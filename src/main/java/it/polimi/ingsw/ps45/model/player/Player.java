@@ -7,11 +7,15 @@ public class Player {
 		return resourceSet;
 	}
 	
-	public void production(int level){
+	public void production(int value){
 		
 	}
 	
-	public void harvest(int level){
+	public void harvest(int value){
+		
+	}
+	
+	public void getTerritory(){
 		
 	}
 }
