@@ -38,9 +38,6 @@ public class ConsumableSet {
 	}
 	
 	public void pay(ConsumableSet cost){
-		
-
-		
 		if(!hasConsumablesAvailable(cost)){
 			//TODO: ASK PLAYER FOR A NEW COMMAND
 			return;
@@ -52,6 +49,10 @@ public class ConsumableSet {
 				consumablesMap.put(key, newValue);
 			}
 		}
+	}
+	
+	public void setConsumable(String key, int value){
+		consumablesMap.put(key, value);
 	}
 	
 	public Integer getConsumableValue(String key){

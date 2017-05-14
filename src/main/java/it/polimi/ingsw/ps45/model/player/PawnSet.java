@@ -33,4 +33,9 @@ public class PawnSet {
 		}
 	}
 	
+	public boolean canThePawnDoTheAction(PawnType pt, int cost){
+		if(pawnMap.get(pt).getValue() >= cost) return true;
+		return false;
+	}
+	
 }
