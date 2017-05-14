@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import it.polimi.ingsw.ps45.model.cards.Building;
 import it.polimi.ingsw.ps45.model.cards.Territory;
+import it.polimi.ingsw.ps45.model.cards.Venture;
 
 public class ResourceSet {
 	
