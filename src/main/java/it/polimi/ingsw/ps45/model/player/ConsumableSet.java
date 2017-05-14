@@ -32,7 +32,10 @@ public class ConsumableSet {
 	// Returns false if there is a consumable value in the cost bigger than it's own value for that consumable
 	public boolean hasConsumablesAvailable(ConsumableSet cost){
 		for(String key: consumablesMap.keySet()){
-			if(cost.getConsumableValue(key) > consumablesMap.get(key)) return false;
+			if(cost.getConsumableValue(key) > consumablesMap.get(key)){
+				//TODO: HANDLE THIS
+				return false;
+			}
 		}
 		return true;
 	}
@@ -63,7 +66,11 @@ public class ConsumableSet {
 	public void collect(ModifierSet<String> ms, ConsumableSet cSet){
 		
 		applyModifiers(ms, cSet);
+		merge(cSet);
 		
+	}
+	
+	public void merge(ConsumableSet cSet){
 		for(String key: consumablesMap.keySet()){
 			if(cSet.getConsumableValue(key) != 0){
 				int newValue = consumablesMap.get(key) + cSet.getConsumableValue(key);
@@ -76,10 +83,7 @@ public class ConsumableSet {
 		return consumablesMap.keySet();
 	}
 	
-	
-	
-	
-	
+
 	public void applyModifiers(ModifierSet<String> ms, ConsumableSet cs){
 		
 		for(String key: cs.getKeys()){

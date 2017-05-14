@@ -5,6 +5,14 @@ import it.polimi.ingsw.ps45.model.player.Player;
 
 public abstract class Venture extends Card {
 	abstract public void endGameEffect(Player p);
-	abstract public boolean hasAlternativeCost();
-	abstract public ConsumableSet alternativeCost();
+	private boolean hasNestedAction;
+	
+	private VentureMode mode;
+	public VentureMode getMode() {
+		return mode;
+	}
+	public void setMode(VentureMode mode) {
+		this.mode = mode;
+	}
+	
 }

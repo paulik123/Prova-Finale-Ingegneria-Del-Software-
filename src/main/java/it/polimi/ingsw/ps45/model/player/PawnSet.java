@@ -9,10 +9,10 @@ public class PawnSet {
 	
 	public PawnSet(){
 		pawnMap = new HashMap<PawnType, Pawn>();
-		pawnMap.put(PawnType.WHITE, new Pawn(0, true));
-		pawnMap.put(PawnType.BLACK, new Pawn(0, true));
-		pawnMap.put(PawnType.ORANGE, new Pawn(0, true));
-		pawnMap.put(PawnType.NEUTRAL, new Pawn(0, true));
+		pawnMap.put(PawnType.WHITE, new Pawn(0, true, PawnType.WHITE));
+		pawnMap.put(PawnType.BLACK, new Pawn(0, true, PawnType.BLACK));
+		pawnMap.put(PawnType.ORANGE, new Pawn(0, true, PawnType.ORANGE));
+		pawnMap.put(PawnType.NEUTRAL, new Pawn(0, true, PawnType.NEUTRAL));
 	}
 	
 	public Pawn get(PawnType type){

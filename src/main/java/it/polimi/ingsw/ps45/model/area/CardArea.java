@@ -35,6 +35,7 @@ public class CardArea<T extends Card> extends Area {
 
 
 	public void immediateEffect(Player p) {
+		this.addOccupant(p);
 		p.getResourceSet().collect(immediateEffectCS);
 	}
 	

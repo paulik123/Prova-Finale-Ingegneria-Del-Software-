@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps45.model.area;
 
 import java.util.ArrayList;
 
+import it.polimi.ingsw.ps45.model.player.Pawn;
 import it.polimi.ingsw.ps45.model.player.Player;
 
 public class ProductionAreaBig extends Area {
@@ -15,8 +16,10 @@ public class ProductionAreaBig extends Area {
 		this.setCost(cost);
 	}
 
-	public void immediateEffect(Player p, int pawnValue) {
-		p.production(pawnValue - bigProductionPenalty);
+	public void immediateEffect(Player p, Pawn pawn, int servantsAdded) {
+		this.addOccupant(p);
+		pawn.setValue(pawn.getValue() - bigProductionPenalty);
+		p.production(pawn, servantsAdded);
 	}
 
 	@Override

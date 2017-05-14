@@ -25,6 +25,14 @@ public class ResourceSet {
 		consumableSet.collect(consumableModifierSet, cs);
 	}
 	
+	public void production(int value){
+		//TODO:
+	}
+	
+	public void harvest(int value){
+		//TODO:
+	}
+	
 	public void pay(RequirementsSet rSet, Pawn pawn){
 		if(hasRequirements(rSet, pawn)){
 			consumableSet.pay(rSet.getConsumableSet());
@@ -34,9 +42,15 @@ public class ResourceSet {
 	}
 	
 	private boolean hasRequirements(RequirementsSet rSet, Pawn pawn){
-		if(!consumableSet.hasConsumablesAvailable(rSet.getConsumableSet())) return false;
+		if(!consumableSet.hasConsumablesAvailable(rSet.getConsumableSet())){
+			//TODO: HANDLE THIS
+			return false;
+		}
 		
-		if(!(pawn.getValue() >= rSet.getPawnCost())) return false;
+		if(!(pawn.getValue() >= rSet.getPawnCost())){
+			//TODO: HANDLE THIS
+			return false;
+		}
 		
 		return true;
 	}
@@ -82,19 +96,26 @@ public class ResourceSet {
 	public void setPermanentEffect(String effect, boolean value){
 		permanentEffectSet.addModifier(effect, value);
 	}
+
+	public ArrayList<Territory> getTerritoryList() {
+		return territoryList;
+	}
+
+	public ArrayList<Building> getBuildingList() {
+		return buildingList;
+	}
+
+
+	public ArrayList<Character> getCharacterList() {
+		return characterList;
+	}
+
+	public ArrayList<Venture> getVentureList() {
+		return ventureList;
+	}
+
 	
-	public void addTerritory(Territory t){
-		territoryList.add(t);
-	}
-	public void addBuilding(Building t){
-		buildingList.add(t);
-	}
-	public void addCharacter(Character t){
-		characterList.add(t);
-	}
-	public void addVenture(Venture t){
-		ventureList.add(t);
-	}
+	
 	
 	
 	

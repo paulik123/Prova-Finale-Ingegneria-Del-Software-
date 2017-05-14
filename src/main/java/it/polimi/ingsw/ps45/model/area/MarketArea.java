@@ -18,6 +18,7 @@ ConsumableSet immediateEffectCS;
 	}
 
 	public void immediateEffect(Player p) {
+		this.addOccupant(p);
 		p.getResourceSet().collect(immediateEffectCS);
 	}
 }

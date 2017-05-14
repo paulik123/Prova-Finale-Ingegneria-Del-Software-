@@ -7,6 +7,9 @@ public abstract class Territory extends Card {
 	int level;
 	abstract public void harvest(Player p);
 	
+	public int getLevel(){
+		return level;
+	}
 	
 	public ConsumableSet cost(){
 		return new ConsumableSet();
