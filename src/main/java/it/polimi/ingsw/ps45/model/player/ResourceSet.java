@@ -34,14 +34,12 @@ public class ResourceSet {
 	}
 	
 	public void pay(RequirementsSet rSet, Pawn pawn){
-		if(hasRequirements(rSet, pawn)){
 			consumableSet.pay(rSet.getConsumableSet());
 			pawn.setAvailable(false);
 			pawn.setValue(0);
-		}
 	}
 	
-	private boolean hasRequirements(RequirementsSet rSet, Pawn pawn){
+	public boolean hasRequirements(RequirementsSet rSet, Pawn pawn){
 		if(!consumableSet.hasConsumablesAvailable(rSet.getConsumableSet())){
 			//TODO: HANDLE THIS
 			return false;
