@@ -13,7 +13,7 @@ public class CardArea<T extends Card> extends Area {
 	ConsumableSet immediateEffectCS;
 	
 	public CardArea(T card, ConsumableSet cs, int cost){
-		occupiedBy = new ArrayList<Player>();
+		occupiedBy = new ArrayList<PlayerPawnPair>();
 		maxOccupants = 1;
 		
 		this.card = card;
@@ -35,7 +35,6 @@ public class CardArea<T extends Card> extends Area {
 
 
 	public void immediateEffect(Player p) {
-		this.addOccupant(p);
 		p.getResourceSet().collect(immediateEffectCS);
 	}
 	

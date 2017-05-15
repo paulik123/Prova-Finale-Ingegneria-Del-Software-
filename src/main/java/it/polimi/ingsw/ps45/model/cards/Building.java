@@ -13,7 +13,7 @@ public abstract class Building extends Card {
 		this.mode = mode;
 	}
 
-	abstract public void production(Player p);
+	abstract public void production(Player p, BuildingMode mode);
 	//TODO: IMPLEMENT SECOND MODE IN PRODUCTION
 	
 	public int getLevel(){

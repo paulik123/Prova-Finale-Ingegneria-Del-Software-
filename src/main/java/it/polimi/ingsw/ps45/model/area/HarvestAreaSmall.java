@@ -8,15 +8,13 @@ import it.polimi.ingsw.ps45.model.player.Player;
 public class HarvestAreaSmall extends Area {
 	
 	public HarvestAreaSmall(int cost){
-		occupiedBy = new ArrayList<Player>();
+		occupiedBy = new ArrayList<PlayerPawnPair>();
 		maxOccupants = 1;
 		
 		this.setCost(cost);
 	}
 
-	public void immediateEffect(Player p, Pawn pawn, int servantsAdded) {
-		p.harvest(pawn, servantsAdded);
-	}
+
 	
 
 }

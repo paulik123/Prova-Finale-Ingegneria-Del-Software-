@@ -13,38 +13,17 @@ public class Player {
 		return resourceSet;
 	}
 	
-	public void harvest(Pawn p, int servantsAdded){
-		resourceSet.increasePawnValue(p, servantsAdded);
-		
-		int level = p.getValue() + resourceSet.getPawnModifier(p.getType()) + resourceSet.getActionModifier("production");
 	
-		ArrayList<Territory> list = resourceSet.getTerritoryList();
-		for(Territory t:list){
-			if(level>= t.getLevel())t.harvest(this);
-		}
-	}
-	
-	public void production(Pawn p, int servantsAdded){
-		resourceSet.increasePawnValue(p, servantsAdded);
-		
-		int level = p.getValue() + resourceSet.getPawnModifier(p.getType()) + resourceSet.getActionModifier("production");
-		
-		ArrayList<Building> list = resourceSet.getBuildingList();
-		for(Building b:list){
-			if(level >= b.getLevel())b.production(this);
-		}
-	}
-	
-	public void getCard(Territory c){
+	public void addCard(Territory c){
 		resourceSet.getTerritoryList().add(c);
 	}
-	public void getCard(Building c){
+	public void addCard(Building c){
 		resourceSet.getBuildingList().add(c);
 	}
-	public void getCard(Character c){
+	public void addCard(Character c){
 		resourceSet.getCharacterList().add(c);
 	}
-	public void getCard(Venture c){
+	public void addCard(Venture c){
 		resourceSet.getVentureList().add(c);
 	}
 	

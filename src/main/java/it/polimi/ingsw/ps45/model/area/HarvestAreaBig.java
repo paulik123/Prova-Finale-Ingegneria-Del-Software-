@@ -10,20 +10,14 @@ public class HarvestAreaBig extends Area {
 	private static int bigProductionPenalty = 3;
 	
 	public HarvestAreaBig(int cost){
-		occupiedBy = new ArrayList<Player>();
+		occupiedBy = new ArrayList<PlayerPawnPair>();
 		maxOccupants = 999;
 		
 		this.setCost(cost);
 	}
 
-	public void immediateEffect(Player p, Pawn pawn, int servantsAdded) {
-		pawn.setValue(pawn.getValue() - bigProductionPenalty);
-		p.harvest(pawn, servantsAdded);
-	}
 
-	@Override
-	public boolean isAvailable() {
-		return true;
-	}
+
+
 	
 }

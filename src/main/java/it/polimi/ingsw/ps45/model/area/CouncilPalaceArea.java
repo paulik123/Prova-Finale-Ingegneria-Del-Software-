@@ -11,7 +11,7 @@ public class CouncilPalaceArea extends Area {
 	private static int coinsReward  = 1;
 	
 	public CouncilPalaceArea(int cost){
-		occupiedBy = new ArrayList<Player>();
+		occupiedBy = new ArrayList<PlayerPawnPair>();
 		maxOccupants = 999;
 		
 		this.setCost(cost);

@@ -44,6 +44,7 @@ public class ResourceSet {
 			//TODO: HANDLE THIS
 			return false;
 		}
+	
 		
 		if(!(pawn.getValue() >= rSet.getPawnCost())){
 			//TODO: HANDLE THIS
@@ -53,23 +54,14 @@ public class ResourceSet {
 		return true;
 	}
 	
+	public boolean hasConsumables(ConsumableSet cSet){
+		return consumableSet.hasConsumablesAvailable(cSet);
+	}
+	
 	public Pawn getPawn(PawnType type){
 		return pawnSet.get(type);
 	}
 	
-	public void increasePawnValue(Pawn p, int increase){
-		int modifier = getActionModifier("servantIncreaseValue");
-		if(modifier == 0) setActionModifier("servantPawnValue", 1);
-		
-		ConsumableSet cost = new ConsumableSet();
-		cost.setConsumable("servants", increase*modifier);
-		
-		if(consumableSet.hasConsumablesAvailable(cost)){
-			consumableSet.pay(cost);
-			p.setValue(p.getValue() + increase);
-		}
-		
-	}
 	
 	public int getPawnModifier(PawnType pt){
 		return pawnModifierSet.getModifier(pt);

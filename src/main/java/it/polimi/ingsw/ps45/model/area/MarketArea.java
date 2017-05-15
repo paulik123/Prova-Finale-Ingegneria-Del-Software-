@@ -10,7 +10,7 @@ ConsumableSet immediateEffectCS;
 	
 	public MarketArea(ConsumableSet cs, int cost){
 		
-		occupiedBy = new ArrayList<Player>();
+		occupiedBy = new ArrayList<PlayerPawnPair>();
 		maxOccupants = 1;
 		
 		this.immediateEffectCS = cs;
@@ -18,7 +18,6 @@ ConsumableSet immediateEffectCS;
 	}
 
 	public void immediateEffect(Player p) {
-		this.addOccupant(p);
 		p.getResourceSet().collect(immediateEffectCS);
 	}
 }

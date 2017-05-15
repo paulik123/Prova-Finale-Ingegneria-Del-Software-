@@ -8,15 +8,9 @@ import it.polimi.ingsw.ps45.model.player.Player;
 public class ProductionAreaSmall extends Area {
 	
 	public ProductionAreaSmall(int cost){
-		occupiedBy = new ArrayList<Player>();
+		occupiedBy = new ArrayList<PlayerPawnPair>();
 		maxOccupants = 1;
 		
 		this.setCost(cost);
 	}
-
-	public void immediateEffect(Player p, Pawn pawn, int servantsAdded) {
-		this.addOccupant(p);
-		p.production(pawn, servantsAdded);
-	}
-	
 }
