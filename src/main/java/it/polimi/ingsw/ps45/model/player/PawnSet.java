@@ -25,13 +25,6 @@ public class PawnSet {
 		p.setAvailable(available);
 	}
 	
-	public void applyPawnModifiers(ModifierSet<PawnType> ms){
-		for(PawnType pt: pawnMap.keySet()){
-			int newValue = pawnMap.get(pt).getValue() + ms.getModifier(pt);
-			Pawn p = pawnMap.get(pt);
-			p.setValue(newValue);
-		}
-	}
 	
 	public boolean canThePawnDoTheAction(PawnType pt, int cost){
 		if(pawnMap.get(pt).getValue() >= cost) return true;

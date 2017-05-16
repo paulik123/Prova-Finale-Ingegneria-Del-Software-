@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps45.model.area;
 
 import java.util.HashMap;
 
+import it.polimi.ingsw.ps45.model.area.cardarea.CardArea;
 import it.polimi.ingsw.ps45.model.cards.Building;
 import it.polimi.ingsw.ps45.model.cards.Character;
 import it.polimi.ingsw.ps45.model.cards.Territory;
@@ -19,9 +20,7 @@ public class Board {
 	
 	
 	public Board(){
-		councilPalaceMap.put("councilPalace", new CouncilPalaceArea(councilPalaceCost));
-		marketMap.put("coinsMarket", newCoinsMarket());
-		marketMap.put("servantsMarket", newServantsMarket());
+
 		
 	}
 	
@@ -46,13 +45,4 @@ public class Board {
 		cs.setConsumable("servants", marketServantsReward);
 		return new MarketArea(cs, marketCost);
 	}
-	
-	private MarketArea newMilitaryMarket(){
-		ConsumableSet cs = new ConsumableSet();
-		cs.setConsumable("militaryPoins", marketMilitaryReward);
-		cs.setConsumable("coins", marketMilitaryCoinsReward);
-		return new MarketArea(cs, marketCost);
-	}
-	
-	
 }

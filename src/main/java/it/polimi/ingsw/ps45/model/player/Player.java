@@ -14,18 +14,4 @@ public class Player {
 	}
 	
 	
-	public void addCard(Territory c){
-		resourceSet.getTerritoryList().add(c);
-	}
-	public void addCard(Building c){
-		resourceSet.getBuildingList().add(c);
-	}
-	public void addCard(Character c){
-		resourceSet.getCharacterList().add(c);
-	}
-	public void addCard(Venture c){
-		resourceSet.getVentureList().add(c);
-	}
-	
-	
 }

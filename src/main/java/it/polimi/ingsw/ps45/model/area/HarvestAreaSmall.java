@@ -5,16 +5,24 @@ import java.util.ArrayList;
 import it.polimi.ingsw.ps45.model.player.Pawn;
 import it.polimi.ingsw.ps45.model.player.Player;
 
-public class HarvestAreaSmall extends HarvestArea {
+public class HarvestAreaSmall extends Area {
+
+	private static int COST = 1;
+	private static int OCCUPANTS = 999;
 	
-	public HarvestAreaSmall(int cost){
-		occupiedBy = new ArrayList<PlayerPawnPair>();
-		maxOccupants = 1;
+	public HarvestAreaSmall(){
+		maxOccupants = OCCUPANTS;
 		
-		this.setCost(cost);
+		this.setCost(COST);
+	}
+
+	@Override
+	public void immediateEffect(Player p) {
+		//TODO: ab.setHarvestAction
 	}
 
 
-	
 
+
+	
 }

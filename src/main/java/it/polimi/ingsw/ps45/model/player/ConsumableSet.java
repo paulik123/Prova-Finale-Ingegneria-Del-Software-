@@ -5,91 +5,133 @@ import java.util.Set;
 
 public class ConsumableSet {
 	
-	private static String[] consumables = {"wood", "stone", "coins", "servants", "victoryPoints", "faithPoints", "militaryPoints"};
 	
-	private HashMap<String,Integer> consumablesMap;
+	
+	private int wood;
+	private int stone;
+	private int coins;
+	private int servants;
+	private int victoryPoints;
+	private int faithPoints;
+	private int militaryPoints;
+	
+
 	public ConsumableSet() {
-			consumablesMap = new HashMap<String,Integer>();
-			for(String s: consumables){
-				consumablesMap.put(s, 0);
-			}
+		this.wood = 0;
+		this.stone = 0;
+		this.coins = 0;
+		this.servants = 0;
+		this.victoryPoints = 0;
+		this.faithPoints = 0;
+		this.militaryPoints = 0;
 	}
-	public ConsumableSet(PlayerType type, int coins) {
-		consumablesMap = new HashMap<String,Integer>();
-		for(String s: consumables){
-			consumablesMap.put(s, 0);
-		}
-		
-		consumablesMap.put("wood",2);
-		consumablesMap.put("stone",2);
-		consumablesMap.put("servants",3);
-		consumablesMap.put("coins", coins);
-		
+	public ConsumableSet(int wood, int stone, int servants, int coins) {
+		this.wood = wood;
+		this.stone = stone;
+		this.servants = servants;
+		this.coins = coins;
 	}
 	
 	
-	
-	// Returns false if there is a consumable value in the cost bigger than it's own value for that consumable
-	public boolean hasConsumablesAvailable(ConsumableSet cost){
-		for(String key: consumablesMap.keySet()){
-			if(cost.getConsumableValue(key) > consumablesMap.get(key)){
-				//TODO: HANDLE THIS
-				return false;
-			}
-		}
-		return true;
+
+	public boolean hasConsumablesAvailable(ConsumableSet c){
+		return(
+				this.wood >= c.wood &&
+				this.stone >= c.stone &&
+				this.servants >= c.servants &&
+				this.coins >= c.coins &&
+				this.victoryPoints >= c.victoryPoints &&
+				this.faithPoints >= c.faithPoints &&
+				this.militaryPoints >= c.militaryPoints
+				);
 	}
 	
-	public void pay(ConsumableSet cost){
-		if(!hasConsumablesAvailable(cost)){
+	public void pay(ConsumableSet c){
+		if(!hasConsumablesAvailable(c)){
 			//TODO: ASK PLAYER FOR A NEW COMMAND
 			return;
 		}
+		this.wood = this.wood - c.wood;
+		this.stone = this.stone - c.stone;
+		this.servants = this.servants - c.servants;
+		this.coins = this.coins - c.coins;
+		this.victoryPoints = this.coins - c.coins;
+		this.faithPoints = this.faithPoints - c.faithPoints;
+		this.militaryPoints = this.militaryPoints - c.faithPoints;
+	}
+	
+	
+	
+	public void collect(ConsumableSet c){
 		
-		for(String key: consumablesMap.keySet()){
-			if(cost.getConsumableValue(key) != 0){
-				int newValue = consumablesMap.get(key) - cost.getConsumableValue(key);
-				consumablesMap.put(key, newValue);
-			}
-		}
+		this.wood = this.wood + c.wood;
+		this.stone = this.stone + c.stone;
+		this.servants = this.servants + c.servants;
+		this.coins = this.coins + c.coins;
+		this.victoryPoints = this.victoryPoints + c.victoryPoints;
+		this.faithPoints = this.faithPoints + c.faithPoints;
+		this.militaryPoints = this.militaryPoints + c.militaryPoints;
 	}
 	
-	public void setConsumable(String key, int value){
-		consumablesMap.put(key, value);
+	public void makeDiscount(ConsumableSet c){
+		subtractWithZeroLimit(this.wood, c.wood);
+		subtractWithZeroLimit(this.stone, c.stone);
+		subtractWithZeroLimit(this.servants, c.servants);
+		subtractWithZeroLimit(this.coins, c.coins);
+		subtractWithZeroLimit(this.victoryPoints, c.victoryPoints);
+		subtractWithZeroLimit(this.faithPoints, c.faithPoints);
+		subtractWithZeroLimit(this.militaryPoints, c.militaryPoints);
 	}
 	
-	public Integer getConsumableValue(String key){
-		return consumablesMap.get(key);
-		
+	public int getWood() {
+		return wood;
+	}
+	public void setWood(int wood) {
+		this.wood = wood;
+	}
+	public int getStone() {
+		return stone;
+	}
+	public void setStone(int stone) {
+		this.stone = stone;
+	}
+	public int getCoins() {
+		return coins;
+	}
+	public void setCoins(int coins) {
+		this.coins = coins;
+	}
+	public int getServants() {
+		return servants;
+	}
+	public void setServants(int servants) {
+		this.servants = servants;
+	}
+	public int getVictoryPoints() {
+		return victoryPoints;
+	}
+	public void setVictoryPoints(int victoryPoints) {
+		this.victoryPoints = victoryPoints;
+	}
+	public int getFaithPoints() {
+		return faithPoints;
+	}
+	public void setFaithPoints(int faithPoints) {
+		this.faithPoints = faithPoints;
+	}
+	public int getMilitaryPoins() {
+		return militaryPoints;
+	}
+	public void setMilitaryPoins(int militaryPoints) {
+		this.militaryPoints = militaryPoints;
 	}
 	
-	public void collect(ModifierSet<String> ms, ConsumableSet cSet){
-		
-		applyModifiers(ms, cSet);
-		merge(cSet);
-		
+	public int subtractWithZeroLimit(int a, int b){
+		int result = a - b;
+		if(result >= 0) return result;
+		else return 0;
 	}
 	
-	public void merge(ConsumableSet cSet){
-		for(String key: consumablesMap.keySet()){
-			if(cSet.getConsumableValue(key) != 0){
-				int newValue = consumablesMap.get(key) + cSet.getConsumableValue(key);
-				consumablesMap.put(key, newValue);
-			}
-		}
-	}
 	
-	public Set<String> getKeys(){
-		return consumablesMap.keySet();
-	}
-	
-
-	public void applyModifiers(ModifierSet<String> ms, ConsumableSet cs){
-		
-		for(String key: cs.getKeys()){
-			int newValue = cs.getConsumableValue(key) + ms.getModifier(key);
-			cs.consumablesMap.put(key,newValue);
-		}
-	}
 	
 }

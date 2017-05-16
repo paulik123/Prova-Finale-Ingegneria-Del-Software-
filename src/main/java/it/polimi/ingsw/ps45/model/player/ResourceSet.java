@@ -8,12 +8,22 @@ import it.polimi.ingsw.ps45.model.cards.Venture;
 
 public class ResourceSet {
 	
-	private ConsumableSet consumableSet;
-	private ModifierSet<String> consumableModifierSet;
+	private ConsumableSet resources;
+	
+	private ConsumableSet territoryActionDiscount;
+	private ConsumableSet characterActionDiscount;
+	private ConsumableSet buildingActionDiscount;
+	private ConsumableSet ventureActionDiscount;
+	
+	private ConsumableSet collectPenalty;
+	
+	private PawnValueModifier pawnValueModifier;
+	
+	private ActionValueModifier actionValueModifiers;
+	
+	private PermanentEffects permanentEffects;
+	
 	private PawnSet pawnSet;
-	private ModifierSet<PawnType> pawnModifierSet;
-	private ModifierSet<String> actionModifierSet;
-	private PermanentEffectSet permanentEffectSet;
 	
 	ArrayList<Territory> territoryList;
 	ArrayList<Building> buildingList;
@@ -22,71 +32,55 @@ public class ResourceSet {
 	
 	
 	public void collect(ConsumableSet cs){
-		consumableSet.collect(consumableModifierSet, cs);
+		cs.makeDiscount(collectPenalty);
+		resources.collect(cs);
 	}
 	
-	public void production(int value){
-		//TODO:
-	}
 	
-	public void harvest(int value){
-		//TODO:
-	}
-	
-	public void pay(RequirementsSet rSet, Pawn pawn){
-			consumableSet.pay(rSet.getConsumableSet());
+	public void pay(ConsumableSet c, Pawn pawn){
+			resources.pay(c);
 			pawn.setAvailable(false);
 			pawn.setValue(0);
-	}
-	
-	public boolean hasRequirements(RequirementsSet rSet, Pawn pawn){
-		if(!consumableSet.hasConsumablesAvailable(rSet.getConsumableSet())){
-			//TODO: HANDLE THIS
-			return false;
-		}
-	
-		
-		if(!(pawn.getValue() >= rSet.getPawnCost())){
-			//TODO: HANDLE THIS
-			return false;
-		}
-		
-		return true;
-	}
+	}	
 	
 	public boolean hasConsumables(ConsumableSet cSet){
-		return consumableSet.hasConsumablesAvailable(cSet);
+		return resources.hasConsumablesAvailable(cSet);
 	}
 	
 	public Pawn getPawn(PawnType type){
 		return pawnSet.get(type);
 	}
 	
+	//Return the value of the pawn + modifiers
+	public int getPawnValue(PawnType pt){
+		return pawnSet.get(pt).getValue() + pawnValueModifier.getValue(pt);
+	}
+	
 	
 	public int getPawnModifier(PawnType pt){
-		return pawnModifierSet.getModifier(pt);
+		return pawnValueModifier.getValue(pt);
 	}
 	
 	public void setModifierPawn(PawnType pt, int value){
-		pawnModifierSet.addModifier(pt, value);
+		pawnValueModifier.setValue(pt, value);
 	}
 	
-	public int getActionModifier(String modifier){
-		return actionModifierSet.getModifier(modifier);
+	public ConsumableSet getTerritoryActionDiscount(){
+		return territoryActionDiscount;
 	}
 	
-	public void setActionModifier(String modifier, int value){
-		actionModifierSet.addModifier(modifier, value);
+	public ConsumableSet getCharacterActionDiscount(){
+		return characterActionDiscount;
 	}
 	
-	public boolean getPermanentEffect(String effect){
-		return permanentEffectSet.getModifier(effect);
+	public ConsumableSet getBuildingActionDiscount(){
+		return buildingActionDiscount;
 	}
 	
-	public void setPermanentEffect(String effect, boolean value){
-		permanentEffectSet.addModifier(effect, value);
+	public ConsumableSet getVentureActionDiscount(){
+		return ventureActionDiscount;
 	}
-
+	
 	public ArrayList<Territory> getTerritoryList() {
 		return territoryList;
 	}
@@ -103,12 +97,6 @@ public class ResourceSet {
 	public ArrayList<Venture> getVentureList() {
 		return ventureList;
 	}
-
-	
-	
-	
-	
-	
 }
 
 

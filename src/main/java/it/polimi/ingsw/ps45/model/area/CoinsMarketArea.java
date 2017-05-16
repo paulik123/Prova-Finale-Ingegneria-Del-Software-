@@ -3,19 +3,19 @@ package it.polimi.ingsw.ps45.model.area;
 import java.util.ArrayList;
 
 import it.polimi.ingsw.ps45.model.player.ConsumableSet;
-import it.polimi.ingsw.ps45.model.player.CouncilPrivilegeType;
 import it.polimi.ingsw.ps45.model.player.Player;
 
-public class CouncilPalaceArea extends Area {
-	
-	private static int COST = 1;
-	private static int COINSREWARD = 1;
-	private static int MAXOCCUPANTS = 999;
-	
+public class CoinsMarketArea extends Area{
 
+	private static int COST = 1;
+	private static int OCCUPANTS = 1;
+	private static int COINSREWARD = 5;
 	
-	public CouncilPalaceArea(){
-		maxOccupants = MAXOCCUPANTS;
+	public CoinsMarketArea(){
+		
+		maxOccupants = OCCUPANTS;
+		
+
 		this.setCost(COST);
 	}
 
@@ -23,9 +23,8 @@ public class CouncilPalaceArea extends Area {
 	public void immediateEffect(Player p) {
 		ConsumableSet cs = new ConsumableSet();
 		cs.setCoins(COINSREWARD);
-	//TODO: ab.setCouncilPrivilegeAction
 		
+		p.getResourceSet().collect(cs);
 	}
-	
 
 }
