@@ -32,11 +32,6 @@ public class CardArea<T extends Card> extends Area {
 	protected void removeCard(){
 		card = null;
 	}
-
-
-	public void immediateEffect(Player p) {
-		p.getResourceSet().collect(immediateEffectCS);
-	}
 	
 	public RequirementsSet getRequirements(){
 		return new RequirementsSet(card.cost(), this.getCost());

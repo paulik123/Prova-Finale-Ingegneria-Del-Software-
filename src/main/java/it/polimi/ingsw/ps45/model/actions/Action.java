@@ -9,6 +9,11 @@ public abstract class Action {
 	public boolean isSet() {
 		return hasParametersSet;
 	}
+	private MapCostCalculator mcc;
+	
+	protected MapCostCalculator getMapCostCalculator(){
+		return mcc;
+	}
 	public void setHasParameters(boolean hasParametersSet) {
 		this.hasParametersSet = hasParametersSet;
 	}

@@ -17,7 +17,4 @@ ConsumableSet immediateEffectCS;
 		this.setCost(cost);
 	}
 
-	public void immediateEffect(Player p) {
-		p.getResourceSet().collect(immediateEffectCS);
-	}
 }

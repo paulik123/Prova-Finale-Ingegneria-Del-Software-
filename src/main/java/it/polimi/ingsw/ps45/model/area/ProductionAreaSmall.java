@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import it.polimi.ingsw.ps45.model.player.Pawn;
 import it.polimi.ingsw.ps45.model.player.Player;
 
-public class ProductionAreaSmall extends Area {
+public class ProductionAreaSmall extends ProductionArea {
 	
 	public ProductionAreaSmall(int cost){
 		occupiedBy = new ArrayList<PlayerPawnPair>();

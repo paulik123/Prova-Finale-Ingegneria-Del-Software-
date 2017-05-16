@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import it.polimi.ingsw.ps45.model.player.Pawn;
 import it.polimi.ingsw.ps45.model.player.Player;
 
-public class ProductionAreaBig extends Area {
+public class ProductionAreaBig extends ProductionArea {
 	
 	private static int bigProductionPenalty = 3;
 	
