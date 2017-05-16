@@ -1,22 +1,19 @@
 package it.polimi.ingsw.ps45.model.cards;
 
+import it.polimi.ingsw.ps45.model.player.ConsumableSet;
 import it.polimi.ingsw.ps45.model.player.Player;
 
 public abstract class Building extends Card {
-	private int level;
-	private BuildingMode mode;
-	public BuildingMode getMode() {
-		return mode;
+	public Building(Era e, int productionLevel) {
+		super(e);
+		this.productionLevel = productionLevel;
 	}
-
-	public void setMode(BuildingMode mode) {
-		this.mode = mode;
-	}
-
-	abstract public void production(Player p, BuildingMode mode);
-	//TODO: IMPLEMENT SECOND MODE IN PRODUCTION
+	abstract ConsumableSet cost();
+	abstract public void productionI(Player p);
+	abstract public void productionII(Player p);
 	
-	public int getLevel(){
-		return level;
+	private int productionLevel;
+	public int getProductionLevel(){
+		return productionLevel;
 	}
 }

@@ -4,15 +4,14 @@ import it.polimi.ingsw.ps45.model.player.ConsumableSet;
 import it.polimi.ingsw.ps45.model.player.Player;
 
 public abstract class Venture extends Card {
-	abstract public void endGameEffect(Player p);
-	private boolean hasNestedAction;
-	
-	private VentureMode mode;
-	public VentureMode getMode() {
-		return mode;
+	public Venture(Era e) {
+		super(e);
+		// TODO Auto-generated constructor stub
 	}
-	public void setMode(VentureMode mode) {
-		this.mode = mode;
-	}
+	abstract public ConsumableSet endGameVictoryPoints();
+	abstract public ConsumableSet costI();
+	abstract public ConsumableSet costII();
+	abstract public ConsumableSet requirementsI();
+	abstract public ConsumableSet requirementsII();
 	
 }
