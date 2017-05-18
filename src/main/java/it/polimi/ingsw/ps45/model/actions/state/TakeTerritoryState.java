@@ -1,6 +1,6 @@
 package it.polimi.ingsw.ps45.model.actions.state;
 
-public class TakeTerritoryState implements State{
+public class TakeTerritoryState implements ActionBuilderState{
 	
 	private int value;
 	

@@ -1,6 +1,6 @@
 package it.polimi.ingsw.ps45.model.actions.state;
 
-public class HarvestState implements State{
+public class HarvestState implements ActionBuilderState{
 	
 	private int value;
 	

@@ -1,6 +1,6 @@
 package it.polimi.ingsw.ps45.model.actions.state;
 
-public class CouncilPrivilegeTwoState implements State{
+public class CouncilPrivilegeTwoState implements ActionBuilderState{
 
 	@Override
 	public int actionValue() {

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import it.polimi.ingsw.ps45.model.player.ConsumableSet;
 import it.polimi.ingsw.ps45.model.player.Player;
 
-public class ServantsMarketArea extends Area{
+public class ServantsMarketArea extends NoCardArea{
 
 	private static int COST = 1;
 	private static int OCCUPANTS = 1;

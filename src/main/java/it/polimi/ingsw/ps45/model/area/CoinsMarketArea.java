@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import it.polimi.ingsw.ps45.model.player.ConsumableSet;
 import it.polimi.ingsw.ps45.model.player.Player;
 
-public class CoinsMarketArea extends Area{
+public class CoinsMarketArea extends NoCardArea{
 
 	private static int COST = 1;
 	private static int OCCUPANTS = 1;

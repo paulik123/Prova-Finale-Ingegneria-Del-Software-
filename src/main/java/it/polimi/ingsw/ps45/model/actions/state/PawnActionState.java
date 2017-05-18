@@ -1,6 +1,6 @@
 package it.polimi.ingsw.ps45.model.actions.state;
 
-public class PawnActionState implements State {
+public class PawnActionState implements ActionBuilderState {
 	
 	public PawnActionState(){
 		

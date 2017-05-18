@@ -1,16 +1,11 @@
 package it.polimi.ingsw.ps45.model.actions.state;
 
-public class ProductionState implements ActionBuilderState{
-	
-	private int value;
-	public ProductionState(int value){
-		this.value = value;
-	}
+public class NoActionState implements ActionBuilderState{
 
 	@Override
 	public int actionValue() {
 		// TODO Auto-generated method stub
-		return value;
+		return 0;
 	}
 
 	@Override
@@ -22,7 +17,7 @@ public class ProductionState implements ActionBuilderState{
 	@Override
 	public boolean productionAction() {
 		// TODO Auto-generated method stub
-		return true;
+		return false;
 	}
 
 	@Override
@@ -30,7 +25,6 @@ public class ProductionState implements ActionBuilderState{
 		// TODO Auto-generated method stub
 		return false;
 	}
-
 
 	@Override
 	public boolean takeTerritoryAction() {

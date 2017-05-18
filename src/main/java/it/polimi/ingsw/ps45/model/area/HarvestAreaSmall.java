@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import it.polimi.ingsw.ps45.model.player.Pawn;
 import it.polimi.ingsw.ps45.model.player.Player;
 
-public class HarvestAreaSmall extends Area {
+public class HarvestAreaSmall extends NoCardArea {
 
 	private static int COST = 1;
 	private static int OCCUPANTS = 999;

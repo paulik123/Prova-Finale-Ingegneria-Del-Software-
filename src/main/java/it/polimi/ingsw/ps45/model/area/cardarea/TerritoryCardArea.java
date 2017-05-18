@@ -6,11 +6,11 @@ import it.polimi.ingsw.ps45.model.cards.Territory;
 public abstract class TerritoryCardArea extends Area{
 	private Territory t;
 
-	public Territory getT() {
+	public Territory getTerritory() {
 		return t;
 	}
 
-	public void setT(Territory t) {
+	public void setTerritory(Territory t) {
 		this.t = t;
 	}
 	

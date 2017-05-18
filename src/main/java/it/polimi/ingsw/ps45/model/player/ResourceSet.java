@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import it.polimi.ingsw.ps45.model.cards.Building;
 import it.polimi.ingsw.ps45.model.cards.Territory;
 import it.polimi.ingsw.ps45.model.cards.Venture;
+import it.polimi.ingsw.ps45.model.cards.Character;
 
 public class ResourceSet {
 	
@@ -45,6 +46,10 @@ public class ResourceSet {
 	
 	public boolean hasConsumables(ConsumableSet cSet){
 		return resources.hasConsumablesAvailable(cSet);
+	}
+	
+	public void setPawn(PawnType pt, int value, boolean b){
+		pawnSet.set(pt, value, b);
 	}
 	
 	public Pawn getPawn(PawnType type){

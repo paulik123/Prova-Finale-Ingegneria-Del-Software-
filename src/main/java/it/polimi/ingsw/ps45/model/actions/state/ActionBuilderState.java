@@ -1,6 +1,6 @@
 package it.polimi.ingsw.ps45.model.actions.state;
 
-public interface State {
+public interface ActionBuilderState {
 	public int actionValue();
 	// PawnAction
 	public boolean placePawnAction();
