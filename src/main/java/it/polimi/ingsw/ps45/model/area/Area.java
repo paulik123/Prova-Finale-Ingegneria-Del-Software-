@@ -26,6 +26,17 @@ public abstract class Area {
 	public void setMaxOccupants(int maxOccupants) {
 		this.maxOccupants = maxOccupants;
 	}
+	
+	public ArrayList<PlayerPawnPair> getOccupants(){
+		return occupiedBy;
+	}
+	
+	public boolean isOccupiedByPlayerWithColoredPawn(Player p){
+		for(PlayerPawnPair ppp:occupiedBy){
+			if(ppp.getPlayer() == p && ppp.getType() != PawnType.NEUTRAL)  return true;
+		}
+		return false;
+	}
 
 
 	public void addOccupant(Player p, PawnType type){
