@@ -6,7 +6,6 @@ import it.polimi.ingsw.ps45.model.player.Player;
 public abstract class Card {
 	private Era era;
 	
-	private ConsumableSet cost;
 	abstract public void immediateEffect(Player p);
 	
 	public Card(Era e){
