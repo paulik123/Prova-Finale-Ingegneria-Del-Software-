@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps45.model.actions;
 import java.util.ArrayList;
 
 import it.polimi.ingsw.ps45.model.cards.Building;
+import it.polimi.ingsw.ps45.model.player.BonusTile;
 import it.polimi.ingsw.ps45.model.player.Player;
 
 public class ProductionAction implements Action{
@@ -19,6 +20,10 @@ public class ProductionAction implements Action{
 	@Override
 	public void run() {
 		ArrayList<Building> buildings = p.getResourceSet().getBuildingList();
+		
+		BonusTile bt = p.getResourceSet().getBonusTile();
+		if(level >=bt.getProductionLevel())bt.production(p);
+		
 		for(int i=0; i<buildings.size();i++){
 			Building b = buildings.get(i);
 			if(level >= b.getProductionLevel()){
