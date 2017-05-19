@@ -1,8 +1,5 @@
 package it.polimi.ingsw.ps45.model.area;
 
-import java.util.ArrayList;
-
-import it.polimi.ingsw.ps45.model.player.Pawn;
 import it.polimi.ingsw.ps45.model.player.Player;
 
 public class ProductionAreaBig extends NoCardArea {
@@ -18,7 +15,7 @@ public class ProductionAreaBig extends NoCardArea {
 	}
 
 	@Override
-	public void immediateEffect(Player p) {
+	public void immediateEffect(Player p, int value) {
 		//TODO: ab.setHarvestAction - bigProductionPenalty
 	}
 

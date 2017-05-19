@@ -15,7 +15,7 @@ public class TerritoryCardAreaThirdFloor extends TerritoryCardArea{
 	}
 
 	@Override
-	public void immediateEffect(Player p) {
+	public void immediateEffect(Player p, int value) {
 		ConsumableSet cs = new ConsumableSet();
 		cs.setWood(WOODREWARD);
 		p.getResourceSet().collect(cs);

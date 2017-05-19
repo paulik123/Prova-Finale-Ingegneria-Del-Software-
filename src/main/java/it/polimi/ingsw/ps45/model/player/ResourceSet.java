@@ -3,9 +3,9 @@ package it.polimi.ingsw.ps45.model.player;
 import java.util.ArrayList;
 
 import it.polimi.ingsw.ps45.model.cards.Building;
+import it.polimi.ingsw.ps45.model.cards.Character;
 import it.polimi.ingsw.ps45.model.cards.Territory;
 import it.polimi.ingsw.ps45.model.cards.Venture;
-import it.polimi.ingsw.ps45.model.cards.Character;
 
 public class ResourceSet {
 	

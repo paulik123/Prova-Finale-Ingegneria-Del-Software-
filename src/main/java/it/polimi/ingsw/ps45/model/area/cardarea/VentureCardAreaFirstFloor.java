@@ -13,7 +13,7 @@ public class VentureCardAreaFirstFloor extends VentureCardArea{
 	}
 
 	@Override
-	public void immediateEffect(Player p) {
+	public void immediateEffect(Player p, int value) {
 		
 		
 	}

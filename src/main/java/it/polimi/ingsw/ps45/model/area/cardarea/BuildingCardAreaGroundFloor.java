@@ -13,7 +13,7 @@ public class BuildingCardAreaGroundFloor extends BuildingCardArea{
 	}
 
 	@Override
-	public void immediateEffect(Player p) {
+	public void immediateEffect(Player p, int value) {
 		
 		
 	}

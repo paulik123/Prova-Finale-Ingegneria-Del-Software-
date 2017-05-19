@@ -1,7 +1,5 @@
 package it.polimi.ingsw.ps45.model.area;
 
-import java.util.ArrayList;
-
 import it.polimi.ingsw.ps45.model.player.ConsumableSet;
 import it.polimi.ingsw.ps45.model.player.Player;
 
@@ -19,7 +17,7 @@ public class CouncilPalaceArea extends NoCardArea {
 	}
 
 	@Override
-	public void immediateEffect(Player p) {
+	public void immediateEffect(Player p, int value) {
 		ConsumableSet cs = new ConsumableSet();
 		cs.setCoins(COINSREWARD);
 	//TODO: ab.setCouncilPrivilegeAction

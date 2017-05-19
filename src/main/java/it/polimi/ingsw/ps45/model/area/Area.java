@@ -11,7 +11,7 @@ public abstract class Area {
 	protected ActionBuilder ab;
 	private ArrayList<PlayerPawnPair> occupiedBy;
 	protected int maxOccupants;
-	abstract public void immediateEffect(Player p);
+	abstract public void immediateEffect(Player p, int value);
 	
 	
 	public Area(){

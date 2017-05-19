@@ -1,7 +1,6 @@
 package it.polimi.ingsw.ps45.model.actions;
 
 import it.polimi.ingsw.ps45.model.area.cardarea.BuildingCardArea;
-import it.polimi.ingsw.ps45.model.area.cardarea.CharacterCardArea;
 import it.polimi.ingsw.ps45.model.cards.Building;
 import it.polimi.ingsw.ps45.model.player.PawnType;
 import it.polimi.ingsw.ps45.model.player.Player;
@@ -10,15 +9,17 @@ public class NoPawnBuildingAction implements Action{
 	
 	private Player p;
 	private BuildingCardArea b;
+	private int value;
 	
-	protected NoPawnBuildingAction(Player p, BuildingCardArea b, PawnType pt){
+	protected NoPawnBuildingAction(Player p, BuildingCardArea b){
 		this.p = p;
 		this.b = b;
+		value = 0;
 	}
 
 	@Override
 	public void run() {
-		b.immediateEffect(p);
+		b.immediateEffect(p,value);
 		
 		Building card = b.getBuilding();
 		b.setBuilding(null);

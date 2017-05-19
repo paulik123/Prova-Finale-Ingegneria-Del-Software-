@@ -10,11 +10,13 @@ public class PlacePawnTerritoryAction implements Action{
 	private Player p;
 	private TerritoryCardArea t;
 	private PawnType pt;
+	private int value;
 	
-	protected PlacePawnTerritoryAction(Player p, TerritoryCardArea t, PawnType pt){
+	protected PlacePawnTerritoryAction(Player p, TerritoryCardArea t, PawnType pt, int value){
 		this.p = p;
 		this.t= t;
 		this.pt = pt;
+		this.value = value;
 	}
 
 	@Override
@@ -22,7 +24,7 @@ public class PlacePawnTerritoryAction implements Action{
 		p.getResourceSet().setPawn(pt, 0, false);
 		
 		t.addOccupant(p, pt);
-		t.immediateEffect(p);
+		t.immediateEffect(p, value);
 		
 		Territory card = t.getTerritory();
 		t.setTerritory(null);

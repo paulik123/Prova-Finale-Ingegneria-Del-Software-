@@ -1,8 +1,5 @@
 package it.polimi.ingsw.ps45.model.player;
 
-import java.util.HashMap;
-import java.util.Set;
-
 public class ConsumableSet {
 	
 	

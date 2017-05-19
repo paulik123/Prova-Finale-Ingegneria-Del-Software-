@@ -15,7 +15,7 @@ public class CharacterCardAreaThirdFloor extends CharacterCardArea{
 	}
 
 	@Override
-	public void immediateEffect(Player p) {
+	public void immediateEffect(Player p, int value) {
 		ConsumableSet cs = new ConsumableSet();
 		cs.setWood(STONEREWARD);
 		

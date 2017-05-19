@@ -9,16 +9,17 @@ public class NoPawnCharacterAction implements Action{
 	
 	private Player p;
 	private CharacterCardArea c;
-	private PawnType pt;
+	private int value;
 	
 	protected NoPawnCharacterAction(Player p, CharacterCardArea c){
 		this.p = p;
 		this.c = c;
+		value = 0;
 	}
 
 	@Override
 	public void run() {
-		c.immediateEffect(p);
+		c.immediateEffect(p, value);
 		
 		Character card = c.getCharacter();
 		c.setCharacter(null);

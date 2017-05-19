@@ -10,11 +10,13 @@ public class PlacePawnCharacterAction implements Action{
 	private Player p;
 	private CharacterCardArea c;
 	private PawnType pt;
+	private int value;
 	
-	protected PlacePawnCharacterAction(Player p, CharacterCardArea c, PawnType pt){
+	protected PlacePawnCharacterAction(Player p, CharacterCardArea c, PawnType pt, int value){
 		this.p = p;
 		this.c= c;
 		this.pt = pt;
+		this.value = value;
 	}
 
 	@Override
@@ -22,7 +24,7 @@ public class PlacePawnCharacterAction implements Action{
 		p.getResourceSet().setPawn(pt, 0, false);
 		
 		c.addOccupant(p, pt);
-		c.immediateEffect(p);
+		c.immediateEffect(p, value);
 		
 		Character card = c.getCharacter();
 		c.setCharacter(null);

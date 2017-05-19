@@ -1,6 +1,9 @@
 package it.polimi.ingsw.ps45.model.area;
 
-import it.polimi.ingsw.ps45.model.area.cardarea.*;
+import it.polimi.ingsw.ps45.model.area.cardarea.BuildingTower;
+import it.polimi.ingsw.ps45.model.area.cardarea.CharacterTower;
+import it.polimi.ingsw.ps45.model.area.cardarea.TerritoryTower;
+import it.polimi.ingsw.ps45.model.area.cardarea.VentureTower;
 
 public class Board {
 	ProductionAreaSmall productionAreaSmall;

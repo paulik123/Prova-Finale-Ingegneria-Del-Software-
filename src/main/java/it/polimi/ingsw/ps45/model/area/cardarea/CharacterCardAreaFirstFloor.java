@@ -13,7 +13,7 @@ public class CharacterCardAreaFirstFloor extends CharacterCardArea{
 	}
 
 	@Override
-	public void immediateEffect(Player p) {
+	public void immediateEffect(Player p, int value) {
 		
 		
 	}
