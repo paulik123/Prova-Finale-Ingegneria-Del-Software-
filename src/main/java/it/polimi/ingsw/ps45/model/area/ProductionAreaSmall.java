@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps45.model.area;
 
+import it.polimi.ingsw.ps45.model.actions.state.ProductionState;
 import it.polimi.ingsw.ps45.model.player.Player;
 
 public class ProductionAreaSmall extends ProductionArea {
@@ -15,7 +16,7 @@ public class ProductionAreaSmall extends ProductionArea {
 
 	@Override
 	public void immediateEffect(Player p, int value) {
-		//TODO: ab.setProductionAction
+		p.getActionBuilder().setState(new ProductionState(value));
 	}
 
 

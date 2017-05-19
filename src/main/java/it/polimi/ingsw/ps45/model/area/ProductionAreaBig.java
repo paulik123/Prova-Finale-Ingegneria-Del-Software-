@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps45.model.area;
 
+import it.polimi.ingsw.ps45.model.actions.state.NoActionState;
+import it.polimi.ingsw.ps45.model.actions.state.ProductionState;
 import it.polimi.ingsw.ps45.model.player.Player;
 
 public class ProductionAreaBig extends ProductionArea {
@@ -16,7 +18,7 @@ public class ProductionAreaBig extends ProductionArea {
 
 	@Override
 	public void immediateEffect(Player p, int value) {
-		//TODO: ab.setHarvestAction - bigProductionPenalty
+		p.getActionBuilder().setState(new ProductionState(value - bigProductionPenalty));
 	}
 
 

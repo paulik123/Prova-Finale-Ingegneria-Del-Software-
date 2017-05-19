@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps45.model.area;
 
+import it.polimi.ingsw.ps45.model.actions.state.CouncilPrivilegeOneState;
+import it.polimi.ingsw.ps45.model.actions.state.NoActionState;
 import it.polimi.ingsw.ps45.model.player.ConsumableSet;
 import it.polimi.ingsw.ps45.model.player.Player;
 
@@ -20,7 +22,7 @@ public class CouncilPalaceArea extends NoCardArea {
 	public void immediateEffect(Player p, int value) {
 		ConsumableSet cs = new ConsumableSet();
 		cs.setCoins(COINSREWARD);
-	//TODO: ab.setCouncilPrivilegeAction
+		p.getActionBuilder().setState(new CouncilPrivilegeOneState());
 		
 	}
 	

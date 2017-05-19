@@ -8,7 +8,6 @@ import it.polimi.ingsw.ps45.model.player.Player;
 
 public abstract class Area {
 	private int cost;
-	protected ActionBuilder ab;
 	private ArrayList<PlayerPawnPair> occupiedBy;
 	protected int maxOccupants;
 	abstract public void immediateEffect(Player p, int value);

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps45.model.area;
 
+import it.polimi.ingsw.ps45.model.actions.state.NoActionState;
 import it.polimi.ingsw.ps45.model.player.ConsumableSet;
 import it.polimi.ingsw.ps45.model.player.Player;
 
@@ -23,6 +24,7 @@ public class CoinsMarketArea extends NoCardArea{
 		cs.setCoins(COINSREWARD);
 		
 		p.getResourceSet().collect(cs);
+		p.getActionBuilder().setState(new NoActionState());
 	}
 
 }

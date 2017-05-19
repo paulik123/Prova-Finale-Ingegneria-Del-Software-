@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps45.model.area;
 
+import it.polimi.ingsw.ps45.model.actions.state.CouncilPrivilegeOneState;
+import it.polimi.ingsw.ps45.model.actions.state.CouncilPrivilegeTwoState;
 import it.polimi.ingsw.ps45.model.player.Player;
 
 public class CouncilPrivilegeMarketArea extends NoCardArea{
@@ -17,7 +19,7 @@ public class CouncilPrivilegeMarketArea extends NoCardArea{
 
 	@Override
 	public void immediateEffect(Player p, int value) {
-		//TODO ab.MakeCouncilPrivilegeAction
+		p.getActionBuilder().setState(new CouncilPrivilegeTwoState());
 	}
 
 }
