@@ -24,6 +24,8 @@ public class ResourceSet {
 	
 	private PermanentEffects permanentEffects;
 	
+	private BonusTile bonusTile;
+	
 
 
 	private PawnSet pawnSet;
@@ -113,6 +115,13 @@ public class ResourceSet {
 	public ConsumableSet getResources() {
 		return resources;
 	}
+
+
+	public BonusTile getBonusTile() {
+		return bonusTile;
+	}
+	
+	
 
 	
 }
