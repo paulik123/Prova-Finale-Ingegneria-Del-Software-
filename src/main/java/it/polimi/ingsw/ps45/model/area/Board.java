@@ -6,11 +6,9 @@ import it.polimi.ingsw.ps45.model.area.cardarea.TerritoryTower;
 import it.polimi.ingsw.ps45.model.area.cardarea.VentureTower;
 
 public class Board {
-	ProductionAreaSmall productionAreaSmall;
-	ProductionAreaBig productionAreaBig;
+	ProductionAreas productionAreas;
 	
-	HarvestAreaSmall harvestAreaSmall;
-	HarvestAreaBig harvestAreaBig;
+	HarvestAreas harvestAreas;
 	
 	CoinsMarketArea coinsMarketArea;
 	ServantsMarketArea servantsMarketArea;
@@ -25,11 +23,9 @@ public class Board {
 	VentureTower ventureTower;
 	
 	public Board(){
-		productionAreaSmall = new ProductionAreaSmall();
-		productionAreaBig = new ProductionAreaBig();
+		productionAreas = new ProductionAreas();
 		
-		harvestAreaSmall = new HarvestAreaSmall();
-		harvestAreaBig = new HarvestAreaBig();
+		harvestAreas = new HarvestAreas();
 		
 		coinsMarketArea = new CoinsMarketArea();
 		servantsMarketArea = new ServantsMarketArea();
@@ -43,5 +39,52 @@ public class Board {
 		buildingTower = new BuildingTower();
 		ventureTower = new VentureTower();	
 	}
+
+	public ProductionAreas getProductionAreas() {
+		return productionAreas;
+	}
+
+	public HarvestAreas getHarvestAreas() {
+		return harvestAreas;
+	}
+
+	public CoinsMarketArea getCoinsMarketArea() {
+		return coinsMarketArea;
+	}
+
+	public ServantsMarketArea getServantsMarketArea() {
+		return servantsMarketArea;
+	}
+
+	public MilitaryAndCoinArea getMilitaryAndCoinArea() {
+		return militaryAndCoinArea;
+	}
+
+	public CouncilPrivilegeMarketArea getCouncilPrivilegeMarketArea() {
+		return councilPrivilegeMarketArea;
+	}
+
+	public CouncilPalaceArea getCouncilPalaceArea() {
+		return councilPalaceArea;
+	}
+
+	public TerritoryTower getTerritoryTower() {
+		return territoryTower;
+	}
+
+	public CharacterTower getCharacterTower() {
+		return characterTower;
+	}
+
+	public BuildingTower getBuildingTower() {
+		return buildingTower;
+	}
+
+	public VentureTower getVentureTower() {
+		return ventureTower;
+	}
+	
+	
+	
 	
 }

@@ -24,6 +24,8 @@ public class ResourceSet {
 	
 	private PermanentEffects permanentEffects;
 	
+
+
 	private PawnSet pawnSet;
 	
 	ArrayList<Territory> territoryList;
@@ -101,6 +103,10 @@ public class ResourceSet {
 
 	public ArrayList<Venture> getVentureList() {
 		return ventureList;
+	}
+	
+	public PermanentEffects getPermanentEffects() {
+		return permanentEffects;
 	}
 }
 

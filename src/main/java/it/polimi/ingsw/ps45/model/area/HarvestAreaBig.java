@@ -2,7 +2,7 @@ package it.polimi.ingsw.ps45.model.area;
 
 import it.polimi.ingsw.ps45.model.player.Player;
 
-public class HarvestAreaBig extends NoCardArea {
+public class HarvestAreaBig extends HarvestArea {
 
 	private static int bigHarvestPenalty = 3;
 	private static int COST = 1;
