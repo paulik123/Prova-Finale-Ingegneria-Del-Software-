@@ -1,17 +1,18 @@
 package it.polimi.ingsw.ps45.model.actions;
 
 import it.polimi.ingsw.ps45.model.area.NoCardArea;
+import it.polimi.ingsw.ps45.model.area.HarvestArea;
 import it.polimi.ingsw.ps45.model.player.PawnType;
 import it.polimi.ingsw.ps45.model.player.Player;
 
-public class PlacePawnAction implements Action{
-	private NoCardArea noCardArea;
+public class PlacePawnHarvestAction implements Action{
+	private HarvestArea HarvestArea;
 	private Player p;
 	private PawnType pt;
 	private int value;
 	
-	protected PlacePawnAction(Player p, NoCardArea area, PawnType pt, int value){
-		this.noCardArea = area;
+	protected PlacePawnHarvestAction(Player p, HarvestArea area, PawnType pt, int value){
+		this.HarvestArea = area;
 		this.p = p;
 		this.pt = pt;
 		this.value = value;
@@ -19,9 +20,7 @@ public class PlacePawnAction implements Action{
 	
 	@Override
 	public void run() {
-		p.getResourceSet().setPawn(pt, 0, false);
-		
-		noCardArea.addOccupant(p, pt);
-		noCardArea.immediateEffect(p, value);
+		HarvestArea.addOccupant(p, pt);
+		HarvestArea.immediateEffect(p, value);
 	}
 }

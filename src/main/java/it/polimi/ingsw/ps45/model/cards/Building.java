@@ -8,7 +8,7 @@ public abstract class Building extends Card {
 		super(e);
 		this.productionLevel = productionLevel;
 	}
-	abstract ConsumableSet cost();
+	public abstract ConsumableSet cost();
 	abstract public void productionI(Player p);
 	abstract public void productionII(Player p);
 	

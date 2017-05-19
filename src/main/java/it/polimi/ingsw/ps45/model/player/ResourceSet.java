@@ -108,6 +108,13 @@ public class ResourceSet {
 	public PermanentEffects getPermanentEffects() {
 		return permanentEffects;
 	}
+
+
+	public ConsumableSet getResources() {
+		return resources;
+	}
+
+	
 }
 
 

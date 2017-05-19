@@ -21,8 +21,6 @@ public class PlacePawnBuildingAction implements Action{
 
 	@Override
 	public void run() {
-		p.getResourceSet().setPawn(pt, 0, false);
-		
 		b.addOccupant(p, pt);
 		b.immediateEffect(p, value);
 		
