@@ -1,11 +1,19 @@
 package it.polimi.ingsw.ps45.model.actions.state;
 
+import it.polimi.ingsw.ps45.model.player.ConsumableSet;
+
 public class CouncilPrivilegeTwoState implements ActionBuilderState{
 
 	@Override
 	public int actionValue() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	@Override
+	public ConsumableSet discount() {
+		// TODO Auto-generated method stub
+		return new ConsumableSet();
 	}
 
 	@Override

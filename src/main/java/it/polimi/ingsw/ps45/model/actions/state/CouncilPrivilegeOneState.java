@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps45.model.actions.state;
 
+import it.polimi.ingsw.ps45.model.player.ConsumableSet;
+
 public class CouncilPrivilegeOneState implements ActionBuilderState{
 	
 	@Override
@@ -66,6 +68,12 @@ public class CouncilPrivilegeOneState implements ActionBuilderState{
 	public boolean coucilPrivilegeActionThree() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public ConsumableSet discount() {
+		// TODO Auto-generated method stub
+		return new ConsumableSet();
 	}
 	
 }

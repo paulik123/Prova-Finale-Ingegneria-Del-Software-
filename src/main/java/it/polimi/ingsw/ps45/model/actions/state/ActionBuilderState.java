@@ -1,7 +1,10 @@
 package it.polimi.ingsw.ps45.model.actions.state;
 
+import it.polimi.ingsw.ps45.model.player.ConsumableSet;
+
 public interface ActionBuilderState {
 	public int actionValue();
+	public ConsumableSet discount();
 	// PawnAction
 	public boolean placePawnAction();
 	

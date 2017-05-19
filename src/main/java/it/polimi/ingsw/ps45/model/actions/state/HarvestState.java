@@ -1,11 +1,19 @@
 package it.polimi.ingsw.ps45.model.actions.state;
 
+import it.polimi.ingsw.ps45.model.player.ConsumableSet;
+
 public class HarvestState implements ActionBuilderState{
 	
 	private int value;
 	
 	public HarvestState(int value){
 		this.value = value;
+	}
+	
+	@Override
+	public ConsumableSet discount() {
+		// TODO Auto-generated method stub
+		return new ConsumableSet();
 	}
 
 	@Override

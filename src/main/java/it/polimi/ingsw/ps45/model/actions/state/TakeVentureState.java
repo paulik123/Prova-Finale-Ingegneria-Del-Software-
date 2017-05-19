@@ -1,11 +1,15 @@
 package it.polimi.ingsw.ps45.model.actions.state;
 
+import it.polimi.ingsw.ps45.model.player.ConsumableSet;
+
 public  class TakeVentureState implements ActionBuilderState{
 	
 	private int value;
+	private ConsumableSet discount;
 	
-	public TakeVentureState(int value){
+	public TakeVentureState(int value, ConsumableSet discount){
 		this.value = value;
+		this.discount = discount;
 	}
 
 	@Override
@@ -13,7 +17,13 @@ public  class TakeVentureState implements ActionBuilderState{
 		// TODO Auto-generated method stub
 		return value;
 	}
-
+	
+	@Override
+	public ConsumableSet discount() {
+		// TODO Auto-generated method stub
+		return discount;
+	}
+	
 	@Override
 	public boolean placePawnAction() {
 		// TODO Auto-generated method stub
