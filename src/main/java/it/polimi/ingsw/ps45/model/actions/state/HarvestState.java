@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps45.model.actions.state;
 
 import it.polimi.ingsw.ps45.model.player.ConsumableSet;
+import it.polimi.ingsw.ps45.model.vatican.ExcommunicationCard;
 
 public class HarvestState implements ActionBuilderState{
 	
@@ -78,6 +79,18 @@ public class HarvestState implements ActionBuilderState{
 
 	@Override
 	public boolean coucilPrivilegeActionThree() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public ExcommunicationCard getExcommunicationCard() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean vaticanChoice() {
 		// TODO Auto-generated method stub
 		return false;
 	}

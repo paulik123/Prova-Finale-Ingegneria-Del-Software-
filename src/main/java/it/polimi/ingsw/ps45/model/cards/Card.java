@@ -5,11 +5,8 @@ import java.io.Serializable;
 import it.polimi.ingsw.ps45.model.effects.Effect;
 import it.polimi.ingsw.ps45.model.player.Player;
 
-public abstract class Card implements Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -2157937128089424956L;
+public abstract class Card implements Serializable {
+
 
 	private Era era;
 	private Effect effect;

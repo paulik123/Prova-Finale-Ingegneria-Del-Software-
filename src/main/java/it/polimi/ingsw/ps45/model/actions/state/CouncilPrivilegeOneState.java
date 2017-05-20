@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps45.model.actions.state;
 
 import it.polimi.ingsw.ps45.model.player.ConsumableSet;
+import it.polimi.ingsw.ps45.model.vatican.ExcommunicationCard;
 
 public class CouncilPrivilegeOneState implements ActionBuilderState{
 	
@@ -74,6 +75,18 @@ public class CouncilPrivilegeOneState implements ActionBuilderState{
 	public ConsumableSet discount() {
 		// TODO Auto-generated method stub
 		return new ConsumableSet();
+	}
+
+	@Override
+	public ExcommunicationCard getExcommunicationCard() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean vaticanChoice() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 }

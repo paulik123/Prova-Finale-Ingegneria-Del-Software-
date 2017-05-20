@@ -3,18 +3,28 @@ package it.polimi.ingsw.ps45.model.actions.state;
 import it.polimi.ingsw.ps45.model.player.ConsumableSet;
 import it.polimi.ingsw.ps45.model.vatican.ExcommunicationCard;
 
-public class CouncilPrivilegeThreeState implements ActionBuilderState{
+public class vaticanChoiceState implements ActionBuilderState{
+	ExcommunicationCard c;
+	public vaticanChoiceState(ExcommunicationCard c){
+		this.c = c;
+	}
 
 	@Override
 	public int actionValue() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
+
 	@Override
 	public ConsumableSet discount() {
 		// TODO Auto-generated method stub
-		return new ConsumableSet();
+		return null;
+	}
+
+	@Override
+	public ExcommunicationCard getExcommunicationCard() {
+		// TODO Auto-generated method stub
+		return c;
 	}
 
 	@Override
@@ -74,19 +84,13 @@ public class CouncilPrivilegeThreeState implements ActionBuilderState{
 	@Override
 	public boolean coucilPrivilegeActionThree() {
 		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public ExcommunicationCard getExcommunicationCard() {
-		// TODO Auto-generated method stub
-		return null;
+		return false;
 	}
 
 	@Override
 	public boolean vaticanChoice() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
-	
+
 }

@@ -1,10 +1,12 @@
 package it.polimi.ingsw.ps45.model.actions.state;
 
 import it.polimi.ingsw.ps45.model.player.ConsumableSet;
+import it.polimi.ingsw.ps45.model.vatican.ExcommunicationCard;
 
 public interface ActionBuilderState {
 	public int actionValue();
 	public ConsumableSet discount();
+	public ExcommunicationCard getExcommunicationCard();
 	// PawnAction
 	public boolean placePawnAction();
 	
@@ -18,4 +20,5 @@ public interface ActionBuilderState {
 	public boolean coucilPrivilegeActionOne();
 	public boolean coucilPrivilegeActionTwo();
 	public boolean coucilPrivilegeActionThree();
+	public boolean vaticanChoice();
 }
