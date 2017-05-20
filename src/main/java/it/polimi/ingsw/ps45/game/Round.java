@@ -8,7 +8,6 @@ import it.polimi.ingsw.ps45.model.player.Player;
 
 public class Round {
 	private Player[] turnOrder;
-	private Player currentPlayer;
 	int index;
 	
 	public Round(Player[] turnOrder){
@@ -17,7 +16,7 @@ public class Round {
 	}
 	
 	// Returns true if round has ended
-	public boolean nextTurn(Player p){
+	public boolean nextTurn(){
 		if(index >= turnOrder.length){
 			return true;
 		}
@@ -27,7 +26,7 @@ public class Round {
 	}
 
 	public Player getCurrentPlayer() {
-		return currentPlayer;
+		return turnOrder[index];
 	}
 
 	

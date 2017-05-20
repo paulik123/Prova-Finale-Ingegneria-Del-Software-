@@ -4,6 +4,14 @@ import it.polimi.ingsw.ps45.model.actions.ActionBuilder;
 import it.polimi.ingsw.ps45.model.area.Board;
 
 public class Player {
+	private String playerID;
+	
+	
+	
+
+
+
+
 	private ResourceSet resourceSet;
 	private ActionBuilder actionBuilder;
 	
@@ -12,7 +20,7 @@ public class Player {
 	public static int defaultServants = 3;
 	public static int defaultCoins = 5;
 	
-	public Player(Board board, ConsumableSet initialResources){
+	public Player(String playerID, Board board, ConsumableSet initialResources){
 		resourceSet = new ResourceSet(initialResources);
 		actionBuilder = new ActionBuilder(this, board);
 	}
@@ -27,6 +35,10 @@ public class Player {
 
 	public ResourceSet getResourceSet(){
 		return resourceSet;
+	}
+	
+	public String getPlayerID() {
+		return playerID;
 	}
 	
 	
