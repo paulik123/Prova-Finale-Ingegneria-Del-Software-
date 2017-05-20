@@ -1,6 +1,8 @@
 package it.polimi.ingsw.ps45.model.player;
 
-public class ConsumableSet {
+import java.io.Serializable;
+
+public class ConsumableSet implements Serializable{
 	
 	
 	

@@ -3,12 +3,12 @@ package it.polimi.ingsw.ps45.model.area;
 import it.polimi.ingsw.ps45.model.player.Player;
 
 public class HarvestAreas {
-	HarvestAreaSmall small;
-	HarvestAreaBig big;
+	NoCardArea small;
+	NoCardArea big;
 	
 	public HarvestAreas(){
-		small = new HarvestAreaSmall();
-		big = new HarvestAreaBig();
+		small = Board.loadFromFile("HarvestAreaSmall.ser");
+		big = Board.loadFromFile("HarvestAreaBig.ser");
 	}
 	
 	public boolean isOccupiedByPlayer(Player p) {
@@ -16,11 +16,11 @@ public class HarvestAreas {
 					big.isOccupiedByPlayerWithColoredPawn(p);
 	}
 
-	public HarvestAreaSmall getSmall() {
+	public NoCardArea getSmall() {
 		return small;
 	}
 
-	public HarvestAreaBig getBig() {
+	public NoCardArea getBig() {
 		return big;
 	}
 }

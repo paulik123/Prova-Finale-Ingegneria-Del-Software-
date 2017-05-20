@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps45.model.cards;
 
-public enum Era {
+import java.io.Serializable;
+
+public enum Era  implements Serializable{
 	I, II, III;
 }

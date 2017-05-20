@@ -1,20 +1,24 @@
 package it.polimi.ingsw.ps45.model.area.cardarea;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
 import it.polimi.ingsw.ps45.model.player.Player;
 
 public class BuildingTower implements Tower{
 	
 	public BuildingTower(){
-		b0 = new BuildingCardAreaGroundFloor();
-		b1 = new BuildingCardAreaFirstFloor();
-		b2 = new BuildingCardAreaSecondFloor();
-		b3 = new BuildingCardAreaThirdFloor();
+		b0 = loadFromFile("BuildingCardAreaGroundFloor.ser");
+		b1 = loadFromFile("BuildingCardAreaFirstFloor.ser");
+		b2 = loadFromFile("BuildingCardAreaSecondFloor.ser");
+		b3 = loadFromFile("BuildingCardAreaThirdFloor.ser");
 	}
 	
-	private BuildingCardAreaGroundFloor b0;
-	private BuildingCardAreaFirstFloor b1;
-	private BuildingCardAreaSecondFloor b2;
-	private BuildingCardAreaThirdFloor b3;
+	private BuildingCardArea b0;
+	private BuildingCardArea b1;
+	private BuildingCardArea b2;
+	private BuildingCardArea b3;
 	
 	@Override
 	public boolean isOccupied() {
@@ -29,6 +33,22 @@ public class BuildingTower implements Tower{
 					b1.isOccupiedByPlayerWithColoredPawn(p) || 
 					b2.isOccupiedByPlayerWithColoredPawn(p) || 
 					b3.isOccupiedByPlayerWithColoredPawn(p);
+	}
+	
+	public BuildingCardArea loadFromFile(String name){
+		BuildingCardArea x = null;
+        try {
+	         FileInputStream fileIn = new FileInputStream("serialized//areas//" + name);
+	         ObjectInputStream in = new ObjectInputStream(fileIn);
+	         x = (BuildingCardArea) in.readObject();
+	         in.close();
+	         fileIn.close();
+	      }catch(IOException i) {
+	         i.printStackTrace();
+	      }catch(Exception ex) {
+	         ex.printStackTrace();
+	      }
+        return x;
 	}
 
 }

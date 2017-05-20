@@ -1,8 +1,13 @@
 package it.polimi.ingsw.ps45.model.area;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
 import it.polimi.ingsw.ps45.model.area.cardarea.BuildingTower;
 import it.polimi.ingsw.ps45.model.area.cardarea.CharacterTower;
 import it.polimi.ingsw.ps45.model.area.cardarea.TerritoryTower;
+import it.polimi.ingsw.ps45.model.area.cardarea.VentureCardArea;
 import it.polimi.ingsw.ps45.model.area.cardarea.VentureTower;
 
 public class Board {
@@ -10,12 +15,12 @@ public class Board {
 	
 	HarvestAreas harvestAreas;
 	
-	CoinsMarketArea coinsMarketArea;
-	ServantsMarketArea servantsMarketArea;
-	MilitaryAndCoinArea militaryAndCoinArea;
-	CouncilPrivilegeMarketArea councilPrivilegeMarketArea;
+	NoCardArea coinsMarketArea;
+	NoCardArea servantsMarketArea;
+	NoCardArea militaryAndCoinArea;
+	NoCardArea councilPrivilegeMarketArea;
 	
-	CouncilPalaceArea councilPalaceArea;
+	NoCardArea councilPalaceArea;
 	
 	TerritoryTower territoryTower;
 	CharacterTower characterTower;
@@ -27,12 +32,12 @@ public class Board {
 		
 		harvestAreas = new HarvestAreas();
 		
-		coinsMarketArea = new CoinsMarketArea();
-		servantsMarketArea = new ServantsMarketArea();
-		militaryAndCoinArea = new MilitaryAndCoinArea();
-		councilPrivilegeMarketArea = new CouncilPrivilegeMarketArea();
+		coinsMarketArea = loadFromFile("CoinsMarketArea.ser");
+		servantsMarketArea = loadFromFile("ServantsMarketArea.ser");
+		militaryAndCoinArea = loadFromFile("MilitaryAndCoinMarketArea.ser");
+		councilPrivilegeMarketArea = loadFromFile("CouncilPrivilegeMarketArea.ser");
 		
-		councilPalaceArea = new CouncilPalaceArea();
+		councilPalaceArea = loadFromFile("CouncilPalaceArea.ser");
 		
 		territoryTower = new TerritoryTower();
 		characterTower = new CharacterTower();
@@ -48,23 +53,23 @@ public class Board {
 		return harvestAreas;
 	}
 
-	public CoinsMarketArea getCoinsMarketArea() {
+	public NoCardArea getCoinsMarketArea() {
 		return coinsMarketArea;
 	}
 
-	public ServantsMarketArea getServantsMarketArea() {
+	public NoCardArea getServantsMarketArea() {
 		return servantsMarketArea;
 	}
 
-	public MilitaryAndCoinArea getMilitaryAndCoinArea() {
+	public NoCardArea getMilitaryAndCoinArea() {
 		return militaryAndCoinArea;
 	}
 
-	public CouncilPrivilegeMarketArea getCouncilPrivilegeMarketArea() {
+	public NoCardArea getCouncilPrivilegeMarketArea() {
 		return councilPrivilegeMarketArea;
 	}
 
-	public CouncilPalaceArea getCouncilPalaceArea() {
+	public NoCardArea getCouncilPalaceArea() {
 		return councilPalaceArea;
 	}
 
@@ -85,6 +90,20 @@ public class Board {
 	}
 	
 	
-	
+	public static NoCardArea loadFromFile(String name){
+		NoCardArea x = null;
+        try {
+	         FileInputStream fileIn = new FileInputStream("serialized//areas//" + name);
+	         ObjectInputStream in = new ObjectInputStream(fileIn);
+	         x = (NoCardArea) in.readObject();
+	         in.close();
+	         fileIn.close();
+	      }catch(IOException i) {
+	         i.printStackTrace();
+	      }catch(Exception ex) {
+	         ex.printStackTrace();
+	      }
+        return x;
+	}
 	
 }

@@ -4,9 +4,7 @@ import it.polimi.ingsw.ps45.model.actions.CouncilPrivilege.CouncilPrivilege;
 import it.polimi.ingsw.ps45.model.actions.state.*;
 import it.polimi.ingsw.ps45.model.area.Area;
 import it.polimi.ingsw.ps45.model.area.Board;
-import it.polimi.ingsw.ps45.model.area.HarvestArea;
 import it.polimi.ingsw.ps45.model.area.NoCardArea;
-import it.polimi.ingsw.ps45.model.area.ProductionArea;
 import it.polimi.ingsw.ps45.model.area.cardarea.BuildingCardArea;
 import it.polimi.ingsw.ps45.model.area.cardarea.CharacterCardArea;
 import it.polimi.ingsw.ps45.model.area.cardarea.TerritoryCardArea;
@@ -50,7 +48,7 @@ public class ActionBuilder {
 		this.board = board;
 	}
 	
-	public void placePawnProduction(ProductionArea area, PawnType pt, int servantsAdded) throws Exception{
+	public void placePawnProduction(NoCardArea area, PawnType pt, int servantsAdded) throws Exception{
 		if(!state.placePawnAction()) throw new Exception("Action not allowed - state is false");
 		
 		Pawn pawn = p.getResourceSet().getPawn(pt);
@@ -63,7 +61,7 @@ public class ActionBuilder {
 		}else throw new Exception("Action not allowed - pawn/consumables unavailable");
 	}
 	
-	public void placePawnHarvest(HarvestArea area, PawnType pt, int servantsAdded) throws Exception{
+	public void placePawnHarvest(NoCardArea area, PawnType pt, int servantsAdded) throws Exception{
 		if(!state.placePawnAction()) throw new Exception("Action not allowed - state is false");
 		
 		Pawn pawn = p.getResourceSet().getPawn(pt);
@@ -300,12 +298,12 @@ public class ActionBuilder {
 		return hasGeneralRequirementsWithPawn(pawn, pawnValue, area, cost);
 	}
 	
-	private boolean canPlacePawnProductionRun(Pawn pawn, int pawnValue, ProductionArea area, ConsumableSet cost){
+	private boolean canPlacePawnProductionRun(Pawn pawn, int pawnValue, NoCardArea area, ConsumableSet cost){
 		return !board.getProductionAreas().isOccupiedByPlayer(p) &&
 				hasGeneralRequirementsWithPawn(pawn, pawnValue, area, cost);
 	}
 	
-	private boolean canPlacePawnHarvestRun(Pawn pawn, int pawnValue, HarvestArea area, ConsumableSet cost){
+	private boolean canPlacePawnHarvestRun(Pawn pawn, int pawnValue, NoCardArea area, ConsumableSet cost){
 		return !board.getHarvestAreas().isOccupiedByPlayer(p) &&
 				hasGeneralRequirementsWithPawn(pawn, pawnValue, area, cost);
 	}
