@@ -20,7 +20,7 @@ public class ResourceSet {
 	
 	private PawnValueModifier pawnValueModifier;
 	
-	private ActionValueModifier actionValueModifiers;
+	private ActionValueModifier actionValueModifier;
 	
 	private PermanentEffects permanentEffects;
 	
@@ -34,6 +34,27 @@ public class ResourceSet {
 	ArrayList<Building> buildingList;
 	ArrayList<Character> characterList;
 	ArrayList<Venture> ventureList;
+	
+	
+	public ResourceSet(ConsumableSet initialResources){
+		this.resources = initialResources;
+		
+		this.territoryActionDiscount = new ConsumableSet();
+		this.characterActionDiscount = new ConsumableSet();
+		this.buildingActionDiscount = new ConsumableSet();
+		this.ventureActionDiscount = new ConsumableSet();
+		
+		this.collectPenalty = new ConsumableSet();
+		
+		this.pawnValueModifier = new PawnValueModifier();
+		
+		this.actionValueModifier = new ActionValueModifier();
+		
+		this.permanentEffects = new PermanentEffects();
+		
+		this.bonusTile = new DefaultBonusTile();
+		
+	}
 	
 	
 	public void collect(ConsumableSet cs){
