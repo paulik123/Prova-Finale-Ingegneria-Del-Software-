@@ -22,22 +22,23 @@ public class SerializeTerritory
     {
     	
     	ConsumableSet immediate = new ConsumableSet();
-    	immediate.setCoins(3);
+    	immediate.setWood(1);
 
     	
     	ConsumableSet harvest = new ConsumableSet();
+    	harvest.setStone(3);
 
         CollectEffect immEff = new CollectEffect(immediate);
         CollectEffect harvestEff = new CollectEffect(harvest);
         
-        CouncilPrivilegeOneEffect cpeffect = new CouncilPrivilegeOneEffect();
+       // CouncilPrivilegeOneEffect cpeffect = new CouncilPrivilegeOneEffect();
         
         
-        Territory t = new Territory(Era.I, "Citta", 6);
+        Territory t = new Territory(Era.II, "Cava di Pietra", 3);
         t.addEffect(immEff);
-        t.addHarvestEffect(cpeffect);
+        t.addHarvestEffect(harvestEff);
         try {
-	         FileOutputStream fileOut = new FileOutputStream("Citta.ser");
+	         FileOutputStream fileOut = new FileOutputStream("Cava di Pietra.ser");
 	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
 	         out.writeObject(t);
 	         out.close();
@@ -48,7 +49,7 @@ public class SerializeTerritory
 	      }
         Territory x = null;
         try {
-	         FileInputStream fileIn = new FileInputStream("Citta.ser");
+	         FileInputStream fileIn = new FileInputStream("Cava di Pietra.ser");
 	         ObjectInputStream in = new ObjectInputStream(fileIn);
 	         x = (Territory) in.readObject();
 	         in.close();
