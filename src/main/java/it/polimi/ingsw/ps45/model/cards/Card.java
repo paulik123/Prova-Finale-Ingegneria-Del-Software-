@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps45.model.cards;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import it.polimi.ingsw.ps45.model.effects.Effect;
 import it.polimi.ingsw.ps45.model.player.Player;
@@ -8,16 +9,20 @@ import it.polimi.ingsw.ps45.model.player.Player;
 public abstract class Card implements Serializable {
 
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7839605187878687863L;
 	private Era era;
-	private Effect effect;
+	private ArrayList<Effect> effects;
 	private String name;
 
 	abstract public void immediateEffect(Player p);
 	
-	public Card(Era e, String name, Effect effect){
+	public Card(Era e, String name){
 		this.era = e;
 		this.name = name;
-		this.effect = effect;
+		effects = new ArrayList<Effect>();
 	}
 	
 	public String getName() {
@@ -28,12 +33,13 @@ public abstract class Card implements Serializable {
 		this.name = name;
 	}
 	
-	public Effect getEffect() {
-		return effect;
-	}
 
-	public void setEffect(Effect effect) {
-		this.effect = effect;
+	public void addEffect(Effect effect) {
+		effects.add(effect);
+	}
+	
+	public ArrayList<Effect> getEffects(){
+		return effects;
 	}
 
 	public Era getEra() {

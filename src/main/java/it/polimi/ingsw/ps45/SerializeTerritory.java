@@ -19,30 +19,40 @@ public class SerializeTerritory
 {
     public static void main( String[] args )
     {
+    	
     	ConsumableSet immediate = new ConsumableSet();
-    	immediate.setCoins(1);
+    	immediate.setServants(2);
+    	immediate.setWood(1);
     	
     	ConsumableSet harvest = new ConsumableSet();
-    	harvest.setCoins(2);
+    	harvest.setCoins(1);
+    	harvest.setWood(2);
 
         CollectEffect immEff = new CollectEffect(immediate);
         CollectEffect harvestEff = new CollectEffect(harvest);
         
-        Territory t = new Territory(Era.I, "Miniera d'Oro", immEff, harvestEff, 1);
+        
+        
+        Territory t = new Territory(Era.II, "Possedimento", 4);
+        t.addEffect(immEff);
+        t.addHarvestEffect(harvestEff);
         try {
-	         FileOutputStream fileOut = new FileOutputStream("C://outout//Miniera.ser");
+	         FileOutputStream fileOut = new FileOutputStream("Miniera.ser");
 	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
 	         out.writeObject(t);
 	         out.close();
 	         fileOut.close();
-	         System.out.printf("Serialized data is saved in /Miniera d'Oro.ser\n\n");
-	      }catch(IOException i) {
+
+        }
+        
+        catch(IOException i) {
 	         i.printStackTrace();
 	      }
+        
 	      
         Territory x = null;
         try {
-	         FileInputStream fileIn = new FileInputStream("C://outout//Miniera.ser");
+	         FileInputStream fileIn = new FileInputStream("Bosco.ser");
 	         ObjectInputStream in = new ObjectInputStream(fileIn);
 	         x = (Territory) in.readObject();
 	         in.close();
@@ -55,7 +65,6 @@ public class SerializeTerritory
 	         ex.printStackTrace();
 	         return;
 	      }
-        System.out.println(t.getEra());
-        System.out.println(t.getEra().equals(Era.I));
+        System.out.println(x.getName());
     }
 }

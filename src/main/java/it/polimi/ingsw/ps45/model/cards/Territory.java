@@ -1,22 +1,30 @@
 package it.polimi.ingsw.ps45.model.cards;
 
+import java.util.ArrayList;
+
 import it.polimi.ingsw.ps45.model.effects.Effect;
 import it.polimi.ingsw.ps45.model.player.Player;
 
 public class Territory extends Card {
 	
-	Effect harvestEffect;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 9088028847025402303L;
 	private int harvestLevel;
+	private ArrayList<Effect> harvestEffects;
 	
 	
-	public Territory(Era e, String name, Effect effect, Effect harvestEffect, int harvestLevel) {
-		super(e, name, effect);
+	public Territory(Era e, String name, int harvestLevel) {
+		super(e, name);
 		this.harvestLevel = harvestLevel;
-		this.harvestEffect = harvestEffect;
+		harvestEffects = new ArrayList<Effect>();
 	}
 
 	public void harvest(Player p){
-		harvestEffect.runEffect(p, 0);
+		for(Effect e:harvestEffects){
+			e.runEffect(p, 0);
+		}
 	}
 	
 	public int getHarvestLevel(){
@@ -25,6 +33,22 @@ public class Territory extends Card {
 
 	@Override
 	public void immediateEffect(Player p) {
-		super.getEffect().runEffect(p, 0);
+		for(Effect e:super.getEffects()){
+			e.runEffect(p, 0);
+		}
 	}
+	
+	public void addHarvestEffect(Effect effect){
+		harvestEffects.add(effect);
+	}
+
+	public ArrayList<Effect> getHarvestEffects() {
+		return harvestEffects;
+	}
+
+	public void setHarvestEffects(ArrayList<Effect> harvestEffects) {
+		this.harvestEffects = harvestEffects;
+	}
+	
+	
 }
