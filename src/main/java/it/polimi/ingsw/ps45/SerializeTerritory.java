@@ -9,6 +9,7 @@ import java.io.ObjectOutputStream;
 import it.polimi.ingsw.ps45.model.cards.Era;
 import it.polimi.ingsw.ps45.model.cards.Territory;
 import it.polimi.ingsw.ps45.model.effects.CollectEffect;
+import it.polimi.ingsw.ps45.model.effects.CouncilPrivilegeOneEffect;
 import it.polimi.ingsw.ps45.model.player.ConsumableSet;
 
 /**
@@ -21,38 +22,33 @@ public class SerializeTerritory
     {
     	
     	ConsumableSet immediate = new ConsumableSet();
-    	immediate.setServants(2);
-    	immediate.setWood(1);
+    	immediate.setCoins(3);
+
     	
     	ConsumableSet harvest = new ConsumableSet();
-    	harvest.setCoins(1);
-    	harvest.setWood(2);
 
         CollectEffect immEff = new CollectEffect(immediate);
         CollectEffect harvestEff = new CollectEffect(harvest);
         
+        CouncilPrivilegeOneEffect cpeffect = new CouncilPrivilegeOneEffect();
         
         
-        Territory t = new Territory(Era.II, "Possedimento", 4);
+        Territory t = new Territory(Era.I, "Citta", 6);
         t.addEffect(immEff);
-        t.addHarvestEffect(harvestEff);
+        t.addHarvestEffect(cpeffect);
         try {
-	         FileOutputStream fileOut = new FileOutputStream("Miniera.ser");
+	         FileOutputStream fileOut = new FileOutputStream("Citta.ser");
 	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
 	         out.writeObject(t);
 	         out.close();
 	         fileOut.close();
-
         }
-        
         catch(IOException i) {
 	         i.printStackTrace();
 	      }
-        
-	      
         Territory x = null;
         try {
-	         FileInputStream fileIn = new FileInputStream("Bosco.ser");
+	         FileInputStream fileIn = new FileInputStream("Citta.ser");
 	         ObjectInputStream in = new ObjectInputStream(fileIn);
 	         x = (Territory) in.readObject();
 	         in.close();
