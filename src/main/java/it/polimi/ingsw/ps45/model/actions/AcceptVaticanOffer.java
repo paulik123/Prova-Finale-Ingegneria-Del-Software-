@@ -12,6 +12,7 @@ public class AcceptVaticanOffer implements Action{
 	@Override
 	public void run() {
 		p.getResourceSet().getResources().setFaithPoints(0);
+		p.setAnsweredVatican(true);
 	}
 
 }

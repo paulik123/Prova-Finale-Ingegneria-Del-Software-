@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import it.polimi.ingsw.ps45.model.actions.state.PawnActionState;
+import it.polimi.ingsw.ps45.model.actions.state.VaticanChoiceState;
 import it.polimi.ingsw.ps45.model.area.Board;
 import it.polimi.ingsw.ps45.model.area.PlayerPawnPair;
 import it.polimi.ingsw.ps45.model.cards.Era;
 import it.polimi.ingsw.ps45.model.player.ConsumableSet;
 import it.polimi.ingsw.ps45.model.player.Player;
+import it.polimi.ingsw.ps45.model.vatican.Vatican;
 
 public class Game {
 	private static int turnsPerRound = 4;
@@ -19,6 +21,7 @@ public class Game {
 	private Era[] eras = {Era.I, Era.II, Era.III};
 	private ArrayList<Player> players;
 	private Board board;
+	private Vatican vatican;
 	private Player[] turns; 
 	private Round currentRound;
 	private int currentEra;
@@ -34,6 +37,7 @@ public class Game {
 		currentEra = 0;
 		players = new ArrayList<Player>();
 		board = new Board();
+		vatican = new Vatican();
 		turns = new Player[turnsPerRound * numberOfPlayers];
 	}
 	
@@ -52,7 +56,7 @@ public class Game {
 		if(currentRound.nextTurn() && currentEra == 3); //TODO END GAME CALCULATION
 	}
 	
-	public void newRound(){
+	public void newRound() throws Exception{
 		if(roundNumber % 2 == 1){
 			roundNumber++;
 			board = new Board();
@@ -62,16 +66,40 @@ public class Game {
 			currentRound.getCurrentPlayer().getActionBuilder().setState(new PawnActionState());
 		}
 		else{
-			//TODO vatican
-			currentEra++;
-			roundNumber = 1;
-			
-			board = new Board();
-			updateActionBuildersBoard();
-			calculateTurns();
-			currentRound = new Round(turns);
-			currentRound.getCurrentPlayer().getActionBuilder().setState(new PawnActionState());
+			vaticanTurn();
 		}
+	}
+	
+	public void vaticanTurn() throws Exception{
+		for(Player p:players){
+			//currentEra+2 is the faith points requirement
+			if(p.getResourceSet().getResources().getFaithPoints() < currentEra+2) p.getActionBuilder().refuseVatican();
+			else {
+				p.getActionBuilder().setState(new VaticanChoiceState(vatican.getCard(eras[currentEra])));
+			}
+		}
+		//TODO TIMEOUT FOR SOME TIME TO WAIT FOR RESPONSES THEN RUN nextEra
+	}
+	
+	public void nextEra() throws Exception{
+		for(Player p:players){
+			if(p.hasAnsweredVatican()){
+				p.setAnsweredVatican(false);
+				continue;
+			}
+			else{
+				 p.getActionBuilder().refuseVatican();
+				 p.setAnsweredVatican(false);
+			}
+		}
+		
+		currentEra++;
+		roundNumber = 1;
+		board = new Board();
+		updateActionBuildersBoard();
+		calculateTurns();
+		currentRound = new Round(turns);
+		currentRound.getCurrentPlayer().getActionBuilder().setState(new PawnActionState());
 	}
 	
 	public void updateActionBuildersBoard(){

@@ -3,9 +3,9 @@ package it.polimi.ingsw.ps45.model.actions.state;
 import it.polimi.ingsw.ps45.model.player.ConsumableSet;
 import it.polimi.ingsw.ps45.model.vatican.ExcommunicationCard;
 
-public class vaticanChoiceState implements ActionBuilderState{
+public class VaticanChoiceState implements ActionBuilderState{
 	ExcommunicationCard c;
-	public vaticanChoiceState(ExcommunicationCard c){
+	public VaticanChoiceState(ExcommunicationCard c){
 		this.c = c;
 	}
 

@@ -20,10 +20,14 @@ public class Player {
 	public static int defaultServants = 3;
 	public static int defaultCoins = 5;
 	
+	private boolean answeredVatican;
+	
 	public Player(String playerID, Board board, ConsumableSet initialResources){
 		resourceSet = new ResourceSet(initialResources);
 		actionBuilder = new ActionBuilder(this, board);
+		answeredVatican = false;
 	}
+	
 	
 	
 	
@@ -40,6 +44,22 @@ public class Player {
 	public String getPlayerID() {
 		return playerID;
 	}
+
+
+
+
+	public boolean hasAnsweredVatican() {
+		return answeredVatican;
+	}
+
+
+
+
+	public void setAnsweredVatican(boolean answeredVatican) {
+		this.answeredVatican = answeredVatican;
+	}
+	
+	
 	
 	
 }

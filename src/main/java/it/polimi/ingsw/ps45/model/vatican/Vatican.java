@@ -25,9 +25,9 @@ public class Vatican {
 		map = new HashMap<Era, ExcommunicationCard>();
 		
 		Random r = new Random();
-		map.put(Era.I, fromFile(filesI[r.nextInt(7)].getPath()));
-		map.put(Era.II, fromFile(filesII[r.nextInt(7)].getPath()));
-		map.put(Era.III, fromFile(filesIII[r.nextInt(7)].getPath()));
+		map.put(Era.I, fromFile(filesI[r.nextInt(filesI.length)].getPath()));
+		map.put(Era.II, fromFile(filesII[r.nextInt(filesII.length)].getPath()));
+		map.put(Era.III, fromFile(filesIII[r.nextInt(filesIII.length)].getPath()));
 	}
 	public ExcommunicationCard fromFile(String path){
 		ExcommunicationCard x = null;
@@ -44,6 +44,10 @@ public class Vatican {
 	      }
 	    return x;
 	    
+	}
+	
+	public ExcommunicationCard getCard(Era e){
+		return map.get(e);
 	}
 
 

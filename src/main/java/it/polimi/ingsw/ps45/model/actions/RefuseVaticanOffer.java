@@ -15,6 +15,7 @@ public class RefuseVaticanOffer implements Action{
 	@Override
 	public void run() {
 		c.immediateEffect(p, 0);
+		p.setAnsweredVatican(true);
 	}
 
 }
