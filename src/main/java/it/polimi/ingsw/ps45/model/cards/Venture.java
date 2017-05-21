@@ -1,16 +1,55 @@
 package it.polimi.ingsw.ps45.model.cards;
 
-import it.polimi.ingsw.ps45.model.player.ConsumableSet;
+import java.util.ArrayList;
 
-public abstract class Venture extends Card {
-	public Venture(Era e) {
-		super(e);
-		// TODO Auto-generated constructor stub
+import it.polimi.ingsw.ps45.model.effects.Effect;
+import it.polimi.ingsw.ps45.model.player.ConsumableSet;
+import it.polimi.ingsw.ps45.model.player.Player;
+
+public class Venture extends Card {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3130752413305105553L;
+	
+	ArrayList<Effect> endGameEffects;
+	
+	ConsumableSet costOne;
+	ConsumableSet costTwo;
+	ConsumableSet reqOne;
+	ConsumableSet reqTwo;
+	
+	public Venture(Era e, String name, ConsumableSet costOne, ConsumableSet costTwo, ConsumableSet reqOne, ConsumableSet reqTwo) {
+		super(e, name);
+		endGameEffects = new ArrayList<Effect>();
+		
+		this.costOne = costOne;
+		this.costTwo = costTwo;
+		this.reqOne = reqOne;
+		this.reqTwo = reqTwo;
 	}
-	abstract public ConsumableSet endGameVictoryPoints();
-	abstract public ConsumableSet costI();
-	abstract public ConsumableSet costII();
-	abstract public ConsumableSet requirementsI();
-	abstract public ConsumableSet requirementsII();
+
+	public ConsumableSet costI(){
+		return costOne;
+	}
+	public ConsumableSet costII(){
+		return costTwo;
+	}
+	public ConsumableSet requirementsI(){
+		return reqOne;
+	}
+	public ConsumableSet requirementsII(){
+		return reqTwo;
+	}
+	@Override
+	public void immediateEffect(Player p) {
+		for(Effect e:super.getEffects()){
+			e.runEffect(p, 0);
+		}
+	}
+	
+	public void addEndGameEffect(Effect e){
+		endGameEffects.add(e);
+	}
 	
 }
