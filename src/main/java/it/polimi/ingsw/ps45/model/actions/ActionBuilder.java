@@ -87,10 +87,23 @@ public class ActionBuilder {
 		}else throw new Exception("Action not allowed - pawn/consumables unavailable");
 	}
 	
+	public void placePawnMarket(NoCardArea area, PawnType pt, int servantsAdded) throws Exception{
+		if(!state.placePawnAction()) throw new Exception("Action not allowed - state is false");
+		
+		Pawn pawn = p.getResourceSet().getPawn(pt);
+		int pawnValue = calculatePawnValue(pt, servantsAdded);
+		ConsumableSet servantsSet = servantsToConsumableSet(servantsAdded);
+		
+		if(canPlacePawnMarketRun(pawn, pawnValue, area, servantsSet)){
+			makePlayerPay(servantsSet, pawn);
+			new PlacePawnNoCardAction(p, area, pt, pawnValue).run();
+		}else throw new Exception("Action not allowed - pawn/consumables unavailable");
+	}
+	
 	public void placePawnTerritory(TerritoryCardArea area, PawnType pt, int servantsAdded) throws Exception{
 		if(!state.placePawnAction()) throw new Exception("Action not allowed - state is false");
 		Pawn pawn = p.getResourceSet().getPawn(pt);
-		int pawnValue = calculatePawnValue(pt, servantsAdded);
+		int pawnValue = calculatePawnValue(pt, servantsAdded) + p.getResourceSet().getActionValueModifier().getTerritoryAction();
 		ConsumableSet servantsSet = servantsToConsumableSet(servantsAdded);
 		servantsSet.makeDiscount(p.getResourceSet().getTerritoryActionDiscount());
 		
@@ -104,7 +117,7 @@ public class ActionBuilder {
 	public void placePawnCharacter(CharacterCardArea area, PawnType pt, int servantsAdded) throws Exception{
 		if(!state.placePawnAction()) throw new Exception("Action not allowed - state is false");
 		Pawn pawn = p.getResourceSet().getPawn(pt);
-		int pawnValue = calculatePawnValue(pt, servantsAdded);
+		int pawnValue = calculatePawnValue(pt, servantsAdded) + p.getResourceSet().getActionValueModifier().getCharacterAction();
 		ConsumableSet cost = area.getCharacter().cost();
 		cost.collect(servantsToConsumableSet(servantsAdded));
 		cost.makeDiscount(p.getResourceSet().getCharacterActionDiscount());
@@ -119,7 +132,7 @@ public class ActionBuilder {
 	public void placePawnBuilding(BuildingCardArea area, PawnType pt, int servantsAdded) throws Exception{
 		if(!state.placePawnAction()) throw new Exception("Action not allowed - state is false");
 		Pawn pawn = p.getResourceSet().getPawn(pt);
-		int pawnValue = calculatePawnValue(pt, servantsAdded);
+		int pawnValue = calculatePawnValue(pt, servantsAdded) + p.getResourceSet().getActionValueModifier().getBuildingAction();
 		ConsumableSet cost = area.getBuilding().cost();
 		cost.collect(servantsToConsumableSet(servantsAdded));
 		cost.makeDiscount(p.getResourceSet().getBuildingActionDiscount());
@@ -134,7 +147,7 @@ public class ActionBuilder {
 	public void placePawnVenture(VentureCardArea area, PawnType pt, int servantsAdded, VentureMode mode) throws Exception{
 		if(!state.placePawnAction()) throw new Exception("Action not allowed - state is false");
 		Pawn pawn = p.getResourceSet().getPawn(pt);
-		int pawnValue = calculatePawnValue(pt, servantsAdded);
+		int pawnValue = calculatePawnValue(pt, servantsAdded) + p.getResourceSet().getActionValueModifier().getVentureAction();
 		
 		ConsumableSet cost;
 		if(mode == VentureMode.FIRST) cost = area.getVenture().costI();
@@ -162,7 +175,7 @@ public class ActionBuilder {
 	
 	public void NoPawnTerritory(TerritoryCardArea area, int servantsAdded) throws Exception{
 		if(!state.takeTerritoryAction()) throw new Exception("Action not allowed - state is false");
-		int value = calculateValue(state.actionValue(), servantsAdded);
+		int value = calculateValue(state.actionValue(), servantsAdded) + p.getResourceSet().getActionValueModifier().getTerritoryAction();
 		ConsumableSet servantsSet = servantsToConsumableSet(servantsAdded);
 		servantsSet.makeDiscount(p.getResourceSet().getTerritoryActionDiscount());
 		
@@ -173,8 +186,8 @@ public class ActionBuilder {
 	}
 	
 	public void NoPawnCharacter(CharacterCardArea area, int servantsAdded) throws Exception{
-		if(!state.takeTerritoryAction()) throw new Exception("Action not allowed - state is false");
-		int value = calculateValue(state.actionValue(), servantsAdded);
+		if(!state.takeCharacterAction()) throw new Exception("Action not allowed - state is false");
+		int value = calculateValue(state.actionValue(), servantsAdded) + p.getResourceSet().getActionValueModifier().getCharacterAction();
 		ConsumableSet cost = area.getCharacter().cost();
 		cost.collect(servantsToConsumableSet(servantsAdded));
 		cost.makeDiscount(p.getResourceSet().getCharacterActionDiscount());
@@ -187,7 +200,7 @@ public class ActionBuilder {
 	
 	public void NoPawnBuilding(BuildingCardArea area, int servantsAdded) throws Exception{
 		if(!state.takeBuildingAction()) throw new Exception("Action not allowed - state is false");
-		int value = calculateValue(state.actionValue(), servantsAdded);
+		int value = calculateValue(state.actionValue(), servantsAdded) + p.getResourceSet().getActionValueModifier().getBuildingAction();
 		ConsumableSet cost = area.getBuilding().cost();
 		cost.collect(servantsToConsumableSet(servantsAdded));
 		cost.makeDiscount(p.getResourceSet().getBuildingActionDiscount());
@@ -200,7 +213,7 @@ public class ActionBuilder {
 	
 	public void NoPawnVenture(VentureCardArea area, int servantsAdded, VentureMode mode) throws Exception{
 		if(!state.takeVentureAction()) throw new Exception("Action not allowed - state is false");
-		int value = calculateValue(state.actionValue(), servantsAdded);
+		int value = calculateValue(state.actionValue(), servantsAdded) + p.getResourceSet().getActionValueModifier().getVentureAction();
 		
 		ConsumableSet cost;
 		if(mode == VentureMode.FIRST) cost = area.getVenture().costI();
@@ -257,13 +270,13 @@ public class ActionBuilder {
 	
 	private boolean canNoPawnVentureRun(int value, VentureCardArea area, ConsumableSet cost){
 		return !board.getVentureTower().isOccupiedByPlayer(p) &&
-				p.getResourceSet().getCharacterList().size() < 6 &&
+				p.getResourceSet().getVentureList().size() < 6 &&
 				hasGeneralRequirementsNoPawn(value, area, cost);
 	}
 	
 	private boolean canNoPawnBuildingRun(int value, BuildingCardArea area, ConsumableSet cost){
 		return !board.getBuildingTower().isOccupiedByPlayer(p) &&
-				p.getResourceSet().getCharacterList().size() < 6 &&
+				p.getResourceSet().getBuildingList().size() < 6 &&
 				hasGeneralRequirementsNoPawn(value, area, cost);
 	}
 	
@@ -308,6 +321,11 @@ public class ActionBuilder {
 	
 	private boolean canPlacePawnNoCardRun(Pawn pawn, int pawnValue, NoCardArea area, ConsumableSet cost){
 		return hasGeneralRequirementsWithPawn(pawn, pawnValue, area, cost);
+	}
+	
+	private boolean canPlacePawnMarketRun(Pawn pawn, int pawnValue, NoCardArea area, ConsumableSet cost){
+		return hasGeneralRequirementsWithPawn(pawn, pawnValue, area, cost) &&
+			   !p.getResourceSet().getPermanentEffects().isNoPawnOnMarketPenalty();
 	}
 	
 	private boolean canPlacePawnProductionRun(Pawn pawn, int pawnValue, NoCardArea area, ConsumableSet cost){

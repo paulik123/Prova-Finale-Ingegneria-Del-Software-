@@ -104,6 +104,7 @@ public class Game {
 				}
 			}
 			for(int m=0; m<numberOfPlayers*turnsPerRound;m++){
+				//TODO No first turn effect
 				turns[m] = temp[m%turnsPerRound];
 			}
 		}
