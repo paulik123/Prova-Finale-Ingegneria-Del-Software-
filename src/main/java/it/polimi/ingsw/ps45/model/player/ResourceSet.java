@@ -91,6 +91,7 @@ public class ResourceSet {
 		return pawnValueModifier.getValue(pt);
 	}
 	
+	
 	public void setModifierPawn(PawnType pt, int value){
 		pawnValueModifier.setValue(pt, value);
 	}
@@ -141,6 +142,20 @@ public class ResourceSet {
 	public BonusTile getBonusTile() {
 		return bonusTile;
 	}
+
+
+	public ConsumableSet getCollectPenalty() {
+		return collectPenalty;
+	}
+
+
+	public ActionValueModifier getActionValueModifier() {
+		return actionValueModifier;
+	}
+	
+	
+	
+	
 	
 	
 

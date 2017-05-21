@@ -55,7 +55,7 @@ public class ActionBuilder {
 		int pawnValue = calculatePawnValue(pt, servantsAdded);
 		ConsumableSet servantsSet = servantsToConsumableSet(servantsAdded);
 		
-		if(canPlacePawnProductionRun(pawn, pawnValue, area, servantsSet)){
+		if(canPlacePawnProductionRun(pawn, pawnValue + p.getResourceSet().getActionValueModifier().getProduction(), area, servantsSet)){
 			makePlayerPay(servantsSet, pawn);
 			new PlacePawnProductionAction(p, area, pt, pawnValue).run();
 		}else throw new Exception("Action not allowed - pawn/consumables unavailable");
@@ -68,7 +68,7 @@ public class ActionBuilder {
 		int pawnValue = calculatePawnValue(pt, servantsAdded);
 		ConsumableSet servantsSet = servantsToConsumableSet(servantsAdded);
 		
-		if(canPlacePawnHarvestRun(pawn, pawnValue, area, servantsSet)){
+		if(canPlacePawnHarvestRun(pawn, pawnValue + p.getResourceSet().getActionValueModifier().getHarvest(), area, servantsSet)){
 			makePlayerPay(servantsSet, pawn);
 			new PlacePawnHarvestAction(p, area, pt, pawnValue).run();
 		}else throw new Exception("Action not allowed - pawn/consumables unavailable");
@@ -152,12 +152,12 @@ public class ActionBuilder {
 	
 	public void harvest() throws Exception{
 		if(!state.harvestAction()) throw new Exception("Action not allowed - state is false");
-		new HarvestAction(p, state.actionValue()).run();
+		new HarvestAction(p, state.actionValue() + + p.getResourceSet().getActionValueModifier().getHarvest()).run();
 	}
 	
 	public void production(ProductionMode[] pm) throws Exception{
 		if(!state.productionAction()) throw new Exception("Action not allowed - state is false");
-		new ProductionAction(p, pm, state.actionValue()).run();
+		new ProductionAction(p, pm, state.actionValue() + p.getResourceSet().getActionValueModifier().getProduction()).run();
 	}
 	
 	public void NoPawnTerritory(TerritoryCardArea area, int servantsAdded) throws Exception{
@@ -234,6 +234,18 @@ public class ActionBuilder {
 		if(CouncilPrivilege.areDifferent(cp1, cp2, cp3)) new CouncilPrivilegeThreeAction(p, cp1, cp2, cp3).run();
 		else throw new Exception("Council privileges are not different");
 		setState(new NoActionState());
+	}
+	
+	public void acceptVatican() throws Exception{
+		if(!state.vaticanChoice())throw new Exception("Action not allowed - state is false");
+		new AcceptVaticanOffer(p).run();
+		this.setState(new NoActionState());
+	}
+	
+	public void refuseVatican() throws Exception{
+		if(!state.vaticanChoice())throw new Exception("Action not allowed - state is false");
+		new RefuseVaticanOffer(p, state.getExcommunicationCard()).run();
+		this.setState(new NoActionState());
 	}
 
 	
