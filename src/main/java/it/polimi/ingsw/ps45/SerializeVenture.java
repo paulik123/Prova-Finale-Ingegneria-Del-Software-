@@ -27,30 +27,22 @@ public class SerializeVenture {
 	
 	public static void main(String[] args) throws IOException{
 		ConsumableSet costOne = new ConsumableSet();
-		costOne.setCoins(2);
-		costOne.setWood(2);
-		costOne.setStone(2);
+		costOne.setCoins(8);
 		
 		
 		ConsumableSet costTwo = new ConsumableSet();
-		costTwo.setCoins(2);
-		costTwo.setWood(2);
-		costTwo.setStone(2);
+		costTwo.setCoins(8);
 	
 		
 		ConsumableSet reqOne = new ConsumableSet();
-		reqOne.setCoins(2);
-		reqOne.setWood(2);
-		reqOne.setStone(2);
+		reqOne.setCoins(8);
 		
 		ConsumableSet reqTwo = new ConsumableSet();
-		reqTwo.setCoins(2);
-		reqTwo.setWood(2);
-		reqTwo.setStone(2);
+		reqTwo.setCoins(8);
 		
 		
 		ConsumableSet immCons = new ConsumableSet();
-		immCons.setFaithPoints(2);
+		immCons.setMilitaryPoins(7);
 
 		
 		ConsumableSet endCons = new ConsumableSet();
@@ -64,12 +56,12 @@ public class SerializeVenture {
 		
 		//TakeAnyCardEffect takeEffect = new TakeAnyCardEffect(7, new ConsumableSet());
 		
-	    Venture venture = new Venture(Era.II, "Riparare l'Abbazia", costOne, costTwo, reqOne, reqTwo);
+	    Venture venture = new Venture(Era.III, "Ingaggiare Mercenari", costOne, costTwo, reqOne, reqTwo);
 	    venture.addEffect(immediateEff);
 	    //venture.addEffect(cpeffect);
 	    venture.addEndGameEffect(endGameEff);
 	    
-        Writer writer = new FileWriter("Riparare l'Abbazia.json");
+        Writer writer = new FileWriter("Ingaggiare Mercenari.json");
 
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Effect.class,
@@ -78,7 +70,7 @@ public class SerializeVenture {
 
         writer.close();
         
-        Venture vent = gson.fromJson(new FileReader("Riparare l'Abbazia.json"), Venture.class);
+        Venture vent = gson.fromJson(new FileReader("Ingaggiare Mercenari.json"), Venture.class);
         System.out.println(vent.getName());
         System.out.println(vent.getEra());
         System.out.println(vent.costI().getCoins());
