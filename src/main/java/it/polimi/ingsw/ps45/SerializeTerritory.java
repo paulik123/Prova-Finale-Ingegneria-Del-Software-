@@ -2,14 +2,20 @@ package it.polimi.ingsw.ps45;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Writer;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import it.polimi.ingsw.ps45.model.cards.Era;
 import it.polimi.ingsw.ps45.model.cards.Territory;
 import it.polimi.ingsw.ps45.model.effects.CollectEffect;
 import it.polimi.ingsw.ps45.model.effects.CouncilPrivilegeOneEffect;
+import it.polimi.ingsw.ps45.model.effects.Effect;
 import it.polimi.ingsw.ps45.model.player.ConsumableSet;
 
 /**
@@ -18,51 +24,43 @@ import it.polimi.ingsw.ps45.model.player.ConsumableSet;
  */
 public class SerializeTerritory 
 {
-    public static void main( String[] args )
+    public static void main( String[] args ) throws IOException
     {
     	
     	ConsumableSet immediate = new ConsumableSet();
-    	immediate.setStone(1);
+    	immediate.setWood(1);
+    	immediate.setStone(0);
+    	immediate.setCoins(0);
+    	immediate.setMilitaryPoins(0);
+    	immediate.setServants(0);
+    	immediate.setFaithPoints(0);
     	
     	ConsumableSet harvest = new ConsumableSet();
-    	harvest.setVictoryPoints(4);
-    	harvest.setStone(1);
-
+    	harvest.setWood(0);
+    	harvest.setStone(3);
+    	harvest.setCoins(0);
+    	harvest.setMilitaryPoins(0);
+    	harvest.setServants(0);
+    	harvest.setFaithPoints(0);
+    	
         CollectEffect immEff = new CollectEffect(immediate);
         CollectEffect harvestEff = new CollectEffect(harvest);
         
        CouncilPrivilegeOneEffect cpeffect = new CouncilPrivilegeOneEffect();
         
         
-        Territory t = new Territory(Era.III, "Provincia", 6);
+        Territory t = new Territory(Era.II, "Citta", 6);
         t.addEffect(immEff);
-        t.addEffect(cpeffect);
+        //t.addEffect(cpeffect);
         t.addHarvestEffect(harvestEff);
-        try {
-	         FileOutputStream fileOut = new FileOutputStream("Provincia.ser");
-	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
-	         out.writeObject(t);
-	         out.close();
-	         fileOut.close();
-        }
-        catch(IOException i) {
-	         i.printStackTrace();
-	      }
-        Territory x = null;
-        try {
-	         FileInputStream fileIn = new FileInputStream("Provincia.ser");
-	         ObjectInputStream in = new ObjectInputStream(fileIn);
-	         x = (Territory) in.readObject();
-	         in.close();
-	         fileIn.close();
-	      }catch(IOException i) {
-	         i.printStackTrace();
-	         return;
-	      }catch(Exception ex) {
-	         System.out.println("Employee class not found");
-	         ex.printStackTrace();
-	         return;
-	      }
-        System.out.println(x.getName());
+
+        Writer writer = new FileWriter("C://outout//json//Citta.json");
+
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(Effect.class,
+                        new PropertyBasedInterfaceMarshal()).create();
+        gson.toJson(t, writer);
+
+        writer.close();
     }
 }
