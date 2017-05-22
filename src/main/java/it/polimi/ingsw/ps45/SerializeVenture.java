@@ -15,39 +15,39 @@ public class SerializeVenture {
 	
 	public static void main(String[] args){
 		ConsumableSet costOne = new ConsumableSet();
-		costOne.setWood(2);
-		costOne.setStone(2);
+		costOne.setMilitaryPoins(3);
 		
 		ConsumableSet costTwo = new ConsumableSet();
-		costOne.setWood(2);
-		costOne.setStone(2);
+		costTwo.setMilitaryPoins(3);
 		
 		ConsumableSet reqOne = new ConsumableSet();
-		costOne.setWood(2);
-		costOne.setStone(2);
+		reqOne.setMilitaryPoins(5);
 		
 		ConsumableSet reqTwo = new ConsumableSet();
-		costOne.setWood(2);
-		costOne.setStone(2);
+		reqTwo.setMilitaryPoins(5);
 		
 		
 		ConsumableSet immCons = new ConsumableSet();
-
+		immCons.setFaithPoints(2);
+	
 		
 		ConsumableSet endCons = new ConsumableSet();
-		endCons.setVictoryPoints(4);
+		endCons.setVictoryPoints(5);
 		
 		
 		CollectEffect immediateEff = new CollectEffect(immCons);
 		CollectEffect endGameEff = new CollectEffect(endCons);
-		CouncilPrivilegeTwoEffect cpeffect = new CouncilPrivilegeTwoEffect();
+		CouncilPrivilegeOneEffect cpeffect = new CouncilPrivilegeOneEffect();
+		//CouncilPrivilegeTwoEffect cpeffect = new CouncilPrivilegeTwoEffect();
 
-	    Venture venture = new Venture(Era.I, "Innalzare una Statua", costOne, costTwo, reqOne, reqTwo);
+		
+
+	    Venture venture = new Venture(Era.I, "Combattere le Eresie", costOne, costTwo, reqOne, reqTwo);
 	    venture.addEffect(immediateEff);
-	    venture.addEffect(cpeffect);
+	    //venture.addEffect(cpeffect);
 	    venture.addEndGameEffect(endGameEff);
 	    try {
-	         FileOutputStream fileOut = new FileOutputStream("Innalzare una Statua.ser");
+	         FileOutputStream fileOut = new FileOutputStream("Combattere le Eresie.ser");
 	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
 	         out.writeObject(venture);
 	         out.close();
@@ -57,6 +57,7 @@ public class SerializeVenture {
 	         i.printStackTrace();
 	      }
 	}
+
 	
 
 }
