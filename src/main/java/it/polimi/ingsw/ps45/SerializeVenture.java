@@ -19,20 +19,21 @@ public class SerializeVenture {
 		
 		ConsumableSet costTwo = new ConsumableSet();
 		costTwo.setMilitaryPoins(3);
+	
 		
 		ConsumableSet reqOne = new ConsumableSet();
-		reqOne.setMilitaryPoins(5);
+		reqOne.setMilitaryPoins(6);
 		
 		ConsumableSet reqTwo = new ConsumableSet();
-		reqTwo.setMilitaryPoins(5);
+		reqTwo.setMilitaryPoins(6);
 		
 		
 		ConsumableSet immCons = new ConsumableSet();
-		immCons.setFaithPoints(2);
+		immCons.setCoins(5);
 	
 		
 		ConsumableSet endCons = new ConsumableSet();
-		endCons.setVictoryPoints(5);
+		endCons.setVictoryPoints(3);
 		
 		
 		CollectEffect immediateEff = new CollectEffect(immCons);
@@ -42,12 +43,12 @@ public class SerializeVenture {
 
 		
 
-	    Venture venture = new Venture(Era.I, "Combattere le Eresie", costOne, costTwo, reqOne, reqTwo);
+	    Venture venture = new Venture(Era.II, "Supporto al Re", costOne, costTwo, reqOne, reqTwo);
 	    venture.addEffect(immediateEff);
-	    //venture.addEffect(cpeffect);
+	    venture.addEffect(cpeffect);
 	    venture.addEndGameEffect(endGameEff);
 	    try {
-	         FileOutputStream fileOut = new FileOutputStream("Combattere le Eresie.ser");
+	         FileOutputStream fileOut = new FileOutputStream("Supporto al Re.ser");
 	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
 	         out.writeObject(venture);
 	         out.close();
