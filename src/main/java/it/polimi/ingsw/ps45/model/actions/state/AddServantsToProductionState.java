@@ -3,18 +3,30 @@ package it.polimi.ingsw.ps45.model.actions.state;
 import it.polimi.ingsw.ps45.model.player.ConsumableSet;
 import it.polimi.ingsw.ps45.model.vatican.ExcommunicationCard;
 
-public class CouncilPrivilegeThreeState implements ActionBuilderState{
+public class AddServantsToProductionState implements ActionBuilderState{
 
-	@Override
-	public int actionValue() {
-		// TODO Auto-generated method stub
-		return 0;
+	int value;
+	
+	public AddServantsToProductionState(int value){
+		this.value = value;
 	}
 	
 	@Override
+	public int actionValue() {
+		// TODO Auto-generated method stub
+		return value;
+	}
+
+	@Override
 	public ConsumableSet discount() {
 		// TODO Auto-generated method stub
-		return new ConsumableSet();
+		return null;
+	}
+
+	@Override
+	public ExcommunicationCard getExcommunicationCard() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
@@ -33,6 +45,18 @@ public class CouncilPrivilegeThreeState implements ActionBuilderState{
 	public boolean harvestAction() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public boolean addServantsToHarvestAction() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean addServantsToProductionAction() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 
 	@Override
@@ -74,13 +98,7 @@ public class CouncilPrivilegeThreeState implements ActionBuilderState{
 	@Override
 	public boolean coucilPrivilegeActionThree() {
 		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public ExcommunicationCard getExcommunicationCard() {
-		// TODO Auto-generated method stub
-		return null;
+		return false;
 	}
 
 	@Override
@@ -89,16 +107,4 @@ public class CouncilPrivilegeThreeState implements ActionBuilderState{
 		return false;
 	}
 
-	@Override
-	public boolean addServantsToHarvestAction() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean addServantsToProductionAction() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	
 }

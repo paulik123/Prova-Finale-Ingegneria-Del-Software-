@@ -95,4 +95,16 @@ public class HarvestState implements ActionBuilderState{
 		return false;
 	}
 
+	@Override
+	public boolean addServantsToHarvestAction() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean addServantsToProductionAction() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

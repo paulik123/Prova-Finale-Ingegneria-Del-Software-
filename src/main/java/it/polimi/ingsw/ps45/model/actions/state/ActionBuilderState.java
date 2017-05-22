@@ -13,6 +13,8 @@ public interface ActionBuilderState {
 	// No Pawn Actions
 	public boolean productionAction();
 	public boolean harvestAction();
+	public boolean addServantsToHarvestAction();
+	public boolean addServantsToProductionAction();
 	public boolean takeTerritoryAction();
 	public boolean takeCharacterAction();
 	public boolean takeBuildingAction();

@@ -173,6 +173,28 @@ public class ActionBuilder {
 		new ProductionAction(p, pm, state.actionValue() + p.getResourceSet().getActionValueModifier().getProduction()).run();
 	}
 	
+	public void addServantsToHarvest(int servantsAdded) throws Exception{
+		if(!state.addServantsToHarvestAction()) throw new Exception("Action not allowed - state is false");
+		int value = calculateValue(state.actionValue(), servantsAdded);
+		ConsumableSet servantsSet = servantsToConsumableSet(servantsAdded);
+		
+		if(p.getResourceSet().hasConsumables(servantsSet)){
+			makePlayerPay(servantsSet);
+			this.setState(new HarvestState(value));
+		}
+	}
+	
+	public void addServantsToProduction(int servantsAdded) throws Exception{
+		if(!state.addServantsToHarvestAction()) throw new Exception("Action not allowed - state is false");
+		int value = calculateValue(state.actionValue(), servantsAdded);
+		ConsumableSet servantsSet = servantsToConsumableSet(servantsAdded);
+		
+		if(p.getResourceSet().hasConsumables(servantsSet)){
+			makePlayerPay(servantsSet);
+			this.setState(new ProductionState(value));
+		}
+	}
+	
 	public void NoPawnTerritory(TerritoryCardArea area, int servantsAdded) throws Exception{
 		if(!state.takeTerritoryAction()) throw new Exception("Action not allowed - state is false");
 		int value = calculateValue(state.actionValue(), servantsAdded) + p.getResourceSet().getActionValueModifier().getTerritoryAction();
