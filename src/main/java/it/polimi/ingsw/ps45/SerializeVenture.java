@@ -27,18 +27,26 @@ public class SerializeVenture {
 	
 	public static void main(String[] args) throws IOException{
 		ConsumableSet costOne = new ConsumableSet();
-		costOne.setMilitaryPoins(3);
+		costOne.setCoins(2);
+		costOne.setWood(2);
+		costOne.setStone(2);
 		
 		
 		ConsumableSet costTwo = new ConsumableSet();
-		costTwo.setMilitaryPoins(3);
+		costTwo.setCoins(2);
+		costTwo.setWood(2);
+		costTwo.setStone(2);
 	
 		
 		ConsumableSet reqOne = new ConsumableSet();
-		reqOne.setMilitaryPoins(5);
+		reqOne.setCoins(2);
+		reqOne.setWood(2);
+		reqOne.setStone(2);
 		
 		ConsumableSet reqTwo = new ConsumableSet();
-		reqTwo.setMilitaryPoins(5);
+		reqTwo.setCoins(2);
+		reqTwo.setWood(2);
+		reqTwo.setStone(2);
 		
 		
 		ConsumableSet immCons = new ConsumableSet();
@@ -46,7 +54,7 @@ public class SerializeVenture {
 
 		
 		ConsumableSet endCons = new ConsumableSet();
-		endCons.setVictoryPoints(5);
+		endCons.setVictoryPoints(6);
 		
 		
 		CollectEffect immediateEff = new CollectEffect(immCons);
@@ -56,12 +64,12 @@ public class SerializeVenture {
 		
 		//TakeAnyCardEffect takeEffect = new TakeAnyCardEffect(7, new ConsumableSet());
 		
-	    Venture venture = new Venture(Era.I, "Combattere le Eresie", costOne, costTwo, reqOne, reqTwo);
+	    Venture venture = new Venture(Era.II, "Riparare l'Abbazia", costOne, costTwo, reqOne, reqTwo);
 	    venture.addEffect(immediateEff);
 	    //venture.addEffect(cpeffect);
 	    venture.addEndGameEffect(endGameEff);
 	    
-        Writer writer = new FileWriter("Combattere le Eresie.json");
+        Writer writer = new FileWriter("Riparare l'Abbazia.json");
 
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Effect.class,
@@ -70,7 +78,7 @@ public class SerializeVenture {
 
         writer.close();
         
-        Venture vent = gson.fromJson(new FileReader("Combattere le Eresie.json"), Venture.class);
+        Venture vent = gson.fromJson(new FileReader("Riparare l'Abbazia.json"), Venture.class);
         System.out.println(vent.getName());
         System.out.println(vent.getEra());
         System.out.println(vent.costI().getCoins());
