@@ -11,6 +11,7 @@ import java.io.Writer;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import it.polimi.ingsw.ps45.gson.PropertyBasedInterfaceMarshal;
 import it.polimi.ingsw.ps45.model.cards.Era;
 import it.polimi.ingsw.ps45.model.cards.Territory;
 import it.polimi.ingsw.ps45.model.effects.CollectEffect;

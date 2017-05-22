@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import it.polimi.ingsw.ps45.gson.PropertyBasedInterfaceMarshal;
 import it.polimi.ingsw.ps45.model.area.Board;
 import it.polimi.ingsw.ps45.model.area.NoCardArea;
 import it.polimi.ingsw.ps45.model.area.PlayerPawnPair;

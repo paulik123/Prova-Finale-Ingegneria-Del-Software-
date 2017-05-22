@@ -1,4 +1,4 @@
-package it.polimi.ingsw.ps45;
+package it.polimi.ingsw.ps45.gson;
 
 import java.lang.reflect.Type;
 
