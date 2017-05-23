@@ -22,7 +22,7 @@ public class PlacePawnTerritoryAction implements Action{
 	@Override
 	public void run() {
 		t.addOccupant(p, pt);
-		t.immediateEffect(p, value);
+		if(!p.getResourceSet().getPermanentEffects().isNoCardAreaEffect())t.immediateEffect(p, value);
 		
 		Territory card = t.getTerritory();
 		t.setTerritory(null);

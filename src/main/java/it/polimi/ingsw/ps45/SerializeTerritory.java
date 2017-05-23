@@ -47,7 +47,7 @@ public class SerializeTerritory
         CollectEffect immEff = new CollectEffect(immediate);
         CollectEffect harvestEff = new CollectEffect(harvest);
         
-       CouncilPrivilegeOneEffect cpeffect = new CouncilPrivilegeOneEffect();
+        CouncilPrivilegeOneEffect cpeffect = new CouncilPrivilegeOneEffect();
         
         
         Territory t = new Territory(Era.II, "Citta", 6);

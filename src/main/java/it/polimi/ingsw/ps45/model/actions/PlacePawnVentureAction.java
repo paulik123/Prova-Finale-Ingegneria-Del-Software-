@@ -23,7 +23,7 @@ public class PlacePawnVentureAction implements Action{
 	public void run() {
 		
 		v.addOccupant(p, pt);
-		v.immediateEffect(p, value);
+		if(!p.getResourceSet().getPermanentEffects().isNoCardAreaEffect())v.immediateEffect(p, value);
 		
 		Venture card = v.getVenture();
 		v.setVenture(null);

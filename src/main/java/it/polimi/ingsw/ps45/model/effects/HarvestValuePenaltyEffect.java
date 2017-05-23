@@ -15,7 +15,8 @@ public class HarvestValuePenaltyEffect implements Effect, Serializable{
 	
 	@Override
 	public void runEffect(Player p, int value) {
-		p.getResourceSet().getActionValueModifier().setHarvest(penalty);
+		int h = p.getResourceSet().getActionValueModifier().getHarvest() + penalty;
+		p.getResourceSet().getActionValueModifier().setHarvest(h);
 	}
 
 }

@@ -14,7 +14,8 @@ public class ProductionValuePenaltyEffect implements Effect, Serializable{
 	
 	@Override
 	public void runEffect(Player p, int value) {
-		p.getResourceSet().getActionValueModifier().setProduction(penalty);
+		int h = p.getResourceSet().getActionValueModifier().getProduction() + penalty;
+		p.getResourceSet().getActionValueModifier().setProduction(h);
 	}
 
 }

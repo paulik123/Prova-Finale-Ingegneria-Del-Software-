@@ -5,6 +5,7 @@ public class PermanentEffects {
 	private boolean addingServantsPenalty;
 	private boolean noPawnOnMarketPenalty;
 	private boolean noFirstTurn;
+	private boolean noCardAreaEffect;
 	
 	//ENDGAME
 	private boolean noCharacterVictoryPoints;
@@ -94,6 +95,16 @@ public class PermanentEffects {
 	public void setResourceVictoryPointsPenalty(boolean resourceVictoryPointsPenalty) {
 		this.resourceVictoryPointsPenalty = resourceVictoryPointsPenalty;
 	}
+
+	public boolean isNoCardAreaEffect() {
+		return noCardAreaEffect;
+	}
+
+	public void setNoCardAreaEffect(boolean noCardAreaEffect) {
+		this.noCardAreaEffect = noCardAreaEffect;
+	}
+	
+	
 	
 	
 	

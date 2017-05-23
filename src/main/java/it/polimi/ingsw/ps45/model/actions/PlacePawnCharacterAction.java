@@ -23,7 +23,7 @@ public class PlacePawnCharacterAction implements Action{
 	public void run() {
 		
 		c.addOccupant(p, pt);
-		c.immediateEffect(p, value);
+		if(!p.getResourceSet().getPermanentEffects().isNoCardAreaEffect())c.immediateEffect(p, value);
 		
 		Character card = c.getCharacter();
 		c.setCharacter(null);

@@ -19,7 +19,7 @@ public class NoPawnVentureAction implements Action{
 
 	@Override
 	public void run() {
-		v.immediateEffect(p,value);
+		if(!p.getResourceSet().getPermanentEffects().isNoCardAreaEffect())v.immediateEffect(p,value);
 		
 		Venture card = v.getVenture();
 		v.setVenture(null);

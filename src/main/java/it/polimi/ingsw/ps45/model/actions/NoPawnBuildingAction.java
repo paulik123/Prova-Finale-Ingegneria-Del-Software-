@@ -19,7 +19,7 @@ public class NoPawnBuildingAction implements Action{
 
 	@Override
 	public void run() {
-		b.immediateEffect(p,value);
+		if(!p.getResourceSet().getPermanentEffects().isNoCardAreaEffect())b.immediateEffect(p,value);
 		
 		Building card = b.getBuilding();
 		b.setBuilding(null);

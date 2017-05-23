@@ -19,7 +19,7 @@ public class NoPawnCharacterAction implements Action{
 
 	@Override
 	public void run() {
-		c.immediateEffect(p, value);
+		if(!p.getResourceSet().getPermanentEffects().isNoCardAreaEffect())c.immediateEffect(p, value);
 		
 		Character card = c.getCharacter();
 		c.setCharacter(null);

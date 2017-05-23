@@ -22,7 +22,7 @@ public class PlacePawnBuildingAction implements Action{
 	@Override
 	public void run() {
 		b.addOccupant(p, pt);
-		b.immediateEffect(p, value);
+		if(!p.getResourceSet().getPermanentEffects().isNoCardAreaEffect())b.immediateEffect(p, value);
 		
 		Building card = b.getBuilding();
 		b.setBuilding(null);
