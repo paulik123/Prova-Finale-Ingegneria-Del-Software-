@@ -12,29 +12,34 @@ import it.polimi.ingsw.ps45.model.cards.Era;
 import it.polimi.ingsw.ps45.model.cards.Character;
 import it.polimi.ingsw.ps45.model.effects.CollectEffect;
 import it.polimi.ingsw.ps45.model.effects.CouncilPrivilegeOneEffect;
+import it.polimi.ingsw.ps45.model.effects.CouncilPrivilegeThreeEffect;
 import it.polimi.ingsw.ps45.model.effects.Effect;
 import it.polimi.ingsw.ps45.model.effects.HarvestValuePenaltyEffect;
 import it.polimi.ingsw.ps45.model.effects.NoCardAreaCollectEffect;
 import it.polimi.ingsw.ps45.model.effects.ProductionValuePenaltyEffect;
 import it.polimi.ingsw.ps45.model.effects.TakeAnyCardEffect;
 import it.polimi.ingsw.ps45.model.effects.TakeBuildingActionModifierEffect;
+import it.polimi.ingsw.ps45.model.effects.TakeBuildingEffect;
 import it.polimi.ingsw.ps45.model.effects.TakeBuildingResourceDiscountEffect;
 import it.polimi.ingsw.ps45.model.effects.TakeCharacterActionModifierEffect;
+import it.polimi.ingsw.ps45.model.effects.TakeCharacterEffect;
 import it.polimi.ingsw.ps45.model.effects.TakeCharacterResourceDiscountEffect;
 import it.polimi.ingsw.ps45.model.effects.TakeTerritoryActionModifierEffect;
+import it.polimi.ingsw.ps45.model.effects.TakeTerritoryEffect;
 import it.polimi.ingsw.ps45.model.effects.TakeVentureActionModifierEffect;
+import it.polimi.ingsw.ps45.model.effects.TakeVentureEffect;
 import it.polimi.ingsw.ps45.model.player.ConsumableSet;
 
 public class SerializeCharacter {
 
 	public static void main( String[] args ) throws IOException
     {
-		String name = "Artigiano";
+		String name = "Messo Reale";
 		
     	ConsumableSet cost = new ConsumableSet();
     	cost.setWood(0);
     	cost.setStone(0);
-    	cost.setCoins(3);
+    	cost.setCoins(5);
     	cost.setMilitaryPoins(0);
     	cost.setServants(0);
     	cost.setFaithPoints(0);
@@ -43,31 +48,31 @@ public class SerializeCharacter {
     	immediate.setWood(0);
     	immediate.setStone(0);
     	immediate.setCoins(0);
-    	immediate.setMilitaryPoins(0);
+    	immediate.setMilitaryPoins(2);
     	immediate.setServants(0);
-    	immediate.setFaithPoints(4);
+    	immediate.setFaithPoints(0);
     	
     	ConsumableSet discount = new ConsumableSet();
-    	discount.setWood(1);
-    	discount.setStone(1);
+    	discount.setWood(0);
+    	discount.setStone(0);
     	discount.setCoins(0);
     	discount.setMilitaryPoins(0);
     	discount.setServants(0);
     	discount.setFaithPoints(0);
     	
-    	ProductionValuePenaltyEffect tankeeffect = new ProductionValuePenaltyEffect(2);
-    	TakeBuildingResourceDiscountEffect discountEffect = new TakeBuildingResourceDiscountEffect(discount);
+    	TakeVentureEffect tankeeffect = new TakeVentureEffect(6, discount);
+    	//TakeCharacterEffect discountEffect = new TakeBuildingResourceDiscountEffect(discount);
 
         CollectEffect collectEff = new CollectEffect(immediate);
         
         NoCardAreaCollectEffect noCardEffect = new NoCardAreaCollectEffect();
         
         
-        CouncilPrivilegeOneEffect cpeffect = new CouncilPrivilegeOneEffect();
+        CouncilPrivilegeThreeEffect cpeffect = new CouncilPrivilegeThreeEffect();
 
-        Character c = new Character(Era.I, name, cost);
-        c.addEffect(tankeeffect);
-        //c.addEffect(noCardEffect);
+        Character c = new Character(Era.II, name, cost);
+        //c.addEffect(tankeeffect);
+        c.addEffect(cpeffect);
 
 
         Writer writer = new FileWriter(name+".json");
