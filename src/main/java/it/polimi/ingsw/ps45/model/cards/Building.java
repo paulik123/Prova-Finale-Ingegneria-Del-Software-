@@ -1,19 +1,60 @@
 package it.polimi.ingsw.ps45.model.cards;
 
+import java.util.ArrayList;
+
+import it.polimi.ingsw.ps45.model.effects.Effect;
 import it.polimi.ingsw.ps45.model.player.ConsumableSet;
 import it.polimi.ingsw.ps45.model.player.Player;
 
-public abstract class Building extends Card {
-	public Building(Era e, int productionLevel) {
-		super(e);
+public class Building extends Card {
+	
+	ArrayList<Effect> productionIEffects;
+	ArrayList<Effect> productionIIEffects;
+	
+	ConsumableSet cost;
+	
+	
+	public Building(Era e, String name, int productionLevel, ConsumableSet cost) {
+		super(e, name);
 		this.productionLevel = productionLevel;
+		
+		productionIEffects = new ArrayList<Effect>();
+		productionIIEffects = new ArrayList<Effect>();
+		
+		this.cost = cost;
 	}
-	public abstract ConsumableSet cost();
-	abstract public void productionI(Player p);
-	abstract public void productionII(Player p);
+	public ConsumableSet cost() {
+		return null;
+	}
+	public void productionI(Player p) {
+		for(Effect e:productionIEffects){
+			e.runEffect(p, 0);
+		}
+	}
+	public void productionII(Player p) {
+		for(Effect e:productionIIEffects){
+			e.runEffect(p, 0);
+		}
+	}
 	
 	private int productionLevel;
 	public int getProductionLevel(){
 		return productionLevel;
+	}
+	
+	public void addProductionIEffect(Effect e){
+		productionIEffects.add(e);
+	}
+	
+	public void addProductionIIEffect(Effect e){
+		productionIIEffects.add(e);
+	}
+	
+	@Override
+	public void immediateEffect(Player p) {
+		for(Effect e:super.getEffects()){
+			e.runEffect(p, 0);
+		}
+		
 	}
 }
