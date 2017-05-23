@@ -14,7 +14,8 @@ public class TakeVentureActionModifierEffect implements Effect, Serializable{
 	
 	@Override
 	public void runEffect(Player p, int value) {
-		p.getResourceSet().getActionValueModifier().setVentureAction(effectValue);
+		int h = p.getResourceSet().getActionValueModifier().getCharacterAction() + effectValue;
+		p.getResourceSet().getActionValueModifier().setVentureAction(h);
 	}
 
 }

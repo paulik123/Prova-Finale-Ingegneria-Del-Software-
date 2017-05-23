@@ -7,8 +7,8 @@ public class HarvestAreas {
 	NoCardArea big;
 	
 	public HarvestAreas(){
-		small = Board.loadFromFile("HarvestAreaSmall.ser");
-		big = Board.loadFromFile("HarvestAreaBig.ser");
+		small = Board.loadFromFile("serialized//areas//HarvestSmallArea.json");
+		big = Board.loadFromFile("serialized//areas//HarvestBigArea.json");
 	}
 	
 	public boolean isOccupiedByPlayer(Player p) {

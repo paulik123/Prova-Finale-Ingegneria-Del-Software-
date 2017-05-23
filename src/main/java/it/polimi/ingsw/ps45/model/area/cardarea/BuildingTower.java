@@ -1,18 +1,28 @@
 package it.polimi.ingsw.ps45.model.area.cardarea;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonSyntaxException;
+
+import it.polimi.ingsw.ps45.gson.PropertyBasedInterfaceMarshal;
+import it.polimi.ingsw.ps45.model.area.NoCardArea;
+import it.polimi.ingsw.ps45.model.effects.Effect;
 import it.polimi.ingsw.ps45.model.player.Player;
 
 public class BuildingTower implements Tower{
 	
 	public BuildingTower(){
-		b0 = loadFromFile("BuildingCardAreaGroundFloor.ser");
-		b1 = loadFromFile("BuildingCardAreaFirstFloor.ser");
-		b2 = loadFromFile("BuildingCardAreaSecondFloor.ser");
-		b3 = loadFromFile("BuildingCardAreaThirdFloor.ser");
+		b0 = loadFromFile("serialized//areas//cardareas//BuildingCardAreaGroundFloor.json");
+		b1 = loadFromFile("serialized//areas//cardareas//BuildingCardAreaFirstFloor.json");
+		b2 = loadFromFile("serialized//areas//cardareas//BuildingCardAreaSecondFloor.json");
+		b3 = loadFromFile("serialized//areas//cardareas//BuildingCardAreaThirdFloor.json");
 	}
 	
 	private BuildingCardArea b0;
@@ -35,20 +45,26 @@ public class BuildingTower implements Tower{
 					b3.isOccupiedByPlayerWithColoredPawn(p);
 	}
 	
-	public BuildingCardArea loadFromFile(String name){
-		BuildingCardArea x = null;
-        try {
-	         FileInputStream fileIn = new FileInputStream("serialized//areas//" + name);
-	         ObjectInputStream in = new ObjectInputStream(fileIn);
-	         x = (BuildingCardArea) in.readObject();
-	         in.close();
-	         fileIn.close();
-	      }catch(IOException i) {
-	         i.printStackTrace();
-	      }catch(Exception ex) {
-	         ex.printStackTrace();
-	      }
-        return x;
+	public BuildingCardArea loadFromFile(String path){
+		Gson gson = new GsonBuilder()
+                .registerTypeAdapter(Effect.class,
+                        new PropertyBasedInterfaceMarshal()).create();
+	 
+		BuildingCardArea c = null;
+		try {
+			c = gson.fromJson(new FileReader(path), BuildingCardArea.class);
+		} catch (JsonSyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonIOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	 return c;
+	}
 	}
 
-}
+

@@ -7,8 +7,8 @@ public class ProductionAreas {
 	NoCardArea big;
 	
 	public ProductionAreas(){
-		small = Board.loadFromFile("ProductionAreaSmall.ser");
-		big = Board.loadFromFile("ProductionAreaBig.ser");
+		small = Board.loadFromFile("serialized//areas//ProductionSmallArea.json");
+		big = Board.loadFromFile("serialized//areas//ProductionBigArea.json");
 	}
 	
 	public boolean isOccupiedByPlayer(Player p) {

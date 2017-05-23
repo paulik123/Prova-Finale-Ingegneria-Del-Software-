@@ -14,7 +14,8 @@ public class TakeTerritoryActionModifierEffect implements Effect, Serializable{
 	
 	@Override
 	public void runEffect(Player p, int value) {
-		p.getResourceSet().getActionValueModifier().setTerritoryAction(effectValue);
+		int h = p.getResourceSet().getActionValueModifier().getTerritoryAction() + effectValue;
+		p.getResourceSet().getActionValueModifier().setTerritoryAction(h);
 	}
 
 }

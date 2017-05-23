@@ -1,18 +1,27 @@
 package it.polimi.ingsw.ps45.model.area.cardarea;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonSyntaxException;
+
+import it.polimi.ingsw.ps45.gson.PropertyBasedInterfaceMarshal;
+import it.polimi.ingsw.ps45.model.effects.Effect;
 import it.polimi.ingsw.ps45.model.player.Player;
 
 public class TerritoryTower implements Tower{
 	
 	public TerritoryTower(){
-		t0 = loadFromFile("TerritoryCardAreaGroundFloor.ser");
-		t1 = loadFromFile("TerritoryCardAreaFirstFloor.ser");
-		t2 = loadFromFile("TerritoryCardAreaSecondFloor.ser");
-		t3 = loadFromFile("TerritoryCardAreaThirdFloor.ser");
+		t0 = loadFromFile("serialized//areas//cardareas//TerritoryCardAreaGroundFloor.json");
+		t1 = loadFromFile("serialized//areas//cardareas//TerritoryCardAreaFirstFloor.json");
+		t2 = loadFromFile("serialized//areas//cardareas//TerritoryCardAreaSecondFloor.json");
+		t3 = loadFromFile("serialized//areas//cardareas//TerritoryCardAreaThirdFloor.json");
 		
 	}
 	
@@ -36,20 +45,25 @@ public class TerritoryTower implements Tower{
 					t3.isOccupiedByPlayerWithColoredPawn(p);
 	}
 	
-	public TerritoryCardArea loadFromFile(String name){
-		TerritoryCardArea x = null;
-        try {
-	         FileInputStream fileIn = new FileInputStream("serialized//areas//" + name);
-	         ObjectInputStream in = new ObjectInputStream(fileIn);
-	         x = (TerritoryCardArea) in.readObject();
-	         in.close();
-	         fileIn.close();
-	      }catch(IOException i) {
-	         i.printStackTrace();
-	      }catch(Exception ex) {
-	         ex.printStackTrace();
-	      }
-        return x;
+	public TerritoryCardArea loadFromFile(String path){
+		Gson gson = new GsonBuilder()
+                .registerTypeAdapter(Effect.class,
+                        new PropertyBasedInterfaceMarshal()).create();
+	 
+		TerritoryCardArea c = null;
+		try {
+			c = gson.fromJson(new FileReader(path), TerritoryCardArea.class);
+		} catch (JsonSyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonIOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	 return c;
 	}
 
 }

@@ -1,14 +1,20 @@
 package it.polimi.ingsw.ps45.model.area;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonSyntaxException;
+
+import it.polimi.ingsw.ps45.gson.PropertyBasedInterfaceMarshal;
 import it.polimi.ingsw.ps45.model.area.cardarea.BuildingTower;
 import it.polimi.ingsw.ps45.model.area.cardarea.CharacterTower;
 import it.polimi.ingsw.ps45.model.area.cardarea.TerritoryTower;
-import it.polimi.ingsw.ps45.model.area.cardarea.VentureCardArea;
 import it.polimi.ingsw.ps45.model.area.cardarea.VentureTower;
+import it.polimi.ingsw.ps45.model.effects.Effect;
 
 public class Board {
 	ProductionAreas productionAreas;
@@ -32,12 +38,12 @@ public class Board {
 		
 		harvestAreas = new HarvestAreas();
 		
-		coinsMarketArea = loadFromFile("CoinsMarketArea.ser");
-		servantsMarketArea = loadFromFile("ServantsMarketArea.ser");
-		militaryAndCoinArea = loadFromFile("MilitaryAndCoinMarketArea.ser");
-		councilPrivilegeMarketArea = loadFromFile("CouncilPrivilegeMarketArea.ser");
+		coinsMarketArea = loadFromFile("serialized//areas//CoinsMarketArea.json");
+		servantsMarketArea = loadFromFile("serialized//areas//ServantsMarketArea.json");
+		militaryAndCoinArea = loadFromFile("serialized//areas//MilitaryAndCoinsMarketArea.json");
+		councilPrivilegeMarketArea = loadFromFile("serialized//areas//CouncilPrivilegeMarketArea.json");
 		
-		councilPalaceArea = loadFromFile("CouncilPalaceArea.ser");
+		councilPalaceArea = loadFromFile("serialized//areas//CouncilPalaceArea.json");
 		
 		territoryTower = new TerritoryTower();
 		characterTower = new CharacterTower();
@@ -90,20 +96,25 @@ public class Board {
 	}
 	
 	
-	public static NoCardArea loadFromFile(String name){
-		NoCardArea x = null;
-        try {
-	         FileInputStream fileIn = new FileInputStream("serialized//areas//" + name);
-	         ObjectInputStream in = new ObjectInputStream(fileIn);
-	         x = (NoCardArea) in.readObject();
-	         in.close();
-	         fileIn.close();
-	      }catch(IOException i) {
-	         i.printStackTrace();
-	      }catch(Exception ex) {
-	         ex.printStackTrace();
-	      }
-        return x;
+	public static NoCardArea loadFromFile(String path){
+		Gson gson = new GsonBuilder()
+                .registerTypeAdapter(Effect.class,
+                        new PropertyBasedInterfaceMarshal()).create();
+	 
+		NoCardArea c = null;
+	try {
+		c = gson.fromJson(new FileReader(path), NoCardArea.class);
+	} catch (JsonSyntaxException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (JsonIOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (FileNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	 return c;
 	}
 	
 }

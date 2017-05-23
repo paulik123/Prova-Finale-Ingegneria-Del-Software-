@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps45;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -12,6 +13,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import it.polimi.ingsw.ps45.gson.PropertyBasedInterfaceMarshal;
+import it.polimi.ingsw.ps45.model.area.NoCardArea;
 import it.polimi.ingsw.ps45.model.cards.Era;
 import it.polimi.ingsw.ps45.model.cards.Territory;
 import it.polimi.ingsw.ps45.model.effects.CollectEffect;
@@ -63,5 +65,8 @@ public class SerializeTerritory
         gson.toJson(t, writer);
 
         writer.close();
+        
+        Territory aaa = gson.fromJson(new FileReader("C://outout//json//Citta.json"), Territory.class);
+        System.out.println(aaa.getName());
     }
 }

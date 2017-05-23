@@ -1,18 +1,26 @@
 package it.polimi.ingsw.ps45.model.area.cardarea;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonSyntaxException;
+
+import it.polimi.ingsw.ps45.gson.PropertyBasedInterfaceMarshal;
+import it.polimi.ingsw.ps45.model.effects.Effect;
 import it.polimi.ingsw.ps45.model.player.Player;
 
 public class VentureTower implements Tower{
 	
 	public VentureTower(){
-		v0 = loadFromFile("VentureCardAreaGroundFloor.ser");
-		v1 = loadFromFile("VentureCardAreaFirstFloor.ser");
-		v2 = loadFromFile("VentureCardAreaSecondFloor.ser");
-		v3 = loadFromFile("VentureCardAreaThirddFloor.ser");
+		v0 = loadFromFile("serialized//areas//cardareas//VentureCardAreaGroundFloor.json");
+		v1 = loadFromFile("serialized//areas//cardareas//VentureCardAreaFirstFloor.json");
+		v2 = loadFromFile("serialized//areas//cardareas//VentureCardAreaSecondFloor.json");
+		v3 = loadFromFile("serialized//areas//cardareas//VentureCardAreaThirdFloor.json");
 		
 	}
 	
@@ -36,20 +44,25 @@ public class VentureTower implements Tower{
 					v3.isOccupiedByPlayerWithColoredPawn(p);
 	}
 	
-	public VentureCardArea loadFromFile(String name){
-		VentureCardArea x = null;
-        try {
-	         FileInputStream fileIn = new FileInputStream("serialized//areas//" + name);
-	         ObjectInputStream in = new ObjectInputStream(fileIn);
-	         x = (VentureCardArea) in.readObject();
-	         in.close();
-	         fileIn.close();
-	      }catch(IOException i) {
-	         i.printStackTrace();
-	      }catch(Exception ex) {
-	         ex.printStackTrace();
-	      }
-        return x;
+	public VentureCardArea loadFromFile(String path){
+		Gson gson = new GsonBuilder()
+                .registerTypeAdapter(Effect.class,
+                        new PropertyBasedInterfaceMarshal()).create();
+	 
+		VentureCardArea c = null;
+		try {
+			c = gson.fromJson(new FileReader(path), VentureCardArea.class);
+		} catch (JsonSyntaxException e) {
+			
+			e.printStackTrace();
+		} catch (JsonIOException e) {
+			
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			
+			e.printStackTrace();
+		}
+	 return c;
 	}
 
 }

@@ -14,7 +14,8 @@ public class TakeBuildingActionModifierEffect implements Effect, Serializable{
 	
 	@Override
 	public void runEffect(Player p, int value) {
-		p.getResourceSet().getActionValueModifier().setBuildingAction(effectValue);
+		int h = p.getResourceSet().getActionValueModifier().getBuildingAction() + effectValue;
+		p.getResourceSet().getActionValueModifier().setBuildingAction(h);
 	}
 
 }
