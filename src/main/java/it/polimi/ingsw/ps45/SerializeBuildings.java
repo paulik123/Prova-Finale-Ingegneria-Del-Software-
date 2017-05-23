@@ -44,11 +44,11 @@ public class SerializeBuildings {
 
 	public static void main( String[] args ) throws IOException
     {
-		String name = "Esattoria";
+		String name = "Gilda dei Scultori";
 		
     	ConsumableSet cost = new ConsumableSet();
-    	cost.setWood(3);
-    	cost.setStone(1);
+    	cost.setWood(0);
+    	cost.setStone(3);
     	cost.setCoins(0);
     	cost.setMilitaryPoins(0);
     	cost.setServants(0);
@@ -61,7 +61,7 @@ public class SerializeBuildings {
     	immediate.setMilitaryPoins(0);
     	immediate.setServants(0);
     	immediate.setFaithPoints(0);
-    	immediate.setVictoryPoints(5);
+    	immediate.setVictoryPoints(6);
     	
     	ConsumableSet discount = new ConsumableSet();
     	discount.setWood(0);
@@ -83,8 +83,8 @@ public class SerializeBuildings {
     	
     	ConsumableSet beforeI = new ConsumableSet();
     	beforeI.setWood(0);
-    	beforeI.setStone(0);
-    	beforeI.setCoins(1);
+    	beforeI.setStone(1);
+    	beforeI.setCoins(0);
     	beforeI.setMilitaryPoins(0);
     	beforeI.setServants(0);
     	beforeI.setFaithPoints(0);
@@ -96,13 +96,13 @@ public class SerializeBuildings {
     	afterI.setCoins(0);
     	afterI.setMilitaryPoins(0);
     	afterI.setServants(0);
-    	afterI.setFaithPoints(1);
-    	afterI.setVictoryPoints(0);
+    	afterI.setFaithPoints(0);
+    	afterI.setVictoryPoints(3);
     	
     	ConsumableSet beforeII = new ConsumableSet();
     	beforeII.setWood(0);
-    	beforeII.setStone(0);
-    	beforeII.setCoins(1);
+    	beforeII.setStone(3);
+    	beforeII.setCoins(0);
     	beforeII.setMilitaryPoins(0);
     	beforeII.setServants(0);
     	beforeII.setFaithPoints(0);
@@ -111,15 +111,16 @@ public class SerializeBuildings {
     	ConsumableSet afterII = new ConsumableSet();
     	afterII.setWood(0);
     	afterII.setStone(0);
-    	afterII.setCoins(1);
+    	afterII.setCoins(0);
     	afterII.setMilitaryPoins(0);
     	afterII.setServants(0);
     	afterII.setFaithPoints(0);
-    	afterII.setVictoryPoints(0);
+    	afterII.setVictoryPoints(7);
     	
     	int productionLevel = 5;
     	
     	CollectEffect collectEffect = new CollectEffect(immediate);
+    	CollectEffect produtctionCollectEffect = new CollectEffect(afterII);
     	
     	ProductionExchangeEffect exchangeEffectI = new ProductionExchangeEffect(beforeI, afterI);
     	ProductionExchangeEffect exchangeEffectII = new ProductionExchangeEffect(beforeII, afterII);
@@ -127,12 +128,12 @@ public class SerializeBuildings {
     	ConsumableSetPerTerritoryEffect c = new ConsumableSetPerTerritoryEffect(afterII);
     	
 
-        Building b = new Building(Era.I, name, productionLevel, cost);
+        Building b = new Building(Era.II, name, productionLevel, cost);
         b.addEffect(collectEffect);
         
-        b.addProductionIEffect(c);
+        b.addProductionIEffect(exchangeEffectI);
         
-        b.addProductionIIEffect(c);
+        b.addProductionIIEffect(exchangeEffectII);
 
 
 
