@@ -1,12 +1,17 @@
 package it.polimi.ingsw.ps45.model.game;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonSyntaxException;
 
 import it.polimi.ingsw.ps45.model.actions.state.PawnActionState;
 import it.polimi.ingsw.ps45.model.actions.state.VaticanChoiceState;
 import it.polimi.ingsw.ps45.model.area.Board;
 import it.polimi.ingsw.ps45.model.area.PlayerPawnPair;
+import it.polimi.ingsw.ps45.model.cards.CardDealer;
 import it.polimi.ingsw.ps45.model.cards.Era;
 import it.polimi.ingsw.ps45.model.player.ConsumableSet;
 import it.polimi.ingsw.ps45.model.player.Player;
@@ -27,6 +32,7 @@ public class Game {
 	private int currentEra;
 	private int roundNumber;
 	private boolean gameStarted;
+	private CardDealer cardDealer;
 	
 	public Game(String gameID){
 		this.gameID = gameID;
@@ -38,12 +44,19 @@ public class Game {
 		players = new ArrayList<Player>();
 		board = new Board();
 		vatican = new Vatican();
-		turns = new Player[turnsPerRound * numberOfPlayers];
+		
+		
+		try {
+			cardDealer = new CardDealer();
+		} catch (JsonSyntaxException | JsonIOException | FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void start() throws Exception{
-		if(players.size() < numberOfPlayers) throw new Exception("Not enough players");
 		if(gameStarted) throw new Exception("Game already started");
+		turns = new Player[turnsPerRound * numberOfPlayers];
 		calculateTurnsStart();
 		currentRound = new Round(turns);
 		roundNumber++;
@@ -61,6 +74,7 @@ public class Game {
 			roundNumber++;
 			board = new Board();
 			updateActionBuildersBoard();
+			cardDealer.updateBoard(board, eras[currentEra]);
 			calculateTurns();
 			currentRound = new Round(turns);
 			currentRound.getCurrentPlayer().getActionBuilder().setState(new PawnActionState());
@@ -97,6 +111,7 @@ public class Game {
 		roundNumber = 1;
 		board = new Board();
 		updateActionBuildersBoard();
+		cardDealer.updateBoard(board, eras[currentEra]);
 		calculateTurns();
 		currentRound = new Round(turns);
 		currentRound.getCurrentPlayer().getActionBuilder().setState(new PawnActionState());
@@ -109,9 +124,7 @@ public class Game {
 	}
 	
 	private void calculateTurns(){
-		if(board.getCouncilPalaceArea().getOccupants().size() == 0){
-			return;
-		}else{
+		
 			Player[] temp = new Player[numberOfPlayers];
 			int i = 0;
 			ArrayList<String> added = new ArrayList<String>();
@@ -135,7 +148,7 @@ public class Game {
 				//TODO No first turn effect
 				turns[m] = temp[m%turnsPerRound];
 			}
-		}
+		
 	}
 
 	private void calculateTurnsStart(){
