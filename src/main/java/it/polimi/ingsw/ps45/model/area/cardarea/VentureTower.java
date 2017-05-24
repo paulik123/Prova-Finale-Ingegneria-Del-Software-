@@ -3,7 +3,7 @@ package it.polimi.ingsw.ps45.model.area.cardarea;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-
+import java.util.ArrayList;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -64,5 +64,32 @@ public class VentureTower implements Tower{
 		}
 	 return c;
 	}
+
+	public VentureCardArea getGroundFloor() {
+		return v0;
+	}
+
+	public VentureCardArea getFirstFloor() {
+		return v1;
+	}
+
+	public VentureCardArea getSecondFloor() {
+		return v2;
+	}
+
+	public VentureCardArea getThirdFloor() {
+		return v3;
+	}
+	
+	public ArrayList<VentureCardArea> getAreas(){
+		ArrayList<VentureCardArea> list = new ArrayList<VentureCardArea>();
+		list.add(v0);
+		list.add(v1);
+		list.add(v2);
+		list.add(v3);
+		return list;
+	}
+	
+	
 
 }

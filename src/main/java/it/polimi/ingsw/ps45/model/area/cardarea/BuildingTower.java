@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.ArrayList;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -13,6 +14,7 @@ import com.google.gson.JsonSyntaxException;
 
 import it.polimi.ingsw.ps45.gson.PropertyBasedInterfaceMarshal;
 import it.polimi.ingsw.ps45.model.area.NoCardArea;
+import it.polimi.ingsw.ps45.model.cards.Building;
 import it.polimi.ingsw.ps45.model.effects.Effect;
 import it.polimi.ingsw.ps45.model.player.Player;
 
@@ -65,6 +67,34 @@ public class BuildingTower implements Tower{
 		}
 	 return c;
 	}
+
+	public BuildingCardArea getGroundFloor() {
+		return b0;
 	}
+
+	public BuildingCardArea getFirstFloor() {
+		return b1;
+	}
+
+	public BuildingCardArea getSecondFloor() {
+		return b2;
+	}
+
+	public BuildingCardArea getThirdFloor() {
+		return b3;
+	}
+	
+	public ArrayList<BuildingCardArea> getAreas(){
+		ArrayList<BuildingCardArea> list = new ArrayList<BuildingCardArea>();
+		list.add(b0);
+		list.add(b1);
+		list.add(b2);
+		list.add(b3);
+		return list;
+	}
+	
+	
+	
+}
 
 

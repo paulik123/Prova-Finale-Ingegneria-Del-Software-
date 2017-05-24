@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.ArrayList;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -65,5 +66,32 @@ public class CharacterTower implements Tower{
 		}
 	 return c;
 	}
+
+	public CharacterCardArea getGroundFloor() {
+		return c0;
+	}
+
+	public CharacterCardArea getFirstFloor() {
+		return c1;
+	}
+
+	public CharacterCardArea getSecondFloor() {
+		return c2;
+	}
+
+	public CharacterCardArea getThirdFloor() {
+		return c3;
+	}
+	
+	public ArrayList<CharacterCardArea> getAreas(){
+		ArrayList<CharacterCardArea> list = new ArrayList<CharacterCardArea>();
+		list.add(c0);
+		list.add(c1);
+		list.add(c2);
+		list.add(c3);
+		return list;
+	}
+	
+	
 
 }

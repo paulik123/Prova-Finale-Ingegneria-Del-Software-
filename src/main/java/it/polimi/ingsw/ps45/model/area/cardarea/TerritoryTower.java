@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.ArrayList;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -65,5 +66,32 @@ public class TerritoryTower implements Tower{
 		}
 	 return c;
 	}
+
+	public TerritoryCardArea getGroundFloor() {
+		return t0;
+	}
+
+	public TerritoryCardArea getFirstFloor() {
+		return t1;
+	}
+
+	public TerritoryCardArea getSecondFloor() {
+		return t2;
+	}
+
+	public TerritoryCardArea getThirdFloor() {
+		return t3;
+	}
+	
+	public ArrayList<TerritoryCardArea> getAreas(){
+		ArrayList<TerritoryCardArea> list = new ArrayList<TerritoryCardArea>();
+		list.add(t0);
+		list.add(t1);
+		list.add(t2);
+		list.add(t3);
+		return list;
+	}
+	
+	
 
 }
