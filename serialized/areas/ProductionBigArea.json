@@ -1,1 +1,1 @@
-{"immediateEffect":{"penalty":3,"CLASS_META_KEY":"it.polimi.ingsw.ps45.model.effects.ProductionEffect"},"cost":1,"occupiedBy":[],"maxOccupants":999}
+{"immediateEffect":{"penalty":3,"CLASS_META_KEY":"it.polimi.ingsw.ps45.model.effects.ProductionEffect"},"name":"ProductionBig","cost":1,"occupiedBy":[],"maxOccupants":999}

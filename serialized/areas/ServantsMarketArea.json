@@ -1,1 +1,1 @@
-{"immediateEffect":{"cs":{"wood":0,"stone":0,"coins":0,"servants":5,"victoryPoints":0,"faithPoints":0,"militaryPoints":0},"CLASS_META_KEY":"it.polimi.ingsw.ps45.model.effects.CollectEffect"},"cost":1,"occupiedBy":[],"maxOccupants":1}
+{"immediateEffect":{"cs":{"wood":0,"stone":0,"coins":0,"servants":5,"victoryPoints":0,"faithPoints":0,"militaryPoints":0},"CLASS_META_KEY":"it.polimi.ingsw.ps45.model.effects.CollectEffect"},"name":"ServantsMarket","cost":1,"occupiedBy":[],"maxOccupants":1}

@@ -10,7 +10,9 @@ import it.polimi.ingsw.ps45.model.player.Player;
 public class VentureCardArea extends Area implements Serializable{
 	Effect effect;
 	
-	public VentureCardArea(int cost, Effect effect){
+	public VentureCardArea(int cost, Effect effect, String name){
+		super();
+		this.setName(name);
 		this.setCost(cost);
 		this.effect = effect;
 		this.maxOccupants = 1;

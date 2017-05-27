@@ -11,7 +11,9 @@ public class TerritoryCardArea extends Area implements Serializable{
 	private Territory t;
 	Effect effect;
 	
-	public TerritoryCardArea(int cost, Effect effect){
+	public TerritoryCardArea(int cost, Effect effect, String name){
+		super();
+		super.setName(name);
 		this.setCost(cost);
 		this.effect = effect;
 		this.maxOccupants = 1;

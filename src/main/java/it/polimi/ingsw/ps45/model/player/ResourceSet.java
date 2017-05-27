@@ -39,6 +39,11 @@ public class ResourceSet {
 	public ResourceSet(ConsumableSet initialResources){
 		this.resources = initialResources;
 		
+		territoryList = new ArrayList<Territory>();
+		buildingList = new ArrayList<Building>();
+		characterList = new ArrayList<Character>();
+		ventureList = new ArrayList<Venture>();
+		
 		this.territoryActionDiscount = new ConsumableSet();
 		this.characterActionDiscount = new ConsumableSet();
 		this.buildingActionDiscount = new ConsumableSet();

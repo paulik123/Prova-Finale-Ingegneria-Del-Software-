@@ -10,7 +10,9 @@ import it.polimi.ingsw.ps45.model.player.Player;
 public class CharacterCardArea extends Area implements Serializable{
 	Effect effect;
 	
-	public CharacterCardArea(int cost, Effect effect){
+	public CharacterCardArea(int cost, Effect effect, String name){
+		super();
+		super.setName(name);
 		this.setCost(cost);
 		this.effect = effect;
 		this.maxOccupants = 1;

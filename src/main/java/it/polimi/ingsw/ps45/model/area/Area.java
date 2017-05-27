@@ -8,6 +8,7 @@ import it.polimi.ingsw.ps45.model.player.PawnType;
 import it.polimi.ingsw.ps45.model.player.Player;
 
 public abstract class Area implements Serializable{
+	private String name;
 	private int cost;
 	private ArrayList<PlayerPawnPair> occupiedBy;
 	protected int maxOccupants;
@@ -52,4 +53,18 @@ public abstract class Area implements Serializable{
 	public boolean isAvailable(){
 		return occupiedBy.size() < maxOccupants;
 	}
+
+
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	
+	
+	
 }

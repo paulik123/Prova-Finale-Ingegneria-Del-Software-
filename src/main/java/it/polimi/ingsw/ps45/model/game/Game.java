@@ -32,7 +32,7 @@ import it.polimi.ingsw.ps45.model.vatican.Vatican;
 
 public class Game {
 	private static final int turnsPerRound = 4;
-	private static final int MAX_NUM_OF_PLAYERS = 1;
+	private static final int MAX_NUM_OF_PLAYERS = 2;
 	
 	private int numberOfPlayers;
 	
@@ -254,6 +254,12 @@ public class Game {
 	public boolean hasStarted() {
 		return gameStarted;
 	}
+
+	public Board getBoard() {
+		return board;
+	}
+	
+	
 	
 
 	

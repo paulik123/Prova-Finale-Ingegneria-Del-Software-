@@ -11,10 +11,13 @@ public class BuildingCardArea extends Area implements Serializable{
 	private Building b;
 	Effect effect;
 	
-	public BuildingCardArea(int cost, Effect effect){
+	public BuildingCardArea(int cost, Effect effect, String name){
+		super();
+		super.setName(name);
 		this.setCost(cost);
 		this.effect = effect;
 		this.maxOccupants = 1;
+		
 	}
 	
 
