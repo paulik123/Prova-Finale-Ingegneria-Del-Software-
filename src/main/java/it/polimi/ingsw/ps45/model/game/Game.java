@@ -21,7 +21,6 @@ public class Game {
 	private static int turnsPerRound = 4;
 	
 	private int numberOfPlayers;
-	public String gameID;
 	
 	private Era[] eras = {Era.I, Era.II, Era.III};
 	private ArrayList<Player> players;
@@ -34,9 +33,7 @@ public class Game {
 	private boolean gameStarted;
 	private CardDealer cardDealer;
 	
-	public Game(String gameID){
-		this.gameID = gameID;
-		
+	public Game(){
 		numberOfPlayers = 0;
 		gameStarted = false;
 		roundNumber = 0;
@@ -168,6 +165,7 @@ public class Game {
 			Player p = new Player(playerID, board, cs);
 			players.add(p);
 			numberOfPlayers++;
+			
 		}
 	}
 	
@@ -179,8 +177,25 @@ public class Game {
 	
 	private boolean playerIDExists(String playerID){
 		for(Player p:players){
+			System.out.println("playerIDExists: "+ p.getPlayerID());
 			if(p.getPlayerID().equals(playerID)) return true;
 		}
 		return false;
 	}
+	
+	public Player getPlayerByID(String ID) throws Exception{
+		for(Player p: players){
+			if(p.getPlayerID().equals(ID)){
+				return p;
+			}
+		}
+		
+		throw new Exception("No such player");
+	}
+
+	public int getNumberOfPlayers() {
+		return numberOfPlayers;
+	}
+	
+	
 }

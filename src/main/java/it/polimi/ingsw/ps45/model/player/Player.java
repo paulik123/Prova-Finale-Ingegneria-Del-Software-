@@ -5,12 +5,6 @@ import it.polimi.ingsw.ps45.model.area.Board;
 
 public class Player {
 	private String playerID;
-	
-	
-	
-
-
-
 
 	private ResourceSet resourceSet;
 	private ActionBuilder actionBuilder;
@@ -23,6 +17,7 @@ public class Player {
 	private boolean answeredVatican;
 	
 	public Player(String playerID, Board board, ConsumableSet initialResources){
+		this.playerID = playerID;
 		resourceSet = new ResourceSet(initialResources);
 		actionBuilder = new ActionBuilder(this, board);
 		answeredVatican = false;
