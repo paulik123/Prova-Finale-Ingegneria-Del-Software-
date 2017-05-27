@@ -1,8 +1,11 @@
-package it.polimi.ingsw.ps45.controller;
+package it.polimi.ingsw.ps45.server;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+
+import it.polimi.ingsw.ps45.controller.Connection;
+import it.polimi.ingsw.ps45.controller.GameCreator;
 
 public class Server {
 	private static int PORTNUMBER = 12345;

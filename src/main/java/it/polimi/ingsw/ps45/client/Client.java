@@ -1,4 +1,4 @@
-package it.polimi.ingsw.ps45.controller;
+package it.polimi.ingsw.ps45.client;
 
 
 import java.io.BufferedReader;
@@ -16,38 +16,43 @@ import it.polimi.ingsw.ps45.controller.command.Command;
 import it.polimi.ingsw.ps45.controller.command.CommandHolder;
 import it.polimi.ingsw.ps45.gson.PropertyBasedInterfaceMarshal;
 import it.polimi.ingsw.ps45.model.effects.Effect;
+import it.polimi.ingsw.ps45.view.View;
 
 public class Client {
 
-    Socket socket;
-    OutputStreamWriter os;
-    BufferedReader br;
-    public static Client c;
+    private Socket socket;
+    private ControllerThread controllerThread;
+    private ObserverThread observerThread;
+    private View view;
 
 
     private static final int PORTNUMBER = 12345;
     public Client(String host) throws IOException {
         socket = new Socket(host, PORTNUMBER);
-        os = new OutputStreamWriter(socket.getOutputStream());
-        br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-    }
-
-    public void send(String message) throws IOException {
-        os.write(message+"\n");
-        os.flush();
+        //TODO HANDLE VIEW CREATION
+        controllerThread = new ControllerThread(new OutputStreamWriter(socket.getOutputStream()), view);
+        observerThread = new ObserverThread(new BufferedReader(new InputStreamReader(socket.getInputStream())), view);
     }
 
     public static void main(String[] args) throws IOException{
 
-
+    	Client c = null;
         try {
-            c = new Client("127.0.0.1");
+           c = new Client("127.0.0.1");
         } catch (IOException e) {
             e.printStackTrace();
         }
         
-        Scanner scanner = new Scanner(System.in);
+       
         
+        
+        
+        
+        
+       
+        
+        /*
+        Scanner scanner = new Scanner(System.in);
 
        while(true){
     	   
@@ -64,6 +69,7 @@ public class Client {
     	   
     	   c.send(json);
        }
+       */
     }
 
 }
