@@ -18,7 +18,7 @@ public class GameCreator {
 	private Game pendingGame;
 	private HashMap<String, Game> playersInGames;
 	
-	private static final int MAX_NUM_OF_PLAYERS = 4;
+
 	
 	public GameCreator(){
 		games = new ArrayList<Game>();
@@ -28,12 +28,11 @@ public class GameCreator {
 	
 	public void addPlayer(String ID, Observer o) throws Exception{
 		if(playerExists(ID)) throw new Exception("Player already exists");
-		pendingGame.addPlayer(ID);
-		pendingGame.registerObserver(o);
-		System.out.println("SERVER: added player: "+ ID);
-		if(pendingGame.getNumberOfPlayers() == MAX_NUM_OF_PLAYERS){
+		pendingGame.addPlayer(ID, o);
+		
+		
+		if(pendingGame.hasStarted()){
 			games.add(pendingGame);
-			pendingGame.start();
 			pendingGame = new Game();
 		}
 	}

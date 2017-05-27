@@ -23,17 +23,14 @@ public class ObserverThread extends Thread{
 	
 	public void run(){
         String fromClient = "";
-        
-        Gson gson = new GsonBuilder()
-                .registerTypeAdapter(Effect.class,
-                        new PropertyBasedInterfaceMarshal())
-                .registerTypeAdapter(Command.class,
-                        new PropertyBasedInterfaceMarshal()).create();
+      
 
         System.out.println("ObserverThread waiting");
         try {
             while((fromClient = br.readLine()) != null) {
-            		//
+            		System.out.println("This is ObserverThread. Json: ");
+            		System.out.println(fromClient);
+            		view.updateView(fromClient);
             }
         } catch (IOException e) {
             e.printStackTrace();

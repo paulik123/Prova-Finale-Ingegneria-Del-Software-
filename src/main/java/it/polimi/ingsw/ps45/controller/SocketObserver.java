@@ -13,6 +13,7 @@ public class SocketObserver implements Observer{
 	@Override
 	public void notify(String json) {
         try {
+        	
 			os.write(json);
 			os.flush();
 		} catch (IOException e) {

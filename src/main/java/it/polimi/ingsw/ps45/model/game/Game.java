@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
+import com.google.gson.annotations.Expose;
 
 import it.polimi.ingsw.ps45.controller.Observer;
 import it.polimi.ingsw.ps45.controller.command.Command;
@@ -26,7 +27,8 @@ import it.polimi.ingsw.ps45.model.player.Player;
 import it.polimi.ingsw.ps45.model.vatican.Vatican;
 
 public class Game {
-	private static int turnsPerRound = 4;
+	private static final int turnsPerRound = 4;
+	private static final int MAX_NUM_OF_PLAYERS = 2;
 	
 	private int numberOfPlayers;
 	
@@ -49,6 +51,7 @@ public class Game {
 		roundNumber = 0;
 		currentEra = 0;
 		players = new ArrayList<Player>();
+		observers = new ArrayList<Observer>();
 		board = new Board();
 		vatican = new Vatican();
 		
@@ -70,6 +73,11 @@ public class Game {
 		currentRound = new Round(turns);
 		roundNumber++;
 		gameStarted = true;
+		
+		setStatus("Game has started");
+		System.out.println("Game Started");
+		
+		notifyObservers();
 	}
 	
 	public void nextTurn(String playerID) throws Exception{
@@ -162,11 +170,11 @@ public class Game {
 
 	private void calculateTurnsStart(){
 		for(int i=0; i<numberOfPlayers*turnsPerRound;i++){
-			turns[i] = players.get(i%turnsPerRound);
+			turns[i] = players.get(i%numberOfPlayers);
 		}
 	}
 	
-	public void addPlayer(String playerID) throws Exception{
+	public void addPlayer(String playerID, Observer o) throws Exception{
 		if(canAddPlayer(playerID)){
 			ConsumableSet cs = new ConsumableSet();
 			cs.setWood(Player.defaultWood);
@@ -176,20 +184,24 @@ public class Game {
 			
 			Player p = new Player(playerID, board, cs);
 			players.add(p);
+			registerObserver(o);
 			numberOfPlayers++;
+			
+			System.out.println("SERVER: added player: "+ playerID);
+			
+			if(players.size() == MAX_NUM_OF_PLAYERS) start();
 			
 		}
 	}
 	
 	private boolean canAddPlayer(String playerID) throws Exception{
 		if(playerIDExists(playerID)) throw new Exception("PlayerID already exists");
-		if(players.size() >= 4) throw new Exception("Game is full");
+		if(players.size() >= MAX_NUM_OF_PLAYERS) throw new Exception("Game is full");
 		return true;
 	}
 	
 	private boolean playerIDExists(String playerID){
 		for(Player p:players){
-			System.out.println("playerIDExists: "+ p.getPlayerID());
 			if(p.getPlayerID().equals(playerID)) return true;
 		}
 		return false;
@@ -213,18 +225,39 @@ public class Game {
 		observers.add(o);
 	}
 	
-	public void notifyObservers(){
+	public  void notifyObservers(){
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Effect.class,
                         new PropertyBasedInterfaceMarshal())
                 .registerTypeAdapter(Command.class,
                         new PropertyBasedInterfaceMarshal()).create();
         
-        String game = gson.toJson(this);
+        String game = gson.toJson(new GameData(this));
+        
 		
 		Notifier n = new Notifier(observers, game);
 		n.start();
 	}
+	
+	public ArrayList<Player> getPlayers(){
+		return players;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public boolean hasStarted() {
+		return gameStarted;
+	}
+	
+	
+	
+	
 	
 	
 }

@@ -130,6 +130,14 @@ public class ConsumableSet implements Serializable{
 		if(result >= 0) return result;
 		else return 0;
 	}
+	@Override
+	public String toString() {
+		return "ConsumableSet [wood=" + wood + ", stone=" + stone + ", coins=" + coins + ", servants=" + servants
+				+ ", victoryPoints=" + victoryPoints + ", faithPoints=" + faithPoints + ", militaryPoints="
+				+ militaryPoints + "]";
+	}
+	
+	
 	
 	
 	

@@ -16,27 +16,35 @@ import it.polimi.ingsw.ps45.controller.command.Command;
 import it.polimi.ingsw.ps45.controller.command.CommandHolder;
 import it.polimi.ingsw.ps45.gson.PropertyBasedInterfaceMarshal;
 import it.polimi.ingsw.ps45.model.effects.Effect;
+import it.polimi.ingsw.ps45.view.CLI;
 import it.polimi.ingsw.ps45.view.View;
 
 public class Client {
 
     private Socket socket;
-    private ControllerThread controllerThread;
+    private CLIControllerThread controllerThread;
     private ObserverThread observerThread;
     private View view;
     private String playerID;
+    Scanner scanner;
 
 
     private static final int PORTNUMBER = 12345;
     public Client(String host) throws IOException {
+    	scanner = new Scanner(System.in);
+    	System.out.println("Enter your username:");
+    	playerID = scanner.nextLine();
+    	
         socket = new Socket(host, PORTNUMBER);
-        //TODO HANDLE VIEW CREATION
-        controllerThread = new ControllerThread(new OutputStreamWriter(socket.getOutputStream()), view, playerID);
+        view = new CLI(scanner);
+        controllerThread = new CLIControllerThread(new OutputStreamWriter(socket.getOutputStream()), scanner, playerID);
         observerThread = new ObserverThread(new BufferedReader(new InputStreamReader(socket.getInputStream())), view);
+        observerThread.start();
+        controllerThread.start();
+        
     }
 
     public static void main(String[] args) throws IOException{
-
     	Client c = null;
         try {
            c = new Client("127.0.0.1");

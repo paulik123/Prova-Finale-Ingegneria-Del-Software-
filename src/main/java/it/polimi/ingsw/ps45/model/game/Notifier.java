@@ -10,7 +10,7 @@ public class Notifier extends Thread{
 	
 	public Notifier(ArrayList<Observer> observers, String json){
 		this.observers = observers;
-		this.json = json;
+		this.json = json + "\n";
 	}
 
 	@Override
