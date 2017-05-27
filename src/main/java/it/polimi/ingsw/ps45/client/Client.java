@@ -42,15 +42,7 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
-       
-        
-        
-        
-        
-        
-       
-        
+
         /*
         Scanner scanner = new Scanner(System.in);
 
