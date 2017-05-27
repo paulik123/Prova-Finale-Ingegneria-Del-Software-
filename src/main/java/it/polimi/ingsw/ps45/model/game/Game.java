@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps45.model.game;
 
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,7 +14,9 @@ import com.google.gson.JsonSyntaxException;
 import com.google.gson.annotations.Expose;
 
 import it.polimi.ingsw.ps45.controller.Observer;
+import it.polimi.ingsw.ps45.controller.TestObserver;
 import it.polimi.ingsw.ps45.controller.command.Command;
+import it.polimi.ingsw.ps45.gson.GsonWithInterface;
 import it.polimi.ingsw.ps45.gson.PropertyBasedInterfaceMarshal;
 import it.polimi.ingsw.ps45.model.actions.state.PawnActionState;
 import it.polimi.ingsw.ps45.model.actions.state.VaticanChoiceState;
@@ -22,27 +25,28 @@ import it.polimi.ingsw.ps45.model.area.PlayerPawnPair;
 import it.polimi.ingsw.ps45.model.cards.CardDealer;
 import it.polimi.ingsw.ps45.model.cards.Era;
 import it.polimi.ingsw.ps45.model.effects.Effect;
+import it.polimi.ingsw.ps45.model.player.BonusTile;
 import it.polimi.ingsw.ps45.model.player.ConsumableSet;
 import it.polimi.ingsw.ps45.model.player.Player;
 import it.polimi.ingsw.ps45.model.vatican.Vatican;
 
 public class Game {
 	private static final int turnsPerRound = 4;
-	private static final int MAX_NUM_OF_PLAYERS = 2;
+	private static final int MAX_NUM_OF_PLAYERS = 1;
 	
 	private int numberOfPlayers;
 	
-	private Era[] eras = {Era.I, Era.II, Era.III};
+	private transient Era[] eras = {Era.I, Era.II, Era.III};
 	private ArrayList<Player> players;
-	private ArrayList<Observer> observers;
+	private transient ArrayList<Observer> observers;
 	private Board board;
 	private Vatican vatican;
-	private Player[] turns; 
+	private transient Player[] turns; 
 	private Round currentRound;
 	private int currentEra;
 	private int roundNumber;
 	private boolean gameStarted;
-	private CardDealer cardDealer;
+	private transient CardDealer cardDealer;
 	private String status;
 	
 	public Game(){
@@ -73,6 +77,7 @@ public class Game {
 		currentRound = new Round(turns);
 		roundNumber++;
 		gameStarted = true;
+		cardDealer.updateBoard(board, eras[currentEra]);
 		
 		setStatus("Game has started");
 		System.out.println("Game Started");
@@ -226,15 +231,10 @@ public class Game {
 	}
 	
 	public  void notifyObservers(){
-        Gson gson = new GsonBuilder()
-                .registerTypeAdapter(Effect.class,
-                        new PropertyBasedInterfaceMarshal())
-                .registerTypeAdapter(Command.class,
-                        new PropertyBasedInterfaceMarshal()).create();
+		Gson gson = GsonWithInterface.getGson();
         
-        String game = gson.toJson(new GameData(this));
-        
-		
+        String game = gson.toJson(this);
+
 		Notifier n = new Notifier(observers, game);
 		n.start();
 	}
@@ -255,9 +255,6 @@ public class Game {
 		return gameStarted;
 	}
 	
-	
-	
-	
-	
+
 	
 }

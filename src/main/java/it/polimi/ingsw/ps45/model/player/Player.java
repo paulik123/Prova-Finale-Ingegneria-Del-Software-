@@ -6,8 +6,8 @@ import it.polimi.ingsw.ps45.model.area.Board;
 public class Player {
 	private String playerID;
 
-	private ResourceSet resourceSet;
-	private ActionBuilder actionBuilder;
+	private  ResourceSet resourceSet;
+	private transient ActionBuilder actionBuilder;
 	
 	public static int defaultWood = 2;
 	public static int defaultStone = 2;

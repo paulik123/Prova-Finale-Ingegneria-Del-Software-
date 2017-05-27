@@ -28,8 +28,6 @@ public class ObserverThread extends Thread{
         System.out.println("ObserverThread waiting");
         try {
             while((fromClient = br.readLine()) != null) {
-            		System.out.println("This is ObserverThread. Json: ");
-            		System.out.println(fromClient);
             		view.updateView(fromClient);
             }
         } catch (IOException e) {

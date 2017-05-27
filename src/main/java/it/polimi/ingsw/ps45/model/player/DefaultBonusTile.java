@@ -1,6 +1,6 @@
 package it.polimi.ingsw.ps45.model.player;
 
-public class DefaultBonusTile extends BonusTile {
+public class DefaultBonusTile implements BonusTile {
 	
 	private static int militaryPoints = 1;
 	private static int coins = 1;
