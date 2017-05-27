@@ -1,8 +1,16 @@
 package it.polimi.ingsw.ps45.controller;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import it.polimi.ingsw.ps45.gson.PropertyBasedInterfaceMarshal;
+import it.polimi.ingsw.ps45.model.effects.Effect;
 import it.polimi.ingsw.ps45.model.game.Game;
 
 public class GameCreator {
@@ -18,9 +26,10 @@ public class GameCreator {
 		pendingGame = new Game();
 	}
 	
-	public void addPlayer(String ID) throws Exception{
+	public void addPlayer(String ID, Observer o) throws Exception{
 		if(playerExists(ID)) throw new Exception("Player already exists");
 		pendingGame.addPlayer(ID);
+		pendingGame.registerObserver(o);
 		System.out.println("SERVER: added player: "+ ID);
 		if(pendingGame.getNumberOfPlayers() == MAX_NUM_OF_PLAYERS){
 			games.add(pendingGame);

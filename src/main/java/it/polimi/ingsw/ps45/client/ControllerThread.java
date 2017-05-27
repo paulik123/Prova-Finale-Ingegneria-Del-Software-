@@ -16,8 +16,9 @@ import it.polimi.ingsw.ps45.view.View;
 public class ControllerThread extends Thread{
 	private OutputStreamWriter os;
 	private View view;
+	private String playerID;
 	
-	public ControllerThread(OutputStreamWriter os, View view){
+	public ControllerThread(OutputStreamWriter os, View view, String playerID){
 		this.os = os;
 		this.view = view;
 	}

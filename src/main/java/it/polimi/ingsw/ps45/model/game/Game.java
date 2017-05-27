@@ -1,18 +1,26 @@
 package it.polimi.ingsw.ps45.model.game;
 
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
+import it.polimi.ingsw.ps45.controller.Observer;
+import it.polimi.ingsw.ps45.controller.command.Command;
+import it.polimi.ingsw.ps45.gson.PropertyBasedInterfaceMarshal;
 import it.polimi.ingsw.ps45.model.actions.state.PawnActionState;
 import it.polimi.ingsw.ps45.model.actions.state.VaticanChoiceState;
 import it.polimi.ingsw.ps45.model.area.Board;
 import it.polimi.ingsw.ps45.model.area.PlayerPawnPair;
 import it.polimi.ingsw.ps45.model.cards.CardDealer;
 import it.polimi.ingsw.ps45.model.cards.Era;
+import it.polimi.ingsw.ps45.model.effects.Effect;
 import it.polimi.ingsw.ps45.model.player.ConsumableSet;
 import it.polimi.ingsw.ps45.model.player.Player;
 import it.polimi.ingsw.ps45.model.vatican.Vatican;
@@ -24,6 +32,7 @@ public class Game {
 	
 	private Era[] eras = {Era.I, Era.II, Era.III};
 	private ArrayList<Player> players;
+	private ArrayList<Observer> observers;
 	private Board board;
 	private Vatican vatican;
 	private Player[] turns; 
@@ -32,6 +41,7 @@ public class Game {
 	private int roundNumber;
 	private boolean gameStarted;
 	private CardDealer cardDealer;
+	private String status;
 	
 	public Game(){
 		numberOfPlayers = 0;
@@ -49,6 +59,8 @@ public class Game {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		status = "Game not started";
 	}
 	
 	public void start() throws Exception{
@@ -195,6 +207,23 @@ public class Game {
 
 	public int getNumberOfPlayers() {
 		return numberOfPlayers;
+	}
+	
+	public void registerObserver(Observer o){
+		observers.add(o);
+	}
+	
+	public void notifyObservers(){
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(Effect.class,
+                        new PropertyBasedInterfaceMarshal())
+                .registerTypeAdapter(Command.class,
+                        new PropertyBasedInterfaceMarshal()).create();
+        
+        String game = gson.toJson(this);
+		
+		Notifier n = new Notifier(observers, game);
+		n.start();
 	}
 	
 	

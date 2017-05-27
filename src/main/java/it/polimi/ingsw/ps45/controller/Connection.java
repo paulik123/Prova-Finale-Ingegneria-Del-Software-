@@ -19,14 +19,14 @@ public class Connection extends Thread {
     private Socket s;
     private BufferedReader br;
     private OutputStreamWriter os;
-    GameCreator gameCreator;
+    private GameCreator gameCreator;
 
 
     public Connection(Socket socket, GameCreator gameCreator) throws IOException {
         this.s = socket;
         this.gameCreator = gameCreator;
         br = new BufferedReader(new InputStreamReader(s.getInputStream()));
-        os = new OutputStreamWriter(s.getOutputStream());
+        os = new OutputStreamWriter(socket.getOutputStream());
     }
 
     public void run(){
@@ -42,7 +42,8 @@ public class Connection extends Thread {
         try {
             while((fromClient = br.readLine()) != null) {
                 CommandHolder c = gson.fromJson(fromClient, CommandHolder.class);
-                c.runCommand(this.gameCreator);
+                c.runCommand(this);
+                
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -53,14 +54,15 @@ public class Connection extends Thread {
 		return br;
 	}
 	
-    public void send(String message) throws IOException {
-        os.write(message+"\n");
-        os.flush();
-    }
-
-
-	public OutputStreamWriter getOutputStreamWriter() {
+	public OutputStreamWriter getOutputStreamWriter(){
 		return os;
 	}
+
+	public GameCreator getGameCreator() {
+		return gameCreator;
+	}
+	
+	
+
 
 }

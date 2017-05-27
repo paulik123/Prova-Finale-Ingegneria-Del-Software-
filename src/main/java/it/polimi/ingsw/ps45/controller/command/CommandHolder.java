@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps45.controller.command;
 
+import it.polimi.ingsw.ps45.controller.Connection;
 import it.polimi.ingsw.ps45.controller.GameCreator;
 
 public class CommandHolder {
@@ -8,8 +9,8 @@ public class CommandHolder {
 		this.c = c;
 	}
 	
-	public void runCommand(GameCreator gc){
-		c.run(gc);
+	public void runCommand(Connection connection){
+		c.run(connection);
 	}
 	
 }

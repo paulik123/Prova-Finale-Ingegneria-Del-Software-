@@ -24,13 +24,14 @@ public class Client {
     private ControllerThread controllerThread;
     private ObserverThread observerThread;
     private View view;
+    private String playerID;
 
 
     private static final int PORTNUMBER = 12345;
     public Client(String host) throws IOException {
         socket = new Socket(host, PORTNUMBER);
         //TODO HANDLE VIEW CREATION
-        controllerThread = new ControllerThread(new OutputStreamWriter(socket.getOutputStream()), view);
+        controllerThread = new ControllerThread(new OutputStreamWriter(socket.getOutputStream()), view, playerID);
         observerThread = new ObserverThread(new BufferedReader(new InputStreamReader(socket.getInputStream())), view);
     }
 
