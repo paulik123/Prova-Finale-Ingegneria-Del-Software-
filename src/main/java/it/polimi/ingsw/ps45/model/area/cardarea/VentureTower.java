@@ -4,6 +4,7 @@ package it.polimi.ingsw.ps45.model.area.cardarea;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -16,12 +17,23 @@ import it.polimi.ingsw.ps45.model.player.Player;
 
 public class VentureTower implements Tower{
 	
+	HashMap<String, VentureCardArea> dictionary;
+	
+	
 	public VentureTower(){
+		dictionary = new HashMap<String, VentureCardArea>();
+		
+		
 		v0 = loadFromFile("serialized//areas//cardareas//VentureCardAreaGroundFloor.json");
 		v1 = loadFromFile("serialized//areas//cardareas//VentureCardAreaFirstFloor.json");
 		v2 = loadFromFile("serialized//areas//cardareas//VentureCardAreaSecondFloor.json");
 		v3 = loadFromFile("serialized//areas//cardareas//VentureCardAreaThirdFloor.json");
 		
+		
+		dictionary.put("v0", v0);
+		dictionary.put("v1", v1);
+		dictionary.put("v2", v2);
+		dictionary.put("v3", v3);
 	}
 	
 	private VentureCardArea v0;
@@ -88,6 +100,10 @@ public class VentureTower implements Tower{
 		list.add(v2);
 		list.add(v3);
 		return list;
+	}
+	
+	public VentureCardArea getAreaFromString(String s) {
+		return dictionary.get(s.toLowerCase());
 	}
 	
 	

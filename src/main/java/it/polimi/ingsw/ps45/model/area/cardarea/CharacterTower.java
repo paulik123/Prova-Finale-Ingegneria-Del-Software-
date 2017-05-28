@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -18,11 +19,20 @@ import it.polimi.ingsw.ps45.model.player.Player;
 
 public class CharacterTower implements Tower{
 	
+	HashMap<String, CharacterCardArea> dictionary;
+	
 	public CharacterTower(){
+		dictionary = new HashMap<String, CharacterCardArea>();
+		
 		c0 = loadFromFile("serialized//areas//cardareas//CharacterCardAreaGroundFloor.json");
 		c1 = loadFromFile("serialized//areas//cardareas//CharacterCardAreaFirstFloor.json");
 		c2 = loadFromFile("serialized//areas//cardareas//CharacterCardAreaSecondFloor.json");
 		c3 = loadFromFile("serialized//areas//cardareas//CharacterCardAreaThirdFloor.json");
+		
+		dictionary.put("c0", c0);
+		dictionary.put("c1", c1);
+		dictionary.put("c2", c2);
+		dictionary.put("c3", c3);
 		
 	}
 	
@@ -90,6 +100,11 @@ public class CharacterTower implements Tower{
 		list.add(c2);
 		list.add(c3);
 		return list;
+	}
+	
+	public CharacterCardArea getAreaFromString(String s) throws Exception {
+		if(!dictionary.containsKey(s.toLowerCase())) throw new Exception("No such key");
+		return dictionary.get(s.toLowerCase());
 	}
 	
 	

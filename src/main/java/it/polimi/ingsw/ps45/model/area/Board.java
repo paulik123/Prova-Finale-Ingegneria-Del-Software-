@@ -2,7 +2,7 @@ package it.polimi.ingsw.ps45.model.area;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-
+import java.util.HashMap;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -17,6 +17,8 @@ import it.polimi.ingsw.ps45.model.area.cardarea.VentureTower;
 import it.polimi.ingsw.ps45.model.effects.Effect;
 
 public class Board {
+	
+	HashMap<String, NoCardArea> noCardAreaDictionary;
 	ProductionAreas productionAreas;
 	
 	HarvestAreas harvestAreas;
@@ -34,6 +36,8 @@ public class Board {
 	VentureTower ventureTower;
 	
 	public Board(){
+		noCardAreaDictionary = new HashMap<String, NoCardArea>();
+		
 		productionAreas = new ProductionAreas();
 		
 		harvestAreas = new HarvestAreas();
@@ -44,6 +48,13 @@ public class Board {
 		councilPrivilegeMarketArea = loadFromFile("serialized//areas//CouncilPrivilegeMarketArea.json");
 		
 		councilPalaceArea = loadFromFile("serialized//areas//CouncilPalaceArea.json");
+		
+		noCardAreaDictionary.put("coinsmarketarea", coinsMarketArea);
+		noCardAreaDictionary.put("servantsmarketarea", servantsMarketArea);
+		noCardAreaDictionary.put("militarymndcoinarea", militaryAndCoinArea);
+		noCardAreaDictionary.put("councilprivilegemarketarea", councilPrivilegeMarketArea);
+		noCardAreaDictionary.put("counciloalacearea", councilPalaceArea);
+		
 		
 		territoryTower = new TerritoryTower();
 		characterTower = new CharacterTower();
@@ -116,5 +127,12 @@ public class Board {
 	}
 	 return c;
 	}
+
+	public NoCardArea getAreaFromString(String s) throws Exception {
+		if(!noCardAreaDictionary.containsKey(s.toLowerCase())) throw new Exception("No such key");
+		return noCardAreaDictionary.get(s.toLowerCase());
+	}
+	
+	
 
 }

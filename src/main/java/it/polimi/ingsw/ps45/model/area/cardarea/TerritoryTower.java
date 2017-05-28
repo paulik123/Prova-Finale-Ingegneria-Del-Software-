@@ -1,11 +1,9 @@
 package it.polimi.ingsw.ps45.model.area.cardarea;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -18,12 +16,20 @@ import it.polimi.ingsw.ps45.model.player.Player;
 
 public class TerritoryTower implements Tower{
 	
+	HashMap<String, TerritoryCardArea> dictionary;
+	
 	public TerritoryTower(){
+		dictionary = new HashMap<String, TerritoryCardArea>();
+		
 		t0 = loadFromFile("serialized//areas//cardareas//TerritoryCardAreaGroundFloor.json");
 		t1 = loadFromFile("serialized//areas//cardareas//TerritoryCardAreaFirstFloor.json");
 		t2 = loadFromFile("serialized//areas//cardareas//TerritoryCardAreaSecondFloor.json");
 		t3 = loadFromFile("serialized//areas//cardareas//TerritoryCardAreaThirdFloor.json");
 		
+		dictionary.put("t0", t0);
+		dictionary.put("t1", t1);
+		dictionary.put("t2", t2);
+		dictionary.put("t3", t3);
 	}
 	
 	private TerritoryCardArea t0;
@@ -90,6 +96,11 @@ public class TerritoryTower implements Tower{
 		list.add(t2);
 		list.add(t3);
 		return list;
+	}
+	
+	public TerritoryCardArea getAreaFromString(String s) throws Exception {
+		if(!dictionary.containsKey(s.toLowerCase())) throw new Exception("No such key");
+		return dictionary.get(s.toLowerCase());
 	}
 	
 	
