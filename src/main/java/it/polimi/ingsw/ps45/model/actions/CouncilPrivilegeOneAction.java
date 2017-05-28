@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps45.model.actions;
 
 import it.polimi.ingsw.ps45.model.actions.CouncilPrivilege.CouncilPrivilege;
+import it.polimi.ingsw.ps45.model.actions.state.NoActionState;
 import it.polimi.ingsw.ps45.model.player.Player;
 
 public class CouncilPrivilegeOneAction implements Action{
@@ -16,6 +17,7 @@ public class CouncilPrivilegeOneAction implements Action{
 	@Override
 	public void run() {
 		p.getResourceSet().collect(cp1.getConsumableSet());	
+		p.getActionBuilder().setState(new NoActionState());
 	}
 
 }

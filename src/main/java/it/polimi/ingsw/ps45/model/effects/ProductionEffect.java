@@ -15,5 +15,6 @@ public class ProductionEffect implements Effect, Serializable{
 	@Override
 	public void runEffect(Player p, int value) {
 		p.getActionBuilder().setState(new ProductionState(value - penalty));
+		p.setStatus("Make a production");
 	}
 }

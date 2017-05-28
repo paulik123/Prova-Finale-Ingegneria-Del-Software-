@@ -15,6 +15,7 @@ public class HarvestEffect implements Effect, Serializable{
 	@Override
 	public void runEffect(Player p, int value) {
 		p.getActionBuilder().setState(new HarvestState(value - penalty));
+		p.setStatus("Make a harvest.");
 	}
 
 }

@@ -88,7 +88,7 @@ public class Game {
 	public void nextTurn(String playerID) throws Exception{
 		if(!playerID.equals(currentRound.getCurrentPlayer().getPlayerID())) throw new Exception("It's not your turn to end");
 		if(currentRound.nextTurn() && currentEra != 3) newRound();
-		if(currentRound.nextTurn() && currentEra == 3); //TODO END GAME CALCULATION
+		else if(currentRound.nextTurn() && currentEra == 3); //TODO END GAME CALCULATION
 	}
 	
 	public void newRound() throws Exception{
@@ -258,6 +258,19 @@ public class Game {
 	public Board getBoard() {
 		return board;
 	}
+
+	public int getRoundNumber(){
+		return roundNumber;
+	}
+
+	public int getCurrentEra() {
+		return currentEra;
+	}
+
+	public Era[] getEras() {
+		return eras;
+	}
+	
 	
 	
 	

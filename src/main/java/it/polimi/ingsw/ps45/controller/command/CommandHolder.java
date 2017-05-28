@@ -13,7 +13,7 @@ public class CommandHolder {
 	}
 	
 	public void runCommand(Connection connection){
-		c.run(connection);
+		c.run(connection, playerID);
 	}
 	
 }

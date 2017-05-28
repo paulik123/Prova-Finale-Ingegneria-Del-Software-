@@ -55,7 +55,7 @@ public class SerializeCardArea {
 		//CouncilPrivilegeOneAndCollectEffect e = new CouncilPrivilegeOneAndCollectEffect(effectConsumableSet);
 		NoEffect noEffect = new NoEffect();
 		
-    	VentureCardArea area = new VentureCardArea(7, collectEffect);
+    	VentureCardArea area = new VentureCardArea(7, collectEffect, "name");
 
 	      
         Writer writer = new FileWriter(path);

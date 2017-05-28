@@ -23,7 +23,7 @@ public class TakeVentureEffect implements Effect, Serializable{
 	@Override
 	public void runEffect(Player p, int value) {
 		p.getActionBuilder().setState(new TakeVentureState(val, discount));
-		
+		p.setStatus("Take any venture. Value: " + val);
 	}
 
 }

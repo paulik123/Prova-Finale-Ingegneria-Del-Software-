@@ -49,7 +49,7 @@ public class SerializeNoCardArea {
 		
 		//CouncilPrivilegeOneAndCollectEffect e = new CouncilPrivilegeOneAndCollectEffect(effectConsumableSet);
 		
-    	NoCardArea area = new NoCardArea(1,999, harvestEffect);
+    	NoCardArea area = new NoCardArea(1,999, harvestEffect, "name");
 
 	      
         Writer writer = new FileWriter(path);

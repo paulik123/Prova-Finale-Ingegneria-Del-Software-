@@ -22,7 +22,7 @@ public class TakeBuildingEffect implements Effect, Serializable{
 	@Override
 	public void runEffect(Player p, int value) {
 		p.getActionBuilder().setState(new TakeBuildingState(val, discount));
-		
+		p.setStatus("Take any building. Value: " + val);
 	}
 
 }

@@ -23,8 +23,8 @@ public class TakeAnyCardEffect implements Effect, Serializable{
 	
 	@Override
 	public void runEffect(Player p, int value) {
-		p.getActionBuilder().setState(new TakeCardState(7, discount));
-		
+		p.getActionBuilder().setState(new TakeCardState(val, discount));
+		p.setStatus("Take any card. Value: " + val);
 	}
 
 }

@@ -30,7 +30,7 @@ public class CLIControllerThread extends Thread{
 	public void run(){
         while(true){
         	String c = scanner.nextLine();
-        	Command command = new AddPlayerCommand(playerID);
+        	Command command = new AddPlayerCommand();
         	CommandHolder ch = new CommandHolder(command, playerID);
         	
         	Gson gson = new GsonBuilder()

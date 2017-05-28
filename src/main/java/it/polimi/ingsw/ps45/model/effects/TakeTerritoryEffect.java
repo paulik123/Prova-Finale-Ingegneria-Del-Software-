@@ -23,7 +23,7 @@ public class TakeTerritoryEffect implements Effect, Serializable{
 	@Override
 	public void runEffect(Player p, int value) {
 		p.getActionBuilder().setState(new TakeTerritoryState(val, discount));
-		
+		p.setStatus("Take any territory. Value: " + val);
 	}
 
 }

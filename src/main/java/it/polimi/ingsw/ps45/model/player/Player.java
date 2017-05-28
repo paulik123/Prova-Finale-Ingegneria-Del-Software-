@@ -16,11 +16,14 @@ public class Player {
 	
 	private boolean answeredVatican;
 	
+	private String status;
+	
 	public Player(String playerID, Board board, ConsumableSet initialResources){
 		this.playerID = playerID;
 		resourceSet = new ResourceSet(initialResources);
 		actionBuilder = new ActionBuilder(this, board);
 		answeredVatican = false;
+		status = "New player";
 	}
 	
 	
@@ -53,6 +56,22 @@ public class Player {
 	public void setAnsweredVatican(boolean answeredVatican) {
 		this.answeredVatican = answeredVatican;
 	}
+
+
+
+
+	public String getStatus() {
+		return status;
+	}
+
+
+
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
+	
 	
 	
 	

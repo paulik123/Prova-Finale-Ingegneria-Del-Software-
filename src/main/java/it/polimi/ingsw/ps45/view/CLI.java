@@ -50,10 +50,12 @@ public class CLI extends View{
 		Game g = gson.fromJson(gameJSON, Game.class);
 		
 		System.out.println("\n\n\n||||||||||  " + g.getStatus() + "  ||||||||||");
+		System.out.println("Current ERA: " + g.getEras()[g.getCurrentEra()] + "  || Current ROUND: " + g.getRoundNumber());
 		System.out.println("\n ---------------- PLAYERS ----------------");
 		
 		for(Player p: g.getPlayers()){
 			System.out.println("\n   --- " + p.getPlayerID() + " ---   ");
+			System.out.println("STATUS: " + p.getStatus());
 			System.out.println(p.getResourceSet().getResources());
 			printTerritories(p);
 			printCharacters(p);

@@ -21,7 +21,7 @@ public class TakeCharacterEffect implements Effect, Serializable{
 	@Override
 	public void runEffect(Player p, int value) {
 		p.getActionBuilder().setState(new TakeCharacterState(val, discount));
-		
+		p.setStatus("Take any character. Value: " + val);
 	}
 
 }
