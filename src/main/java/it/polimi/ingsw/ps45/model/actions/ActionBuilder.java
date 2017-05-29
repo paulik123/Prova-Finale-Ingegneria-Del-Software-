@@ -363,13 +363,13 @@ public class ActionBuilder {
 	private boolean hasGeneralRequirementsWithPawn(Pawn pawn, int pawnValue, Area area, ConsumableSet cost){
 		   return   area.isAvailable() &&
 				   	pawn.isAvailable() &&
-				   	pawnValue > area.getCost() && 
+				   	pawnValue >= area.getCost() && 
 				   	p.getResourceSet().hasConsumables(cost);
 	}
 	
 	private boolean hasGeneralRequirementsNoPawn(int value, Area area, ConsumableSet cost){
 		   return   area.isAvailable() &&
-				   	value > area.getCost() && 
+				   	value >= area.getCost() && 
 				   	p.getResourceSet().hasConsumables(cost);
 	}
 	

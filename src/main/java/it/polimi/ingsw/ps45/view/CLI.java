@@ -27,6 +27,7 @@ import it.polimi.ingsw.ps45.model.effects.Effect;
 import it.polimi.ingsw.ps45.model.game.Game;
 import it.polimi.ingsw.ps45.model.game.GameData;
 import it.polimi.ingsw.ps45.model.player.BonusTile;
+import it.polimi.ingsw.ps45.model.player.PawnType;
 import it.polimi.ingsw.ps45.model.player.Player;
 
 public class CLI extends View{
@@ -61,6 +62,7 @@ public class CLI extends View{
 			System.out.println("\n   --- " + p.getPlayerID() + " ---   ");
 			System.out.println("State: " + p.getStatus());
 			System.out.println(p.getResourceSet().getResources());
+			printPawns(p);
 			printTerritories(p);
 			printCharacters(p);
 			printBuildings(p);
@@ -80,7 +82,18 @@ public class CLI extends View{
 			sb.append(t.getName() + " | ");
 		}
 		System.out.println(sb.toString());
-	}	
+	}
+	
+	private void printPawns(Player p){
+		StringBuilder sb = new StringBuilder();
+		sb.append("PAWNS: \n");
+		
+		if(p.getResourceSet().getPawn(PawnType.WHITE).isAvailable())sb.append("White: " + p.getResourceSet().getPawn(PawnType.WHITE).getValue() + "  ||  ");
+		if(p.getResourceSet().getPawn(PawnType.BLACK).isAvailable())sb.append("Black: " + p.getResourceSet().getPawn(PawnType.BLACK).getValue()+ "  ||  ");
+		if(p.getResourceSet().getPawn(PawnType.ORANGE).isAvailable())sb.append("Orange: " + p.getResourceSet().getPawn(PawnType.ORANGE).getValue()+ "  ||  ");
+		if(p.getResourceSet().getPawn(PawnType.NEUTRAL).isAvailable())sb.append("Neutral: " + p.getResourceSet().getPawn(PawnType.NEUTRAL).getValue()+ "  ||  ");
+		System.out.println(sb.toString());
+	}
 	private void printCharacters(Player p){
 		StringBuilder sb = new StringBuilder();
 		sb.append("Characters: ");
@@ -137,7 +150,7 @@ public class CLI extends View{
 	private void printTerritoryTower(TerritoryTower t){
 		System.out.println("");
 		for(TerritoryCardArea a: t.getAreas()){
-			System.out.println(a.getName() + " | Territory: " + a.getTerritory().getName());
+			if(a.getTerritory() != null) System.out.println(a.getName() + " | Territory: " + a.getTerritory().getName());
 			for(PlayerPawnPair ppp: a.getOccupants()){
 				System.out.println("Player: " + ppp.getPlayer().getPlayerID() + "   Pawn: " + ppp.getType());
 			}
@@ -146,7 +159,7 @@ public class CLI extends View{
 	}
 	private void printCharacterTower(CharacterTower t){
 		for(CharacterCardArea a: t.getAreas()){
-			System.out.println(a.getName() + " | Character: " + a.getCharacter().getName());
+			if(a.getCharacter() != null)System.out.println(a.getName() + " | Character: " + a.getCharacter().getName());
 			for(PlayerPawnPair ppp: a.getOccupants()){
 				System.out.println("Player: " + ppp.getPlayer().getPlayerID() + "   Pawn: " + ppp.getType());
 			}
@@ -155,7 +168,7 @@ public class CLI extends View{
 	}
 	private void printBuildingTower(BuildingTower t){
 		for(BuildingCardArea a: t.getAreas()){
-			System.out.println(a.getName() + " | Building: " + a.getBuilding().getName());
+			if(a.getBuilding() != null)System.out.println(a.getName() + " | Building: " + a.getBuilding().getName());
 			for(PlayerPawnPair ppp: a.getOccupants()){
 				System.out.println("Player: " + ppp.getPlayer().getPlayerID() + "   Pawn: " + ppp.getType());
 			}
@@ -164,7 +177,7 @@ public class CLI extends View{
 	}
 	private void printVentureTower(VentureTower t){
 		for(VentureCardArea a: t.getAreas()){
-			System.out.println(a.getName() + " | Venture: " + a.getVenture().getName());
+			if(a.getVenture() != null) System.out.println(a.getName() + " | Venture: " + a.getVenture().getName());
 			for(PlayerPawnPair ppp: a.getOccupants()){
 				System.out.println("Player: " + ppp.getPlayer().getPlayerID() + "   Pawn: " + ppp.getType());
 			}

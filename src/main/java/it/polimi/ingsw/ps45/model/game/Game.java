@@ -252,7 +252,7 @@ public class Game {
 		setSinglePawn(r.nextInt(6)+1, PawnType.BLACK);
 		setSinglePawn(r.nextInt(6)+1, PawnType.WHITE);
 		setSinglePawn(r.nextInt(6)+1, PawnType.ORANGE);
-		setSinglePawn(r.nextInt(6)+1, PawnType.NEUTRAL);
+		setSinglePawn(0, PawnType.NEUTRAL);
 	}
 	
 	public void setSinglePawn(int value, PawnType pt){
