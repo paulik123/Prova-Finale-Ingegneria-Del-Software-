@@ -28,7 +28,7 @@ public class Round {
 		
 		turnOrder[index].getActionBuilder().setState(new NoActionState());
 		index++;
-		turnOrder[index].getActionBuilder().setState(new PawnActionState());
+		if(index < turnOrder.length)turnOrder[index].getActionBuilder().setState(new PawnActionState());
 	}
 
 	public Player getCurrentPlayer() {

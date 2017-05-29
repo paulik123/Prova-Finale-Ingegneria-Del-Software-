@@ -106,6 +106,7 @@ public class ActionBuilder {
 		int pawnValue = calculatePawnValue(pt, servantsAdded) + p.getResourceSet().getActionValueModifier().getTerritoryAction();
 		ConsumableSet servantsSet = servantsToConsumableSet(servantsAdded);
 		servantsSet.makeDiscount(p.getResourceSet().getTerritoryActionDiscount());
+		if(board.getTerritoryTower().isOccupied()) servantsSet.collect(towerCoinsPenaltySet());
 		
 		if(canPlacePawnTerritoryRun(pawn, pawnValue, area, servantsSet)){
 			makePlayerPay(servantsSet, pawn);
@@ -121,6 +122,7 @@ public class ActionBuilder {
 		ConsumableSet cost = area.getCharacter().cost();
 		cost.collect(servantsToConsumableSet(servantsAdded));
 		cost.makeDiscount(p.getResourceSet().getCharacterActionDiscount());
+		if(board.getCharacterTower().isOccupied()) cost.collect(towerCoinsPenaltySet());
 		
 		if(canPlacePawnCharacterRun(pawn, pawnValue, area, cost)){
 			makePlayerPay(cost, pawn);
@@ -137,6 +139,7 @@ public class ActionBuilder {
 		
 		cost.collect(servantsToConsumableSet(servantsAdded));
 		cost.makeDiscount(p.getResourceSet().getBuildingActionDiscount());
+		if(board.getBuildingTower().isOccupied()) cost.collect(towerCoinsPenaltySet());
 		
 		if(canPlacePawnBuildingRun(pawn, pawnValue, area, cost)){
 			makePlayerPay(cost, pawn);
@@ -156,6 +159,7 @@ public class ActionBuilder {
 		
 		cost.collect(servantsToConsumableSet(servantsAdded));
 		cost.makeDiscount(p.getResourceSet().getVentureActionDiscount());
+		if(board.getVentureTower().isOccupied()) cost.collect(towerCoinsPenaltySet());
 		
 		if(canPlacePawnVentureRun(pawn, pawnValue, area, cost)){
 			makePlayerPay(cost, pawn);
@@ -201,6 +205,7 @@ public class ActionBuilder {
 		int value = calculateValue(state.actionValue(), servantsAdded) + p.getResourceSet().getActionValueModifier().getTerritoryAction();
 		ConsumableSet servantsSet = servantsToConsumableSet(servantsAdded);
 		servantsSet.makeDiscount(p.getResourceSet().getTerritoryActionDiscount());
+		if(board.getTerritoryTower().isOccupied()) servantsSet.collect(towerCoinsPenaltySet());
 		
 		if(canNoPawnTerritoryRun(value, area, servantsSet)){
 			makePlayerPay(servantsSet);
@@ -214,6 +219,7 @@ public class ActionBuilder {
 		ConsumableSet cost = area.getCharacter().cost();
 		cost.collect(servantsToConsumableSet(servantsAdded));
 		cost.makeDiscount(p.getResourceSet().getCharacterActionDiscount());
+		if(board.getCharacterTower().isOccupied()) cost.collect(towerCoinsPenaltySet());
 		
 		if(canNoPawnCharacterRun(value, area, cost)){
 			makePlayerPay(cost);
@@ -227,6 +233,7 @@ public class ActionBuilder {
 		ConsumableSet cost = area.getBuilding().cost();
 		cost.collect(servantsToConsumableSet(servantsAdded));
 		cost.makeDiscount(p.getResourceSet().getBuildingActionDiscount());
+		if(board.getBuildingTower().isOccupied()) cost.collect(towerCoinsPenaltySet());
 		
 		if(canNoPawnBuildingRun(value, area, cost)){
 			makePlayerPay(cost);
@@ -244,6 +251,7 @@ public class ActionBuilder {
 		
 		cost.collect(servantsToConsumableSet(servantsAdded));
 		cost.makeDiscount(p.getResourceSet().getVentureActionDiscount());
+		if(board.getVentureTower().isOccupied()) cost.collect(towerCoinsPenaltySet());
 		
 		if(canNoPawnVentureRun(value, area, cost)){
 			makePlayerPay(cost);
@@ -409,6 +417,12 @@ public class ActionBuilder {
 	private ConsumableSet servantsToConsumableSet(int servantsAdded){
 		ConsumableSet cs = new ConsumableSet();
 		cs.setServants(servantsAdded);
+		return cs;
+	}
+	
+	private ConsumableSet towerCoinsPenaltySet(){
+		ConsumableSet cs = new ConsumableSet();
+		cs.setCoins(3);
 		return cs;
 	}
 	
