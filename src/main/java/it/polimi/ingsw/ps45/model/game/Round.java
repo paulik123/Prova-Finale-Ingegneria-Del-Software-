@@ -21,14 +21,15 @@ public class Round {
 	
 	// Returns true if round has ended
 	public void nextTurn(){
-		if(index >= turnOrder.length){
-			hasEnded = true;
-			return;
-		}
-		
 		turnOrder[index].getActionBuilder().setState(new NoActionState());
-		index++;
-		if(index < turnOrder.length)turnOrder[index].getActionBuilder().setState(new PawnActionState());
+		
+		if(index < turnOrder.length-1){
+			index++;
+			turnOrder[index].getActionBuilder().setState(new PawnActionState());
+		}
+		else{
+			hasEnded = true;
+		}
 	}
 
 	public Player getCurrentPlayer() {

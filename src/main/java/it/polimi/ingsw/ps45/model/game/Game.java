@@ -97,8 +97,6 @@ public class Game {
 			return;
 		}
 		else if(currentRound.roundEnded() && currentEra == 3); //TODO END GAME CALCULATION
-		
-		
 	}
 	
 	public void newRound() throws Exception{
@@ -120,7 +118,10 @@ public class Game {
 	public void vaticanTurn() throws Exception{
 		for(Player p:players){
 			//currentEra+2 is the faith points requirement
-			if(p.getResourceSet().getResources().getFaithPoints() < currentEra+2) p.getActionBuilder().refuseVatican();
+			if(p.getResourceSet().getResources().getFaithPoints() < currentEra+2) {
+				p.getActionBuilder().setState(new VaticanChoiceState(vatican.getCard(eras[currentEra])));
+				p.getActionBuilder().refuseVatican();
+			}
 			else {
 				p.getActionBuilder().setState(new VaticanChoiceState(vatican.getCard(eras[currentEra])));
 			}
@@ -180,7 +181,7 @@ public class Game {
 			}
 			for(int m=0; m<numberOfPlayers*turnsPerRound;m++){
 				//TODO No first turn effect
-				turns[m] = temp[m%turnsPerRound];
+				turns[m] = temp[m%numberOfPlayers];
 			}
 		
 	}
