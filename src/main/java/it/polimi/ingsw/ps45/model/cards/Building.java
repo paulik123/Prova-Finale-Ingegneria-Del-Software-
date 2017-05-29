@@ -24,7 +24,7 @@ public class Building extends Card {
 		this.cost = cost;
 	}
 	public ConsumableSet cost() {
-		return null;
+		return cost;
 	}
 	public void productionI(Player p) {
 		for(Effect e:productionIEffects){

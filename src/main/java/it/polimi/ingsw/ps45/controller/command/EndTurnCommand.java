@@ -15,6 +15,7 @@ public class EndTurnCommand implements Command{
 		try {
 			Game g = connection.getGameCreator().getGameFromPlayerID(playerID);
 			g.nextTurn(playerID);
+			g.notifyObservers();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

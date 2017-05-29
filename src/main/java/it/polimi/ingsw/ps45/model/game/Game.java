@@ -91,8 +91,13 @@ public class Game {
 	
 	public void nextTurn(String playerID) throws Exception{
 		if(!playerID.equals(currentRound.getCurrentPlayer().getPlayerID())) throw new Exception("It's not your turn to end");
-		if(currentRound.nextTurn() && currentEra != 3) newRound();
-		else if(currentRound.nextTurn() && currentEra == 3); //TODO END GAME CALCULATION
+		if(currentRound.roundEnded() && currentEra != 3){
+			newRound();
+			return;
+		}
+		else if(currentRound.roundEnded() && currentEra == 3); //TODO END GAME CALCULATION
+		
+		currentRound.nextTurn();
 	}
 	
 	public void newRound() throws Exception{

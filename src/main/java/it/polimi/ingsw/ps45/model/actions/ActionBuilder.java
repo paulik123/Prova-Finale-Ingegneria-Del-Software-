@@ -134,6 +134,7 @@ public class ActionBuilder {
 		Pawn pawn = p.getResourceSet().getPawn(pt);
 		int pawnValue = calculatePawnValue(pt, servantsAdded) + p.getResourceSet().getActionValueModifier().getBuildingAction();
 		ConsumableSet cost = area.getBuilding().cost();
+		
 		cost.collect(servantsToConsumableSet(servantsAdded));
 		cost.makeDiscount(p.getResourceSet().getBuildingActionDiscount());
 		
