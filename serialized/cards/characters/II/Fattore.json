@@ -1,1 +1,18 @@
-{"era":"II","effects":[{"penalty":3,"CLASS_META_KEY":"it.polimi.ingsw.ps45.model.effects.HarvestValuePenaltyEffect"}],"name":"Fattore"}
+{
+	"era": "II",
+	"effects": [{
+			"penalty": 3,
+			"CLASS_META_KEY": "it.polimi.ingsw.ps45.model.effects.HarvestValuePenaltyEffect"
+		}
+	],
+	"cost": {
+		"wood": 0,
+		"stone": 0,
+		"coins": 4,
+		"servants": 0,
+		"victoryPoints": 0,
+		"faithPoints": 0,
+		"militaryPoints": 0
+	},
+	"name": "Fattore"
+}

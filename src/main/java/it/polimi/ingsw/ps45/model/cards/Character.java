@@ -10,7 +10,7 @@ public class Character extends Card {
 	
 	public Character(Era e, String name, ConsumableSet cost) {
 		super(e, name);
-		// TODO Auto-generated constructor stub
+		this.cost = cost;
 	}
 
 	public ConsumableSet cost(){

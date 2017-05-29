@@ -1,1 +1,20 @@
-{"era":"I","effects":[{"CLASS_META_KEY":"it.polimi.ingsw.ps45.model.effects.CouncilPrivilegeOneEffect"},{"effectValue":2,"CLASS_META_KEY":"it.polimi.ingsw.ps45.model.effects.TakeVentureActionModifierEffect"}],"name":"Cavaliere"}
+{
+	"era": "I",
+	"effects": [{
+			"CLASS_META_KEY": "it.polimi.ingsw.ps45.model.effects.CouncilPrivilegeOneEffect"
+		}, {
+			"effectValue": 2,
+			"CLASS_META_KEY": "it.polimi.ingsw.ps45.model.effects.TakeVentureActionModifierEffect"
+		}
+	],
+	"cost": {
+		"wood": 0,
+		"stone": 0,
+		"coins": 3,
+		"servants": 0,
+		"victoryPoints": 0,
+		"faithPoints": 0,
+		"militaryPoints": 0
+	},
+	"name": "Cavaliere"
+}

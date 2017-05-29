@@ -1,1 +1,28 @@
-{"era":"I","effects":[{"cs":{"wood":0,"stone":0,"coins":0,"servants":0,"victoryPoints":0,"faithPoints":4,"militaryPoints":0},"CLASS_META_KEY":"it.polimi.ingsw.ps45.model.effects.CollectEffect"},{"CLASS_META_KEY":"it.polimi.ingsw.ps45.model.effects.NoCardAreaCollectEffect"}],"name":"Predicatore"}
+{
+	"era": "I",
+	"effects": [{
+			"cs": {
+				"wood": 0,
+				"stone": 0,
+				"coins": 0,
+				"servants": 0,
+				"victoryPoints": 0,
+				"faithPoints": 4,
+				"militaryPoints": 0
+			},
+			"CLASS_META_KEY": "it.polimi.ingsw.ps45.model.effects.CollectEffect"
+		}, {
+			"CLASS_META_KEY": "it.polimi.ingsw.ps45.model.effects.NoCardAreaCollectEffect"
+		}
+	],
+	"cost": {
+		"wood": 0,
+		"stone": 0,
+		"coins": 2,
+		"servants": 0,
+		"victoryPoints": 0,
+		"faithPoints": 0,
+		"militaryPoints": 0
+	},
+	"name": "Predicatore"
+}

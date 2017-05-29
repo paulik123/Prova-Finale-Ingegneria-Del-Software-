@@ -1,1 +1,17 @@
-{"era":"II","effects":[{"CLASS_META_KEY":"it.polimi.ingsw.ps45.model.effects.CouncilPrivilegeThreeEffect"}],"name":"Messo Reale"}
+{
+	"era": "II",
+	"effects": [{
+			"CLASS_META_KEY": "it.polimi.ingsw.ps45.model.effects.CouncilPrivilegeThreeEffect"
+		}
+	],
+	"cost": {
+		"wood": 0,
+		"stone": 0,
+		"coins": 5,
+		"servants": 0,
+		"victoryPoints": 0,
+		"faithPoints": 0,
+		"militaryPoints": 0
+	},
+	"name": "Messo Reale"
+}

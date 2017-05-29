@@ -1,1 +1,38 @@
-{"era":"I","effects":[{"val":4,"discount":{"wood":0,"stone":0,"coins":0,"servants":0,"victoryPoints":0,"faithPoints":0,"militaryPoints":0},"CLASS_META_KEY":"it.polimi.ingsw.ps45.model.effects.TakeAnyCardEffect"},{"cs":{"wood":0,"stone":0,"coins":0,"servants":0,"victoryPoints":0,"faithPoints":1,"militaryPoints":0},"CLASS_META_KEY":"it.polimi.ingsw.ps45.model.effects.CollectEffect"}],"name":"Badessa"}
+{
+	"era": "I",
+	"effects": [{
+			"val": 4,
+			"discount": {
+				"wood": 0,
+				"stone": 0,
+				"coins": 0,
+				"servants": 0,
+				"victoryPoints": 0,
+				"faithPoints": 0,
+				"militaryPoints": 0
+			},
+			"CLASS_META_KEY": "it.polimi.ingsw.ps45.model.effects.TakeAnyCardEffect"
+		}, {
+			"cs": {
+				"wood": 0,
+				"stone": 0,
+				"coins": 0,
+				"servants": 0,
+				"victoryPoints": 0,
+				"faithPoints": 1,
+				"militaryPoints": 0
+			},
+			"CLASS_META_KEY": "it.polimi.ingsw.ps45.model.effects.CollectEffect"
+		}
+	],
+	"cost": {
+		"wood": 0,
+		"stone": 0,
+		"coins": 3,
+		"servants": 0,
+		"victoryPoints": 0,
+		"faithPoints": 0,
+		"militaryPoints": 0
+	},
+	"name": "Badessa"
+}

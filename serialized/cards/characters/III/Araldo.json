@@ -1,1 +1,26 @@
-{"era":"III","effects":[{"cs":{"wood":0,"stone":0,"coins":0,"servants":0,"victoryPoints":2,"faithPoints":0,"militaryPoints":0},"CLASS_META_KEY":"it.polimi.ingsw.ps45.model.effects.ConsumableSetPerVentureEffect"}],"name":"Araldo"}
+{
+	"era": "III",
+	"effects": [{
+			"cs": {
+				"wood": 0,
+				"stone": 0,
+				"coins": 0,
+				"servants": 0,
+				"victoryPoints": 2,
+				"faithPoints": 0,
+				"militaryPoints": 0
+			},
+			"CLASS_META_KEY": "it.polimi.ingsw.ps45.model.effects.ConsumableSetPerVentureEffect"
+		}
+	],
+	"cost": {
+		"wood": 0,
+		"stone": 0,
+		"coins": 4,
+		"servants": 0,
+		"victoryPoints": 0,
+		"faithPoints": 0,
+		"militaryPoints": 0
+	},
+	"name": "Araldo"
+}
