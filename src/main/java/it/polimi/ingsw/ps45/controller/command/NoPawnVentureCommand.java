@@ -36,13 +36,9 @@ public class NoPawnVentureCommand implements Command{
 			CommandAdapter ca = new CommandAdapter(g.getBoard());
 			tca = ca.getVentureArea(ventureCardArea);
 			vm = ca.getVentureMode(ventureMode);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		try {
 			ab.NoPawnVenture(tca, servantsAdded, vm);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			g.notifyObservers();
+		}catch(Exception e){
 			e.printStackTrace();
 		}
 	}

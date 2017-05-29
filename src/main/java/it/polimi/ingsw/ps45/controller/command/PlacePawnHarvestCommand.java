@@ -32,13 +32,9 @@ public class PlacePawnHarvestCommand implements Command{
 			CommandAdapter ca = new CommandAdapter(g.getBoard());
 			nca = ca.getHarvestArea(harvestArea);
 			pt = ca.getPawnType(pawnType);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		try {
 			ab.placePawnHarvest(nca, pt, servantsAdded);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			g.notifyObservers();
+		}catch(Exception e){
 			e.printStackTrace();
 		}
 	}

@@ -20,34 +20,34 @@ public class CLIControllerThread extends Thread{
 	private Scanner scanner;
 	private String playerID;
 	boolean x;
+	private CommandParser cp;
 	
 	public CLIControllerThread(OutputStreamWriter os, Scanner scanner, String playerID){
 		this.os = os;
 		this.scanner = scanner;
 		this.playerID = playerID;
+		cp = new CommandParser();
 	}
 	
 	public void run(){
         while(true){
         	String c = scanner.nextLine();
-        	Command command = new AddPlayerCommand();
-        	CommandHolder ch = new CommandHolder(command, playerID);
-        	
-        	Gson gson = new GsonBuilder()
-                    .registerTypeAdapter(Effect.class,
-                            new PropertyBasedInterfaceMarshal())
-                    .registerTypeAdapter(Command.class,
-                            new PropertyBasedInterfaceMarshal()).create();
-     	   
-     	   String json = gson.toJson(ch);
-     	   
-     	   
-        	try {
-				send(json);
-			} catch (IOException e) {
+
+			try {
+				CommandHolder ch = new CommandHolder(cp.parse(c), playerID);
+	        	Gson gson = new GsonBuilder()
+	                    .registerTypeAdapter(Effect.class,
+	                            new PropertyBasedInterfaceMarshal())
+	                    .registerTypeAdapter(Command.class,
+	                            new PropertyBasedInterfaceMarshal()).create();
+	     	   
+	     	   String json = gson.toJson(ch);
+	     	   send(json);
+			} catch (Exception e1) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				e1.printStackTrace();
 			}
+
         }
     }
 

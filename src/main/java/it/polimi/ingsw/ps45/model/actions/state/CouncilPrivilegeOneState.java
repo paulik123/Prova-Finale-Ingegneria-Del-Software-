@@ -101,4 +101,10 @@ public class CouncilPrivilegeOneState implements ActionBuilderState{
 		return false;
 	}
 	
+	@Override
+	public String message() {
+		// TODO Auto-generated method stub
+		return "CouncilPrivilegeOneState";
+	}
+	
 }

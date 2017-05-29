@@ -24,13 +24,9 @@ public class ProductionCommand implements Command{
 			ab = g.getPlayerByID(playerID).getActionBuilder();
 			CommandAdapter ca = new CommandAdapter(g.getBoard());
 			pm = ca.getProductionMode(productionMode);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		try {
 			ab.production(pm);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			g.notifyObservers();
+		}catch(Exception e){
 			e.printStackTrace();
 		}
 		

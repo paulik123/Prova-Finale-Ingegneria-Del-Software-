@@ -17,13 +17,9 @@ public class RefuseVaticanCommand implements Command{
 		try{
 			g = connection.getGameCreator().getGameFromPlayerID(playerID);
 			ab = g.getPlayerByID(playerID).getActionBuilder();
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		try {
 			ab.refuseVatican();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			g.notifyObservers();
+		}catch(Exception e){
 			e.printStackTrace();
 		}
 		

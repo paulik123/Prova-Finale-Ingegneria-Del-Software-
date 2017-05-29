@@ -17,16 +17,11 @@ public class HarvestCommand implements Command{
 		try{
 			g = connection.getGameCreator().getGameFromPlayerID(playerID);
 			ab = g.getPlayerByID(playerID).getActionBuilder();
+			ab.harvest();
+			g.notifyObservers();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		try {
-			ab.harvest();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 	}
 
 }

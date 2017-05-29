@@ -106,5 +106,10 @@ public class AddServantsToProductionState implements ActionBuilderState{
 		// TODO Auto-generated method stub
 		return false;
 	}
+	@Override
+	public String message() {
+		// TODO Auto-generated method stub
+		return "AddServantsToProductionState";
+	}
 
 }

@@ -40,13 +40,9 @@ public class PlacePawnVentureCommand implements Command{
 			tca = ca.getVentureArea(ventureCardArea);
 			pt = ca.getPawnType(pawnType);
 			vm = ca.getVentureMode(ventureMode);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		try {
 			ab.placePawnVenture(tca, pt, servantsAdded, vm);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			g.notifyObservers();
+		}catch(Exception e){
 			e.printStackTrace();
 		}
 	}

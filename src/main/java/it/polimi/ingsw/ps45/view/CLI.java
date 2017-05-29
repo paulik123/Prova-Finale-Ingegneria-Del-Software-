@@ -32,9 +32,11 @@ import it.polimi.ingsw.ps45.model.player.Player;
 public class CLI extends View{
 	
 	Scanner scanner;
+	private String playerID;
 	
-	public CLI(Scanner scanner){
+	public CLI(Scanner scanner, String playerID){
 		this.scanner = scanner;
+		this.playerID = playerID;
 	}
 
 	@Override
@@ -50,12 +52,14 @@ public class CLI extends View{
 		Game g = gson.fromJson(gameJSON, Game.class);
 		
 		System.out.println("\n\n\n||||||||||  " + g.getStatus() + "  ||||||||||");
+		System.out.println("\n" + playerID);
 		System.out.println("Current ERA: " + g.getEras()[g.getCurrentEra()] + "  || Current ROUND: " + g.getRoundNumber());
+		System.out.println("CURRENT PLAYER: " + g.getCurrentRound().getCurrentPlayer().getPlayerID() + "  \n");
 		System.out.println("\n ---------------- PLAYERS ----------------");
 		
 		for(Player p: g.getPlayers()){
 			System.out.println("\n   --- " + p.getPlayerID() + " ---   ");
-			System.out.println("STATUS: " + p.getStatus());
+			System.out.println("State: " + p.getStatus());
 			System.out.println(p.getResourceSet().getResources());
 			printTerritories(p);
 			printCharacters(p);

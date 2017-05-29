@@ -35,16 +35,11 @@ public class ExchangeCouncilPrivilegeThreeCommand implements Command{
 			privilege1 = ca.getCouncilPrivilege(cp1);
 			privilege2 = ca.getCouncilPrivilege(cp2);
 			privilege3 = ca.getCouncilPrivilege(cp3); 
+			ab.exchangeCouncilPrivilegeThree(privilege1, privilege2, privilege3);
+			g.notifyObservers();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		try {
-			ab.exchangeCouncilPrivilegeThree(privilege1, privilege2, privilege3);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 	}
 
 }

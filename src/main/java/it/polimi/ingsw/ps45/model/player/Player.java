@@ -18,12 +18,13 @@ public class Player {
 	
 	private String status;
 	
+	
 	public Player(String playerID, Board board, ConsumableSet initialResources){
 		this.playerID = playerID;
 		resourceSet = new ResourceSet(initialResources);
 		actionBuilder = new ActionBuilder(this, board);
 		answeredVatican = false;
-		status = "New player";
+		this.status = "New player";
 	}
 	
 	
@@ -70,6 +71,11 @@ public class Player {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+	
+
+
+
 	
 	
 	

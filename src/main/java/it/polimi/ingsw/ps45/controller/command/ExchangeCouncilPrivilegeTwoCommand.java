@@ -31,13 +31,9 @@ public class ExchangeCouncilPrivilegeTwoCommand implements Command{
 			CommandAdapter ca = new CommandAdapter(g.getBoard());
 			privilege1 = ca.getCouncilPrivilege(cp1);
 			privilege2 = ca.getCouncilPrivilege(cp2); 
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		try {
 			ab.exchangeCouncilPrivilegeTwo(privilege1, privilege2);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			g.notifyObservers();
+		}catch(Exception e){
 			e.printStackTrace();
 		}
 		

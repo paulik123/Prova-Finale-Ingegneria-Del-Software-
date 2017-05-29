@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -27,6 +28,7 @@ import it.polimi.ingsw.ps45.model.cards.Era;
 import it.polimi.ingsw.ps45.model.effects.Effect;
 import it.polimi.ingsw.ps45.model.player.BonusTile;
 import it.polimi.ingsw.ps45.model.player.ConsumableSet;
+import it.polimi.ingsw.ps45.model.player.PawnType;
 import it.polimi.ingsw.ps45.model.player.Player;
 import it.polimi.ingsw.ps45.model.vatican.Vatican;
 
@@ -78,6 +80,8 @@ public class Game {
 		roundNumber++;
 		gameStarted = true;
 		cardDealer.updateBoard(board, eras[currentEra]);
+		setPawns();
+		currentRound.getCurrentPlayer().getActionBuilder().setState(new PawnActionState());
 		
 		setStatus("Game has started");
 		System.out.println("Game Started");
@@ -97,6 +101,7 @@ public class Game {
 			board = new Board();
 			updateActionBuildersBoard();
 			cardDealer.updateBoard(board, eras[currentEra]);
+			setPawns();
 			calculateTurns();
 			currentRound = new Round(turns);
 			currentRound.getCurrentPlayer().getActionBuilder().setState(new PawnActionState());
@@ -134,6 +139,7 @@ public class Game {
 		board = new Board();
 		updateActionBuildersBoard();
 		cardDealer.updateBoard(board, eras[currentEra]);
+		setPawns();
 		calculateTurns();
 		currentRound = new Round(turns);
 		currentRound.getCurrentPlayer().getActionBuilder().setState(new PawnActionState());
@@ -230,13 +236,35 @@ public class Game {
 		observers.add(o);
 	}
 	
+	
 	public  void notifyObservers(){
-		Gson gson = GsonWithInterface.getGson();
-        
+		updatePlayerStatus();
+		
+		Gson gson = GsonWithInterface.getGson(); 
         String game = gson.toJson(this);
 
 		Notifier n = new Notifier(observers, game);
 		n.start();
+	}
+	
+	public void setPawns(){
+		Random r = new Random();
+		setSinglePawn(r.nextInt(6)+1, PawnType.BLACK);
+		setSinglePawn(r.nextInt(6)+1, PawnType.WHITE);
+		setSinglePawn(r.nextInt(6)+1, PawnType.ORANGE);
+		setSinglePawn(r.nextInt(6)+1, PawnType.NEUTRAL);
+	}
+	
+	public void setSinglePawn(int value, PawnType pt){
+		for(Player p:players){
+			p.getResourceSet().setPawn(pt, value, true);
+		}
+	}
+	
+	public void updatePlayerStatus(){
+		for(Player p: players){
+			p.setStatus(p.getActionBuilder().getState().message());
+		}
 	}
 	
 	public ArrayList<Player> getPlayers(){
@@ -270,6 +298,11 @@ public class Game {
 	public Era[] getEras() {
 		return eras;
 	}
+
+	public Round getCurrentRound() {
+		return currentRound;
+	}
+	
 	
 	
 	

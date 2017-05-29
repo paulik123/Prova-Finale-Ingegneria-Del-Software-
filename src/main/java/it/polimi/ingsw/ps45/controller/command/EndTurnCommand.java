@@ -1,0 +1,24 @@
+package it.polimi.ingsw.ps45.controller.command;
+
+import it.polimi.ingsw.ps45.controller.Connection;
+import it.polimi.ingsw.ps45.controller.GameCreator;
+import it.polimi.ingsw.ps45.controller.SocketObserver;
+import it.polimi.ingsw.ps45.model.game.Game;
+
+public class EndTurnCommand implements Command{
+
+
+	
+	
+	@Override
+	public void run(Connection connection, String playerID) {
+		try {
+			Game g = connection.getGameCreator().getGameFromPlayerID(playerID);
+			g.nextTurn(playerID);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+}

@@ -31,13 +31,9 @@ public class PlacePawnMarketCommand implements Command{
 			CommandAdapter ca = new CommandAdapter(g.getBoard());
 			nca = ca.getNoCardArea(noCardArea);
 			pt = ca.getPawnType(pawnType);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		try {
 			ab.placePawnMarket(nca, pt, servantsAdded);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			g.notifyObservers();
+		}catch(Exception e){
 			e.printStackTrace();
 		}
 	}

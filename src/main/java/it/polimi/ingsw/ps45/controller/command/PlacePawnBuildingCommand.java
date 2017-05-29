@@ -34,13 +34,9 @@ public class PlacePawnBuildingCommand implements Command{
 			CommandAdapter ca = new CommandAdapter(g.getBoard());
 			tca = ca.getBuildingArea(buildingCardArea);
 			pt = ca.getPawnType(pawnType);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		try {
 			ab.placePawnBuilding(tca, pt, servantsAdded);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			g.notifyObservers();
+		}catch(Exception e){
 			e.printStackTrace();
 		}
 	}

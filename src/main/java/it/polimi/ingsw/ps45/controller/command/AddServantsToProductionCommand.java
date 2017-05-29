@@ -23,13 +23,9 @@ public class AddServantsToProductionCommand implements Command{
 		try{
 			g = connection.getGameCreator().getGameFromPlayerID(playerID);
 			ab = g.getPlayerByID(playerID).getActionBuilder();
+			ab.addServantsToProduction(servants);
+			g.notifyObservers();
 		}catch(Exception e){
-			e.printStackTrace();
-		}
-		try {
-			ab.addServantsToProduction(servants);;
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

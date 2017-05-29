@@ -32,13 +32,9 @@ public class PlacePawnTerritoryCommand implements Command{
 			CommandAdapter ca = new CommandAdapter(g.getBoard());
 			tca = ca.getTerritoryArea(territoryCardArea);
 			pt = ca.getPawnType(pawnType);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		try {
 			ab.placePawnTerritory(tca, pt, servantsAdded);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			g.notifyObservers();
+		}catch(Exception e){
 			e.printStackTrace();
 		}
 	}

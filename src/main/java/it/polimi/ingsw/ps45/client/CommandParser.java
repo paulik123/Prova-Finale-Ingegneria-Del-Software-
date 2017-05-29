@@ -5,6 +5,7 @@ import it.polimi.ingsw.ps45.controller.command.AddPlayerCommand;
 import it.polimi.ingsw.ps45.controller.command.AddServantsToHarvestCommand;
 import it.polimi.ingsw.ps45.controller.command.AddServantsToProductionCommand;
 import it.polimi.ingsw.ps45.controller.command.Command;
+import it.polimi.ingsw.ps45.controller.command.EndTurnCommand;
 import it.polimi.ingsw.ps45.controller.command.ExchangeCouncilPrivilegeOneCommand;
 import it.polimi.ingsw.ps45.controller.command.ExchangeCouncilPrivilegeThreeCommand;
 import it.polimi.ingsw.ps45.controller.command.ExchangeCouncilPrivilegeTwoCommand;
@@ -24,11 +25,13 @@ import it.polimi.ingsw.ps45.controller.command.PlacePawnVentureCommand;
 import it.polimi.ingsw.ps45.controller.command.ProductionCommand;
 import it.polimi.ingsw.ps45.controller.command.RefuseVaticanCommand;
 
-public class CommadParser {
+public class CommandParser {
 	public Command parse(String input) throws Exception{
 		String[] s = input.toLowerCase().split("-");
 		
 		switch(s[0]){
+		case "endturn":
+			return parseEndTurn(s);
 		case "placepawnnocard":
 			return parsePlacePawnNoCard(s);
 		case "placepawnmarket":
@@ -184,6 +187,11 @@ public class CommadParser {
 	public ProductionCommand parseProduction(String[] s) throws Exception{
 		if(s.length != 2) throw new Exception("Bad command");
 		return new ProductionCommand(s[1]);
+	}
+	
+	public EndTurnCommand parseEndTurn(String[] s) throws Exception{
+		if(s.length != 1) throw new Exception("Bad command");
+		return new EndTurnCommand();
 	}
 	
 }

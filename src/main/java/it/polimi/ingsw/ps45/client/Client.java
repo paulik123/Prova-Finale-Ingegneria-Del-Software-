@@ -36,7 +36,7 @@ public class Client {
     	playerID = scanner.nextLine();
     	
         socket = new Socket(host, PORTNUMBER);
-        view = new CLI(scanner);
+        view = new CLI(scanner, playerID);
         controllerThread = new CLIControllerThread(new OutputStreamWriter(socket.getOutputStream()), scanner, playerID);
         observerThread = new ObserverThread(new BufferedReader(new InputStreamReader(socket.getInputStream())), view);
         observerThread.start();

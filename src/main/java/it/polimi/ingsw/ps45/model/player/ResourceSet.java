@@ -49,6 +49,8 @@ public class ResourceSet {
 		this.buildingActionDiscount = new ConsumableSet();
 		this.ventureActionDiscount = new ConsumableSet();
 		
+		this.pawnSet = new PawnSet();
+		
 		this.collectPenalty = new ConsumableSet();
 		
 		this.pawnValueModifier = new PawnValueModifier();

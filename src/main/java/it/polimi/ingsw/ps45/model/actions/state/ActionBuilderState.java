@@ -7,6 +7,7 @@ public interface ActionBuilderState {
 	public int actionValue();
 	public ConsumableSet discount();
 	public ExcommunicationCard getExcommunicationCard();
+	public String message();
 	// PawnAction
 	public boolean placePawnAction();
 	

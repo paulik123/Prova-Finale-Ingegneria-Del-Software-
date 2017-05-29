@@ -23,13 +23,9 @@ public class AddServantsToHarvestCommand implements Command{
 		try{
 			g = connection.getGameCreator().getGameFromPlayerID(playerID);
 			ab = g.getPlayerByID(playerID).getActionBuilder();
+			ab.addServantsToHarvest(servants);
+			g.notifyObservers();
 		}catch(Exception e){
-			e.printStackTrace();
-		}
-		try {
-			ab.addServantsToHarvest(servants);;
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

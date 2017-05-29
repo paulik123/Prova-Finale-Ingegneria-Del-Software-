@@ -27,16 +27,11 @@ public class ExchangeCouncilPrivilegeOneCommand implements Command{
 			ab = g.getPlayerByID(playerID).getActionBuilder();
 			CommandAdapter ca = new CommandAdapter(g.getBoard());
 			privilege1 = ca.getCouncilPrivilege(cp1); 
+			ab.exchangeCouncilPrivilegeOne(privilege1);
+			g.notifyObservers();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		try {
-			ab.exchangeCouncilPrivilegeOne(privilege1);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 	}
 
 }

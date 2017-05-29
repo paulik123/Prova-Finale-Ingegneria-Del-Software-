@@ -30,13 +30,9 @@ public class NoPawnBuildingCommand implements Command{
 			ab = g.getPlayerByID(playerID).getActionBuilder();
 			CommandAdapter ca = new CommandAdapter(g.getBoard());
 			tca = ca.getBuildingArea(buildingCardArea);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		try {
 			ab.NoPawnBuilding(tca, servantsAdded);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			g.notifyObservers();
+		}catch(Exception e){
 			e.printStackTrace();
 		}
 	}
