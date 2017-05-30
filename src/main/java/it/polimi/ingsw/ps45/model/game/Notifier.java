@@ -12,6 +12,12 @@ public class Notifier extends Thread{
 		this.observers = observers;
 		this.json = json + "\n";
 	}
+	
+	public Notifier(Observer observer, String json){
+		observers = new ArrayList<Observer>();
+		observers.add(observer);
+		this.json = json + "\n";
+	}
 
 	@Override
 	public void run() {

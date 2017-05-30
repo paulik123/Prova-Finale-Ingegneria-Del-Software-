@@ -22,13 +22,15 @@ public class ObserverThread extends Thread{
 	}
 	
 	public void run(){
-        String fromClient = "";
+        String fromServer = "";
       
 
-        System.out.println("ObserverThread waiting");
         try {
-            while((fromClient = br.readLine()) != null) {
-            		view.updateView(fromClient);
+            while((fromServer = br.readLine()) != null) {
+            	if(fromServer.contains("ERROR")){
+            		System.out.println(fromServer);
+            	}
+            	else view.updateView(fromServer);
             }
         } catch (IOException e) {
             e.printStackTrace();

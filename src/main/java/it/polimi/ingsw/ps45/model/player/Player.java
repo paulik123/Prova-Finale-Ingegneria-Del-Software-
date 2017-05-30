@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps45.model.player;
 
+import it.polimi.ingsw.ps45.controller.Observer;
 import it.polimi.ingsw.ps45.model.actions.ActionBuilder;
 import it.polimi.ingsw.ps45.model.area.Board;
 
@@ -19,10 +20,10 @@ public class Player {
 	private String status;
 	
 	
-	public Player(String playerID, Board board, ConsumableSet initialResources){
+	public Player(String playerID, Board board, ConsumableSet initialResources, Observer errorObserver){
 		this.playerID = playerID;
 		resourceSet = new ResourceSet(initialResources);
-		actionBuilder = new ActionBuilder(this, board);
+		actionBuilder = new ActionBuilder(this, board, errorObserver);
 		answeredVatican = false;
 		this.status = "New player";
 	}

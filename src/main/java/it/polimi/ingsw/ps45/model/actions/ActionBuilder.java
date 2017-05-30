@@ -1,5 +1,9 @@
 package it.polimi.ingsw.ps45.model.actions;
 
+import com.google.gson.Gson;
+
+import it.polimi.ingsw.ps45.controller.Observer;
+import it.polimi.ingsw.ps45.gson.GsonWithInterface;
 import it.polimi.ingsw.ps45.model.actions.CouncilPrivilege.CouncilPrivilege;
 import it.polimi.ingsw.ps45.model.actions.state.*;
 import it.polimi.ingsw.ps45.model.area.Area;
@@ -10,6 +14,7 @@ import it.polimi.ingsw.ps45.model.area.cardarea.CharacterCardArea;
 import it.polimi.ingsw.ps45.model.area.cardarea.TerritoryCardArea;
 import it.polimi.ingsw.ps45.model.area.cardarea.VentureCardArea;
 import it.polimi.ingsw.ps45.model.cards.VentureMode;
+import it.polimi.ingsw.ps45.model.game.Notifier;
 import it.polimi.ingsw.ps45.model.player.ConsumableSet;
 import it.polimi.ingsw.ps45.model.player.Pawn;
 import it.polimi.ingsw.ps45.model.player.PawnType;
@@ -19,11 +24,13 @@ public class ActionBuilder {
 	private ActionBuilderState state;
 	private Board board;
 	private Player p;
+	Observer errorObserver;
 	
 	
-	public ActionBuilder(Player p, Board board){
+	public ActionBuilder(Player p, Board board, Observer errorObserver){
 		this.p = p;
 		this.board = board;
+		this.errorObserver = errorObserver;
 		
 		state = new NoActionState();
 	}
@@ -49,7 +56,10 @@ public class ActionBuilder {
 	}
 	
 	public void placePawnProduction(NoCardArea area, PawnType pt, int servantsAdded) throws Exception{
-		if(!state.placePawnAction()) throw new Exception("Action not allowed - state is false");
+		if(!state.placePawnAction()){
+			notifyError("Action not allowed - state is false");
+			throw new Exception("Action not allowed - state is false");
+		}
 		
 		Pawn pawn = p.getResourceSet().getPawn(pt);
 		int pawnValue = calculatePawnValue(pt, servantsAdded);
@@ -58,11 +68,17 @@ public class ActionBuilder {
 		if(canPlacePawnProductionRun(pawn, pawnValue + p.getResourceSet().getActionValueModifier().getProduction(), area, servantsSet)){
 			makePlayerPay(servantsSet, pawn);
 			new PlacePawnProductionAction(p, area, pt, pawnValue).run();
-		}else throw new Exception("Action not allowed - pawn/consumables unavailable");
+		}else{ 
+			notifyError("Action not allowed - pawn/consumables unavailable");
+			throw new Exception("Action not allowed - pawn/consumables unavailable");
+		}
 	}
 	
 	public void placePawnHarvest(NoCardArea area, PawnType pt, int servantsAdded) throws Exception{
-		if(!state.placePawnAction()) throw new Exception("Action not allowed - state is false");
+		if(!state.placePawnAction()){
+			notifyError("Action not allowed - state is false");
+			throw new Exception("Action not allowed - state is false");
+		}
 		
 		Pawn pawn = p.getResourceSet().getPawn(pt);
 		int pawnValue = calculatePawnValue(pt, servantsAdded);
@@ -71,11 +87,17 @@ public class ActionBuilder {
 		if(canPlacePawnHarvestRun(pawn, pawnValue + p.getResourceSet().getActionValueModifier().getHarvest(), area, servantsSet)){
 			makePlayerPay(servantsSet, pawn);
 			new PlacePawnHarvestAction(p, area, pt, pawnValue).run();
-		}else throw new Exception("Action not allowed - pawn/consumables unavailable");
+		}else{
+			notifyError("Action not allowed - pawn/consumables unavailable");
+			throw new Exception("Action not allowed - pawn/consumables unavailable");
+		}
 	}
 
 	public void placePawnNoCard(NoCardArea area, PawnType pt, int servantsAdded) throws Exception{
-		if(!state.placePawnAction()) throw new Exception("Action not allowed - state is false");
+		if(!state.placePawnAction()){
+			notifyError("Action not allowed - state is false");
+			throw new Exception("Action not allowed - state is false");
+		}
 		
 		Pawn pawn = p.getResourceSet().getPawn(pt);
 		int pawnValue = calculatePawnValue(pt, servantsAdded);
@@ -84,11 +106,17 @@ public class ActionBuilder {
 		if(canPlacePawnNoCardRun(pawn, pawnValue, area, servantsSet)){
 			makePlayerPay(servantsSet, pawn);
 			new PlacePawnNoCardAction(p, area, pt, pawnValue).run();
-		}else throw new Exception("Action not allowed - pawn/consumables unavailable");
+		}else{
+			notifyError("Action not allowed - pawn/consumables unavailable");
+			throw new Exception("Action not allowed - pawn/consumables unavailable");
+		}
 	}
 	
 	public void placePawnMarket(NoCardArea area, PawnType pt, int servantsAdded) throws Exception{
-		if(!state.placePawnAction()) throw new Exception("Action not allowed - state is false");
+		if(!state.placePawnAction()){
+			notifyError("Action not allowed - state is false");
+			throw new Exception("Action not allowed - state is false");
+		}
 		
 		Pawn pawn = p.getResourceSet().getPawn(pt);
 		int pawnValue = calculatePawnValue(pt, servantsAdded);
@@ -97,11 +125,17 @@ public class ActionBuilder {
 		if(canPlacePawnMarketRun(pawn, pawnValue, area, servantsSet)){
 			makePlayerPay(servantsSet, pawn);
 			new PlacePawnNoCardAction(p, area, pt, pawnValue).run();
-		}else throw new Exception("Action not allowed - pawn/consumables unavailable");
+		}else{
+			notifyError("Action not allowed - pawn/consumables unavailable");
+			throw new Exception("Action not allowed - pawn/consumables unavailable");
+		}
 	}
 	
 	public void placePawnTerritory(TerritoryCardArea area, PawnType pt, int servantsAdded) throws Exception{
-		if(!state.placePawnAction()) throw new Exception("Action not allowed - state is false");
+		if(!state.placePawnAction()){
+			notifyError("Action not allowed - state is false");
+			throw new Exception("Action not allowed - state is false");
+		}
 		Pawn pawn = p.getResourceSet().getPawn(pt);
 		int pawnValue = calculatePawnValue(pt, servantsAdded) + p.getResourceSet().getActionValueModifier().getTerritoryAction();
 		ConsumableSet servantsSet = servantsToConsumableSet(servantsAdded);
@@ -111,12 +145,18 @@ public class ActionBuilder {
 		if(canPlacePawnTerritoryRun(pawn, pawnValue, area, servantsSet)){
 			makePlayerPay(servantsSet, pawn);
 			new PlacePawnTerritoryAction(p, area, pt, pawnValue).run();
-		}else throw new Exception("Action not allowed - pawn/consumables unavailable");
+		}else{
+			notifyError("Action not allowed - pawn/consumables unavailable");
+			throw new Exception("Action not allowed - pawn/consumables unavailable");
+		}
 
 	}
 	
 	public void placePawnCharacter(CharacterCardArea area, PawnType pt, int servantsAdded) throws Exception{
-		if(!state.placePawnAction()) throw new Exception("Action not allowed - state is false");
+		if(!state.placePawnAction()){
+			notifyError("Action not allowed - state is false");
+			throw new Exception("Action not allowed - state is false");
+		}
 		Pawn pawn = p.getResourceSet().getPawn(pt);
 		int pawnValue = calculatePawnValue(pt, servantsAdded) + p.getResourceSet().getActionValueModifier().getCharacterAction();
 		ConsumableSet cost = area.getCharacter().cost();
@@ -127,12 +167,18 @@ public class ActionBuilder {
 		if(canPlacePawnCharacterRun(pawn, pawnValue, area, cost)){
 			makePlayerPay(cost, pawn);
 			new PlacePawnCharacterAction(p, area, pt, pawnValue).run();
-		}else throw new Exception("Action not allowed - pawn/consumables unavailable");
+		}else{
+			notifyError("Action not allowed - pawn/consumables unavailable");
+			throw new Exception("Action not allowed - pawn/consumables unavailable");
+		}
 
 	}
 	
 	public void placePawnBuilding(BuildingCardArea area, PawnType pt, int servantsAdded) throws Exception{
-		if(!state.placePawnAction()) throw new Exception("Action not allowed - state is false");
+		if(!state.placePawnAction()){
+			notifyError("Action not allowed - state is false");
+			throw new Exception("Action not allowed - state is false");
+		}
 		Pawn pawn = p.getResourceSet().getPawn(pt);
 		int pawnValue = calculatePawnValue(pt, servantsAdded) + p.getResourceSet().getActionValueModifier().getBuildingAction();
 		ConsumableSet cost = area.getBuilding().cost();
@@ -144,12 +190,18 @@ public class ActionBuilder {
 		if(canPlacePawnBuildingRun(pawn, pawnValue, area, cost)){
 			makePlayerPay(cost, pawn);
 			new PlacePawnBuildingAction(p, area, pt, pawnValue).run();
-		}else throw new Exception("Action not allowed - pawn/consumables unavailable");
+		}else{
+			notifyError("Action not allowed - pawn/consumables unavailable");
+			throw new Exception("Action not allowed - pawn/consumables unavailable");
+		}
 
 	}
 	
 	public void placePawnVenture(VentureCardArea area, PawnType pt, int servantsAdded, VentureMode mode) throws Exception{
-		if(!state.placePawnAction()) throw new Exception("Action not allowed - state is false");
+		if(!state.placePawnAction()){
+			notifyError("Action not allowed - state is false");
+			throw new Exception("Action not allowed - state is false");
+		}
 		Pawn pawn = p.getResourceSet().getPawn(pt);
 		int pawnValue = calculatePawnValue(pt, servantsAdded) + p.getResourceSet().getActionValueModifier().getVentureAction();
 		
@@ -164,22 +216,34 @@ public class ActionBuilder {
 		if(canPlacePawnVentureRun(pawn, pawnValue, area, cost)){
 			makePlayerPay(cost, pawn);
 			new PlacePawnVentureAction(p, area, pt, pawnValue).run();
-		}else throw new Exception("Action not allowed - pawn/consumables unavailable");
+		}else{
+			notifyError("Action not allowed - pawn/consumables unavailable");
+			throw new Exception("Action not allowed - pawn/consumables unavailable");
+		}
 
 	}
 	
 	public void harvest() throws Exception{
-		if(!state.harvestAction()) throw new Exception("Action not allowed - state is false");
+		if(!state.harvestAction()){
+			notifyError("Action not allowed - state is false");
+			throw new Exception("Action not allowed - state is false");
+		}
 		new HarvestAction(p, state.actionValue() + + p.getResourceSet().getActionValueModifier().getHarvest()).run();
 	}
 	
 	public void production(ProductionMode[] pm) throws Exception{
-		if(!state.productionAction()) throw new Exception("Action not allowed - state is false");
+		if(!state.productionAction()){
+			notifyError("Action not allowed - state is false");
+			throw new Exception("Action not allowed - state is false");
+		}
 		new ProductionAction(p, pm, state.actionValue() + p.getResourceSet().getActionValueModifier().getProduction()).run();
 	}
 	
 	public void addServantsToHarvest(int servantsAdded) throws Exception{
-		if(!state.addServantsToHarvestAction()) throw new Exception("Action not allowed - state is false");
+		if(!state.addServantsToHarvestAction()){
+			notifyError("Action not allowed - state is false");
+			throw new Exception("Action not allowed - state is false");
+		}
 		int value = calculateValue(state.actionValue(), servantsAdded);
 		ConsumableSet servantsSet = servantsToConsumableSet(servantsAdded);
 		
@@ -190,7 +254,10 @@ public class ActionBuilder {
 	}
 	
 	public void addServantsToProduction(int servantsAdded) throws Exception{
-		if(!state.addServantsToHarvestAction()) throw new Exception("Action not allowed - state is false");
+		if(!state.addServantsToHarvestAction()){
+			notifyError("Action not allowed - state is false");
+			throw new Exception("Action not allowed - state is false");
+		}
 		int value = calculateValue(state.actionValue(), servantsAdded);
 		ConsumableSet servantsSet = servantsToConsumableSet(servantsAdded);
 		
@@ -201,7 +268,10 @@ public class ActionBuilder {
 	}
 	
 	public void NoPawnTerritory(TerritoryCardArea area, int servantsAdded) throws Exception{
-		if(!state.takeTerritoryAction()) throw new Exception("Action not allowed - state is false");
+		if(!state.takeTerritoryAction()){
+			notifyError("Action not allowed - state is false");
+			throw new Exception("Action not allowed - state is false");
+		}
 		int value = calculateValue(state.actionValue(), servantsAdded) + p.getResourceSet().getActionValueModifier().getTerritoryAction();
 		ConsumableSet servantsSet = servantsToConsumableSet(servantsAdded);
 		servantsSet.makeDiscount(p.getResourceSet().getTerritoryActionDiscount());
@@ -210,11 +280,17 @@ public class ActionBuilder {
 		if(canNoPawnTerritoryRun(value, area, servantsSet)){
 			makePlayerPay(servantsSet);
 			new NoPawnTerritoryAction(p, area).run();
-		}else throw new Exception("Action not allowed - pawn/consumables unavailable");
+		}else{
+			notifyError("Action not allowed - pawn/consumables unavailable");
+			throw new Exception("Action not allowed - pawn/consumables unavailable");
+		}
 	}
 	
 	public void NoPawnCharacter(CharacterCardArea area, int servantsAdded) throws Exception{
-		if(!state.takeCharacterAction()) throw new Exception("Action not allowed - state is false");
+		if(!state.takeCharacterAction()){
+			notifyError("Action not allowed - state is false");
+			throw new Exception("Action not allowed - state is false");
+		}
 		int value = calculateValue(state.actionValue(), servantsAdded) + p.getResourceSet().getActionValueModifier().getCharacterAction();
 		ConsumableSet cost = area.getCharacter().cost();
 		cost.collect(servantsToConsumableSet(servantsAdded));
@@ -224,11 +300,17 @@ public class ActionBuilder {
 		if(canNoPawnCharacterRun(value, area, cost)){
 			makePlayerPay(cost);
 			new NoPawnCharacterAction(p, area).run();
-		}else throw new Exception("Action not allowed - pawn/consumables unavailable");
+		}else{
+			notifyError("Action not allowed - pawn/consumables unavailable");
+			throw new Exception("Action not allowed - pawn/consumables unavailable");
+		}
 	}
 	
 	public void NoPawnBuilding(BuildingCardArea area, int servantsAdded) throws Exception{
-		if(!state.takeBuildingAction()) throw new Exception("Action not allowed - state is false");
+		if(!state.takeBuildingAction()){
+			notifyError("Action not allowed - state is false");
+			throw new Exception("Action not allowed - state is false");
+		}
 		int value = calculateValue(state.actionValue(), servantsAdded) + p.getResourceSet().getActionValueModifier().getBuildingAction();
 		ConsumableSet cost = area.getBuilding().cost();
 		cost.collect(servantsToConsumableSet(servantsAdded));
@@ -238,11 +320,17 @@ public class ActionBuilder {
 		if(canNoPawnBuildingRun(value, area, cost)){
 			makePlayerPay(cost);
 			new NoPawnBuildingAction(p, area).run();
-		}else throw new Exception("Action not allowed - pawn/consumables unavailable");
+		}else{
+			notifyError("Action not allowed - pawn/consumables unavailable");
+			throw new Exception("Action not allowed - pawn/consumables unavailable");
+		}
 	}
 	
 	public void NoPawnVenture(VentureCardArea area, int servantsAdded, VentureMode mode) throws Exception{
-		if(!state.takeVentureAction()) throw new Exception("Action not allowed - state is false");
+		if(!state.takeVentureAction()){
+			notifyError("Action not allowed - state is false");
+			throw new Exception("Action not allowed - state is false");
+		}
 		int value = calculateValue(state.actionValue(), servantsAdded) + p.getResourceSet().getActionValueModifier().getVentureAction();
 		
 		ConsumableSet cost;
@@ -256,38 +344,62 @@ public class ActionBuilder {
 		if(canNoPawnVentureRun(value, area, cost)){
 			makePlayerPay(cost);
 			new NoPawnVentureAction(p, area).run();
-		}else throw new Exception("Action not allowed - pawn/consumables unavailable");
+		}else{
+			notifyError("Action not allowed - pawn/consumables unavailable");
+			throw new Exception("Action not allowed - pawn/consumables unavailable");
+		}
 	}
 	
 	public void exchangeCouncilPrivilegeOne(CouncilPrivilege cp1) throws Exception{
-		if(!state.coucilPrivilegeActionOne())throw new Exception("Action not allowed - state is false");
+		if(!state.coucilPrivilegeActionOne()){
+			notifyError("Action not allowed - state is false");
+			throw new Exception("Action not allowed - state is false");
+		}
 		new CouncilPrivilegeOneAction(p, cp1).run();
 		setState(new NoActionState());
 	}
 	
 	public void exchangeCouncilPrivilegeTwo(CouncilPrivilege cp1, CouncilPrivilege cp2) throws Exception{
-		if(!state.coucilPrivilegeActionTwo())throw new Exception("Action not allowed - state is false");
+		if(!state.coucilPrivilegeActionTwo()){
+			notifyError("Action not allowed - state is false");
+			throw new Exception("Action not allowed - state is false");
+		}
 		if(CouncilPrivilege.areDifferent(cp1, cp2)) new CouncilPrivilegeTwoAction(p, cp1, cp2).run();
-		else throw new Exception("Council privileges are not different");
+		else{
+			notifyError("Council privileges are not different");
+			throw new Exception("Council privileges are not different");
+		}
 		setState(new NoActionState());
 	}
 	
 	public void exchangeCouncilPrivilegeThree(CouncilPrivilege cp1, CouncilPrivilege cp2, CouncilPrivilege cp3) throws Exception{
-		if(!state.coucilPrivilegeActionThree())throw new Exception("Action not allowed - state is false");
+		if(!state.coucilPrivilegeActionThree()){
+			notifyError("Action not allowed - state is false");
+			throw new Exception("Action not allowed - state is false");
+		}
 		
 		if(CouncilPrivilege.areDifferent(cp1, cp2, cp3)) new CouncilPrivilegeThreeAction(p, cp1, cp2, cp3).run();
-		else throw new Exception("Council privileges are not different");
+		else{
+			notifyError("Council privileges are not different");
+			throw new Exception("Council privileges are not different");
+		}
 		setState(new NoActionState());
 	}
 	
 	public void acceptVatican() throws Exception{
-		if(!state.vaticanChoice())throw new Exception("Action not allowed - state is false");
+		if(!state.vaticanChoice()){
+			notifyError("Action not allowed - state is false");
+			throw new Exception("Action not allowed - state is false");
+		}
 		new AcceptVaticanOffer(p).run();
 		this.setState(new NoActionState());
 	}
 	
 	public void refuseVatican() throws Exception{
-		if(!state.vaticanChoice())throw new Exception("Action not allowed - state is false");
+		if(!state.vaticanChoice()){
+			notifyError("Action not allowed - state is false");
+			throw new Exception("Action not allowed - state is false");
+		}
 		new RefuseVaticanOffer(p, state.getExcommunicationCard()).run();
 		this.setState(new NoActionState());
 	}
@@ -424,6 +536,16 @@ public class ActionBuilder {
 		ConsumableSet cs = new ConsumableSet();
 		cs.setCoins(3);
 		return cs;
+	}
+	
+	private void notifyError(String error){
+		Gson gson = GsonWithInterface.getGson(); 
+        StringBuilder sb = new StringBuilder();
+        sb.append("ERROR: ");
+        sb.append(error);
+
+		Notifier n = new Notifier(errorObserver, sb.toString());
+		n.start();
 	}
 	
 	

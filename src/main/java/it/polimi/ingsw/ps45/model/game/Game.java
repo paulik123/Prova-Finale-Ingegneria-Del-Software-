@@ -92,11 +92,10 @@ public class Game {
 	public void nextTurn(String playerID) throws Exception{
 		if(!playerID.equals(currentRound.getCurrentPlayer().getPlayerID())) throw new Exception("It's not your turn to end");
 		currentRound.nextTurn();
-		if(currentRound.roundEnded() && currentEra != 3){
+		if(currentRound.roundEnded()){
 			newRound();
 			return;
 		}
-		else if(currentRound.roundEnded() && currentEra == 3); //TODO END GAME CALCULATION
 	}
 	
 	public void newRound() throws Exception{
@@ -127,6 +126,7 @@ public class Game {
 			}
 		}
 		//TODO TIMEOUT FOR SOME TIME TO WAIT FOR RESPONSES THEN RUN nextEra
+		nextEra();
 	}
 	
 	public void nextEra() throws Exception{
@@ -136,6 +136,7 @@ public class Game {
 				continue;
 			}
 			else{
+				 p.getActionBuilder().setState(new VaticanChoiceState(vatican.getCard(eras[currentEra])));
 				 p.getActionBuilder().refuseVatican();
 				 p.setAnsweredVatican(false);
 			}
@@ -192,7 +193,7 @@ public class Game {
 		}
 	}
 	
-	public void addPlayer(String playerID, Observer o) throws Exception{
+	public void addPlayer(String playerID, Observer observer) throws Exception{
 		if(canAddPlayer(playerID)){
 			ConsumableSet cs = new ConsumableSet();
 			cs.setWood(Player.defaultWood);
@@ -200,9 +201,9 @@ public class Game {
 			cs.setServants(Player.defaultServants);
 			cs.setCoins(Player.defaultCoins + players.size());
 			
-			Player p = new Player(playerID, board, cs);
+			Player p = new Player(playerID, board, cs, observer);
 			players.add(p);
-			registerObserver(o);
+			registerObserver(observer);
 			numberOfPlayers++;
 			
 			System.out.println("SERVER: added player: "+ playerID);
