@@ -13,6 +13,7 @@ import it.polimi.ingsw.ps45.model.area.cardarea.CharacterCardArea;
 import it.polimi.ingsw.ps45.model.area.cardarea.TerritoryCardArea;
 import it.polimi.ingsw.ps45.model.area.cardarea.VentureCardArea;
 import it.polimi.ingsw.ps45.model.cards.VentureMode;
+import it.polimi.ingsw.ps45.model.game.ErrorNotifier;
 import it.polimi.ingsw.ps45.model.game.Notifier;
 import it.polimi.ingsw.ps45.model.game.Observer;
 import it.polimi.ingsw.ps45.model.player.ConsumableSet;
@@ -544,7 +545,7 @@ public class ActionBuilder {
         sb.append("ERROR: ");
         sb.append(error);
 
-		Notifier n = new Notifier(errorObserver, sb.toString());
+		ErrorNotifier n = new ErrorNotifier(errorObserver, sb.toString());
 		n.start();
 	}
 	

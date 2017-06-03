@@ -14,7 +14,6 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.annotations.Expose;
 
-import it.polimi.ingsw.ps45.controller.TestObserver;
 import it.polimi.ingsw.ps45.controller.command.Command;
 import it.polimi.ingsw.ps45.gson.GsonWithInterface;
 import it.polimi.ingsw.ps45.gson.PropertyBasedInterfaceMarshal;
@@ -250,7 +249,7 @@ public class Game {
 		Gson gson = GsonWithInterface.getGson(); 
         String game = gson.toJson(this);
 
-		Notifier n = new Notifier(observers, game);
+		GameUpdateNotifier n = new GameUpdateNotifier(observers, game);
 		n.start();
 	}
 	
