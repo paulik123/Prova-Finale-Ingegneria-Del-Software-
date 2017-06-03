@@ -27,12 +27,19 @@ public class Client {
     	System.out.println("Enter your username:");
     	playerID = scanner.nextLine();
     	
+    	
         socket = new Socket(host, PORTNUMBER);
+
         view = new CLI(scanner, playerID);
+        System.out.println("After view");
         controllerThread = new CLIControllerThread(new OutputStreamWriter(socket.getOutputStream()), scanner, playerID);
+        System.out.println("After CLICONTROLLER new");
         observerThread = new ObserverThread(new BufferedReader(new InputStreamReader(socket.getInputStream())), view);
+        System.out.println("After observerthread new");
         observerThread.start();
+        System.out.println("After observerthread start");
         controllerThread.start();
+        System.out.println("After controllerthread start");
         
     }
 

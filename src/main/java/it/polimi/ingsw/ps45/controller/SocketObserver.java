@@ -17,13 +17,15 @@ public class SocketObserver implements Observer{
 	}
 
 	@Override
-	public void notify(ServerResponseWrapper response) {
+	public void notify(String json) {
         try {
-        	Gson gson = GsonWithInterface.getGson();
         	
-        	String json = gson.toJson(response);
+        	StringBuilder sb = new StringBuilder();
+        	sb.append(json);
+        	sb.append("\n");
+
         	
-			os.write(json);
+			os.write(sb.toString());
 			os.flush();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

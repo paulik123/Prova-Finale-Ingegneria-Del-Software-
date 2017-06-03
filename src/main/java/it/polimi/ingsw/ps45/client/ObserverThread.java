@@ -29,10 +29,13 @@ public class ObserverThread extends Thread{
 	
 	public void run(){
         String fromServer = "";
+        System.out.println("OBSERVER THREAD RUNNING - INSIDE RUN");
       
 
         try {
             while((fromServer = br.readLine()) != null) {
+            	System.out.println(fromServer);
+            	
             	ServerResponseWrapper respWrapper = gson.fromJson(fromServer, ServerResponseWrapper.class);
             	respWrapper.getResponse().accept(serverResponseVisitor);
             }
