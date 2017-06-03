@@ -1,26 +1,19 @@
 package it.polimi.ingsw.ps45;
 
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.Reader;
 import java.io.Writer;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import it.polimi.ingsw.ps45.gson.PropertyBasedInterfaceMarshal;
-import it.polimi.ingsw.ps45.model.actions.state.AddServantsToHarvestState;
 import it.polimi.ingsw.ps45.model.cards.Era;
 import it.polimi.ingsw.ps45.model.cards.Venture;
 import it.polimi.ingsw.ps45.model.effects.CollectEffect;
 import it.polimi.ingsw.ps45.model.effects.CouncilPrivilegeOneEffect;
-import it.polimi.ingsw.ps45.model.effects.CouncilPrivilegeTwoEffect;
 import it.polimi.ingsw.ps45.model.effects.Effect;
-import it.polimi.ingsw.ps45.model.effects.HarvestWithValueEffect;
-import it.polimi.ingsw.ps45.model.effects.ProductionWithValueEffect;
 import it.polimi.ingsw.ps45.model.effects.TakeAnyCardEffect;
 import it.polimi.ingsw.ps45.model.player.ConsumableSet;
 

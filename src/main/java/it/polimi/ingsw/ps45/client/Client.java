@@ -8,14 +8,6 @@ import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import it.polimi.ingsw.ps45.controller.command.AddPlayerCommand;
-import it.polimi.ingsw.ps45.controller.command.Command;
-import it.polimi.ingsw.ps45.controller.command.CommandHolder;
-import it.polimi.ingsw.ps45.gson.PropertyBasedInterfaceMarshal;
-import it.polimi.ingsw.ps45.model.effects.Effect;
 import it.polimi.ingsw.ps45.view.CLI;
 import it.polimi.ingsw.ps45.view.View;
 

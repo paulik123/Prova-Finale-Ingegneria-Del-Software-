@@ -1,8 +1,6 @@
 package it.polimi.ingsw.ps45.controller.command;
 
 import it.polimi.ingsw.ps45.controller.Connection;
-import it.polimi.ingsw.ps45.controller.GameCreator;
-import it.polimi.ingsw.ps45.controller.SocketObserver;
 import it.polimi.ingsw.ps45.model.game.Game;
 
 public class EndTurnCommand implements Command{

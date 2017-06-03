@@ -3,11 +3,8 @@ package it.polimi.ingsw.ps45.view;
 import java.util.Scanner;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
-import it.polimi.ingsw.ps45.controller.command.Command;
 import it.polimi.ingsw.ps45.gson.GsonWithInterface;
-import it.polimi.ingsw.ps45.gson.PropertyBasedInterfaceMarshal;
 import it.polimi.ingsw.ps45.model.area.Area;
 import it.polimi.ingsw.ps45.model.area.Board;
 import it.polimi.ingsw.ps45.model.area.PlayerPawnPair;
@@ -20,13 +17,10 @@ import it.polimi.ingsw.ps45.model.area.cardarea.TerritoryTower;
 import it.polimi.ingsw.ps45.model.area.cardarea.VentureCardArea;
 import it.polimi.ingsw.ps45.model.area.cardarea.VentureTower;
 import it.polimi.ingsw.ps45.model.cards.Building;
+import it.polimi.ingsw.ps45.model.cards.Character;
 import it.polimi.ingsw.ps45.model.cards.Territory;
 import it.polimi.ingsw.ps45.model.cards.Venture;
-import it.polimi.ingsw.ps45.model.cards.Character;
-import it.polimi.ingsw.ps45.model.effects.Effect;
 import it.polimi.ingsw.ps45.model.game.Game;
-import it.polimi.ingsw.ps45.model.game.GameData;
-import it.polimi.ingsw.ps45.model.player.BonusTile;
 import it.polimi.ingsw.ps45.model.player.PawnType;
 import it.polimi.ingsw.ps45.model.player.Player;
 

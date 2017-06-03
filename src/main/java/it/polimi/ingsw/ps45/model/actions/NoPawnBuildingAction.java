@@ -2,7 +2,6 @@ package it.polimi.ingsw.ps45.model.actions;
 
 import it.polimi.ingsw.ps45.model.area.cardarea.BuildingCardArea;
 import it.polimi.ingsw.ps45.model.cards.Building;
-import it.polimi.ingsw.ps45.model.player.PawnType;
 import it.polimi.ingsw.ps45.model.player.Player;
 
 public class NoPawnBuildingAction implements Action{

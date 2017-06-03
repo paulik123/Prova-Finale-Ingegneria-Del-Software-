@@ -3,7 +3,6 @@ package it.polimi.ingsw.ps45.model.area;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import it.polimi.ingsw.ps45.model.actions.ActionBuilder;
 import it.polimi.ingsw.ps45.model.player.PawnType;
 import it.polimi.ingsw.ps45.model.player.Player;
 

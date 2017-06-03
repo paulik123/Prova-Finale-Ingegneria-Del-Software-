@@ -1,11 +1,8 @@
 package it.polimi.ingsw.ps45.model.vatican;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -16,7 +13,6 @@ import com.google.gson.JsonSyntaxException;
 
 import it.polimi.ingsw.ps45.gson.PropertyBasedInterfaceMarshal;
 import it.polimi.ingsw.ps45.model.cards.Era;
-import it.polimi.ingsw.ps45.model.cards.Territory;
 import it.polimi.ingsw.ps45.model.effects.Effect;
 
 public class Vatican {

@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps45.client;
 import java.io.BufferedReader;
 import java.io.IOException;
 
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -12,6 +13,7 @@ import it.polimi.ingsw.ps45.gson.GsonWithInterface;
 import it.polimi.ingsw.ps45.gson.PropertyBasedInterfaceMarshal;
 import it.polimi.ingsw.ps45.model.effects.Effect;
 import it.polimi.ingsw.ps45.model.game.ServerResponseWrapper;
+
 import it.polimi.ingsw.ps45.view.View;
 
 public class ObserverThread extends Thread{

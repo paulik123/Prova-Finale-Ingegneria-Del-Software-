@@ -1,38 +1,19 @@
 package it.polimi.ingsw.ps45;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Writer;
-import java.util.ArrayList;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import it.polimi.ingsw.ps45.gson.PropertyBasedInterfaceMarshal;
-import it.polimi.ingsw.ps45.model.area.Board;
-import it.polimi.ingsw.ps45.model.area.NoCardArea;
-import it.polimi.ingsw.ps45.model.area.PlayerPawnPair;
-import it.polimi.ingsw.ps45.model.area.cardarea.BuildingCardArea;
-import it.polimi.ingsw.ps45.model.area.cardarea.CharacterCardArea;
-import it.polimi.ingsw.ps45.model.area.cardarea.TerritoryCardArea;
 import it.polimi.ingsw.ps45.model.area.cardarea.VentureCardArea;
-import it.polimi.ingsw.ps45.model.cards.Era;
-import it.polimi.ingsw.ps45.model.cards.Territory;
-import it.polimi.ingsw.ps45.model.cards.Venture;
 import it.polimi.ingsw.ps45.model.effects.CollectEffect;
-import it.polimi.ingsw.ps45.model.effects.CouncilPrivilegeOneAndCollectEffect;
-import it.polimi.ingsw.ps45.model.effects.CouncilPrivilegeTwoEffect;
 import it.polimi.ingsw.ps45.model.effects.Effect;
-import it.polimi.ingsw.ps45.model.effects.HarvestEffect;
 import it.polimi.ingsw.ps45.model.effects.NoEffect;
-import it.polimi.ingsw.ps45.model.effects.ProductionEffect;
 import it.polimi.ingsw.ps45.model.player.ConsumableSet;
-import it.polimi.ingsw.ps45.model.player.Player;
 
 public class SerializeCardArea {
 	public static void main(String[] args) throws IOException{

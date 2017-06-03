@@ -1,10 +1,7 @@
 package it.polimi.ingsw.ps45.model.game;
 
-import java.util.ArrayList;
-
 import it.polimi.ingsw.ps45.model.actions.state.NoActionState;
 import it.polimi.ingsw.ps45.model.actions.state.PawnActionState;
-import it.polimi.ingsw.ps45.model.cards.Era;
 import it.polimi.ingsw.ps45.model.player.Player;
 
 public class Round {

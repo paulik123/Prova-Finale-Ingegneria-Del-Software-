@@ -8,33 +8,14 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import it.polimi.ingsw.ps45.gson.PropertyBasedInterfaceMarshal;
-import it.polimi.ingsw.ps45.model.cards.Era;
 import it.polimi.ingsw.ps45.model.cards.Character;
+import it.polimi.ingsw.ps45.model.cards.Era;
 import it.polimi.ingsw.ps45.model.effects.CollectEffect;
 import it.polimi.ingsw.ps45.model.effects.ConsumableSetPerBuildingEffect;
-import it.polimi.ingsw.ps45.model.effects.ConsumableSetPerCharactersEffect;
-import it.polimi.ingsw.ps45.model.effects.ConsumableSetPerMilitaryPointsEffect;
-import it.polimi.ingsw.ps45.model.effects.ConsumableSetPerTerritoryEffect;
-import it.polimi.ingsw.ps45.model.effects.ConsumableSetPerVentureEffect;
 import it.polimi.ingsw.ps45.model.effects.CouncilPrivilegeOneEffect;
-import it.polimi.ingsw.ps45.model.effects.CouncilPrivilegeThreeEffect;
 import it.polimi.ingsw.ps45.model.effects.Effect;
-import it.polimi.ingsw.ps45.model.effects.HarvestValuePenaltyEffect;
-import it.polimi.ingsw.ps45.model.effects.HarvestWithValueEffect;
 import it.polimi.ingsw.ps45.model.effects.NoCardAreaCollectEffect;
-import it.polimi.ingsw.ps45.model.effects.ProductionValuePenaltyEffect;
-import it.polimi.ingsw.ps45.model.effects.ProductionWithValueEffect;
 import it.polimi.ingsw.ps45.model.effects.TakeAnyCardEffect;
-import it.polimi.ingsw.ps45.model.effects.TakeBuildingActionModifierEffect;
-import it.polimi.ingsw.ps45.model.effects.TakeBuildingEffect;
-import it.polimi.ingsw.ps45.model.effects.TakeBuildingResourceDiscountEffect;
-import it.polimi.ingsw.ps45.model.effects.TakeCharacterActionModifierEffect;
-import it.polimi.ingsw.ps45.model.effects.TakeCharacterEffect;
-import it.polimi.ingsw.ps45.model.effects.TakeCharacterResourceDiscountEffect;
-import it.polimi.ingsw.ps45.model.effects.TakeTerritoryActionModifierEffect;
-import it.polimi.ingsw.ps45.model.effects.TakeTerritoryEffect;
-import it.polimi.ingsw.ps45.model.effects.TakeVentureActionModifierEffect;
-import it.polimi.ingsw.ps45.model.effects.TakeVentureEffect;
 import it.polimi.ingsw.ps45.model.player.ConsumableSet;
 
 public class SerializeCharacter {

@@ -1,10 +1,13 @@
 package it.polimi.ingsw.ps45.model.actions;
 
-import com.google.gson.Gson;
 
 import it.polimi.ingsw.ps45.gson.GsonWithInterface;
+
 import it.polimi.ingsw.ps45.model.actions.CouncilPrivilege.CouncilPrivilege;
-import it.polimi.ingsw.ps45.model.actions.state.*;
+import it.polimi.ingsw.ps45.model.actions.state.ActionBuilderState;
+import it.polimi.ingsw.ps45.model.actions.state.HarvestState;
+import it.polimi.ingsw.ps45.model.actions.state.NoActionState;
+import it.polimi.ingsw.ps45.model.actions.state.ProductionState;
 import it.polimi.ingsw.ps45.model.area.Area;
 import it.polimi.ingsw.ps45.model.area.Board;
 import it.polimi.ingsw.ps45.model.area.NoCardArea;
@@ -540,7 +543,6 @@ public class ActionBuilder {
 	}
 	
 	private void notifyError(String error){
-		Gson gson = GsonWithInterface.getGson(); 
         StringBuilder sb = new StringBuilder();
         sb.append("ERROR: ");
         sb.append(error);

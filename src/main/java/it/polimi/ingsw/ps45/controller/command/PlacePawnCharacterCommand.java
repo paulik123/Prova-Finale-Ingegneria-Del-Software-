@@ -2,9 +2,7 @@ package it.polimi.ingsw.ps45.controller.command;
 
 import it.polimi.ingsw.ps45.controller.Connection;
 import it.polimi.ingsw.ps45.model.actions.ActionBuilder;
-import it.polimi.ingsw.ps45.model.area.NoCardArea;
 import it.polimi.ingsw.ps45.model.area.cardarea.CharacterCardArea;
-import it.polimi.ingsw.ps45.model.area.cardarea.TerritoryCardArea;
 import it.polimi.ingsw.ps45.model.game.Game;
 import it.polimi.ingsw.ps45.model.player.PawnType;
 

@@ -1,30 +1,21 @@
 package it.polimi.ingsw.ps45.model.game;
 
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Random;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
-import com.google.gson.annotations.Expose;
 
 import it.polimi.ingsw.ps45.controller.command.Command;
 import it.polimi.ingsw.ps45.gson.GsonWithInterface;
-import it.polimi.ingsw.ps45.gson.PropertyBasedInterfaceMarshal;
 import it.polimi.ingsw.ps45.model.actions.state.PawnActionState;
 import it.polimi.ingsw.ps45.model.actions.state.VaticanChoiceState;
 import it.polimi.ingsw.ps45.model.area.Board;
 import it.polimi.ingsw.ps45.model.area.PlayerPawnPair;
 import it.polimi.ingsw.ps45.model.cards.CardDealer;
 import it.polimi.ingsw.ps45.model.cards.Era;
-import it.polimi.ingsw.ps45.model.effects.Effect;
-import it.polimi.ingsw.ps45.model.player.BonusTile;
 import it.polimi.ingsw.ps45.model.player.ConsumableSet;
 import it.polimi.ingsw.ps45.model.player.PawnType;
 import it.polimi.ingsw.ps45.model.player.Player;
