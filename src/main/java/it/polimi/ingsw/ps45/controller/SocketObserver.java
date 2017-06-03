@@ -3,6 +3,8 @@ package it.polimi.ingsw.ps45.controller;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
+import it.polimi.ingsw.ps45.model.game.Observer;
+
 public class SocketObserver implements Observer{
 	OutputStreamWriter os;
 	

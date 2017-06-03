@@ -2,8 +2,6 @@ package it.polimi.ingsw.ps45.model.game;
 
 import java.util.ArrayList;
 
-import it.polimi.ingsw.ps45.controller.Observer;
-
 public class Notifier extends Thread{
 	ArrayList<Observer> observers;
 	String json;

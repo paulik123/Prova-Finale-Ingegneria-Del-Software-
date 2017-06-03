@@ -2,7 +2,6 @@ package it.polimi.ingsw.ps45.model.actions;
 
 import com.google.gson.Gson;
 
-import it.polimi.ingsw.ps45.controller.Observer;
 import it.polimi.ingsw.ps45.gson.GsonWithInterface;
 import it.polimi.ingsw.ps45.model.actions.CouncilPrivilege.CouncilPrivilege;
 import it.polimi.ingsw.ps45.model.actions.state.*;
@@ -15,6 +14,7 @@ import it.polimi.ingsw.ps45.model.area.cardarea.TerritoryCardArea;
 import it.polimi.ingsw.ps45.model.area.cardarea.VentureCardArea;
 import it.polimi.ingsw.ps45.model.cards.VentureMode;
 import it.polimi.ingsw.ps45.model.game.Notifier;
+import it.polimi.ingsw.ps45.model.game.Observer;
 import it.polimi.ingsw.ps45.model.player.ConsumableSet;
 import it.polimi.ingsw.ps45.model.player.Pawn;
 import it.polimi.ingsw.ps45.model.player.PawnType;

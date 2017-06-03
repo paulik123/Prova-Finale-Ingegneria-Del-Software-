@@ -1,8 +1,8 @@
 package it.polimi.ingsw.ps45.model.player;
 
-import it.polimi.ingsw.ps45.controller.Observer;
 import it.polimi.ingsw.ps45.model.actions.ActionBuilder;
 import it.polimi.ingsw.ps45.model.area.Board;
+import it.polimi.ingsw.ps45.model.game.Observer;
 
 public class Player {
 	private String playerID;

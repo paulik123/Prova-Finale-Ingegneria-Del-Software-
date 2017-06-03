@@ -12,6 +12,7 @@ import com.google.gson.GsonBuilder;
 import it.polimi.ingsw.ps45.gson.PropertyBasedInterfaceMarshal;
 import it.polimi.ingsw.ps45.model.effects.Effect;
 import it.polimi.ingsw.ps45.model.game.Game;
+import it.polimi.ingsw.ps45.model.game.Observer;
 
 public class GameCreator {
 	private ArrayList<Game> games;

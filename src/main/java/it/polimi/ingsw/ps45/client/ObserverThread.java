@@ -8,17 +8,21 @@ import com.google.gson.GsonBuilder;
 
 import it.polimi.ingsw.ps45.controller.command.Command;
 import it.polimi.ingsw.ps45.controller.command.CommandHolder;
+import it.polimi.ingsw.ps45.gson.GsonWithInterface;
 import it.polimi.ingsw.ps45.gson.PropertyBasedInterfaceMarshal;
 import it.polimi.ingsw.ps45.model.effects.Effect;
+import it.polimi.ingsw.ps45.model.game.ServerResponseWrapper;
 import it.polimi.ingsw.ps45.view.View;
 
 public class ObserverThread extends Thread{
 	private BufferedReader br;
-	private View view;
+	CLIServerResponseVisitor serverResponseVisitor;
+	Gson gson;
 	
 	public ObserverThread(BufferedReader br, View view){
 		this.br = br;
-		this.view = view;
+		serverResponseVisitor = new CLIServerResponseVisitor(view);
+		gson = GsonWithInterface.getGson();
 	}
 	
 	public void run(){
@@ -27,10 +31,8 @@ public class ObserverThread extends Thread{
 
         try {
             while((fromServer = br.readLine()) != null) {
-            	if(fromServer.contains("ERROR")){
-            		System.out.println(fromServer);
-            	}
-            	else view.updateView(fromServer);
+            	ServerResponseWrapper respWrapper = gson.fromJson(fromServer, ServerResponseWrapper.class);
+            	respWrapper.getResponse().accept(serverResponseVisitor);
             }
         } catch (IOException e) {
             e.printStackTrace();
