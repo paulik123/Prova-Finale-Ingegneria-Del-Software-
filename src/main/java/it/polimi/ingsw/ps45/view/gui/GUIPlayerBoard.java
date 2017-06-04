@@ -32,6 +32,7 @@ public class GUIPlayerBoard extends JFrame{
         setContentPane(background);
 		pack();
 		setVisible(true);
+		add(myGamePanel);
 	}
 	
 	
