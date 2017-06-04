@@ -8,12 +8,12 @@ import javax.swing.JFrame;
 
 
 @SuppressWarnings("serial")
-public class GUIBoard extends JFrame{
+public class GUIPlayerBoard extends JFrame{
 	
 	private GamePanel myGamePanel;
-	private static final String imagePath = "images/gameboard_f_c.jpeg";
+	private static final String imagePath = "images/punchboard_f_c_03.jpg";
 	
-	public GUIBoard(){
+	public GUIPlayerBoard(){
 		super("Lorenzo Il Magnifico");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		myGamePanel = new GamePanel();
