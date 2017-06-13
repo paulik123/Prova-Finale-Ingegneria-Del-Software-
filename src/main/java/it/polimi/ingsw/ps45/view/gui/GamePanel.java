@@ -11,8 +11,8 @@ import javax.swing.JPanel;
 
 public class GamePanel extends JPanel{
 	
-	private final static int DEFAULT_WIDTH = 720;
-	private final static int DEFAULT_HEIGHT = 990;
+	private final static int DEFAULT_WIDTH = 524;
+	private final static int DEFAULT_HEIGHT = 720;
 	
 	public GamePanel(){
 		super();

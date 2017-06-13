@@ -86,7 +86,6 @@ public class GUIBoard extends JFrame{
 		card2.setPreferredSize(new Dimension(70,112));
 		imageIcon = new ImageIcon(new ImageIcon("images/cards/devcards_f_en_c_1.png").getImage().getScaledInstance(70, 112, Image.SCALE_SMOOTH));
 		card2.setIcon(imageIcon);
-		
 	}
 	
 	
