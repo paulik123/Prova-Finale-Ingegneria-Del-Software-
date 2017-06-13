@@ -1,1 +1,7 @@
-{"era":"III","effect":{"CLASS_META_KEY":"it.polimi.ingsw.ps45.model.effects.NoTerritoryVictoryPointsEffect"}}
+{
+  "era": "III",
+  "name": "NoTerritoryVictoryPoints",
+  "effect": {
+    "CLASS_META_KEY": "it.polimi.ingsw.ps45.model.effects.NoTerritoryVictoryPointsEffect"
+  }
+}

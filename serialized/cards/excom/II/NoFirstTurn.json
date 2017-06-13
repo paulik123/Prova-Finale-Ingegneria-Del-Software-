@@ -1,1 +1,7 @@
-{"era":"II","effect":{"CLASS_META_KEY":"it.polimi.ingsw.ps45.model.effects.NoFirstTurnEffect"}}
+{
+  "era": "II",
+  "name": "NoFirstTurn",
+  "effect": {
+    "CLASS_META_KEY": "it.polimi.ingsw.ps45.model.effects.NoFirstTurnEffect"
+  }
+}

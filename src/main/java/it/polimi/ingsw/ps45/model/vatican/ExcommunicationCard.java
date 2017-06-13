@@ -9,6 +9,7 @@ import it.polimi.ingsw.ps45.model.player.Player;
 public class ExcommunicationCard implements Serializable{
 	Era era;
 	Effect effect;
+	private String name;
 	
 	public ExcommunicationCard(Era era, Effect effect){
 		this.era = era;
@@ -17,5 +18,9 @@ public class ExcommunicationCard implements Serializable{
 	
 	public void immediateEffect(Player p, int value){
 		effect.runEffect(p, value);
+	}
+	
+	public String getName(){
+		return name;
 	}
 }

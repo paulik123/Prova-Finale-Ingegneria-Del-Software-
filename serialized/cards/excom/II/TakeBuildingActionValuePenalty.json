@@ -1,1 +1,8 @@
-{"era":"II","effect":{"effectValue":-4,"CLASS_META_KEY":"it.polimi.ingsw.ps45.model.effects.TakeBuildingActionModifierEffect"}}
+{
+  "era": "II",
+  "name": "TakeBuildingActionValuePenalty",
+  "effect": {
+    "effectValue": -4,
+    "CLASS_META_KEY": "it.polimi.ingsw.ps45.model.effects.TakeBuildingActionModifierEffect"
+  }
+}

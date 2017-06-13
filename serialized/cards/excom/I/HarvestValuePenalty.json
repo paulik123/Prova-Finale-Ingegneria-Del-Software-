@@ -1,1 +1,8 @@
-{"era":"I","effect":{"penalty":-3,"CLASS_META_KEY":"it.polimi.ingsw.ps45.model.effects.HarvestValuePenaltyEffect"}}
+{
+  "era": "I",
+  "name": "HarvestValuePenalty",
+  "effect": {
+    "penalty": -3,
+    "CLASS_META_KEY": "it.polimi.ingsw.ps45.model.effects.HarvestValuePenaltyEffect"
+  }
+}

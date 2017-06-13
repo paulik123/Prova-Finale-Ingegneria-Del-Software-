@@ -1,1 +1,7 @@
-{"era":"II","effect":{"CLASS_META_KEY":"it.polimi.ingsw.ps45.model.effects.CantPlacePawnOnMarkeyEffect"}}
+{
+  "era": "II",
+  "name": "NoPawnOnMarket",
+  "effect": {
+    "CLASS_META_KEY": "it.polimi.ingsw.ps45.model.effects.CantPlacePawnOnMarkeyEffect"
+  }
+}
