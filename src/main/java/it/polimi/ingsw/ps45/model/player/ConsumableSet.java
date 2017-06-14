@@ -54,7 +54,7 @@ public class ConsumableSet implements Serializable{
 		this.stone = this.stone - c.stone;
 		this.servants = this.servants - c.servants;
 		this.coins = this.coins - c.coins;
-		this.victoryPoints = this.coins - c.coins;
+		this.victoryPoints = this.victoryPoints - c.victoryPoints;
 		this.faithPoints = this.faithPoints - c.faithPoints;
 		this.militaryPoints = this.militaryPoints - c.faithPoints;
 	}

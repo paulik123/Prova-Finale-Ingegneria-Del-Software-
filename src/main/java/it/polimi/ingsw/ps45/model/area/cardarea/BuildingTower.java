@@ -11,10 +11,12 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
 import it.polimi.ingsw.ps45.gson.PropertyBasedInterfaceMarshal;
+import it.polimi.ingsw.ps45.model.area.Area;
+import it.polimi.ingsw.ps45.model.area.HasDictionary;
 import it.polimi.ingsw.ps45.model.effects.Effect;
 import it.polimi.ingsw.ps45.model.player.Player;
 
-public class BuildingTower implements Tower{
+public class BuildingTower implements Tower, HasDictionary{
 	
 	HashMap<String, BuildingCardArea> dictionary;
 	
@@ -101,6 +103,17 @@ public class BuildingTower implements Tower{
 		if(!dictionary.containsKey(s.toLowerCase())) throw new Exception("No such key");
 		return dictionary.get(s.toLowerCase());
 	}
+
+	public HashMap<String, BuildingCardArea> getDictionary() {
+		return dictionary;
+	}
+
+	@Override
+	public Area getAreaFromDictionary(String s) throws Exception {
+		if(!dictionary.containsKey(s.toLowerCase())) throw new Exception("No such key");
+		return dictionary.get(s.toLowerCase());
+	}
+	
 	
 	
 	

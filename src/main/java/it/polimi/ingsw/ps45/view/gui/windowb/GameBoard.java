@@ -163,9 +163,9 @@ public class GameBoard extends JFrame {
 	private static final int councilPrivilegeMarketY = 612;
 	
 	
-	private static final int diceBlackX = 275;
-	private static final int diceWhiteX = 320;
-	private static final int diceOrangeX = 365;
+	private static final int diceBlackX = 280;
+	private static final int diceWhiteX = 325;
+	private static final int diceOrangeX = 370;
 	private static final int diceY = 640;
 	
 	private static final int turnMarkerX = 393;
@@ -235,7 +235,6 @@ public class GameBoard extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		
 		setBackground();
 		setFrontPanel();
@@ -246,6 +245,7 @@ public class GameBoard extends JFrame {
 		initializeVentures();
 		initializeExcom();
 		initializePawnAreaLabels();
+		update();
 	}
 	
 	public void setBackground(){
@@ -303,11 +303,14 @@ public class GameBoard extends JFrame {
 		councilPalace4 = initializePawnLabel(councilPalaceX + pawnAreaSize*3, councilPalaceY);
 		
 		diceBlack = initializePawnLabel(diceBlackX, diceY);
-		diceBlack.setFont(new Font("Serif", Font.PLAIN, 30));
+		diceBlack.setFont(new Font("Arial", Font.PLAIN, 25));
+		diceBlack.setForeground(Color.RED);
 		diceWhite = initializePawnLabel(diceWhiteX, diceY);
-		diceWhite.setFont(new Font("Serif", Font.PLAIN, 30));
+		diceWhite.setFont(new Font("Arial", Font.PLAIN, 25));
+		diceWhite.setForeground(Color.RED);
 		diceOrange = initializePawnLabel(diceOrangeX, diceY);
-		diceOrange.setFont(new Font("Serif", Font.PLAIN, 30));
+		diceOrange.setFont(new Font("Arial", Font.PLAIN, 25));
+		diceOrange.setForeground(Color.RED);
 		
 	}
 	
@@ -406,7 +409,7 @@ public class GameBoard extends JFrame {
 		newLabel.setBounds(x, y, pawnAreaSize, pawnAreaSize);
 		//newLabel.setBackground(new Color(255,0,0,255));
 		frontPanel.add(newLabel);
-		newLabel.setOpaque(true);
+		//newLabel.setOpaque(true);
 
 		return newLabel;
 	}
@@ -450,49 +453,51 @@ public class GameBoard extends JFrame {
 	
 	public void updatePawnLabels(){
 		
-		setPawnLabelIcon(productionSmall, g.getBoard().getProductionAreas().getSmall().getOccupants().get(0));
-		setPawnLabelIcon(productionBig1, g.getBoard().getProductionAreas().getBig().getOccupants().get(0));
-		setPawnLabelIcon(productionBig2, g.getBoard().getProductionAreas().getBig().getOccupants().get(1));
-		setPawnLabelIcon(productionBig3, g.getBoard().getProductionAreas().getBig().getOccupants().get(2));
-		setPawnLabelIcon(productionBig4, g.getBoard().getProductionAreas().getBig().getOccupants().get(3));
+		setPawnLabelIcon(productionSmall, g.getBoard().getProductionAreas().getSmall().getOccupants(), 0);
+		setPawnLabelIcon(productionBig1,g.getBoard().getProductionAreas().getBig().getOccupants(),0);
+		setPawnLabelIcon(productionBig2, g.getBoard().getProductionAreas().getBig().getOccupants(),1);
+		setPawnLabelIcon(productionBig3, g.getBoard().getProductionAreas().getBig().getOccupants(),2);
+		setPawnLabelIcon(productionBig4, g.getBoard().getProductionAreas().getBig().getOccupants(),3);
 		
-		setPawnLabelIcon(harvestSmall, g.getBoard().getHarvestAreas().getSmall().getOccupants().get(0));
-		setPawnLabelIcon(harvestBig1, g.getBoard().getHarvestAreas().getBig().getOccupants().get(0));
-		setPawnLabelIcon(harvestBig2, g.getBoard().getHarvestAreas().getBig().getOccupants().get(1));
-		setPawnLabelIcon(harvestBig3, g.getBoard().getHarvestAreas().getBig().getOccupants().get(2));
-		setPawnLabelIcon(harvestBig4, g.getBoard().getHarvestAreas().getBig().getOccupants().get(3));
+		setPawnLabelIcon(harvestSmall, g.getBoard().getHarvestAreas().getSmall().getOccupants(), 0);
+		setPawnLabelIcon(harvestBig1, g.getBoard().getHarvestAreas().getBig().getOccupants(), 0);
+		setPawnLabelIcon(harvestBig2, g.getBoard().getHarvestAreas().getBig().getOccupants(), 1);
+		setPawnLabelIcon(harvestBig3, g.getBoard().getHarvestAreas().getBig().getOccupants(), 2);
+		setPawnLabelIcon(harvestBig4, g.getBoard().getHarvestAreas().getBig().getOccupants(), 3);
 		
-		setPawnLabelIcon(coinsMarket, g.getBoard().getCoinsMarketArea().getOccupants().get(0));
-		setPawnLabelIcon(servantsMarket, g.getBoard().getServantsMarketArea().getOccupants().get(0));
-		setPawnLabelIcon(militaryCoinsMarket, g.getBoard().getMilitaryAndCoinArea().getOccupants().get(0));
-		setPawnLabelIcon(councilPrivilegeMarket, g.getBoard().getCouncilPrivilegeMarketArea().getOccupants().get(0));
+		setPawnLabelIcon(coinsMarket, g.getBoard().getCoinsMarketArea().getOccupants(),0);
+		setPawnLabelIcon(servantsMarket, g.getBoard().getServantsMarketArea().getOccupants(),0);
+		setPawnLabelIcon(militaryCoinsMarket, g.getBoard().getMilitaryAndCoinArea().getOccupants(),0);
+		setPawnLabelIcon(councilPrivilegeMarket, g.getBoard().getCouncilPrivilegeMarketArea().getOccupants(),0);
 		
-		setPawnLabelIcon(councilPalace1, g.getBoard().getCouncilPalaceArea().getOccupants().get(0));
-		setPawnLabelIcon(councilPalace2, g.getBoard().getCouncilPalaceArea().getOccupants().get(1));
-		setPawnLabelIcon(councilPalace3, g.getBoard().getCouncilPalaceArea().getOccupants().get(2));
-		setPawnLabelIcon(councilPalace4, g.getBoard().getCouncilPalaceArea().getOccupants().get(3));
+		setPawnLabelIcon(councilPalace1, g.getBoard().getCouncilPalaceArea().getOccupants(), 0);
+		setPawnLabelIcon(councilPalace2, g.getBoard().getCouncilPalaceArea().getOccupants(), 1);
+		setPawnLabelIcon(councilPalace3, g.getBoard().getCouncilPalaceArea().getOccupants(), 2);
+		setPawnLabelIcon(councilPalace4, g.getBoard().getCouncilPalaceArea().getOccupants(), 3);
 		
-		setPawnLabelIcon(territory_third_pawn, g.getBoard().getTerritoryTower().getThirdFloor().getOccupants().get(0));
-		setPawnLabelIcon(territory_second_pawn, g.getBoard().getTerritoryTower().getSecondFloor().getOccupants().get(0));
-		setPawnLabelIcon(territory_first_pawn, g.getBoard().getTerritoryTower().getFirstFloor().getOccupants().get(0));
-		setPawnLabelIcon(territory_ground_pawn, g.getBoard().getTerritoryTower().getGroundFloor().getOccupants().get(0));
+		setPawnLabelIcon(territory_third_pawn, g.getBoard().getTerritoryTower().getThirdFloor().getOccupants(), 0);
+		setPawnLabelIcon(territory_second_pawn, g.getBoard().getTerritoryTower().getSecondFloor().getOccupants(), 0);
+		setPawnLabelIcon(territory_first_pawn, g.getBoard().getTerritoryTower().getFirstFloor().getOccupants(), 0);
+		setPawnLabelIcon(territory_ground_pawn, g.getBoard().getTerritoryTower().getGroundFloor().getOccupants(), 0);
 		
-		setPawnLabelIcon(character_third_pawn, g.getBoard().getCharacterTower().getThirdFloor().getOccupants().get(0));
-		setPawnLabelIcon(character_second_pawn, g.getBoard().getCharacterTower().getSecondFloor().getOccupants().get(0));
-		setPawnLabelIcon(character_first_pawn, g.getBoard().getCharacterTower().getFirstFloor().getOccupants().get(0));
-		setPawnLabelIcon(character_ground_pawn, g.getBoard().getCharacterTower().getGroundFloor().getOccupants().get(0));
+		setPawnLabelIcon(character_third_pawn, g.getBoard().getCharacterTower().getThirdFloor().getOccupants(), 0);
+		setPawnLabelIcon(character_second_pawn, g.getBoard().getCharacterTower().getSecondFloor().getOccupants(), 0);
+		setPawnLabelIcon(character_first_pawn, g.getBoard().getCharacterTower().getFirstFloor().getOccupants(), 0);
+		setPawnLabelIcon(character_ground_pawn, g.getBoard().getCharacterTower().getGroundFloor().getOccupants(), 0);
 		
-		setPawnLabelIcon(building_third_pawn, g.getBoard().getBuildingTower().getThirdFloor().getOccupants().get(0));
-		setPawnLabelIcon(building_second_pawn, g.getBoard().getBuildingTower().getSecondFloor().getOccupants().get(0));
-		setPawnLabelIcon(building_first_pawn, g.getBoard().getBuildingTower().getFirstFloor().getOccupants().get(0));
-		setPawnLabelIcon(building_ground_pawn, g.getBoard().getBuildingTower().getGroundFloor().getOccupants().get(0));
+		setPawnLabelIcon(building_third_pawn, g.getBoard().getBuildingTower().getThirdFloor().getOccupants(), 0);
+		setPawnLabelIcon(building_second_pawn, g.getBoard().getBuildingTower().getSecondFloor().getOccupants(), 0);
+		setPawnLabelIcon(building_first_pawn, g.getBoard().getBuildingTower().getFirstFloor().getOccupants(), 0);
+		setPawnLabelIcon(building_ground_pawn, g.getBoard().getBuildingTower().getGroundFloor().getOccupants(), 0);
 		
-		setPawnLabelIcon(venture_third_pawn, g.getBoard().getVentureTower().getThirdFloor().getOccupants().get(0));
-		setPawnLabelIcon(venture_second_pawn, g.getBoard().getVentureTower().getSecondFloor().getOccupants().get(0));
-		setPawnLabelIcon(venture_first_pawn, g.getBoard().getVentureTower().getFirstFloor().getOccupants().get(0));
-		setPawnLabelIcon(venture_ground_pawn, g.getBoard().getVentureTower().getGroundFloor().getOccupants().get(0));
+		setPawnLabelIcon(venture_third_pawn, g.getBoard().getVentureTower().getThirdFloor().getOccupants(), 0);
+		setPawnLabelIcon(venture_second_pawn, g.getBoard().getVentureTower().getSecondFloor().getOccupants(), 0);
+		setPawnLabelIcon(venture_first_pawn, g.getBoard().getVentureTower().getFirstFloor().getOccupants(), 0);
+		setPawnLabelIcon(venture_ground_pawn, g.getBoard().getVentureTower().getGroundFloor().getOccupants(), 0);
 		
 	}
+	
+
 	
 	public void updateDiceLabels(){
 		HashMap<PawnType, Integer> dices = g.getDices();
@@ -529,11 +534,12 @@ public class GameBoard extends JFrame {
 		}
 	}
 	
-	public void setPawnLabelIcon(JLabel l, PlayerPawnPair ppp){
+	public void setPawnLabelIcon(JLabel l, ArrayList<PlayerPawnPair> list, int index){
 		
-		if(ppp != null){
-			String playerColor = ppp.getPlayer().getColor();
-			String diceColor = ppp.getType().toString();
+		if(index <= list.size()-1){
+			String playerColor = list.get(index).getPlayer().getColor();
+			String diceColor = list.get(index).getType().getColor();
+			
 			
 			ImageIcon imageIcon = new ImageIcon("images\\pawns\\" + playerColor+ "-" + diceColor + ".png"); // load the image to a imageIcon
 			Image image = imageIcon.getImage(); // transform it 
@@ -544,6 +550,13 @@ public class GameBoard extends JFrame {
 		}else{
 			l.setIcon(null);
 		}
+	}
+	
+	public void update(){
+		updateDiceLabels();
+		updateTurnMarkers();
+		updatePawnLabels();
+		updateCardLabels();
 	}
 	
 

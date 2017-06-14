@@ -8,7 +8,7 @@ public enum PawnType {
 		this.type = type;
 	}
 	
-	public String toString(){
+	public String getColor(){
 		return type;
 	}
 }

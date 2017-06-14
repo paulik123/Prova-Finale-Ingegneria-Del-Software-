@@ -30,5 +30,11 @@ public class PawnSet {
 		if(pawnMap.get(pt).getValue() >= cost) return true;
 		return false;
 	}
+
+	public HashMap<PawnType, Pawn> getPawnMap() {
+		return pawnMap;
+	}
+	
+	
 	
 }

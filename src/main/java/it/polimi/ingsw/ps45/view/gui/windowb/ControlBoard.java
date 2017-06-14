@@ -2,15 +2,19 @@ package it.polimi.ingsw.ps45.view.gui.windowb;
 
 import java.awt.BorderLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
@@ -24,32 +28,57 @@ import it.polimi.ingsw.ps45.model.cards.Territory;
 import it.polimi.ingsw.ps45.model.cards.Venture;
 import it.polimi.ingsw.ps45.model.game.Game;
 import it.polimi.ingsw.ps45.model.player.Player;
+import it.polimi.ingsw.ps45.view.gui.CommandComboBoxListener;
 
-public class ControlBoard extends JFrame{
+public class ControlBoard extends JFrame implements ActionListener{
 	
 	private Game g;
 	private Player p;
+	private Player ownPlayer;
 
 	private JPanel contentPane;
 	private JLayeredPane layeredPane;
 	private JPanel frontPanel;
 	
+	private CommandComboBoxListener commandListener;
+	
+	
+
+	
 	private ArrayList<JLabel> characters;
 	private ArrayList<JLabel> ventures;
+	
+	private String[] commands = {"endturn", "placepawnnocard","placepawnmarket", "placepawnharvest","placepawnproduction","placepawnterritory","placepawncharacter", "placepawnbuilding","placepawnventure", "nopawnterritory","nopawncharacter", "nopawnbuilding","nopawnventure","acceptvatican","refusevatican", "addservantsharvest","addservantsproduction", "cp1","cp2","cp3", "harvest","production"};
+	private String[] none = {"---"};
 	
 	private static final int width = 720;
 	private static final int height = 454;
 	private static final int cardWidth = 80;
 	private static final int cardHeight = 128;
 	
-	private static final int cardsX = 58;
+	private static final int cardsX = 46;
 	private static final int cardsXGap = 110;
-	private static final int characterY = 60;
-	private static final int ventureY = 200;
+	private static final int characterY = 44;
+	private static final int ventureY = 182;
+	
+	private static final int playerBoxX = 45;
+	private static final int playerBoxY = 18;
+	private static final int boxWidht = 100;
+	private static final int boxHeight = 20;
+	
+	private static final int commandBoxY = 400;
+	private static final int commandBoxX = 45;
+	private static final int areaBoxX = 155;
+	private static final int pawnBoxX = 265;
+	private static final int servantsBoxX = 375;
+	private static final int modeBoxX = 485;
+	
+	
+	
 	
 	public ControlBoard(){
 		setResizable(false);
-		setTitle("Lorenzo il Magnifico - PlayerBoard");
+		setTitle("Lorenzo il Magnifico - ControlBoard");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, width, height + 25);
 		contentPane = new JPanel();
@@ -64,7 +93,8 @@ public class ControlBoard extends JFrame{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		p = g.getPlayers().get(0);
+		p = g.getPlayers().get(1);
+		ownPlayer = g.getPlayers().get(1);
 		
 		
 		characters = new ArrayList<JLabel>();
@@ -73,6 +103,9 @@ public class ControlBoard extends JFrame{
 		
 		setBackground();
 		setFrontPanel();
+		initializePlayerComboBox();
+		initializeCommandComboBoxes();
+		
 		updateCards();
 	}
 	
@@ -144,6 +177,7 @@ public class ControlBoard extends JFrame{
 
 	}
 	
+	
 	public JLabel initializeCardLabel(int x, int y, Card card){
 		
 		JLabel newLabel = new JLabel("");
@@ -161,6 +195,64 @@ public class ControlBoard extends JFrame{
 		frontPanel.add(newLabel);
 		
 		return newLabel;
+	}
+	
+	public void initializePlayerComboBox(){
+		ArrayList<String> players = new ArrayList<String>();
+		for(Player p: g.getPlayers()){
+			players.add(p.getPlayerID());
+		}
+		
+        JComboBox playerList = new JComboBox(players.toArray());
+        playerList.setSelectedIndex(0);
+        playerList.addActionListener(this);
+        playerList.setBounds(playerBoxX, playerBoxY, boxWidht, boxHeight);
+        frontPanel.add(playerList);
+	}
+	
+	public void initializeCommandComboBoxes(){
+		JComboBox commandList = new JComboBox(commands);
+		commandList.setSelectedIndex(0);
+		commandList.setBounds(commandBoxX, commandBoxY, boxWidht, boxHeight);
+		frontPanel.add(commandList);
+		
+		JComboBox areaList = new JComboBox(none);
+		areaList.setSelectedIndex(0);
+		areaList.setBounds(areaBoxX, commandBoxY, boxWidht, boxHeight);
+		frontPanel.add(areaList);
+		
+		JComboBox pawnList = new JComboBox(none);
+		pawnList.setSelectedIndex(0);
+		pawnList.setBounds(pawnBoxX, commandBoxY, boxWidht, boxHeight);
+		frontPanel.add(pawnList);
+		
+		JTextField servants = new JTextField();;
+		servants.setBounds(servantsBoxX, commandBoxY, boxWidht, boxHeight);
+		frontPanel.add(servants);
+		
+		JTextField modes = new JTextField();;
+		modes.setBounds(modeBoxX, commandBoxY, boxWidht, boxHeight);
+		frontPanel.add(modes);
+		
+		
+		commandListener = new CommandComboBoxListener(g, ownPlayer, areaList, pawnList);
+		commandList.addActionListener(commandListener);
+		
+		
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+
+	        JComboBox cb = (JComboBox)e.getSource();
+	        String playerID = (String)cb.getSelectedItem();
+	        try {
+				p = g.getPlayerByID(playerID);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			updateCards();
 	}
 
 }

@@ -23,6 +23,7 @@ public class Player {
 	
 	public Player(String playerID, String color, Board board, ConsumableSet initialResources, Observer errorObserver){
 		this.playerID = playerID;
+		this.color = color;
 		resourceSet = new ResourceSet(initialResources);
 		actionBuilder = new ActionBuilder(this, board, errorObserver);
 		answeredVatican = false;

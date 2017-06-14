@@ -26,6 +26,8 @@ import it.polimi.ingsw.ps45.controller.command.ProductionCommand;
 import it.polimi.ingsw.ps45.controller.command.RefuseVaticanCommand;
 
 public class CommandParser {
+
+	
 	public Command parse(String input) throws Exception{
 		String[] s = input.toLowerCase().split("-");
 		

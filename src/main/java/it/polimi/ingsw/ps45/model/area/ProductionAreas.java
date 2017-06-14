@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import it.polimi.ingsw.ps45.model.player.Player;
 
-public class ProductionAreas {
+public class ProductionAreas implements HasDictionary {
 	NoCardArea small;
 	NoCardArea big;
 	HashMap<String, NoCardArea> productionAreaDictionary;
@@ -34,4 +34,16 @@ public class ProductionAreas {
 		if(!productionAreaDictionary.containsKey(s.toLowerCase())) throw new Exception("No such key");
 		return productionAreaDictionary.get(s.toLowerCase());
 	}
+
+	public HashMap<String, NoCardArea> getDictionary() {
+		return productionAreaDictionary;
+	}
+
+	@Override
+	public Area getAreaFromDictionary(String s) throws Exception {
+		if(!productionAreaDictionary.containsKey(s.toLowerCase())) throw new Exception("No such key");
+		return productionAreaDictionary.get(s.toLowerCase());
+	}
+	
+	
 }

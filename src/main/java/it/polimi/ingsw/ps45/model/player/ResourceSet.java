@@ -159,6 +159,13 @@ public class ResourceSet {
 	public ActionValueModifier getActionValueModifier() {
 		return actionValueModifier;
 	}
+
+
+	public PawnSet getPawnSet() {
+		return pawnSet;
+	}
+	
+	
 	
 	
 	

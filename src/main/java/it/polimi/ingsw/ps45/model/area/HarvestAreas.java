@@ -4,10 +4,10 @@ import java.util.HashMap;
 
 import it.polimi.ingsw.ps45.model.player.Player;
 
-public class HarvestAreas {
-	NoCardArea small;
-	NoCardArea big;
-	HashMap<String, NoCardArea> harvestAreaDictionary;
+public class HarvestAreas implements HasDictionary {
+	private NoCardArea small;
+	private NoCardArea big;
+	private HashMap<String, NoCardArea> harvestAreaDictionary;
 	
 	public HarvestAreas(){
 		harvestAreaDictionary = new HashMap<String, NoCardArea>(); 
@@ -35,6 +35,18 @@ public class HarvestAreas {
 		if(!harvestAreaDictionary.containsKey(s.toLowerCase())) throw new Exception("No such key");
 		return harvestAreaDictionary.get(s.toLowerCase());
 	}
+
+	public HashMap<String, NoCardArea> getDictionary() {
+		return harvestAreaDictionary;
+	}
+
+	@Override
+	public Area getAreaFromDictionary(String s) throws Exception {
+		if(!harvestAreaDictionary.containsKey(s.toLowerCase())) throw new Exception("No such key");
+		return harvestAreaDictionary.get(s.toLowerCase());
+	}
+	
+	
 	
 	
 }

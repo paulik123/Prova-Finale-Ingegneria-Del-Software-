@@ -16,7 +16,7 @@ import it.polimi.ingsw.ps45.model.area.cardarea.TerritoryTower;
 import it.polimi.ingsw.ps45.model.area.cardarea.VentureTower;
 import it.polimi.ingsw.ps45.model.effects.Effect;
 
-public class Board {
+public class Board implements HasDictionary {
 	
 	HashMap<String, NoCardArea> noCardAreaDictionary;
 	ProductionAreas productionAreas;
@@ -53,7 +53,7 @@ public class Board {
 		noCardAreaDictionary.put("servantsmarketarea", servantsMarketArea);
 		noCardAreaDictionary.put("militarymndcoinarea", militaryAndCoinArea);
 		noCardAreaDictionary.put("councilprivilegemarketarea", councilPrivilegeMarketArea);
-		noCardAreaDictionary.put("counciloalacearea", councilPalaceArea);
+		noCardAreaDictionary.put("councilpalacearea", councilPalaceArea);
 		
 		
 		territoryTower = new TerritoryTower();
@@ -132,6 +132,19 @@ public class Board {
 		if(!noCardAreaDictionary.containsKey(s.toLowerCase())) throw new Exception("No such key");
 		return noCardAreaDictionary.get(s.toLowerCase());
 	}
+
+	public HashMap<String, NoCardArea> getDictionary() {
+		return noCardAreaDictionary;
+	}
+
+	@Override
+	public Area getAreaFromDictionary(String s) throws Exception {
+		if(!noCardAreaDictionary.containsKey(s.toLowerCase())) throw new Exception("No such key");
+		return noCardAreaDictionary.get(s.toLowerCase());
+	}
+
+	
+	
 	
 	
 
