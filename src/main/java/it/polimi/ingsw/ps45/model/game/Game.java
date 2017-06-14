@@ -1,6 +1,10 @@
 package it.polimi.ingsw.ps45.model.game;
 
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -239,6 +243,19 @@ public class Game {
 		
 		Gson gson = GsonWithInterface.getGson(); 
         String game = gson.toJson(this);
+        
+        Writer writer;
+		try {
+			writer = new FileWriter("game.json");
+			gson.toJson(this, writer);
+			writer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+        
 
 		GameUpdateNotifier n = new GameUpdateNotifier(observers, game);
 		n.start();
@@ -299,6 +316,12 @@ public class Game {
 	public Round getCurrentRound() {
 		return currentRound;
 	}
+
+	public Vatican getVatican() {
+		return vatican;
+	}
+	
+	
 	
 	
 	
