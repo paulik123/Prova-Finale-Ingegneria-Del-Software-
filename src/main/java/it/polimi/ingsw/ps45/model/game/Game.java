@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 import com.google.gson.Gson;
@@ -37,12 +38,14 @@ public class Game {
 	private Board board;
 	private Vatican vatican;
 	private transient Player[] turns; 
+	private String[] colorTurns;
 	private Round currentRound;
 	private int currentEra;
 	private int roundNumber;
 	private boolean gameStarted;
 	private transient CardDealer cardDealer;
 	private String status;
+	private HashMap<PawnType, Integer> dices;
 	
 	public Game(){
 		numberOfPlayers = 0;
@@ -51,6 +54,7 @@ public class Game {
 		currentEra = 0;
 		players = new ArrayList<Player>();
 		observers = new ArrayList<Observer>();
+		dices = new HashMap<PawnType, Integer>();
 		board = new Board();
 		vatican = new Vatican();
 		
@@ -68,6 +72,7 @@ public class Game {
 	public void start() throws Exception{
 		if(gameStarted) throw new Exception("Game already started");
 		turns = new Player[turnsPerRound * numberOfPlayers];
+		colorTurns = new String[numberOfPlayers];
 		calculateTurnsStart();
 		currentRound = new Round(turns);
 		roundNumber++;
@@ -177,13 +182,20 @@ public class Game {
 				//TODO No first turn effect
 				turns[m] = temp[m%numberOfPlayers];
 			}
-		
+			updateColorTurns();
+	}
+	
+	private void updateColorTurns(){
+		for(int j=0; j < numberOfPlayers; j++){
+			colorTurns[j] = turns[j].getColor();
+		}
 	}
 
 	private void calculateTurnsStart(){
 		for(int i=0; i<numberOfPlayers*turnsPerRound;i++){
 			turns[i] = players.get(i%numberOfPlayers);
 		}
+		updateColorTurns();
 	}
 	
 	public void addPlayer(String playerID, Observer observer) throws Exception{
@@ -194,7 +206,7 @@ public class Game {
 			cs.setServants(Player.defaultServants);
 			cs.setCoins(Player.defaultCoins + players.size());
 			
-			Player p = new Player(playerID, board, cs, observer);
+			Player p = new Player(playerID,ColorFromInt.getColor(numberOfPlayers), board, cs, observer);
 			players.add(p);
 			registerObserver(observer);
 			numberOfPlayers++;
@@ -254,9 +266,6 @@ public class Game {
 			e.printStackTrace();
 		}
 		
-		
-        
-
 		GameUpdateNotifier n = new GameUpdateNotifier(observers, game);
 		n.start();
 	}
@@ -270,6 +279,8 @@ public class Game {
 	}
 	
 	public void setSinglePawn(int value, PawnType pt){
+		dices.put(pt, value);
+		
 		for(Player p:players){
 			p.getResourceSet().setPawn(pt, value, true);
 		}
@@ -319,6 +330,14 @@ public class Game {
 
 	public Vatican getVatican() {
 		return vatican;
+	}
+	
+	public String[] getColorTurns(){
+		return colorTurns;
+	}
+	
+	public HashMap<PawnType, Integer> getDices(){
+		return dices;
 	}
 	
 	

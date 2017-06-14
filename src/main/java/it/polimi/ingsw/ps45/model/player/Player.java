@@ -6,6 +6,7 @@ import it.polimi.ingsw.ps45.model.game.Observer;
 
 public class Player {
 	private String playerID;
+	private String color;
 
 	private  ResourceSet resourceSet;
 	private transient ActionBuilder actionBuilder;
@@ -20,7 +21,7 @@ public class Player {
 	private String status;
 	
 	
-	public Player(String playerID, Board board, ConsumableSet initialResources, Observer errorObserver){
+	public Player(String playerID, String color, Board board, ConsumableSet initialResources, Observer errorObserver){
 		this.playerID = playerID;
 		resourceSet = new ResourceSet(initialResources);
 		actionBuilder = new ActionBuilder(this, board, errorObserver);
@@ -71,6 +72,10 @@ public class Player {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	
+	public String getColor(){
+		return color;
 	}
 
 	

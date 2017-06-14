@@ -2,6 +2,8 @@ package it.polimi.ingsw.ps45.view.gui.windowb;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.Graphics2D;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -13,10 +15,12 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
 import it.polimi.ingsw.ps45.gson.GsonWithInterface;
+import it.polimi.ingsw.ps45.model.area.PlayerPawnPair;
 import it.polimi.ingsw.ps45.model.cards.Card;
 import it.polimi.ingsw.ps45.model.cards.Era;
 import it.polimi.ingsw.ps45.model.cards.Territory;
 import it.polimi.ingsw.ps45.model.game.Game;
+import it.polimi.ingsw.ps45.model.player.PawnType;
 
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -24,6 +28,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.GridBagLayout;
@@ -33,6 +40,11 @@ import javax.swing.JLayeredPane;
 import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Shape;
+import java.awt.geom.Ellipse2D;
+import java.awt.image.BufferedImage;
+
 import javax.swing.SwingConstants;
 
 public class GameBoard extends JFrame {
@@ -114,10 +126,7 @@ public class GameBoard extends JFrame {
 	private JLabel diceWhite;
 	private JLabel diceOrange;
 	
-	private JLabel turnMarker1;
-	private JLabel turnMarker2;
-	private JLabel turnMarker3;
-	private JLabel turnMarker4;
+	ArrayList<JLabel> turnMarkers;
 	
 	
 	
@@ -217,6 +226,8 @@ public class GameBoard extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
+		
+		
 		Gson gson = GsonWithInterface.getGson(); 
 		try {
 			g = gson.fromJson(new FileReader("game.json"), Game.class);
@@ -228,14 +239,13 @@ public class GameBoard extends JFrame {
 		
 		setBackground();
 		setFrontPanel();
-		updateTerritories();
-		updateCharacters();
-		updateBuildings();
-		updateVentures();
-		updateExcom();
-		updatePawnAreaLabels();
-		
-
+		initializeTurnMarkers();
+		initializeTerritories();
+		initializeCharacters();
+		initializeBuildings();
+		initializeVentures();
+		initializeExcom();
+		initializePawnAreaLabels();
 	}
 	
 	public void setBackground(){
@@ -268,7 +278,7 @@ public class GameBoard extends JFrame {
 
 	}
 	
-	public void updatePawnAreaLabels(){
+	public void initializePawnAreaLabels(){
 		
 		productionSmall = initializePawnLabel(prodHarvestSmallX, productionY);
 		productionBig1 = initializePawnLabel(prodHarvestBigX, productionY);
@@ -293,120 +303,111 @@ public class GameBoard extends JFrame {
 		councilPalace4 = initializePawnLabel(councilPalaceX + pawnAreaSize*3, councilPalaceY);
 		
 		diceBlack = initializePawnLabel(diceBlackX, diceY);
+		diceBlack.setFont(new Font("Serif", Font.PLAIN, 30));
 		diceWhite = initializePawnLabel(diceWhiteX, diceY);
+		diceWhite.setFont(new Font("Serif", Font.PLAIN, 30));
 		diceOrange = initializePawnLabel(diceOrangeX, diceY);
-		
-		turnMarker1 = initializePawnLabel(turnMarkerX, turnMarker1Y);
-		turnMarker2 = initializePawnLabel(turnMarkerX, turnMarker2Y);
-		turnMarker3 = initializePawnLabel(turnMarkerX, turnMarker3Y);
-		turnMarker4 = initializePawnLabel(turnMarkerX, turnMarker4Y);
+		diceOrange.setFont(new Font("Serif", Font.PLAIN, 30));
 		
 	}
 	
-	public void updateTerritories(){
+	private void initializeTurnMarkers(){
+		turnMarkers = new ArrayList<JLabel>();
+		turnMarkers.add(initializePawnLabel(turnMarkerX, turnMarker1Y));
+		turnMarkers.add(initializePawnLabel(turnMarkerX, turnMarker2Y));
+		turnMarkers.add(initializePawnLabel(turnMarkerX, turnMarker3Y));
+		turnMarkers.add(initializePawnLabel(turnMarkerX, turnMarker4Y));
+	}
+	
+	
+	
+	private void initializeTerritories(){
 		int territoryXWithGap = territoryX + cardPawnHorizontalGap;
 		
 		
 		
-		territory_third = initializeCardLabel(territoryX, thirdFloorY, g.getBoard().getTerritoryTower().getThirdFloor().getTerritory());
+		territory_third = initializeCardLabel(territoryX, thirdFloorY);
 		territory_third_pawn = initializePawnLabel(territoryXWithGap, thirdFloorY + cardPawnVerticalGap);
 		
-		territory_second = initializeCardLabel(territoryX, secondFloorY, g.getBoard().getTerritoryTower().getSecondFloor().getTerritory());
+		territory_second = initializeCardLabel(territoryX, secondFloorY);
 		territory_second_pawn = initializePawnLabel(territoryXWithGap, secondFloorY + cardPawnVerticalGap);
 
-		territory_first = initializeCardLabel(territoryX, firstFloorY, g.getBoard().getTerritoryTower().getFirstFloor().getTerritory());
+		territory_first = initializeCardLabel(territoryX, firstFloorY);
 		territory_first_pawn = initializePawnLabel(territoryXWithGap, firstFloorY + cardPawnVerticalGap);
 
-		territory_ground = initializeCardLabel(territoryX, groundFloorY, g.getBoard().getTerritoryTower().getGroundFloor().getTerritory());
+		territory_ground = initializeCardLabel(territoryX, groundFloorY);
 		territory_ground_pawn = initializePawnLabel(territoryXWithGap, groundFloorY + cardPawnVerticalGap);
 	}
 	
-	public void updateCharacters(){
+	public void initializeCharacters(){
 		int characterXWithGap = characterX + cardPawnHorizontalGap;
 		
-		character_third = initializeCardLabel(characterX, thirdFloorY, g.getBoard().getCharacterTower().getThirdFloor().getCharacter());
+		character_third = initializeCardLabel(characterX, thirdFloorY);
 		character_third_pawn = initializePawnLabel(characterXWithGap, thirdFloorY + cardPawnVerticalGap);
 		
-		character_second = initializeCardLabel(characterX, secondFloorY, g.getBoard().getCharacterTower().getSecondFloor().getCharacter());
+		character_second = initializeCardLabel(characterX, secondFloorY);
 		character_second_pawn = initializePawnLabel(characterXWithGap, secondFloorY + cardPawnVerticalGap);
 		
-		character_first = initializeCardLabel(characterX, firstFloorY, g.getBoard().getCharacterTower().getFirstFloor().getCharacter());
+		character_first = initializeCardLabel(characterX, firstFloorY);
 		character_first_pawn = initializePawnLabel(characterXWithGap, firstFloorY + cardPawnVerticalGap);
 		
-		character_ground = initializeCardLabel(characterX, groundFloorY, g.getBoard().getCharacterTower().getGroundFloor().getCharacter());
+		character_ground = initializeCardLabel(characterX, groundFloorY);
 		character_ground_pawn = initializePawnLabel(characterXWithGap, groundFloorY + cardPawnVerticalGap);
 	}
 	
-	public void updateBuildings(){
+	public void initializeBuildings(){
 		int buildingXWithGap = buildingX + cardPawnHorizontalGap;
 		
-		building_third = initializeCardLabel(buildingX, thirdFloorY, g.getBoard().getBuildingTower().getThirdFloor().getBuilding());
+		building_third = initializeCardLabel(buildingX, thirdFloorY);
 		building_third_pawn = initializePawnLabel(buildingXWithGap, thirdFloorY + cardPawnVerticalGap);
 		
-		building_second = initializeCardLabel(buildingX, secondFloorY, g.getBoard().getBuildingTower().getSecondFloor().getBuilding());
+		building_second = initializeCardLabel(buildingX, secondFloorY);
 		building_second_pawn = initializePawnLabel(buildingXWithGap, secondFloorY + cardPawnVerticalGap);
 		
-		building_first = initializeCardLabel(buildingX, firstFloorY, g.getBoard().getBuildingTower().getFirstFloor().getBuilding());
+		building_first = initializeCardLabel(buildingX, firstFloorY);
 		building_first_pawn = initializePawnLabel(buildingXWithGap, firstFloorY + cardPawnVerticalGap);
 		
-		building_ground = initializeCardLabel(buildingX, groundFloorY, g.getBoard().getBuildingTower().getGroundFloor().getBuilding());
+		building_ground = initializeCardLabel(buildingX, groundFloorY);
 		building_ground_pawn = initializePawnLabel(buildingXWithGap, groundFloorY + cardPawnVerticalGap);
 	}
 	
-	public void updateVentures(){
+	public void initializeVentures(){
 		int ventureXWithGap = ventureX + cardPawnHorizontalGap;
 		
-		venture_third = initializeCardLabel(ventureX, thirdFloorY, g.getBoard().getVentureTower().getThirdFloor().getVenture());
+		venture_third = initializeCardLabel(ventureX, thirdFloorY);
 		venture_third_pawn = initializePawnLabel(ventureXWithGap, thirdFloorY + cardPawnVerticalGap);
 		
-		venture_second = initializeCardLabel(ventureX, secondFloorY, g.getBoard().getVentureTower().getSecondFloor().getVenture());
+		venture_second = initializeCardLabel(ventureX, secondFloorY);
 		venture_second_pawn = initializePawnLabel(ventureXWithGap, secondFloorY + cardPawnVerticalGap);
 		
-		venture_first = initializeCardLabel(ventureX, firstFloorY, g.getBoard().getVentureTower().getFirstFloor().getVenture());
+		venture_first = initializeCardLabel(ventureX, firstFloorY);
 		venture_first_pawn = initializePawnLabel(ventureXWithGap, firstFloorY + cardPawnVerticalGap);
 		
-		venture_ground = initializeCardLabel(ventureX, groundFloorY, g.getBoard().getVentureTower().getGroundFloor().getVenture());
+		venture_ground = initializeCardLabel(ventureX, groundFloorY);
 		venture_ground_pawn = initializePawnLabel(ventureXWithGap, groundFloorY + cardPawnVerticalGap);
 	}
 	
-	public void updateExcom(){
+	public void initializeExcom(){
 		excomI = initializeExcomLabel(excomIX, excomIY, g.getVatican().getCard(Era.I).getName());
 		excomII = initializeExcomLabel(excomIIX, excomIIY, g.getVatican().getCard(Era.II).getName());
 		excomIII = initializeExcomLabel(excomIIIX, excomIIIY, g.getVatican().getCard(Era.III).getName());
 	}
 	
-	public JLabel initializeCardLabel(int x, int y, Card card){
-		
+	public JLabel initializeCardLabel(int x, int y){
 		JLabel newLabel = new JLabel("");
 		newLabel.setBounds(x, y, cardWidth, cardHeight);
-		
-		if(card != null){
-			ImageIcon imageIcon = new ImageIcon("images\\cards\\" + card.getName() + ".png"); // load the image to a imageIcon
-			Image image = imageIcon.getImage(); // transform it 
-			Image newimg = image.getScaledInstance(cardWidth, cardHeight,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-			imageIcon = new ImageIcon(newimg);
-
-			newLabel.setIcon(imageIcon);
-		}
-
 		frontPanel.add(newLabel);
 		
 		return newLabel;
 	}
 	
 	public JLabel initializePawnLabel(int x, int y){
-		ImageIcon imageIcon = new ImageIcon("images\\cards\\Citta.png"); // load the image to a imageIcon
-		Image image = imageIcon.getImage(); // transform it 
-		Image newimg = image.getScaledInstance(cardWidth, cardHeight,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-		imageIcon = new ImageIcon(newimg);
-		
-		
 		JLabel newLabel = new JLabel("");
 		newLabel.setBounds(x, y, pawnAreaSize, pawnAreaSize);
-		newLabel.setBackground(new Color(255,0,0,255));
-		//newLabel.setIcon(imageIcon);
+		//newLabel.setBackground(new Color(255,0,0,255));
 		frontPanel.add(newLabel);
 		newLabel.setOpaque(true);
+
 		return newLabel;
 	}
 	
@@ -424,5 +425,127 @@ public class GameBoard extends JFrame {
 		
 		return newLabel;
 	}
+	
+	public void updateCardLabels(){
+		setCardLabelIcon(territory_third, g.getBoard().getTerritoryTower().getThirdFloor().getTerritory());
+		setCardLabelIcon(territory_second, g.getBoard().getTerritoryTower().getSecondFloor().getTerritory());
+		setCardLabelIcon(territory_first, g.getBoard().getTerritoryTower().getFirstFloor().getTerritory());
+		setCardLabelIcon(territory_ground, g.getBoard().getTerritoryTower().getGroundFloor().getTerritory());
+		
+		setCardLabelIcon(character_third, g.getBoard().getCharacterTower().getThirdFloor().getCharacter());
+		setCardLabelIcon(character_second, g.getBoard().getCharacterTower().getSecondFloor().getCharacter());
+		setCardLabelIcon(character_first, g.getBoard().getCharacterTower().getFirstFloor().getCharacter());
+		setCardLabelIcon(character_ground, g.getBoard().getCharacterTower().getGroundFloor().getCharacter());
+		
+		setCardLabelIcon(building_third, g.getBoard().getBuildingTower().getThirdFloor().getBuilding());
+		setCardLabelIcon(building_second, g.getBoard().getBuildingTower().getSecondFloor().getBuilding());
+		setCardLabelIcon(building_first, g.getBoard().getBuildingTower().getFirstFloor().getBuilding());
+		setCardLabelIcon(building_ground, g.getBoard().getBuildingTower().getGroundFloor().getBuilding());
+		
+		setCardLabelIcon(venture_third, g.getBoard().getVentureTower().getThirdFloor().getVenture());
+		setCardLabelIcon(venture_second, g.getBoard().getVentureTower().getSecondFloor().getVenture());
+		setCardLabelIcon(venture_first, g.getBoard().getVentureTower().getFirstFloor().getVenture());
+		setCardLabelIcon(venture_ground, g.getBoard().getVentureTower().getGroundFloor().getVenture());
+	}
+	
+	public void updatePawnLabels(){
+		
+		setPawnLabelIcon(productionSmall, g.getBoard().getProductionAreas().getSmall().getOccupants().get(0));
+		setPawnLabelIcon(productionBig1, g.getBoard().getProductionAreas().getBig().getOccupants().get(0));
+		setPawnLabelIcon(productionBig2, g.getBoard().getProductionAreas().getBig().getOccupants().get(1));
+		setPawnLabelIcon(productionBig3, g.getBoard().getProductionAreas().getBig().getOccupants().get(2));
+		setPawnLabelIcon(productionBig4, g.getBoard().getProductionAreas().getBig().getOccupants().get(3));
+		
+		setPawnLabelIcon(harvestSmall, g.getBoard().getHarvestAreas().getSmall().getOccupants().get(0));
+		setPawnLabelIcon(harvestBig1, g.getBoard().getHarvestAreas().getBig().getOccupants().get(0));
+		setPawnLabelIcon(harvestBig2, g.getBoard().getHarvestAreas().getBig().getOccupants().get(1));
+		setPawnLabelIcon(harvestBig3, g.getBoard().getHarvestAreas().getBig().getOccupants().get(2));
+		setPawnLabelIcon(harvestBig4, g.getBoard().getHarvestAreas().getBig().getOccupants().get(3));
+		
+		setPawnLabelIcon(coinsMarket, g.getBoard().getCoinsMarketArea().getOccupants().get(0));
+		setPawnLabelIcon(servantsMarket, g.getBoard().getServantsMarketArea().getOccupants().get(0));
+		setPawnLabelIcon(militaryCoinsMarket, g.getBoard().getMilitaryAndCoinArea().getOccupants().get(0));
+		setPawnLabelIcon(councilPrivilegeMarket, g.getBoard().getCouncilPrivilegeMarketArea().getOccupants().get(0));
+		
+		setPawnLabelIcon(councilPalace1, g.getBoard().getCouncilPalaceArea().getOccupants().get(0));
+		setPawnLabelIcon(councilPalace2, g.getBoard().getCouncilPalaceArea().getOccupants().get(1));
+		setPawnLabelIcon(councilPalace3, g.getBoard().getCouncilPalaceArea().getOccupants().get(2));
+		setPawnLabelIcon(councilPalace4, g.getBoard().getCouncilPalaceArea().getOccupants().get(3));
+		
+		setPawnLabelIcon(territory_third_pawn, g.getBoard().getTerritoryTower().getThirdFloor().getOccupants().get(0));
+		setPawnLabelIcon(territory_second_pawn, g.getBoard().getTerritoryTower().getSecondFloor().getOccupants().get(0));
+		setPawnLabelIcon(territory_first_pawn, g.getBoard().getTerritoryTower().getFirstFloor().getOccupants().get(0));
+		setPawnLabelIcon(territory_ground_pawn, g.getBoard().getTerritoryTower().getGroundFloor().getOccupants().get(0));
+		
+		setPawnLabelIcon(character_third_pawn, g.getBoard().getCharacterTower().getThirdFloor().getOccupants().get(0));
+		setPawnLabelIcon(character_second_pawn, g.getBoard().getCharacterTower().getSecondFloor().getOccupants().get(0));
+		setPawnLabelIcon(character_first_pawn, g.getBoard().getCharacterTower().getFirstFloor().getOccupants().get(0));
+		setPawnLabelIcon(character_ground_pawn, g.getBoard().getCharacterTower().getGroundFloor().getOccupants().get(0));
+		
+		setPawnLabelIcon(building_third_pawn, g.getBoard().getBuildingTower().getThirdFloor().getOccupants().get(0));
+		setPawnLabelIcon(building_second_pawn, g.getBoard().getBuildingTower().getSecondFloor().getOccupants().get(0));
+		setPawnLabelIcon(building_first_pawn, g.getBoard().getBuildingTower().getFirstFloor().getOccupants().get(0));
+		setPawnLabelIcon(building_ground_pawn, g.getBoard().getBuildingTower().getGroundFloor().getOccupants().get(0));
+		
+		setPawnLabelIcon(venture_third_pawn, g.getBoard().getVentureTower().getThirdFloor().getOccupants().get(0));
+		setPawnLabelIcon(venture_second_pawn, g.getBoard().getVentureTower().getSecondFloor().getOccupants().get(0));
+		setPawnLabelIcon(venture_first_pawn, g.getBoard().getVentureTower().getFirstFloor().getOccupants().get(0));
+		setPawnLabelIcon(venture_ground_pawn, g.getBoard().getVentureTower().getGroundFloor().getOccupants().get(0));
+		
+	}
+	
+	public void updateDiceLabels(){
+		HashMap<PawnType, Integer> dices = g.getDices();
+		diceBlack.setText(dices.get(PawnType.BLACK).toString());
+		diceWhite.setText(dices.get(PawnType.WHITE).toString());
+		diceOrange.setText(dices.get(PawnType.ORANGE).toString());
+	}
+	
+	public void updateTurnMarkers(){
+		for(int i=0;i<g.getNumberOfPlayers();i++){
+			setTurnMarkerLabelIcon(turnMarkers.get(i), g.getColorTurns()[i]);
+		}
+	}
+	
+	public void setTurnMarkerLabelIcon(JLabel l, String color){
+		ImageIcon imageIcon = new ImageIcon("images\\pawns\\" + color + ".png"); // load the image to a imageIcon
+		Image image = imageIcon.getImage(); // transform it 
+		Image newimg = image.getScaledInstance(pawnAreaSize, pawnAreaSize,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+		imageIcon = new ImageIcon(newimg);
+
+		l.setIcon(imageIcon);
+	}
+	
+	public void setCardLabelIcon(JLabel l, Card card){
+		if(card != null){
+			ImageIcon imageIcon = new ImageIcon("images\\cards\\" + card.getName() + ".png"); // load the image to a imageIcon
+			Image image = imageIcon.getImage(); // transform it 
+			Image newimg = image.getScaledInstance(cardWidth, cardHeight,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+			imageIcon = new ImageIcon(newimg);
+
+			l.setIcon(imageIcon);
+		}else{
+			l.setIcon(null);
+		}
+	}
+	
+	public void setPawnLabelIcon(JLabel l, PlayerPawnPair ppp){
+		
+		if(ppp != null){
+			String playerColor = ppp.getPlayer().getColor();
+			String diceColor = ppp.getType().toString();
+			
+			ImageIcon imageIcon = new ImageIcon("images\\pawns\\" + playerColor+ "-" + diceColor + ".png"); // load the image to a imageIcon
+			Image image = imageIcon.getImage(); // transform it 
+			Image newimg = image.getScaledInstance(pawnAreaSize, pawnAreaSize,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+			imageIcon = new ImageIcon(newimg);
+
+			l.setIcon(imageIcon);
+		}else{
+			l.setIcon(null);
+		}
+	}
+	
+
 	
 }
