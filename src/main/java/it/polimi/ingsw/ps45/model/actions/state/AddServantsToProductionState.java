@@ -6,7 +6,7 @@ import it.polimi.ingsw.ps45.model.vatican.ExcommunicationCard;
 public class AddServantsToProductionState implements ActionBuilderState{
 
 	int value;
-	private String[] commands = {"addservantsproduction"};
+	private String[] commands = {"addservantsproduction", "endturn"};
 	
 	public AddServantsToProductionState(int value){
 		this.value = value;

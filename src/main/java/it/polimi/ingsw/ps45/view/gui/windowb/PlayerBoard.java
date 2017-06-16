@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -48,6 +49,10 @@ public class PlayerBoard extends JFrame implements ActionListener{
 	private JLabel militaryLabel;
 	private JLabel victoryLabel;
 	
+	private JComboBox playerList;
+	
+	private String playerID;
+	
 	
 	private static final int width = 720;
 	private static final int height = 454;
@@ -81,7 +86,7 @@ public class PlayerBoard extends JFrame implements ActionListener{
 	private static final int playerBoxWidht = 100;
 	private static final int playerBoxHeight = 20;
 	
-	public PlayerBoard(){
+	public PlayerBoard(String playerID){
 		setResizable(false);
 		setTitle("Lorenzo il Magnifico - PlayerBoard");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -89,18 +94,10 @@ public class PlayerBoard extends JFrame implements ActionListener{
 		contentPane = new JPanel();
 		//contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		Gson gson = GsonWithInterface.getGson(); 
-		try {
-			g = gson.fromJson(new FileReader("game.json"), Game.class);
-		} catch (JsonSyntaxException | JsonIOException | FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		p = g.getPlayers().get(0);
+		this.playerID = playerID;
 		
-		
+
 		buildings = new ArrayList<JLabel>();
 		territories = new ArrayList<JLabel>();
 
@@ -109,8 +106,6 @@ public class PlayerBoard extends JFrame implements ActionListener{
 		setFrontPanel();
 		initializeResourceLabels();
 		initializePlayerComboBox();
-		updateCards();
-		updateResourceLabels();
 	}
 	
 	public void updateCards(){
@@ -217,10 +212,11 @@ public class PlayerBoard extends JFrame implements ActionListener{
 
 			newLabel.setIcon(imageIcon);
 		}
-
+		
 		frontPanel.add(newLabel);
 		return newLabel;
 	}
+	
 	
 	public void initializePlayerComboBox(){
 		ArrayList<String> players = new ArrayList<String>();
@@ -228,8 +224,7 @@ public class PlayerBoard extends JFrame implements ActionListener{
 			players.add(p.getPlayerID());
 		}
 		
-        JComboBox playerList = new JComboBox(players.toArray());
-        playerList.setSelectedIndex(0);
+		playerList = new JComboBox(players.toArray());
         playerList.addActionListener(this);
         playerList.setBounds(playerBoxX, playerBoxY, playerBoxWidht, playerBoxHeight);
         frontPanel.add(playerList);
@@ -244,6 +239,24 @@ public class PlayerBoard extends JFrame implements ActionListener{
 
 
 		return newLabel;
+	}
+	
+	public void updatePlayerComboBox(){
+		ArrayList<String> players = new ArrayList<String>();
+		for(Player p: g.getPlayers()){
+			players.add(p.getPlayerID());
+		}
+		
+		DefaultComboBoxModel model = new DefaultComboBoxModel(players.toArray(new String[players.size()]));
+		playerList.setModel(model);
+		playerList.setSelectedItem(playerID);
+	}
+	
+	public void update(Game g){
+		this.g = g;
+		updatePlayerComboBox();
+		updateCards();
+		updateResourceLabels();
 	}
 
 	@Override

@@ -34,12 +34,7 @@ public class CLI extends View{
 		this.playerID = playerID;
 	}
 
-	@Override
-	public String getCommand() {
-		
-		String out = scanner.nextLine();
-		return out;
-	}
+
 
 	@Override
 	public void updateView(String gameJSON) {

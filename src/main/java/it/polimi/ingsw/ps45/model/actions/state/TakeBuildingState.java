@@ -5,7 +5,7 @@ import it.polimi.ingsw.ps45.model.vatican.ExcommunicationCard;
 
 public class TakeBuildingState implements ActionBuilderState{
 	
-	private String[] commands = {"nopawnbuilding"};
+	private String[] commands = {"nopawnbuilding", "endturn"};
 	
 	private int value;
 	private ConsumableSet discount;

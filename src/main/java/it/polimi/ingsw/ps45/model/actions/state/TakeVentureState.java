@@ -7,7 +7,7 @@ public  class TakeVentureState implements ActionBuilderState{
 	
 	private int value;
 	private ConsumableSet discount;
-	private String[] commands = {"nopawnventure"};
+	private String[] commands = {"nopawnventure", "endturn"};
 	
 	public TakeVentureState(int value, ConsumableSet discount){
 		this.value = value;

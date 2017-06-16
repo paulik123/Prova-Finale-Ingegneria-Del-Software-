@@ -7,7 +7,7 @@ public class TakeTerritoryState implements ActionBuilderState{
 	
 	private int value;
 	private ConsumableSet discount;
-	private String[] commands = {"nopawnterritory"};
+	private String[] commands = {"nopawnterritory", "endturn"};
 	
 	public TakeTerritoryState(int value, ConsumableSet discount){
 		this.value = value;

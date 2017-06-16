@@ -45,26 +45,6 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        /*
-        Scanner scanner = new Scanner(System.in);
-
-       while(true){
-    	   
-    	   AddPlayerCommand command = new AddPlayerCommand(scanner.nextLine());
-    	   CommandHolder ch = new CommandHolder(command);
-    	   
-    	   Gson gson = new GsonBuilder()
-                   .registerTypeAdapter(Effect.class,
-                           new PropertyBasedInterfaceMarshal())
-                   .registerTypeAdapter(Command.class,
-                           new PropertyBasedInterfaceMarshal()).create();
-    	   
-    	   String json = gson.toJson(ch);
-    	   
-    	   c.send(json);
-       }
-       */
     }
 
 }

@@ -197,21 +197,6 @@ public class GameBoard extends JFrame {
 	private static final int cardPawnHorizontalGap = 57;
 	private static final int cardPawnVerticalGap = 27;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GameBoard frame = new GameBoard();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -227,15 +212,6 @@ public class GameBoard extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		
-		
-		Gson gson = GsonWithInterface.getGson(); 
-		try {
-			g = gson.fromJson(new FileReader("game.json"), Game.class);
-		} catch (JsonSyntaxException | JsonIOException | FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 		setBackground();
 		setFrontPanel();
 		initializeTurnMarkers();
@@ -245,7 +221,6 @@ public class GameBoard extends JFrame {
 		initializeVentures();
 		initializeExcom();
 		initializePawnAreaLabels();
-		update();
 	}
 	
 	public void setBackground(){
@@ -391,9 +366,9 @@ public class GameBoard extends JFrame {
 	}
 	
 	public void initializeExcom(){
-		excomI = initializeExcomLabel(excomIX, excomIY, g.getVatican().getCard(Era.I).getName());
-		excomII = initializeExcomLabel(excomIIX, excomIIY, g.getVatican().getCard(Era.II).getName());
-		excomIII = initializeExcomLabel(excomIIIX, excomIIIY, g.getVatican().getCard(Era.III).getName());
+		excomI = initializeExcomLabel(excomIX, excomIY );
+		excomII = initializeExcomLabel(excomIIX, excomIIY);
+		excomIII = initializeExcomLabel(excomIIIX, excomIIIY);
 	}
 	
 	public JLabel initializeCardLabel(int x, int y){
@@ -414,19 +389,27 @@ public class GameBoard extends JFrame {
 		return newLabel;
 	}
 	
-	public JLabel initializeExcomLabel(int x, int y, String name){
+	public JLabel initializeExcomLabel(int x, int y){
+		JLabel newLabel = new JLabel("");
+		newLabel.setBounds(x, y, excomWidth, excomHeight);
+
+		frontPanel.add(newLabel);
+		
+		return newLabel;
+	}
+	
+	public void updateExcomLabels(){
+		setExcomLabelIcon(excomI,g.getVatican().getCard(Era.I).getName());
+		setExcomLabelIcon(excomII,g.getVatican().getCard(Era.II).getName());
+		setExcomLabelIcon(excomIII,g.getVatican().getCard(Era.III).getName());
+	}
+	
+	public void setExcomLabelIcon(JLabel excomLabel, String name){
 		ImageIcon imageIcon = new ImageIcon("images\\excom\\" + name + ".png"); // load the image to a imageIcon
 		Image image = imageIcon.getImage(); // transform it 
 		Image newimg = image.getScaledInstance(excomWidth, excomHeight,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 		imageIcon = new ImageIcon(newimg);
-		
-		
-		JLabel newLabel = new JLabel("");
-		newLabel.setBounds(x, y, excomWidth, excomHeight);
-		newLabel.setIcon(imageIcon);
-		frontPanel.add(newLabel);
-		
-		return newLabel;
+		excomLabel.setIcon(imageIcon);
 	}
 	
 	public void updateCardLabels(){
@@ -552,13 +535,13 @@ public class GameBoard extends JFrame {
 		}
 	}
 	
-	public void update(){
+	public void update(Game g){
+		this.g = g;
 		updateDiceLabels();
 		updateTurnMarkers();
 		updatePawnLabels();
 		updateCardLabels();
+		updateExcomLabels();
 	}
-	
 
-	
 }
