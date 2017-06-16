@@ -8,10 +8,11 @@ public interface ActionBuilderState {
 	public ConsumableSet discount();
 	public ExcommunicationCard getExcommunicationCard();
 	public String message();
-	// PawnAction
-	public boolean placePawnAction();
+	public String[] commands();
 	
-	// No Pawn Actions
+	
+	
+	public boolean placePawnAction();
 	public boolean productionAction();
 	public boolean harvestAction();
 	public boolean addServantsToHarvestAction();

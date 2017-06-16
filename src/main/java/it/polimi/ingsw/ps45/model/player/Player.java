@@ -19,6 +19,7 @@ public class Player {
 	private boolean answeredVatican;
 	
 	private String status;
+	private String[] availableCommands;
 	
 	
 	public Player(String playerID, String color, Board board, ConsumableSet initialResources, Observer errorObserver){
@@ -28,6 +29,7 @@ public class Player {
 		actionBuilder = new ActionBuilder(this, board, errorObserver);
 		answeredVatican = false;
 		this.status = "New player";
+		this.availableCommands = actionBuilder.getState().commands();
 	}
 	
 	
@@ -77,6 +79,13 @@ public class Player {
 	
 	public String getColor(){
 		return color;
+	}
+	
+	public void setAvailableCommands(String[] commands){
+		this.availableCommands = commands;
+	}
+	public String[] getAvailableCommands(){
+		return availableCommands;
 	}
 
 	

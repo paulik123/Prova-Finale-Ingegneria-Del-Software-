@@ -4,6 +4,8 @@ import it.polimi.ingsw.ps45.model.player.ConsumableSet;
 import it.polimi.ingsw.ps45.model.vatican.ExcommunicationCard;
 
 public class TakeCharacterState implements ActionBuilderState{
+	
+	private String[] commands = {"nopawncharacter"};
 	private int value;
 	private ConsumableSet discount;
 	
@@ -112,5 +114,10 @@ public class TakeCharacterState implements ActionBuilderState{
 	public String message() {
 		// TODO Auto-generated method stub
 		return "TakeCharacterState";
+	}
+
+	@Override
+	public String[] commands() {
+		return commands;
 	}
 }

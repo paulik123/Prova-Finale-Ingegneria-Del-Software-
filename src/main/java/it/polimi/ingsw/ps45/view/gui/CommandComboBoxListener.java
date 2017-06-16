@@ -68,10 +68,6 @@ public class CommandComboBoxListener implements ActionListener{
 			changeModel(areas, getAvailableAreas(g.getBoard()));
 			changeModel(pawns, getAvailablePawns());
 			break;
-		case "placepawnmarket":
-			changeModel(areas, getAvailableAreas(g.getBoard()));
-			changeModel(pawns, getAvailablePawns());
-			break;
 		case "placepawnharvest":
 			changeModel(areas, getAvailableAreas(g.getBoard().getHarvestAreas()));
 			changeModel(pawns, getAvailablePawns());

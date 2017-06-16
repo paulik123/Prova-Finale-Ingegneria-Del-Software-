@@ -7,6 +7,7 @@ public class TakeTerritoryState implements ActionBuilderState{
 	
 	private int value;
 	private ConsumableSet discount;
+	private String[] commands = {"nopawnterritory"};
 	
 	public TakeTerritoryState(int value, ConsumableSet discount){
 		this.value = value;
@@ -113,6 +114,11 @@ public class TakeTerritoryState implements ActionBuilderState{
 	public String message() {
 		// TODO Auto-generated method stub
 		return "TakeTerritoryState";
+	}
+
+	@Override
+	public String[] commands() {
+		return commands;
 	}
 
 }

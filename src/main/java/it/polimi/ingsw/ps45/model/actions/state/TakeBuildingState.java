@@ -5,6 +5,8 @@ import it.polimi.ingsw.ps45.model.vatican.ExcommunicationCard;
 
 public class TakeBuildingState implements ActionBuilderState{
 	
+	private String[] commands = {"nopawnbuilding"};
+	
 	private int value;
 	private ConsumableSet discount;
 	
@@ -113,6 +115,11 @@ public class TakeBuildingState implements ActionBuilderState{
 	public String message() {
 		// TODO Auto-generated method stub
 		return "TakeBuildingState";
+	}
+
+	@Override
+	public String[] commands() {
+		return commands;
 	}
 
 }

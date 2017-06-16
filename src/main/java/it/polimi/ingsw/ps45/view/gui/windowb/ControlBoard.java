@@ -68,10 +68,10 @@ public class ControlBoard extends JFrame implements ActionListener{
 	
 	private static final int commandBoxY = 400;
 	private static final int commandBoxX = 45;
-	private static final int areaBoxX = 155;
-	private static final int pawnBoxX = 265;
-	private static final int servantsBoxX = 375;
-	private static final int modeBoxX = 485;
+	private static final int areaBoxX = 255;
+	private static final int pawnBoxX = 365;
+	private static final int servantsBoxX = 475;
+	private static final int modeBoxX = 585;
 	
 	
 	
@@ -93,8 +93,8 @@ public class ControlBoard extends JFrame implements ActionListener{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		p = g.getPlayers().get(1);
-		ownPlayer = g.getPlayers().get(1);
+		p = g.getPlayers().get(0);
+		ownPlayer = g.getPlayers().get(0);
 		
 		
 		characters = new ArrayList<JLabel>();
@@ -211,9 +211,9 @@ public class ControlBoard extends JFrame implements ActionListener{
 	}
 	
 	public void initializeCommandComboBoxes(){
-		JComboBox commandList = new JComboBox(commands);
+		JComboBox commandList = new JComboBox(ownPlayer.getAvailableCommands());
 		commandList.setSelectedIndex(0);
-		commandList.setBounds(commandBoxX, commandBoxY, boxWidht, boxHeight);
+		commandList.setBounds(commandBoxX, commandBoxY, boxWidht * 2, boxHeight);
 		frontPanel.add(commandList);
 		
 		JComboBox areaList = new JComboBox(none);
@@ -237,8 +237,6 @@ public class ControlBoard extends JFrame implements ActionListener{
 		
 		commandListener = new CommandComboBoxListener(g, ownPlayer, areaList, pawnList);
 		commandList.addActionListener(commandListener);
-		
-		
 	}
 	
 	@Override

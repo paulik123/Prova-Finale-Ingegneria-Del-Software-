@@ -6,6 +6,7 @@ import it.polimi.ingsw.ps45.model.vatican.ExcommunicationCard;
 public class AddServantsToProductionState implements ActionBuilderState{
 
 	int value;
+	private String[] commands = {"addservantsproduction"};
 	
 	public AddServantsToProductionState(int value){
 		this.value = value;
@@ -110,6 +111,11 @@ public class AddServantsToProductionState implements ActionBuilderState{
 	public String message() {
 		// TODO Auto-generated method stub
 		return "AddServantsToProductionState";
+	}
+
+	@Override
+	public String[] commands() {
+		return commands;
 	}
 
 }

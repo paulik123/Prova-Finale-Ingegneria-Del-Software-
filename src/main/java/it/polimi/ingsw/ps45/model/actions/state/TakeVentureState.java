@@ -7,6 +7,7 @@ public  class TakeVentureState implements ActionBuilderState{
 	
 	private int value;
 	private ConsumableSet discount;
+	private String[] commands = {"nopawnventure"};
 	
 	public TakeVentureState(int value, ConsumableSet discount){
 		this.value = value;
@@ -113,6 +114,11 @@ public  class TakeVentureState implements ActionBuilderState{
 	public String message() {
 		// TODO Auto-generated method stub
 		return "TakeVentureState";
+	}
+
+	@Override
+	public String[] commands() {
+		return commands;
 	}
 
 }

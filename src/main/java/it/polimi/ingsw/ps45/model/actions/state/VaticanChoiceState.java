@@ -4,7 +4,10 @@ import it.polimi.ingsw.ps45.model.player.ConsumableSet;
 import it.polimi.ingsw.ps45.model.vatican.ExcommunicationCard;
 
 public class VaticanChoiceState implements ActionBuilderState{
-	ExcommunicationCard c;
+	
+	private ExcommunicationCard c;
+	private String[] commands = {"acceptvatican", "refusevatican"};
+	
 	public VaticanChoiceState(ExcommunicationCard c){
 		this.c = c;
 	}
@@ -109,6 +112,11 @@ public class VaticanChoiceState implements ActionBuilderState{
 	public String message() {
 		// TODO Auto-generated method stub
 		return "VaticanChoiceState";
+	}
+
+	@Override
+	public String[] commands() {
+		return commands;
 	}
 
 }

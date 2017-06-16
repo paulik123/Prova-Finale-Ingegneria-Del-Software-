@@ -4,6 +4,8 @@ import it.polimi.ingsw.ps45.model.player.ConsumableSet;
 import it.polimi.ingsw.ps45.model.vatican.ExcommunicationCard;
 
 public class CouncilPrivilegeTwoState implements ActionBuilderState{
+	
+	private String[] commands = {"cp2"};
 
 	@Override
 	public int actionValue() {
@@ -105,6 +107,11 @@ public class CouncilPrivilegeTwoState implements ActionBuilderState{
 	public String message() {
 		// TODO Auto-generated method stub
 		return "CouncilPrivilegeThreeState";
+	}
+
+	@Override
+	public String[] commands() {
+		return commands;
 	}
 
 }

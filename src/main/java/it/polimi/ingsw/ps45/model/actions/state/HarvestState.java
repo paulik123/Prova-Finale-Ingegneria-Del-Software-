@@ -5,6 +5,8 @@ import it.polimi.ingsw.ps45.model.vatican.ExcommunicationCard;
 
 public class HarvestState implements ActionBuilderState{
 	
+	private String[] commands = {"harvest"};
+	
 	private int value;
 	
 	public HarvestState(int value){
@@ -112,5 +114,11 @@ public class HarvestState implements ActionBuilderState{
 		// TODO Auto-generated method stub
 		return "HarvestState";
 	}
+
+	@Override
+	public String[] commands() {
+		return commands;
+	}
+
 
 }

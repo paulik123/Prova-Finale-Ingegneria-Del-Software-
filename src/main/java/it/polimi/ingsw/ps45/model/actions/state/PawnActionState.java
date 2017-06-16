@@ -5,6 +5,8 @@ import it.polimi.ingsw.ps45.model.vatican.ExcommunicationCard;
 
 public class PawnActionState implements ActionBuilderState {
 	
+	private String[] commands = {"placepawnnocard", "placepawnharvest", "placepawnproduction", "placepawnterritory", "placepawncharacter", "placepawnbuilding", "placepawnventure"};
+	
 
 	@Override
 	public int actionValue() {
@@ -107,6 +109,11 @@ public class PawnActionState implements ActionBuilderState {
 	public String message() {
 		// TODO Auto-generated method stub
 		return "PawnActionState";
+	}
+
+	@Override
+	public String[] commands() {
+		return commands;
 	}
 
 }

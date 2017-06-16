@@ -289,6 +289,7 @@ public class Game {
 	public void updatePlayerStatus(){
 		for(Player p: players){
 			p.setStatus(p.getActionBuilder().getState().message());
+			p.setAvailableCommands(p.getActionBuilder().getState().commands());
 		}
 	}
 	

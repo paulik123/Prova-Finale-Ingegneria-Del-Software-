@@ -4,6 +4,8 @@ import it.polimi.ingsw.ps45.model.player.ConsumableSet;
 import it.polimi.ingsw.ps45.model.vatican.ExcommunicationCard;
 
 public class NoActionState implements ActionBuilderState{
+	
+	private String[] commands = {"---"};
 
 	@Override
 	public int actionValue() {
@@ -105,6 +107,11 @@ public class NoActionState implements ActionBuilderState{
 	public String message() {
 		// TODO Auto-generated method stub
 		return "NoActionState";
+	}
+
+	@Override
+	public String[] commands() {
+		return commands;
 	}
 
 }
