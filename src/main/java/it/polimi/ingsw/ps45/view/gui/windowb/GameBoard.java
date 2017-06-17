@@ -196,12 +196,15 @@ public class GameBoard extends JFrame {
 	private static final int pawnAreaSize = 20;
 	private static final int cardPawnHorizontalGap = 57;
 	private static final int cardPawnVerticalGap = 27;
+	
 
 
 	/**
 	 * Create the frame.
 	 */
 	public GameBoard() {
+		
+		
 		setResizable(false);
 		setTitle("Lorenzo il Magnifico - GameBoard");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -221,6 +224,7 @@ public class GameBoard extends JFrame {
 		initializeVentures();
 		initializeExcom();
 		initializePawnAreaLabels();
+		
 	}
 	
 	public void setBackground(){
@@ -543,5 +547,6 @@ public class GameBoard extends JFrame {
 		updateCardLabels();
 		updateExcomLabels();
 	}
+	
 
 }

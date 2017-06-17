@@ -5,7 +5,7 @@ import it.polimi.ingsw.ps45.model.vatican.ExcommunicationCard;
 
 public class NoActionState implements ActionBuilderState{
 	
-	private String[] commands = {"---", "endturn"};
+	private String[] commands = {"endturn"};
 
 	@Override
 	public int actionValue() {

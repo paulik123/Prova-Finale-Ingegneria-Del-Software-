@@ -10,11 +10,13 @@ import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import com.google.gson.Gson;
@@ -52,6 +54,9 @@ public class ControlBoard extends JFrame implements ActionListener{
 	private JComboBox pawnList;
 	private JComboBox servants;
 	private JTextField modes;
+	private JButton sendCommandButton;
+	private JTextArea textArea;
+	
 	
 	JComboBox playerList;
 	
@@ -84,10 +89,20 @@ public class ControlBoard extends JFrame implements ActionListener{
 	private static final int servantsBoxX = 475;
 	private static final int modeBoxX = 585;
 	
+	private static final int sendButtonWidth = 100;
+	private static final int sendButtonHeight = 25;
+	private static final int sendButtonX = 310;
+	private static final int sendButtonY = 350;
+	
+	private static final int textAreaWidth = 500;
+	
+	
 	
 	
 	
 	public ControlBoard(String playerID){
+		
+		
 		setResizable(false);
 		setTitle("Lorenzo il Magnifico - ControlBoard");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -112,6 +127,7 @@ public class ControlBoard extends JFrame implements ActionListener{
 		
 		commandParser = new GUICommandParser(commandList, areaList, pawnList, servants, modes);
 		
+		
 
 	}
 	
@@ -127,11 +143,13 @@ public class ControlBoard extends JFrame implements ActionListener{
 		characters = new ArrayList<JLabel>();
 		ventures = new ArrayList<JLabel>();
 		
-		frontPanel.revalidate(); 
-		frontPanel.repaint();
+
 		
 		updateCharacters();
 		updateVentures();
+		
+		frontPanel.revalidate(); 
+		frontPanel.repaint();
 	}
 	
 	public void updateCharacters(){
@@ -223,34 +241,43 @@ public class ControlBoard extends JFrame implements ActionListener{
 	}
 	
 	public void updateCommandComboBoxes(){
-		
-		DefaultComboBoxModel model = null;
 		try {
-			model = new DefaultComboBoxModel(g.getPlayerByID(playerID).getAvailableCommands());
+			
+			DefaultComboBoxModel model = new DefaultComboBoxModel(g.getPlayerByID(playerID).getAvailableCommands());
+			commandList.setModel(model);
+			
+			commandListener = new CommandComboBoxListener(g, g.getPlayerByID(playerID), areaList, pawnList, servants);
+			//Deleting old actionListener
+			for(ActionListener al:commandList.getActionListeners()){
+				commandList.removeActionListener(al);
+			}
+			commandList.addActionListener(commandListener);
+			//Simulate an actionperformed so the boxes update
+			commandListener.actionPerformed(new ActionEvent(commandList, ActionEvent.ACTION_PERFORMED, null));
+			commandListener.actionPerformed(new ActionEvent(commandList, ActionEvent.ACTION_PERFORMED, null));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		commandList.setModel(model);
 		
-		
-		commandListener.actionPerformed(new ActionEvent(commandList, ActionEvent.ACTION_PERFORMED, null));
+		textArea.setText("Current ERA: " + g.getEras()[g.getCurrentEra()] + "  || Current ROUND: " + g.getRoundNumber() + "  || CURRENT PLAYER: " + g.getCurrentRound().getCurrentPlayer().getPlayerID());
+
 	}
 	
 
 	public void initializeCommandComboBoxes(){
 		commandList = new JComboBox();
-		commandList.setSelectedIndex(0);
+		//commandList.setSelectedIndex(0);
 		commandList.setBounds(commandBoxX, commandBoxY, boxWidht * 2, boxHeight);
 		frontPanel.add(commandList);
 		
 		areaList = new JComboBox(none);
-		areaList.setSelectedIndex(0);
+		//areaList.setSelectedIndex(0);
 		areaList.setBounds(areaBoxX, commandBoxY, boxWidht, boxHeight);
 		frontPanel.add(areaList);
 		
 		pawnList = new JComboBox(none);
-		pawnList.setSelectedIndex(0);
+		//pawnList.setSelectedIndex(0);
 		pawnList.setBounds(pawnBoxX, commandBoxY, boxWidht, boxHeight);
 		frontPanel.add(pawnList);
 		
@@ -262,16 +289,15 @@ public class ControlBoard extends JFrame implements ActionListener{
 		modes.setBounds(modeBoxX, commandBoxY, boxWidht, boxHeight);
 		frontPanel.add(modes);
 		
+		sendCommandButton = new JButton("SEND");
+		sendCommandButton.setBounds(sendButtonX, sendButtonY, sendButtonWidth, sendButtonHeight);
+		frontPanel.add(sendCommandButton);
 		
-		try {
-			commandListener = new CommandComboBoxListener(g, g.getPlayerByID(playerID), areaList, pawnList, servants);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		commandList.addActionListener(commandListener);
-		//Simulate an actionperformed so the boxes update
-		commandListener.actionPerformed(new ActionEvent(commandList, ActionEvent.ACTION_PERFORMED, null));
+        textArea = new JTextArea();
+        textArea.setBounds(playerBoxX + boxWidht + 10, playerBoxY, textAreaWidth, boxHeight);
+        textArea.setEditable(false);
+        frontPanel.add(textArea);
+		
 	}
 	
 	
@@ -297,15 +323,18 @@ public class ControlBoard extends JFrame implements ActionListener{
 	public void update(Game g){
 		
 		this.g = g;
-		try {
-			commandListener.update(g, g.getPlayerByID(playerID));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		updatePlayerComboBox();
 		updateCommandComboBoxes();
 		updateCards();
 	}
+
+	public JButton getSendCommandButton() {
+		return sendCommandButton;
+	}
+	
+	
+
+	
+	
 
 }

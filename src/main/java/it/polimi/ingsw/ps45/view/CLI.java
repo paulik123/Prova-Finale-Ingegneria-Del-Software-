@@ -174,4 +174,12 @@ public class CLI extends View{
 		System.out.println("---");
 	}
 
+
+
+	@Override
+	public void showError(String error) {
+		System.out.println(error);
+		
+	}
+
 }

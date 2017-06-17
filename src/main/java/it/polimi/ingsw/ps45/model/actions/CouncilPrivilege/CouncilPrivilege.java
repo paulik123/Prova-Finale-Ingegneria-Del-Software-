@@ -16,7 +16,7 @@ public abstract class CouncilPrivilege {
 	public abstract ConsumableSet getConsumableSet();
 	
 	public static boolean areDifferent(CouncilPrivilege cp1, CouncilPrivilege cp2){
-		return cp1.equals(cp2);
+		return !cp1.equals(cp2);
 	}
 	
 	public static boolean areDifferent(CouncilPrivilege cp1, CouncilPrivilege cp2, CouncilPrivilege cp3){

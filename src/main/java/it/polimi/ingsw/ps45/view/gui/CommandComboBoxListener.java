@@ -71,7 +71,6 @@ public class CommandComboBoxListener implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(g == null) return;
 		JComboBox cb = (JComboBox)e.getSource();
         String s = (String)cb.getSelectedItem();
         String[] servantsAvailable = getAvailableServants();

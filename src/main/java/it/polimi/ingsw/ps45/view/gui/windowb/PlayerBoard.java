@@ -86,7 +86,10 @@ public class PlayerBoard extends JFrame implements ActionListener{
 	private static final int playerBoxWidht = 100;
 	private static final int playerBoxHeight = 20;
 	
+	
 	public PlayerBoard(String playerID){
+		
+		
 		setResizable(false);
 		setTitle("Lorenzo il Magnifico - PlayerBoard");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -94,6 +97,7 @@ public class PlayerBoard extends JFrame implements ActionListener{
 		contentPane = new JPanel();
 		//contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		this.playerID = playerID;
 		
@@ -106,6 +110,7 @@ public class PlayerBoard extends JFrame implements ActionListener{
 		setFrontPanel();
 		initializeResourceLabels();
 		initializePlayerComboBox();
+		
 	}
 	
 	public void updateCards(){
@@ -120,11 +125,13 @@ public class PlayerBoard extends JFrame implements ActionListener{
 		buildings = new ArrayList<JLabel>();
 		territories = new ArrayList<JLabel>();
 		
-		frontPanel.revalidate(); 
-		frontPanel.repaint();
+
 		
 		updateBuildings();
 		updateTerritories();
+		
+		frontPanel.revalidate(); 
+		frontPanel.repaint();
 	}
 	
 	public void updateBuildings(){
@@ -157,6 +164,8 @@ public class PlayerBoard extends JFrame implements ActionListener{
 		background.setLayout(new BorderLayout(0, 0));
 		
 		JLabel backgroundLabel = new JLabel("");
+		
+		
 
 		
 		background.add(backgroundLabel, BorderLayout.CENTER);
@@ -219,12 +228,9 @@ public class PlayerBoard extends JFrame implements ActionListener{
 	
 	
 	public void initializePlayerComboBox(){
-		ArrayList<String> players = new ArrayList<String>();
-		for(Player p: g.getPlayers()){
-			players.add(p.getPlayerID());
-		}
+
 		
-		playerList = new JComboBox(players.toArray());
+		playerList = new JComboBox();
         playerList.addActionListener(this);
         playerList.setBounds(playerBoxX, playerBoxY, playerBoxWidht, playerBoxHeight);
         frontPanel.add(playerList);
@@ -273,5 +279,6 @@ public class PlayerBoard extends JFrame implements ActionListener{
 			updateCards();
 			updateResourceLabels();
 	}
+	
 
 }

@@ -162,18 +162,18 @@ public class GUICommandParser {
 	}
 	
 	public ExchangeCouncilPrivilegeOneCommand parseCPOne() throws Exception{
-		String[] s = councilPrivilegeParse();
-		return new ExchangeCouncilPrivilegeOneCommand(s[1]);
+		String[] s = councilPrivilegeParse(1);
+		return new ExchangeCouncilPrivilegeOneCommand(s[0]);
 	}
 	
 	public ExchangeCouncilPrivilegeTwoCommand parseCPTwo() throws Exception{
-		String[] s = councilPrivilegeParse();
-		return new ExchangeCouncilPrivilegeTwoCommand(s[1], s[2]);
+		String[] s = councilPrivilegeParse(2);
+		return new ExchangeCouncilPrivilegeTwoCommand(s[0], s[1]);
 	}
 	
 	public ExchangeCouncilPrivilegeThreeCommand parseCPThree() throws Exception{
-		String[] s = councilPrivilegeParse();
-		return new ExchangeCouncilPrivilegeThreeCommand(s[1], s[2], s[3]);
+		String[] s = councilPrivilegeParse(3);
+		return new ExchangeCouncilPrivilegeThreeCommand(s[0], s[1], s[2]);
 	}
 	
 	public HarvestCommand parseHarvest() throws Exception{
@@ -188,9 +188,10 @@ public class GUICommandParser {
 		return new EndTurnCommand();
 	}
 	
-	public String[] councilPrivilegeParse(){
+	public String[] councilPrivilegeParse(int count) throws Exception{
 		String cp = (String) modes.getText();
 		String[] cps = cp.split("-");
+		if(cps.length != count) throw new Exception("Bad councilPrivilege command");
 		return cps;
 	}
 }

@@ -12,7 +12,7 @@ import it.polimi.ingsw.ps45.controller.command.CommandHolder;
 import it.polimi.ingsw.ps45.gson.PropertyBasedInterfaceMarshal;
 import it.polimi.ingsw.ps45.model.effects.Effect;
 
-public class CLIControllerThread extends Thread{
+public class CLIControllerThread extends Thread implements ClientController{
 	private OutputStreamWriter os;
 	private Scanner scanner;
 	private String playerID;

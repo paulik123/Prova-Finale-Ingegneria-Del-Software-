@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps45.client;
 
+import java.awt.EventQueue;
 import java.io.BufferedReader;
 import java.io.IOException;
 
@@ -18,12 +19,12 @@ import it.polimi.ingsw.ps45.view.View;
 
 public class ObserverThread extends Thread{
 	private BufferedReader br;
-	CLIServerResponseVisitor serverResponseVisitor;
-	Gson gson;
+	private ClientServerResponseVisitor serverResponseVisitor;
+	private Gson gson;
 	
 	public ObserverThread(BufferedReader br, View view){
 		this.br = br;
-		serverResponseVisitor = new CLIServerResponseVisitor(view);
+		serverResponseVisitor = new ClientServerResponseVisitor(view);
 		gson = GsonWithInterface.getGson();
 	}
 	
@@ -35,7 +36,11 @@ public class ObserverThread extends Thread{
             while((fromServer = br.readLine()) != null) {
             	
             	ServerResponseWrapper respWrapper = gson.fromJson(fromServer, ServerResponseWrapper.class);
-            	respWrapper.getResponse().accept(serverResponseVisitor);
+				respWrapper.getResponse().accept(serverResponseVisitor);
+
+            	
+            	
+            	
             }
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,5 +1,12 @@
 package it.polimi.ingsw.ps45.view.gui;
 
+import java.awt.EventQueue;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+
+import com.google.gson.Gson;
+
+import it.polimi.ingsw.ps45.gson.GsonWithInterface;
 import it.polimi.ingsw.ps45.model.game.Game;
 import it.polimi.ingsw.ps45.view.View;
 import it.polimi.ingsw.ps45.view.gui.windowb.ControlBoard;
@@ -14,21 +21,71 @@ public class GUI extends View{
 	
 	private ControlBoard controlBoard;
 	
-	public GUI(Game game, String playerID){
-		GameBoard gameBoard = new GameBoard(game);
-		gameBoard.setVisible(true);
+	private GUIWindowListener gameBoardListener;
+	private GUIWindowListener playerBoardListener;
+	private GUIWindowListener controlBoardListener;
+	
+	public GUI(String playerID){
 		
-		PlayerBoard playerBoard = new PlayerBoard(game, playerID);
-		playerBoard.setVisible(true);
+		gameBoardListener = new GUIWindowListener();
+		playerBoardListener = new GUIWindowListener();
+		controlBoardListener = new GUIWindowListener();
+
 		
-		ControlBoard controlBoard = new ControlBoard(game, playerID);
-		controlBoard.setVisible(true);
+		EventQueue.invokeLater(new Runnable(){
+
+			@Override
+			public void run() {
+				gameBoard = new GameBoard();
+				gameBoard.addWindowListener(gameBoardListener);
+				gameBoard.setVisible(true);
+				
+				playerBoard = new PlayerBoard(playerID);
+				playerBoard.addWindowListener(playerBoardListener);
+				playerBoard.setVisible(true);
+				
+				controlBoard = new ControlBoard(playerID);
+				controlBoard.addWindowListener(controlBoardListener);
+				controlBoard.setVisible(true);
+			}
+			
+		});
+
 	}
 
 	@Override
 	public void updateView(String gameJSON) {
-		// TODO Auto-generated method stub
+		Gson gson = GsonWithInterface.getGson();
+		Game g = gson.fromJson(gameJSON, Game.class);
 		
+		while(!isReady()){
+			try {
+				System.out.println("Window not ready.. waiting");
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		
+		gameBoard.update(g);
+		playerBoard.update(g);
+		controlBoard.update(g);
+	}
+	
+	public void addController(GUIController controller){
+		while(!isReady()){
+			try {
+				System.out.println("Window not ready.. waiting");
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		controlBoard.getSendCommandButton().addActionListener(controller);
 	}
 
 	public GameBoard getGameBoard() {
@@ -42,7 +99,15 @@ public class GUI extends View{
 	public ControlBoard getControlBoard() {
 		return controlBoard;
 	}
+
+	@Override
+	public void showError(String error) {
+		// TODO Auto-generated method stub
+		
+	}
 	
-	
+	public boolean isReady(){
+		return gameBoardListener.isReady() && playerBoardListener.isReady() && controlBoardListener.isReady();
+	}
 
 }
