@@ -21,6 +21,7 @@ import it.polimi.ingsw.ps45.model.cards.Era;
 import it.polimi.ingsw.ps45.model.cards.Territory;
 import it.polimi.ingsw.ps45.model.game.Game;
 import it.polimi.ingsw.ps45.model.player.PawnType;
+import it.polimi.ingsw.ps45.model.player.Player;
 
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -126,7 +127,10 @@ public class GameBoard extends JFrame {
 	private JLabel diceWhite;
 	private JLabel diceOrange;
 	
-	ArrayList<JLabel> turnMarkers;
+	private ArrayList<JLabel> turnMarkers;
+	private ArrayList<JLabel> excomIMarkers;
+	private ArrayList<JLabel> excomIIMarkers;
+	private ArrayList<JLabel> excomIIIMarkers;
 	
 	
 	
@@ -190,6 +194,13 @@ public class GameBoard extends JFrame {
 	
 	private static final int excomWidth = 35;
 	private static final int excomHeight = 65;
+	private static final int excomMarkerWidth = 5;
+	private static final int excomMarkerHeight = 5;
+	private static final int excomMarkerXGap1 = 10;
+	private static final int excomMarkerXGap2 = 20;
+	private static final int excomMarkerYGap1 = 10;
+	private static final int excomMarkerYGap2 = 20;
+	private static final int excomMarkerTHIRDYGap = 2;
 	
 	
 	
@@ -371,8 +382,25 @@ public class GameBoard extends JFrame {
 	
 	public void initializeExcom(){
 		excomI = initializeExcomLabel(excomIX, excomIY );
+		excomIMarkers = new ArrayList<JLabel>();
+		excomIMarkers.add(initializeExcomMarkerLabel(excomIX + excomMarkerXGap1, excomIY + excomMarkerYGap1));
+		excomIMarkers.add(initializeExcomMarkerLabel(excomIX + excomMarkerXGap2, excomIY + excomMarkerYGap1));
+		excomIMarkers.add(initializeExcomMarkerLabel(excomIX + excomMarkerXGap1, excomIY + excomMarkerYGap2));
+		excomIMarkers.add(initializeExcomMarkerLabel(excomIX + excomMarkerXGap2, excomIY + excomMarkerYGap2));
+		
 		excomII = initializeExcomLabel(excomIIX, excomIIY);
+		excomIIMarkers = new ArrayList<JLabel>();
+		excomIIMarkers.add(initializeExcomMarkerLabel(excomIIX + excomMarkerXGap1, excomIIY + excomMarkerYGap1));
+		excomIIMarkers.add(initializeExcomMarkerLabel(excomIIX + excomMarkerXGap2, excomIIY + excomMarkerYGap1));
+		excomIIMarkers.add(initializeExcomMarkerLabel(excomIIX + excomMarkerXGap1, excomIIY + excomMarkerYGap2));
+		excomIIMarkers.add(initializeExcomMarkerLabel(excomIIX + excomMarkerXGap2, excomIIY + excomMarkerYGap2));
+		
 		excomIII = initializeExcomLabel(excomIIIX, excomIIIY);
+		excomIIIMarkers = new ArrayList<JLabel>();
+		excomIIIMarkers.add(initializeExcomMarkerLabel(excomIIIX + excomMarkerXGap1, excomIIIY + excomMarkerTHIRDYGap + excomMarkerYGap1));
+		excomIIIMarkers.add(initializeExcomMarkerLabel(excomIIIX + excomMarkerXGap2, excomIIIY + excomMarkerTHIRDYGap + excomMarkerYGap1));
+		excomIIIMarkers.add(initializeExcomMarkerLabel(excomIIIX + excomMarkerXGap1, excomIIIY + excomMarkerTHIRDYGap + excomMarkerYGap2));
+		excomIIIMarkers.add(initializeExcomMarkerLabel(excomIIIX + excomMarkerXGap2, excomIIIY + excomMarkerTHIRDYGap + excomMarkerYGap2));
 	}
 	
 	public JLabel initializeCardLabel(int x, int y){
@@ -402,16 +430,48 @@ public class GameBoard extends JFrame {
 		return newLabel;
 	}
 	
+	public JLabel initializeExcomMarkerLabel(int x, int y){
+		JLabel newLabel = new JLabel("");
+		newLabel.setBounds(x, y, excomMarkerWidth, excomMarkerHeight);
+		newLabel.setOpaque(true);
+		newLabel.setBackground(Color.GREEN);
+		
+
+		frontPanel.add(newLabel);
+		
+		return newLabel;
+	}
+	
 	public void updateExcomLabels(){
 		setExcomLabelIcon(excomI,g.getVatican().getCard(Era.I).getName());
 		setExcomLabelIcon(excomII,g.getVatican().getCard(Era.II).getName());
 		setExcomLabelIcon(excomIII,g.getVatican().getCard(Era.III).getName());
+		
+		ArrayList<Player> players = g.getPlayers();
+		
+		for(int i=0; i<players.size();i++){
+			Player player = players.get(i);
+			
+			if(player.hasVaticanPenalty(Era.I))setExcomMarkerLabelIcon(excomIMarkers.get(i), players.get(i).getColor());
+			if(player.hasVaticanPenalty(Era.II))setExcomMarkerLabelIcon(excomIIMarkers.get(i), players.get(i).getColor());
+			if(player.hasVaticanPenalty(Era.III))setExcomMarkerLabelIcon(excomIIIMarkers.get(i), players.get(i).getColor());
+		}
 	}
 	
 	public void setExcomLabelIcon(JLabel excomLabel, String name){
 		ImageIcon imageIcon = new ImageIcon("images\\excom\\" + name + ".png"); // load the image to a imageIcon
 		Image image = imageIcon.getImage(); // transform it 
 		Image newimg = image.getScaledInstance(excomWidth, excomHeight,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+		imageIcon = new ImageIcon(newimg);
+		excomLabel.setIcon(imageIcon);
+	}
+	
+	public void setExcomMarkerLabelIcon(JLabel excomLabel, String color){
+		
+		
+		ImageIcon imageIcon = new ImageIcon("images\\pawns\\" + color + ".png"); // load the image to a imageIcon
+		Image image = imageIcon.getImage(); // transform it 
+		Image newimg = image.getScaledInstance(excomMarkerWidth, excomMarkerHeight,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 		imageIcon = new ImageIcon(newimg);
 		excomLabel.setIcon(imageIcon);
 	}

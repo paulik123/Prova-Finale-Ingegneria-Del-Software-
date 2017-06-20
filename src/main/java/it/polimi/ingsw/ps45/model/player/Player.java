@@ -1,7 +1,10 @@
 package it.polimi.ingsw.ps45.model.player;
 
+import java.util.HashMap;
+
 import it.polimi.ingsw.ps45.model.actions.ActionBuilder;
 import it.polimi.ingsw.ps45.model.area.Board;
+import it.polimi.ingsw.ps45.model.cards.Era;
 import it.polimi.ingsw.ps45.model.game.Observer;
 
 public class Player {
@@ -18,6 +21,8 @@ public class Player {
 	
 	private boolean answeredVatican;
 	
+	private HashMap<Era, Boolean> vaticanPenalties;
+	
 	private String status;
 	private String[] availableCommands;
 	
@@ -28,6 +33,7 @@ public class Player {
 		resourceSet = new ResourceSet(initialResources);
 		actionBuilder = new ActionBuilder(this, board, errorObserver);
 		answeredVatican = false;
+		initializeVaticanPenalties();
 		this.status = "New player";
 		this.availableCommands = actionBuilder.getState().commands();
 	}
@@ -37,6 +43,13 @@ public class Player {
 	
 	public ActionBuilder getActionBuilder() {
 		return actionBuilder;
+	}
+	
+	private void initializeVaticanPenalties(){
+		vaticanPenalties = new HashMap<Era, Boolean>();
+		vaticanPenalties.put(Era.I, false);
+		vaticanPenalties.put(Era.II, false);
+		vaticanPenalties.put(Era.III, false);
 	}
 
 
@@ -54,6 +67,14 @@ public class Player {
 
 	public boolean hasAnsweredVatican() {
 		return answeredVatican;
+	}
+	
+	public boolean hasVaticanPenalty(Era e){
+		return vaticanPenalties.get(e);
+	}
+	
+	public void setVaticanPenalty(Era e){
+		vaticanPenalties.put(e, true);
 	}
 
 

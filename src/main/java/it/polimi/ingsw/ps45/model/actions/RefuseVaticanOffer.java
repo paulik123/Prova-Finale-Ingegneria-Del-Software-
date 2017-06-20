@@ -18,6 +18,7 @@ public class RefuseVaticanOffer implements Action{
 		c.immediateEffect(p, 0);
 		p.setAnsweredVatican(true);
 		p.getActionBuilder().setState(new NoActionState());
+		p.setVaticanPenalty(c.getEra());
 	}
 
 }

@@ -23,4 +23,10 @@ public class ExcommunicationCard implements Serializable{
 	public String getName(){
 		return name;
 	}
+
+	public Era getEra() {
+		return era;
+	}
+	
+	
 }
