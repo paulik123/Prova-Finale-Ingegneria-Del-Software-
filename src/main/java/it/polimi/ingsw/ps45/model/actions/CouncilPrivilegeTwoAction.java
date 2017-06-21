@@ -20,7 +20,6 @@ public class CouncilPrivilegeTwoAction implements Action{
 	public void run() {
 		p.getResourceSet().collect(cp1.getConsumableSet());	
 		p.getResourceSet().collect(cp2.getConsumableSet());	
-		p.getActionBuilder().setState(new NoActionState());
 	}
 
 }

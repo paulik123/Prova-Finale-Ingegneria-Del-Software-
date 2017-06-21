@@ -17,10 +17,4 @@ public class Character extends Card {
 		return cost;
 	}
 
-	@Override
-	public void immediateEffect(Player p) {
-		for(Effect e:super.getEffects()){
-			e.runEffect(p, 0);
-		}
-	}
 }

@@ -142,8 +142,8 @@ public class CommandParser {
 	}
 	
 	public AddPlayerCommand parseJoinGame(String[] s) throws Exception{
-		if(s.length != 1) throw new Exception("Bad command");
-		return new AddPlayerCommand();
+		if(s.length != 2) throw new Exception("Bad command");
+		return new AddPlayerCommand(s[1]);
 	}
 	
 	public AcceptVaticanCommand parseAcceptVatican(String[] s) throws Exception{

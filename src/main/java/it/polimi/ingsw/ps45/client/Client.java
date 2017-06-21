@@ -19,6 +19,7 @@ public class Client {
     private ObserverThread observerThread;
 
     private String playerID;
+    private String bonusTile;
     Scanner scanner;
 
 
@@ -27,6 +28,8 @@ public class Client {
     	scanner = new Scanner(System.in);
     	System.out.println("Enter your username:");
     	playerID = scanner.nextLine();
+    	System.out.println("Enter the bonus tile you want to use: 1 to 5");
+    	bonusTile = scanner.nextLine();
     	
     	System.out.println("\nHello " + playerID + ". FOR GUI enter \"gui\" as next command. Else the game will use CLI.\n");
     	if(scanner.nextLine().toLowerCase().equals("gui")){
@@ -35,7 +38,7 @@ public class Client {
     		GUIController controller = new GUIController(gui, new OutputStreamWriter(socket.getOutputStream()), playerID);
     		observerThread = new ObserverThread(new BufferedReader(new InputStreamReader(socket.getInputStream())), gui);
     		observerThread.start();
-    		controller.sendJoinCommand();
+    		controller.sendJoinCommand(bonusTile);
     		gui.addController(controller);
     	}
     	else{
@@ -46,6 +49,7 @@ public class Client {
             observerThread = new ObserverThread(new BufferedReader(new InputStreamReader(socket.getInputStream())), cli);
             observerThread.start();
             controllerThread.start();
+            controllerThread.sendJoinCommand(bonusTile);
     	}
     }
 

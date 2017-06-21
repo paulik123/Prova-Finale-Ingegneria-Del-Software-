@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps45.model.actions;
 
+import it.polimi.ingsw.ps45.model.actions.state.NoActionState;
 import it.polimi.ingsw.ps45.model.area.cardarea.CharacterCardArea;
 import it.polimi.ingsw.ps45.model.cards.Character;
 import it.polimi.ingsw.ps45.model.player.Player;
@@ -17,7 +18,7 @@ public class NoPawnCharacterAction implements Action{
 	}
 
 	@Override
-	public void run() {
+	public void run() {	
 		if(!p.getResourceSet().getPermanentEffects().isNoCardAreaEffect())c.immediateEffect(p, value);
 		
 		Character card = c.getCharacter();

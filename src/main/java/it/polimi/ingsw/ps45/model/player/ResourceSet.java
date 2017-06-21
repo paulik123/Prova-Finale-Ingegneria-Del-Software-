@@ -1,7 +1,14 @@
 package it.polimi.ingsw.ps45.model.player;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonSyntaxException;
+
+import it.polimi.ingsw.ps45.gson.GsonWithInterface;
 import it.polimi.ingsw.ps45.model.cards.Building;
 import it.polimi.ingsw.ps45.model.cards.Character;
 import it.polimi.ingsw.ps45.model.cards.Territory;
@@ -24,7 +31,7 @@ public class ResourceSet {
 	
 	private PermanentEffects permanentEffects;
 	
-	private BonusTile bonusTile;
+	private PersonalBonusTile bonusTile;
 	
 
 
@@ -36,7 +43,7 @@ public class ResourceSet {
 	ArrayList<Venture> ventureList;
 	
 	
-	public ResourceSet(ConsumableSet initialResources){
+	public ResourceSet(ConsumableSet initialResources, String bonusTile){
 		this.resources = initialResources;
 		
 		territoryList = new ArrayList<Territory>();
@@ -59,7 +66,7 @@ public class ResourceSet {
 		
 		this.permanentEffects = new PermanentEffects();
 		
-		this.bonusTile = new DefaultBonusTile();
+		initializeBonusTile(bonusTile);
 		
 	}
 	
@@ -81,6 +88,10 @@ public class ResourceSet {
 	}
 	
 	public void setPawn(PawnType pt, int value, boolean b){
+		if(permanentEffects.isValueFivePawn()){
+			pawnSet.set(pt, 5, b);
+			return;
+		}
 		pawnSet.set(pt, value, b);
 	}
 	
@@ -146,7 +157,7 @@ public class ResourceSet {
 	}
 
 
-	public BonusTile getBonusTile() {
+	public PersonalBonusTile getBonusTile() {
 		return bonusTile;
 	}
 
@@ -163,6 +174,22 @@ public class ResourceSet {
 
 	public PawnSet getPawnSet() {
 		return pawnSet;
+	}
+	
+	public void initializeBonusTile(String bt){
+		Gson gson = GsonWithInterface.getGson();
+		
+		
+		try {
+			bonusTile = gson.fromJson(new FileReader("serialized\\bonustiles\\" + bt  + ".json"), PersonalBonusTile.class);
+		} catch (Exception e) {
+			try {
+				bonusTile = gson.fromJson(new FileReader("serialized\\bonustiles\\0.json"), PersonalBonusTile.class);
+			} catch (JsonSyntaxException | JsonIOException | FileNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
 	}
 	
 	

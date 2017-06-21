@@ -17,7 +17,6 @@ public class CouncilPrivilegeOneAction implements Action{
 	@Override
 	public void run() {
 		p.getResourceSet().collect(cp1.getConsumableSet());	
-		p.getActionBuilder().setState(new NoActionState());
 	}
 
 }

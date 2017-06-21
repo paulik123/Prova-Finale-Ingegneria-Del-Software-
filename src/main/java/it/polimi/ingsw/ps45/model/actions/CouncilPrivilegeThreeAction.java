@@ -23,7 +23,6 @@ public class CouncilPrivilegeThreeAction implements Action{
 		p.getResourceSet().collect(cp1.getConsumableSet());	
 		p.getResourceSet().collect(cp2.getConsumableSet());	
 		p.getResourceSet().collect(cp3.getConsumableSet());
-		p.getActionBuilder().setState(new NoActionState());
 	}
 
 }

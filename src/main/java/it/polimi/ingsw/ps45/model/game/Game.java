@@ -198,7 +198,7 @@ public class Game {
 		updateColorTurns();
 	}
 	
-	public void addPlayer(String playerID, Observer observer) throws Exception{
+	public void addPlayer(String playerID, String bonusTile, Observer observer) throws Exception{
 		if(canAddPlayer(playerID)){
 			ConsumableSet cs = new ConsumableSet();
 			cs.setWood(Player.defaultWood);
@@ -206,7 +206,7 @@ public class Game {
 			cs.setServants(Player.defaultServants);
 			cs.setCoins(Player.defaultCoins + players.size());
 			
-			Player p = new Player(playerID, ColorFromInt.getColor(numberOfPlayers), board, cs, observer);
+			Player p = new Player(playerID, bonusTile, ColorFromInt.getColor(numberOfPlayers), board, cs, observer);
 			players.add(p);
 			registerObserver(observer);
 			numberOfPlayers++;
@@ -275,7 +275,7 @@ public class Game {
 		setSinglePawn(r.nextInt(6)+1, PawnType.BLACK);
 		setSinglePawn(r.nextInt(6)+1, PawnType.WHITE);
 		setSinglePawn(r.nextInt(6)+1, PawnType.ORANGE);
-		setSinglePawn(0, PawnType.NEUTRAL);
+		setNeutralPawn();
 	}
 	
 	public void setSinglePawn(int value, PawnType pt){
@@ -283,6 +283,12 @@ public class Game {
 		
 		for(Player p:players){
 			p.getResourceSet().setPawn(pt, value, true);
+		}
+	}
+	
+	public void setNeutralPawn(){
+		for(Player p:players){
+			p.getResourceSet().setPawn(PawnType.NEUTRAL, p.getResourceSet().getPawnSet().getDefaultNeutralValue(), true);
 		}
 	}
 	

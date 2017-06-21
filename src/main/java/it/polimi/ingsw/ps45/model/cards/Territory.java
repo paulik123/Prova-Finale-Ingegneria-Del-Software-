@@ -31,12 +31,7 @@ public class Territory extends Card {
 		return harvestLevel;
 	}
 
-	@Override
-	public void immediateEffect(Player p) {
-		for(Effect e:super.getEffects()){
-			e.runEffect(p, 0);
-		}
-	}
+
 	
 	public void addHarvestEffect(Effect effect){
 		harvestEffects.add(effect);

@@ -27,10 +27,10 @@ public class Player {
 	private String[] availableCommands;
 	
 	
-	public Player(String playerID, String color, Board board, ConsumableSet initialResources, Observer errorObserver){
+	public Player(String playerID, String bonusTile, String color, Board board, ConsumableSet initialResources, Observer errorObserver){
 		this.playerID = playerID;
 		this.color = color;
-		resourceSet = new ResourceSet(initialResources);
+		resourceSet = new ResourceSet(initialResources, bonusTile);
 		actionBuilder = new ActionBuilder(this, board, errorObserver);
 		answeredVatican = false;
 		initializeVaticanPenalties();

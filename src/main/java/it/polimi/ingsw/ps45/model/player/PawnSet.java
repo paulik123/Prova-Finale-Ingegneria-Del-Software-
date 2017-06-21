@@ -6,6 +6,7 @@ public class PawnSet {
 
 	
 	private HashMap<PawnType,Pawn> pawnMap;
+	private int defaultNeutralValue;
 	
 	public PawnSet(){
 		pawnMap = new HashMap<PawnType, Pawn>();
@@ -13,6 +14,8 @@ public class PawnSet {
 		pawnMap.put(PawnType.BLACK, new Pawn(0, true, PawnType.BLACK));
 		pawnMap.put(PawnType.ORANGE, new Pawn(0, true, PawnType.ORANGE));
 		pawnMap.put(PawnType.NEUTRAL, new Pawn(0, true, PawnType.NEUTRAL));
+		
+		defaultNeutralValue = 0;
 	}
 	
 	public Pawn get(PawnType type){
@@ -34,6 +37,16 @@ public class PawnSet {
 	public HashMap<PawnType, Pawn> getPawnMap() {
 		return pawnMap;
 	}
+
+	public int getDefaultNeutralValue() {
+		return defaultNeutralValue;
+	}
+
+	public void setDefaultNeutralValue(int defaultNeutralValue) {
+		this.defaultNeutralValue = defaultNeutralValue;
+	}
+	
+	
 	
 	
 	

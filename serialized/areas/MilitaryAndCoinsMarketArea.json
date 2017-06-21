@@ -1,1 +1,1 @@
-{"immediateEffect":{"cs":{"wood":0,"stone":0,"coins":2,"servants":0,"victoryPoints":0,"faithPoints":0,"militaryPoints":3},"CLASS_META_KEY":"it.polimi.ingsw.ps45.model.effects.CollectEffect"},"name":"MilitaryAndCoinsMarket","cost":1,"occupiedBy":[],"maxOccupants":1}
+{"immediateEffect":{"cs":{"wood":0,"stone":0,"coins":2,"servants":0,"victoryPoints":0,"faithPoints":0,"militaryPoints":3},"CLASS_META_KEY":"it.polimi.ingsw.ps45.model.effects.AreaCollectEffect"},"name":"MilitaryAndCoinsMarket","cost":1,"occupiedBy":[],"maxOccupants":1}

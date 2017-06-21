@@ -50,11 +50,4 @@ public class Building extends Card {
 		productionIIEffects.add(e);
 	}
 	
-	@Override
-	public void immediateEffect(Player p) {
-		for(Effect e:super.getEffects()){
-			e.runEffect(p, 0);
-		}
-		
-	}
 }

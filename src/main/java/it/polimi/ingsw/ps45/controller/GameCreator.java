@@ -19,9 +19,9 @@ public class GameCreator {
 		pendingGame = new Game();
 	}
 	
-	public void addPlayer(String ID, Observer o) throws Exception{
+	public void addPlayer(String ID, String bonusTile, Observer o) throws Exception{
 		if(playerExists(ID)) throw new Exception("Player already exists");
-		pendingGame.addPlayer(ID, o);
+		pendingGame.addPlayer(ID, bonusTile, o);
 		playersInGames.put(ID, pendingGame);
 		
 		

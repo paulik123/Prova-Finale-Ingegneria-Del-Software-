@@ -71,6 +71,7 @@ public class ActionBuilder {
 		
 		if(canPlacePawnProductionRun(pawn, pawnValue + p.getResourceSet().getActionValueModifier().getProduction(), area, servantsSet)){
 			makePlayerPay(servantsSet, pawn);
+			setState(new NoActionState());
 			new PlacePawnProductionAction(p, area, pt, pawnValue).run();
 		}else{ 
 			notifyError("Action not allowed - pawn/consumables unavailable");
@@ -90,6 +91,7 @@ public class ActionBuilder {
 		
 		if(canPlacePawnHarvestRun(pawn, pawnValue + p.getResourceSet().getActionValueModifier().getHarvest(), area, servantsSet)){
 			makePlayerPay(servantsSet, pawn);
+			setState(new NoActionState());
 			new PlacePawnHarvestAction(p, area, pt, pawnValue).run();
 		}else{
 			notifyError("Action not allowed - pawn/consumables unavailable");
@@ -109,6 +111,7 @@ public class ActionBuilder {
 		
 		if(canPlacePawnNoCardRun(pawn, pawnValue, area, servantsSet)){
 			makePlayerPay(servantsSet, pawn);
+			setState(new NoActionState());
 			new PlacePawnNoCardAction(p, area, pt, pawnValue).run();
 		}else{
 			notifyError("Action not allowed - pawn/consumables unavailable");
@@ -128,6 +131,7 @@ public class ActionBuilder {
 		
 		if(canPlacePawnMarketRun(pawn, pawnValue, area, servantsSet)){
 			makePlayerPay(servantsSet, pawn);
+			setState(new NoActionState());
 			new PlacePawnNoCardAction(p, area, pt, pawnValue).run();
 		}else{
 			notifyError("Action not allowed - pawn/consumables unavailable");
@@ -144,10 +148,11 @@ public class ActionBuilder {
 		int pawnValue = calculatePawnValue(pt, servantsAdded) + p.getResourceSet().getActionValueModifier().getTerritoryAction();
 		ConsumableSet servantsSet = servantsToConsumableSet(servantsAdded);
 		servantsSet.makeDiscount(p.getResourceSet().getTerritoryActionDiscount());
-		if(board.getTerritoryTower().isOccupied()) servantsSet.collect(towerCoinsPenaltySet());
+		if(board.getVentureTower().isOccupied() && !p.getResourceSet().getPermanentEffects().isNoThreeCoinsTowerPenalty()) servantsSet.collect(towerCoinsPenaltySet());
 		
 		if(canPlacePawnTerritoryRun(pawn, pawnValue, area, servantsSet)){
 			makePlayerPay(servantsSet, pawn);
+			setState(new NoActionState());
 			new PlacePawnTerritoryAction(p, area, pt, pawnValue).run();
 		}else{
 			notifyError("Action not allowed - pawn/consumables unavailable");
@@ -166,10 +171,11 @@ public class ActionBuilder {
 		ConsumableSet cost = area.getCharacter().cost();
 		cost.collect(servantsToConsumableSet(servantsAdded));
 		cost.makeDiscount(p.getResourceSet().getCharacterActionDiscount());
-		if(board.getCharacterTower().isOccupied()) cost.collect(towerCoinsPenaltySet());
+		if(board.getVentureTower().isOccupied() && !p.getResourceSet().getPermanentEffects().isNoThreeCoinsTowerPenalty()) cost.collect(towerCoinsPenaltySet());
 		
 		if(canPlacePawnCharacterRun(pawn, pawnValue, area, cost)){
 			makePlayerPay(cost, pawn);
+			setState(new NoActionState());
 			new PlacePawnCharacterAction(p, area, pt, pawnValue).run();
 		}else{
 			notifyError("Action not allowed - pawn/consumables unavailable");
@@ -189,10 +195,11 @@ public class ActionBuilder {
 		
 		cost.collect(servantsToConsumableSet(servantsAdded));
 		cost.makeDiscount(p.getResourceSet().getBuildingActionDiscount());
-		if(board.getBuildingTower().isOccupied()) cost.collect(towerCoinsPenaltySet());
+		if(board.getVentureTower().isOccupied() && !p.getResourceSet().getPermanentEffects().isNoThreeCoinsTowerPenalty()) cost.collect(towerCoinsPenaltySet());
 		
 		if(canPlacePawnBuildingRun(pawn, pawnValue, area, cost)){
 			makePlayerPay(cost, pawn);
+			setState(new NoActionState());
 			new PlacePawnBuildingAction(p, area, pt, pawnValue).run();
 		}else{
 			notifyError("Action not allowed - pawn/consumables unavailable");
@@ -215,10 +222,11 @@ public class ActionBuilder {
 		
 		cost.collect(servantsToConsumableSet(servantsAdded));
 		cost.makeDiscount(p.getResourceSet().getVentureActionDiscount());
-		if(board.getVentureTower().isOccupied()) cost.collect(towerCoinsPenaltySet());
+		if(board.getVentureTower().isOccupied() && !p.getResourceSet().getPermanentEffects().isNoThreeCoinsTowerPenalty()) cost.collect(towerCoinsPenaltySet());
 		
 		if(canPlacePawnVentureRun(pawn, pawnValue, area, cost)){
 			makePlayerPay(cost, pawn);
+			setState(new NoActionState());
 			new PlacePawnVentureAction(p, area, pt, pawnValue).run();
 		}else{
 			notifyError("Action not allowed - pawn/consumables unavailable");
@@ -232,6 +240,7 @@ public class ActionBuilder {
 			notifyError("Action not allowed - state is false");
 			throw new Exception("Action not allowed - state is false");
 		}
+		setState(new NoActionState());
 		new HarvestAction(p, state.actionValue() + + p.getResourceSet().getActionValueModifier().getHarvest()).run();
 	}
 	
@@ -240,6 +249,7 @@ public class ActionBuilder {
 			notifyError("Action not allowed - state is false");
 			throw new Exception("Action not allowed - state is false");
 		}
+		setState(new NoActionState());
 		new ProductionAction(p, pm, state.actionValue() + p.getResourceSet().getActionValueModifier().getProduction()).run();
 	}
 	
@@ -279,10 +289,11 @@ public class ActionBuilder {
 		int value = calculateValue(state.actionValue(), servantsAdded) + p.getResourceSet().getActionValueModifier().getTerritoryAction();
 		ConsumableSet servantsSet = servantsToConsumableSet(servantsAdded);
 		servantsSet.makeDiscount(p.getResourceSet().getTerritoryActionDiscount());
-		if(board.getTerritoryTower().isOccupied()) servantsSet.collect(towerCoinsPenaltySet());
+		if(board.getVentureTower().isOccupied() && !p.getResourceSet().getPermanentEffects().isNoThreeCoinsTowerPenalty()) servantsSet.collect(towerCoinsPenaltySet());
 		
 		if(canNoPawnTerritoryRun(value, area, servantsSet)){
 			makePlayerPay(servantsSet);
+			setState(new NoActionState());
 			new NoPawnTerritoryAction(p, area).run();
 		}else{
 			notifyError("Action not allowed - pawn/consumables unavailable");
@@ -299,10 +310,11 @@ public class ActionBuilder {
 		ConsumableSet cost = area.getCharacter().cost();
 		cost.collect(servantsToConsumableSet(servantsAdded));
 		cost.makeDiscount(p.getResourceSet().getCharacterActionDiscount());
-		if(board.getCharacterTower().isOccupied()) cost.collect(towerCoinsPenaltySet());
+		if(board.getVentureTower().isOccupied() && !p.getResourceSet().getPermanentEffects().isNoThreeCoinsTowerPenalty()) cost.collect(towerCoinsPenaltySet());
 		
 		if(canNoPawnCharacterRun(value, area, cost)){
 			makePlayerPay(cost);
+			setState(new NoActionState());
 			new NoPawnCharacterAction(p, area).run();
 		}else{
 			notifyError("Action not allowed - pawn/consumables unavailable");
@@ -319,10 +331,11 @@ public class ActionBuilder {
 		ConsumableSet cost = area.getBuilding().cost();
 		cost.collect(servantsToConsumableSet(servantsAdded));
 		cost.makeDiscount(p.getResourceSet().getBuildingActionDiscount());
-		if(board.getBuildingTower().isOccupied()) cost.collect(towerCoinsPenaltySet());
+		if(board.getVentureTower().isOccupied() && !p.getResourceSet().getPermanentEffects().isNoThreeCoinsTowerPenalty()) cost.collect(towerCoinsPenaltySet());
 		
 		if(canNoPawnBuildingRun(value, area, cost)){
 			makePlayerPay(cost);
+			setState(new NoActionState());
 			new NoPawnBuildingAction(p, area).run();
 		}else{
 			notifyError("Action not allowed - pawn/consumables unavailable");
@@ -343,10 +356,11 @@ public class ActionBuilder {
 		
 		cost.collect(servantsToConsumableSet(servantsAdded));
 		cost.makeDiscount(p.getResourceSet().getVentureActionDiscount());
-		if(board.getVentureTower().isOccupied()) cost.collect(towerCoinsPenaltySet());
+		if(board.getVentureTower().isOccupied() && !p.getResourceSet().getPermanentEffects().isNoThreeCoinsTowerPenalty()) cost.collect(towerCoinsPenaltySet());
 		
 		if(canNoPawnVentureRun(value, area, cost)){
 			makePlayerPay(cost);
+			setState(new NoActionState());
 			new NoPawnVentureAction(p, area).run();
 		}else{
 			notifyError("Action not allowed - pawn/consumables unavailable");
@@ -359,8 +373,9 @@ public class ActionBuilder {
 			notifyError("Action not allowed - state is false");
 			throw new Exception("Action not allowed - state is false");
 		}
-		new CouncilPrivilegeOneAction(p, cp1).run();
 		setState(new NoActionState());
+		new CouncilPrivilegeOneAction(p, cp1).run();
+		
 	}
 	
 	public void exchangeCouncilPrivilegeTwo(CouncilPrivilege cp1, CouncilPrivilege cp2) throws Exception{
@@ -417,24 +432,28 @@ public class ActionBuilder {
 	
 	private boolean canNoPawnVentureRun(int value, VentureCardArea area, ConsumableSet cost){
 		return !board.getVentureTower().isOccupiedByPlayer(p) &&
+				area.getVenture() != null &&
 				p.getResourceSet().getVentureList().size() < 6 &&
 				hasGeneralRequirementsNoPawn(value, area, cost);
 	}
 	
 	private boolean canNoPawnBuildingRun(int value, BuildingCardArea area, ConsumableSet cost){
 		return !board.getBuildingTower().isOccupiedByPlayer(p) &&
+				area.getBuilding() != null &&
 				p.getResourceSet().getBuildingList().size() < 6 &&
 				hasGeneralRequirementsNoPawn(value, area, cost);
 	}
 	
 	private boolean canNoPawnCharacterRun(int value, CharacterCardArea area, ConsumableSet cost){
 		return !board.getCharacterTower().isOccupiedByPlayer(p) &&
+				area.getCharacter() != null &&
 				p.getResourceSet().getCharacterList().size() < 6 &&
 				hasGeneralRequirementsNoPawn(value, area, cost);
 	}
 	
 	private boolean canNoPawnTerritoryRun(int value, TerritoryCardArea area, ConsumableSet cost){
 		return !board.getTerritoryTower().isOccupiedByPlayer(p) &&
+				area.getTerritory() != null &&
 				hasMilitaryForTerritory() &&
 				p.getResourceSet().getTerritoryList().size() < 6 &&
 				hasGeneralRequirementsNoPawn(value, area, cost);
@@ -442,6 +461,7 @@ public class ActionBuilder {
 	
 	private boolean canPlacePawnVentureRun(Pawn pawn, int pawnValue, VentureCardArea area, ConsumableSet cost){
 		return !board.getVentureTower().isOccupiedByPlayer(p) &&
+				area.getVenture() != null &&
 				p.getResourceSet().getVentureList().size() < 6 &&
 				hasGeneralRequirementsWithPawn(pawn, pawnValue, area, cost);
 	}
@@ -449,18 +469,21 @@ public class ActionBuilder {
 	
 	private boolean canPlacePawnBuildingRun(Pawn pawn, int pawnValue, BuildingCardArea area, ConsumableSet cost){
 		return !board.getBuildingTower().isOccupiedByPlayer(p) &&
+				area.getBuilding() != null &&
 				p.getResourceSet().getBuildingList().size() < 6 &&
 				hasGeneralRequirementsWithPawn(pawn, pawnValue, area, cost);
 	}
 	
 	private boolean canPlacePawnCharacterRun(Pawn pawn, int pawnValue, CharacterCardArea area, ConsumableSet cost){
 		return !board.getCharacterTower().isOccupiedByPlayer(p) &&
+				area.getCharacter() != null &&
 				p.getResourceSet().getCharacterList().size() < 6 &&
 				hasGeneralRequirementsWithPawn(pawn, pawnValue, area, cost);
 	}
 	
 	private boolean canPlacePawnTerritoryRun(Pawn pawn, int pawnValue, TerritoryCardArea area, ConsumableSet cost){
 		return !board.getTerritoryTower().isOccupiedByPlayer(p) &&
+				area.getTerritory() != null &&
 				hasMilitaryForTerritory() &&
 				p.getResourceSet().getTerritoryList().size() < 6 &&
 				hasGeneralRequirementsWithPawn(pawn, pawnValue, area, cost);
@@ -486,19 +509,21 @@ public class ActionBuilder {
 	}
 	
 	private boolean hasGeneralRequirementsWithPawn(Pawn pawn, int pawnValue, Area area, ConsumableSet cost){
-		   return   area.isAvailable() &&
+		   return   (area.isAvailable() || p.getResourceSet().getPermanentEffects().isCanPlacePawnOnOccupiedAreas()) &&
 				   	pawn.isAvailable() &&
 				   	pawnValue >= area.getCost() && 
 				   	p.getResourceSet().hasConsumables(cost);
 	}
 	
 	private boolean hasGeneralRequirementsNoPawn(int value, Area area, ConsumableSet cost){
-		   return   area.isAvailable() &&
+		   return   (area.isAvailable() || p.getResourceSet().getPermanentEffects().isCanPlacePawnOnOccupiedAreas()) &&
 				   	value >= area.getCost() && 
 				   	p.getResourceSet().hasConsumables(cost);
 	}
 	
 	private boolean hasMilitaryForTerritory(){
+		if(p.getResourceSet().getPermanentEffects().isNoTerritoryMilitaryPointsRequirements()) return true;
+		
 		int size = p.getResourceSet().getTerritoryList().size() + 1;
 		int militaryPoints = p.getResourceSet().getResources().getMilitaryPoins();
 		if(size <= 2) return true;
@@ -537,6 +562,12 @@ public class ActionBuilder {
 	}
 	
 	private ConsumableSet towerCoinsPenaltySet(){
+		ConsumableSet cs = new ConsumableSet();
+		cs.setCoins(3);
+		return cs;
+	}
+	
+	private ConsumableSet coinsDiscountConsumableSet(){
 		ConsumableSet cs = new ConsumableSet();
 		cs.setCoins(3);
 		return cs;

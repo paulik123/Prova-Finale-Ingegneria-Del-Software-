@@ -56,10 +56,10 @@ public class GUIController implements ActionListener, ClientController{
 		
 	}
 	
-	public void sendJoinCommand(){
+	public void sendJoinCommand(String bonusTile){
 
 		try {
-			CommandHolder ch = new CommandHolder(new AddPlayerCommand(), playerID);
+			CommandHolder ch = new CommandHolder(new AddPlayerCommand(bonusTile), playerID);
 			String json = gson.toJson(ch);
 			send(json);
 		} catch (IOException e) {

@@ -17,7 +17,14 @@ public abstract class Card implements Serializable {
 	private ArrayList<Effect> effects;
 	private String name;
 
-	abstract public void immediateEffect(Player p);
+	public void immediateEffect(Player p){
+		
+		
+		
+		for(Effect e:effects){
+			e.runEffect(p, 0);
+		}
+	}
 	
 	public Card(Era e, String name){
 		this.era = e;

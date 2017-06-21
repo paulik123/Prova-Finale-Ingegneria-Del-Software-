@@ -1,11 +1,17 @@
 package it.polimi.ingsw.ps45.model.player;
 
 public class PermanentEffects {
- //TODO:
+	
 	private boolean addingServantsPenalty;
 	private boolean noPawnOnMarketPenalty;
 	private boolean noFirstTurn;
 	private boolean noCardAreaEffect;
+	private boolean hasActivatedSisto;
+	private boolean noTerritoryMilitaryPointsRequirements;
+	private boolean hasActivatedSantaRita;
+	private boolean canPlacePawnOnOccupiedAreas;
+	private boolean valueFivePawn;
+	private boolean noThreeCoinsTowerPenalty;
 	
 	//ENDGAME
 	private boolean noCharacterVictoryPoints;
@@ -103,6 +109,67 @@ public class PermanentEffects {
 	public void setNoCardAreaEffect(boolean noCardAreaEffect) {
 		this.noCardAreaEffect = noCardAreaEffect;
 	}
+
+	public boolean isHasActivatedSisto() {
+		return hasActivatedSisto;
+	}
+
+	public void setHasActivatedSisto(boolean hasActivatedSisto) {
+		this.hasActivatedSisto = hasActivatedSisto;
+	}
+
+	public boolean isNoTerritoryMilitaryPointsRequirements() {
+		return noTerritoryMilitaryPointsRequirements;
+	}
+
+	public void setNoTerritoryMilitaryPointsRequirements(boolean noTerritoryMilitaryPointsRequirements) {
+		this.noTerritoryMilitaryPointsRequirements = noTerritoryMilitaryPointsRequirements;
+	}
+
+	public boolean isHasActivatedSantaRita() {
+		return hasActivatedSantaRita;
+	}
+
+	public void setHasActivatedSantaRita(boolean hasActivatedSantaRita) {
+		this.hasActivatedSantaRita = hasActivatedSantaRita;
+	}
+
+	public boolean isCanPlacePawnOnOccupiedAreas() {
+		return canPlacePawnOnOccupiedAreas;
+	}
+
+	public void setCanPlacePawnOnOccupiedAreas(boolean canPlacePawnOnOccupiedAreas) {
+		this.canPlacePawnOnOccupiedAreas = canPlacePawnOnOccupiedAreas;
+	}
+
+	public boolean isValueFivePawn() {
+		return valueFivePawn;
+	}
+
+	public void setValueFivePawn(boolean valueFivePawn) {
+		this.valueFivePawn = valueFivePawn;
+	}
+
+	public boolean isNoThreeCoinsTowerPenalty() {
+		return noThreeCoinsTowerPenalty;
+	}
+
+	public void setNoThreeCoinsTowerPenalty(boolean noThreeCoinsTowerPenalty) {
+		this.noThreeCoinsTowerPenalty = noThreeCoinsTowerPenalty;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+
+	
 	
 	
 	

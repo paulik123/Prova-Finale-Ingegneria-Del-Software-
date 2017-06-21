@@ -1,1 +1,1 @@
-{"effect":{"cs":{"wood":0,"stone":0,"coins":0,"servants":0,"victoryPoints":0,"faithPoints":0,"militaryPoints":2},"CLASS_META_KEY":"it.polimi.ingsw.ps45.model.effects.CollectEffect"},"name":"ThirdFloor","cost":7,"occupiedBy":[],"maxOccupants":1}
+{"effect":{"cs":{"wood":0,"stone":0,"coins":0,"servants":0,"victoryPoints":0,"faithPoints":0,"militaryPoints":2},"CLASS_META_KEY":"it.polimi.ingsw.ps45.model.effects.AreaCollectEffect"},"name":"ThirdFloor","cost":7,"occupiedBy":[],"maxOccupants":1}

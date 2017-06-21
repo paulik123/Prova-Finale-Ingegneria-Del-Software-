@@ -14,7 +14,28 @@ public class CollectEffect implements Effect, Serializable{
 	}
 	@Override
 	public void runEffect(Player p, int value) {
+		
+		// Santa Rita... 
+		if(p.getResourceSet().getPermanentEffects().isHasActivatedSantaRita()){
+			ConsumableSet newCS = new ConsumableSet();
+			newCS.setCoins(cs.getCoins());
+			cs.setCoins(0);
+			
+			newCS.setWood(cs.getWood());
+			cs.setWood(0);
+			
+			newCS.setStone(cs.getStone());
+			cs.setStone(0);
+			
+			newCS.setServants(cs.getServants());
+			cs.setServants(0);
+			
+			p.getResourceSet().collect(newCS);
+			p.getResourceSet().collect(newCS);
+			p.getResourceSet().collect(cs);
+			return;
+		}
+		
 		p.getResourceSet().collect(cs);
-		p.getActionBuilder().setState(new NoActionState());
 	}
 }
