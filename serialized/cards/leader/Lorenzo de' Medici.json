@@ -1,0 +1,1 @@
+{"usedEffectThisRound":false,"name":"Lorenzo de\u0027 Medici","resourceCost":{"wood":0,"stone":0,"coins":0,"servants":0,"victoryPoints":35,"faithPoints":0,"militaryPoints":0},"territoryCost":0,"characterCost":0,"buildingCost":0,"ventureCost":0,"anyCardCost":0,"immediateEffects":[{"CLASS_META_KEY":"it.polimi.ingsw.ps45.model.effects.LorenzoDeMediciEffect"}],"perRoundEffects":[]}

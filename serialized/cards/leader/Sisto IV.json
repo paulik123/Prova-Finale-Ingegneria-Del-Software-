@@ -1,0 +1,1 @@
+{"usedEffectThisRound":false,"name":"Sisto IV","resourceCost":{"wood":6,"stone":6,"coins":6,"servants":6,"victoryPoints":0,"faithPoints":0,"militaryPoints":0},"territoryCost":0,"characterCost":0,"buildingCost":0,"ventureCost":0,"anyCardCost":0,"immediateEffects":[{"CLASS_META_KEY":"it.polimi.ingsw.ps45.model.effects.SistoEffect"}],"perRoundEffects":[]}
