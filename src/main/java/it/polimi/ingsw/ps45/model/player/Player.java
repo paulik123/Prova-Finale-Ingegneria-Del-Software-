@@ -1,10 +1,12 @@
 package it.polimi.ingsw.ps45.model.player;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import it.polimi.ingsw.ps45.model.actions.ActionBuilder;
 import it.polimi.ingsw.ps45.model.area.Board;
 import it.polimi.ingsw.ps45.model.cards.Era;
+import it.polimi.ingsw.ps45.model.cards.LeaderCard;
 import it.polimi.ingsw.ps45.model.game.Observer;
 
 public class Player {
@@ -27,10 +29,10 @@ public class Player {
 	private String[] availableCommands;
 	
 	
-	public Player(String playerID, String bonusTile, String color, Board board, ConsumableSet initialResources, Observer errorObserver){
+	public Player(String playerID, String bonusTile, String color, Board board, ConsumableSet initialResources, ArrayList<LeaderCard> leaderCards, Observer errorObserver){
 		this.playerID = playerID;
 		this.color = color;
-		resourceSet = new ResourceSet(initialResources, bonusTile);
+		resourceSet = new ResourceSet(initialResources, bonusTile, leaderCards);
 		actionBuilder = new ActionBuilder(this, board, errorObserver);
 		answeredVatican = false;
 		initializeVaticanPenalties();
@@ -108,6 +110,8 @@ public class Player {
 	public String[] getAvailableCommands(){
 		return availableCommands;
 	}
+	
+	
 
 	
 

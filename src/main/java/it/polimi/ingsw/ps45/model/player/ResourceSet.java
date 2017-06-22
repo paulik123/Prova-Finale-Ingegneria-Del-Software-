@@ -11,6 +11,7 @@ import com.google.gson.JsonSyntaxException;
 import it.polimi.ingsw.ps45.gson.GsonWithInterface;
 import it.polimi.ingsw.ps45.model.cards.Building;
 import it.polimi.ingsw.ps45.model.cards.Character;
+import it.polimi.ingsw.ps45.model.cards.LeaderCard;
 import it.polimi.ingsw.ps45.model.cards.Territory;
 import it.polimi.ingsw.ps45.model.cards.Venture;
 
@@ -37,19 +38,23 @@ public class ResourceSet {
 
 	private PawnSet pawnSet;
 	
-	ArrayList<Territory> territoryList;
-	ArrayList<Building> buildingList;
-	ArrayList<Character> characterList;
-	ArrayList<Venture> ventureList;
+	private ArrayList<Territory> territoryList;
+	private ArrayList<Building> buildingList;
+	private ArrayList<Character> characterList;
+	private ArrayList<Venture> ventureList;
+	private ArrayList<LeaderCard> leaderCardList;
+	private ArrayList<LeaderCard> activatedLeaderCardList;
 	
 	
-	public ResourceSet(ConsumableSet initialResources, String bonusTile){
+	public ResourceSet(ConsumableSet initialResources, String bonusTile, ArrayList<LeaderCard> leaderCards){
 		this.resources = initialResources;
 		
 		territoryList = new ArrayList<Territory>();
 		buildingList = new ArrayList<Building>();
 		characterList = new ArrayList<Character>();
 		ventureList = new ArrayList<Venture>();
+		leaderCardList = leaderCards;
+		activatedLeaderCardList = new ArrayList<LeaderCard>();
 		
 		this.territoryActionDiscount = new ConsumableSet();
 		this.characterActionDiscount = new ConsumableSet();
@@ -192,15 +197,26 @@ public class ResourceSet {
 		}
 	}
 	
-	
-	
-	
+	public void activateLeaderCard(int index){
+		
+		activatedLeaderCardList.add(leaderCardList.get(index));
+		leaderCardList.remove(index);
+	}
+
+
+	public ArrayList<LeaderCard> getLeaderCardList() {
+		return leaderCardList;
+	}
+
+
+	public ArrayList<LeaderCard> getActivatedLeaderCardList() {
+		return activatedLeaderCardList;
+	}
 	
 	
 	
 	
 
-	
 }
 
 

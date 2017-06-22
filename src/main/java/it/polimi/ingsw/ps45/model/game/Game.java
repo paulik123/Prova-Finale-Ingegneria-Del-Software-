@@ -206,7 +206,7 @@ public class Game {
 			cs.setServants(Player.defaultServants);
 			cs.setCoins(Player.defaultCoins + players.size());
 			
-			Player p = new Player(playerID, bonusTile, ColorFromInt.getColor(numberOfPlayers), board, cs, observer);
+			Player p = new Player(playerID, bonusTile, ColorFromInt.getColor(numberOfPlayers), board, cs, cardDealer.getFourLeaders(), observer);
 			players.add(p);
 			registerObserver(observer);
 			numberOfPlayers++;

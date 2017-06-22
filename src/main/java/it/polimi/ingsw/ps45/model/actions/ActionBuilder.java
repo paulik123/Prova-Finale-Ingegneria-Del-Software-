@@ -422,6 +422,24 @@ public class ActionBuilder {
 		new RefuseVaticanOffer(p, state.getExcommunicationCard()).run();
 		this.setState(new NoActionState());
 	}
+	
+	public void activateLeaderCard(int index) throws Exception{
+		if(index >= p.getResourceSet().getLeaderCardList().size() || index < 0) {
+			notifyError("Action not allowed - leader card with that index does not exist");
+			throw new Exception("Action not allowed - leader card with that index does not exist");
+		}
+		new ActivateLeaderCardAction(p, index).run();
+	}
+	
+	public void useLeaderCard(int index) throws Exception{
+		if(index >= p.getResourceSet().getActivatedLeaderCardList().size() || index < 0 || p.getResourceSet().getActivatedLeaderCardList().get(index).usedEffectThisRound()) {
+			notifyError("Action not allowed - leader card with that index does not exist or has been used this round");
+			throw new Exception("Action not allowed - leader card with that index does not exist or has been used this round");
+		}
+		new UseLeaderCardAction(p, index).run();
+	}
+	
+	
 
 	
 	

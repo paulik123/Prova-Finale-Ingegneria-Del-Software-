@@ -12,6 +12,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
+import it.polimi.ingsw.ps45.gson.GsonWithInterface;
 import it.polimi.ingsw.ps45.gson.PropertyBasedInterfaceMarshal;
 import it.polimi.ingsw.ps45.model.area.Board;
 import it.polimi.ingsw.ps45.model.area.cardarea.BuildingCardArea;
@@ -26,13 +27,15 @@ public class CardDealer {
 	private static final String characterPath = "serialized//cards//characters//";
 	private static final String buildingPath = "serialized//cards//buildings//";
 	private static final String venturePath = "serialized//cards//ventures//";
+	private static final String leaderPath = "serialized//cards//leader//";
 	
 	
 	
-	HashMap<Era, ArrayList<Territory>> territoryList;
-	HashMap<Era, ArrayList<Character>> characterList;
-	HashMap<Era, ArrayList<Building>> buildingList;
-	HashMap<Era, ArrayList<Venture>> ventureList;
+	private HashMap<Era, ArrayList<Territory>> territoryList;
+	private HashMap<Era, ArrayList<Character>> characterList;
+	private HashMap<Era, ArrayList<Building>> buildingList;
+	private HashMap<Era, ArrayList<Venture>> ventureList;
+	private ArrayList<LeaderCard> leaderList;
 	
 	public CardDealer() throws JsonSyntaxException, JsonIOException, FileNotFoundException{
 		
@@ -40,6 +43,7 @@ public class CardDealer {
 		characterList = new HashMap<Era, ArrayList<Character>>();
 		buildingList = new HashMap<Era, ArrayList<Building>>();
 		ventureList = new HashMap<Era, ArrayList<Venture>>();
+		leaderList = getLeaders();
 		
 		for(Era e:Era.values()){
 			territoryList.put(e, getTerritoryFromEra(e));
@@ -47,6 +51,7 @@ public class CardDealer {
 			buildingList.put(e, getBuildingFromEra(e));
 			ventureList.put(e, getVentureFromEra(e));
 		}
+
 	}
 	
 	public void updateBoard(Board b, Era e){
@@ -54,6 +59,17 @@ public class CardDealer {
 		updateCharacterTower(b,e);
 		updateBuildingTower(b,e);
 		updateVentureTower(b,e);
+	}
+	public  ArrayList<LeaderCard> getFourLeaders(){
+		Random r = new Random();
+		ArrayList<LeaderCard> list = new ArrayList<LeaderCard>();
+		
+		for(int i = 0; i < 4; i++){
+			int index = r.nextInt(leaderList.size());
+			list.add(leaderList.get(index));
+			leaderList.remove(index);
+		}
+		return list;
 	}
 	
 	private void updateBuildingTower(Board b, Era e){
@@ -159,6 +175,21 @@ public class CardDealer {
 		 
 		 for(File f:filesI){
 			 Venture aaa = gson.fromJson(new FileReader(f), Venture.class);
+				temp.add(aaa);
+		 }
+		 return temp;
+	}
+	
+	public ArrayList<LeaderCard> getLeaders() throws JsonSyntaxException, JsonIOException, FileNotFoundException{
+		 Gson gson = GsonWithInterface.getGson();
+		 
+		 File dirI = new File(leaderPath);
+		 File[] filesI = dirI.listFiles();
+		 
+		 ArrayList<LeaderCard> temp = new ArrayList<LeaderCard>();
+		 
+		 for(File f:filesI){
+			 LeaderCard aaa = gson.fromJson(new FileReader(f), LeaderCard.class);
 				temp.add(aaa);
 		 }
 		 return temp;

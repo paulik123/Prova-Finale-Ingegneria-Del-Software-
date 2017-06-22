@@ -10,7 +10,7 @@ import it.polimi.ingsw.ps45.model.game.Observer;
 import it.polimi.ingsw.ps45.model.game.ServerResponseWrapper;
 
 public class SocketObserver implements Observer{
-	OutputStreamWriter os;
+	private OutputStreamWriter os;
 	
 	public SocketObserver(OutputStreamWriter os){
 		this.os = os;
