@@ -5,7 +5,7 @@ import it.polimi.ingsw.ps45.model.vatican.ExcommunicationCard;
 
 public class CouncilPrivilegeTwoState implements ActionBuilderState{
 	
-	private String[] commands = {"cp2"};
+	private String[] commands = {"cp2", "endturn"};
 
 	@Override
 	public int actionValue() {

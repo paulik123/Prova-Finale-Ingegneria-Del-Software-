@@ -5,7 +5,7 @@ import it.polimi.ingsw.ps45.model.vatican.ExcommunicationCard;
 
 public class ProductionState implements ActionBuilderState{
 	
-	private String[] commands = {"production", "endturn"};
+	private String[] commands = {"production", "activateleader", "useleader", "endturn"};
 	
 	private int value;
 	public ProductionState(int value){

@@ -4,6 +4,7 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
 import it.polimi.ingsw.ps45.controller.command.AcceptVaticanCommand;
+import it.polimi.ingsw.ps45.controller.command.ActivateLeaderCardCommand;
 import it.polimi.ingsw.ps45.controller.command.AddPlayerCommand;
 import it.polimi.ingsw.ps45.controller.command.AddServantsToHarvestCommand;
 import it.polimi.ingsw.ps45.controller.command.AddServantsToProductionCommand;
@@ -27,6 +28,7 @@ import it.polimi.ingsw.ps45.controller.command.PlacePawnTerritoryCommand;
 import it.polimi.ingsw.ps45.controller.command.PlacePawnVentureCommand;
 import it.polimi.ingsw.ps45.controller.command.ProductionCommand;
 import it.polimi.ingsw.ps45.controller.command.RefuseVaticanCommand;
+import it.polimi.ingsw.ps45.controller.command.UseLeaderCardCommand;
 
 public class GUICommandParser {
 	
@@ -93,6 +95,10 @@ public class GUICommandParser {
 			return parseHarvest();
 		case "production":
 			return parseProduction();
+		case "activateleader":
+			return parseActivateLeader();
+		case "useleader":
+			return parseUseLeader();
 		default: throw new Exception("Bad command");
 		}
 	}
@@ -193,5 +199,12 @@ public class GUICommandParser {
 		String[] cps = cp.split("-");
 		if(cps.length != count) throw new Exception("Bad councilPrivilege command");
 		return cps;
+	}
+	
+	public  ActivateLeaderCardCommand parseActivateLeader(){
+		return new ActivateLeaderCardCommand(Integer.valueOf((String)area.getSelectedItem()));
+	}
+	public  UseLeaderCardCommand parseUseLeader(){
+		return new UseLeaderCardCommand(Integer.valueOf((String)area.getSelectedItem()));
 	}
 }

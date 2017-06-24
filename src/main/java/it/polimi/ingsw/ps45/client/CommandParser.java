@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps45.client;
 
 import it.polimi.ingsw.ps45.controller.command.AcceptVaticanCommand;
+import it.polimi.ingsw.ps45.controller.command.ActivateLeaderCardCommand;
 import it.polimi.ingsw.ps45.controller.command.AddPlayerCommand;
 import it.polimi.ingsw.ps45.controller.command.AddServantsToHarvestCommand;
 import it.polimi.ingsw.ps45.controller.command.AddServantsToProductionCommand;
@@ -24,6 +25,7 @@ import it.polimi.ingsw.ps45.controller.command.PlacePawnTerritoryCommand;
 import it.polimi.ingsw.ps45.controller.command.PlacePawnVentureCommand;
 import it.polimi.ingsw.ps45.controller.command.ProductionCommand;
 import it.polimi.ingsw.ps45.controller.command.RefuseVaticanCommand;
+import it.polimi.ingsw.ps45.controller.command.UseLeaderCardCommand;
 
 public class CommandParser {
 
@@ -78,6 +80,10 @@ public class CommandParser {
 			return parseHarvest(s);
 		case "production":
 			return parseProduction(s);
+		case "activateleader":
+			return parseActivateLeader(s);
+		case "useleader":
+			return parseUseLeader(s);
 		default: throw new Exception("Bad command");
 		}
 	}
@@ -194,6 +200,13 @@ public class CommandParser {
 	public EndTurnCommand parseEndTurn(String[] s) throws Exception{
 		if(s.length != 1) throw new Exception("Bad command");
 		return new EndTurnCommand();
+	}
+	
+	public  ActivateLeaderCardCommand parseActivateLeader(String[] s){
+		return new ActivateLeaderCardCommand(Integer.valueOf(s[1]));
+	}
+	public  UseLeaderCardCommand parseUseLeader(String[] s){
+		return new UseLeaderCardCommand(Integer.valueOf(s[1]));
 	}
 	
 }

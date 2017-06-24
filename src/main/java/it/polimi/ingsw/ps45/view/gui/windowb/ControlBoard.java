@@ -157,7 +157,7 @@ public class ControlBoard extends JFrame implements ActionListener{
 		
 		for(Character c:p.getResourceSet().getCharacterList()){
 			characters.add(initializeCardLabel(cardsX + gap, characterY, c));
-			gap = gap + cardsX;
+			gap = gap + cardsXGap;
 		}
 	}
 	
@@ -166,7 +166,7 @@ public class ControlBoard extends JFrame implements ActionListener{
 		
 		for(Venture v:p.getResourceSet().getVentureList()){
 			ventures.add(initializeCardLabel(cardsX + gap, ventureY, v));
-			gap = gap + cardsX;
+			gap = gap + cardsXGap;
 		}
 	}
 	

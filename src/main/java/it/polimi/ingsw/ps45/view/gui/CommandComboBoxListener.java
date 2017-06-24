@@ -68,6 +68,24 @@ public class CommandComboBoxListener implements ActionListener{
 		}
 		return available.toArray(new String[available.size()]);
 	}
+	
+	public String[] getAvailableLeaderCards(){
+		ArrayList<String> available = new ArrayList<String>();
+		int size = p.getResourceSet().getLeaderCardList().size();
+		for(int i=0; i <= size-1; i++){
+			available.add(String.valueOf(i));
+		}
+		return available.toArray(new String[available.size()]);
+	}
+	
+	public String[] getAvailableActivatedLeaderCards(){
+		ArrayList<String> available = new ArrayList<String>();
+		int size = p.getResourceSet().getActivatedLeaderCardList().size();
+		for(int i=0; i <= size-1; i++){
+			available.add(String.valueOf(i));
+		}
+		return available.toArray(new String[available.size()]);
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -173,6 +191,16 @@ public class CommandComboBoxListener implements ActionListener{
 			break;
 		case "production":
 			changeModel(areas, none);
+			changeModel(pawns, none);
+			changeModel(servants, none);
+			break;
+		case "activateleader":
+			changeModel(areas, getAvailableLeaderCards());
+			changeModel(pawns, none);
+			changeModel(servants, none);
+			break;
+		case "useleader":
+			changeModel(areas, getAvailableActivatedLeaderCards());
 			changeModel(pawns, none);
 			changeModel(servants, none);
 			break;

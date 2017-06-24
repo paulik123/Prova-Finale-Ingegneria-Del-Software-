@@ -6,7 +6,7 @@ import it.polimi.ingsw.ps45.model.vatican.ExcommunicationCard;
 public class AddServantsToHarvestState implements ActionBuilderState{
 
 	private int value;
-	private String[] commands = {"addservantsharvest", "endturn"};
+	private String[] commands = {"addservantsharvest", "activateleader", "useleader", "endturn"};
 	
 	public AddServantsToHarvestState(int value){
 		this.value = value;

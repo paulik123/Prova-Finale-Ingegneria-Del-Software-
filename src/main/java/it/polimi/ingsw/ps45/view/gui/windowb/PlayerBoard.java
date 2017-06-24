@@ -37,6 +37,7 @@ public class PlayerBoard extends JFrame implements ActionListener{
 	private JPanel contentPane;
 	private JLayeredPane layeredPane;
 	private JPanel frontPanel;
+	private JLabel backgroundLabel;
 	
 	private ArrayList<JLabel> buildings;
 	private ArrayList<JLabel> territories;
@@ -52,6 +53,8 @@ public class PlayerBoard extends JFrame implements ActionListener{
 	private JComboBox playerList;
 	
 	private String playerID;
+	
+	private boolean updatedBackground;
 	
 	
 	private static final int width = 720;
@@ -163,7 +166,7 @@ public class PlayerBoard extends JFrame implements ActionListener{
 		layeredPane.add(background);
 		background.setLayout(new BorderLayout(0, 0));
 		
-		JLabel backgroundLabel = new JLabel("");
+		backgroundLabel = new JLabel("");
 		
 		
 
@@ -195,6 +198,15 @@ public class PlayerBoard extends JFrame implements ActionListener{
 		faithLabel = initializeLabel(faithX, faithY, Color.RED);
 		militaryLabel = initializeLabel(militaryX, militaryY, Color.RED);
 		victoryLabel = initializeLabel(victoryX, victoryY, Color.RED);
+	}
+	
+	private void updateBackground(){
+		ImageIcon imageIcon = new ImageIcon("images\\playerboard_" + p.getResourceSet().getBonusTile().getId() + ".png"); // load the image to a imageIcon
+		Image image = imageIcon.getImage(); // transform it 
+		Image newimg = image.getScaledInstance(width, height,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+		imageIcon = new ImageIcon(newimg);  // transform it back
+		backgroundLabel.setIcon(imageIcon);
+		updatedBackground = true;
 	}
 	
 	public void updateResourceLabels(){
@@ -260,6 +272,7 @@ public class PlayerBoard extends JFrame implements ActionListener{
 	
 	public void update(Game g){
 		this.g = g;
+		
 		updatePlayerComboBox();
 		updateCards();
 		updateResourceLabels();
@@ -278,6 +291,7 @@ public class PlayerBoard extends JFrame implements ActionListener{
 			}
 			updateCards();
 			updateResourceLabels();
+			updateBackground();
 	}
 	
 

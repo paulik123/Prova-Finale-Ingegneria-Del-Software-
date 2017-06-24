@@ -11,6 +11,7 @@ import it.polimi.ingsw.ps45.model.game.Game;
 import it.polimi.ingsw.ps45.view.View;
 import it.polimi.ingsw.ps45.view.gui.windowb.ControlBoard;
 import it.polimi.ingsw.ps45.view.gui.windowb.GameBoard;
+import it.polimi.ingsw.ps45.view.gui.windowb.LeaderBoard;
 import it.polimi.ingsw.ps45.view.gui.windowb.PlayerBoard;
 
 public class GUI extends View{
@@ -21,15 +22,19 @@ public class GUI extends View{
 	
 	private ControlBoard controlBoard;
 	
+	private LeaderBoard leaderBoard;
+	
 	private GUIWindowListener gameBoardListener;
 	private GUIWindowListener playerBoardListener;
 	private GUIWindowListener controlBoardListener;
+	private GUIWindowListener leaderBoardListener;
 	
 	public GUI(String playerID){
 		
 		gameBoardListener = new GUIWindowListener();
 		playerBoardListener = new GUIWindowListener();
 		controlBoardListener = new GUIWindowListener();
+		leaderBoardListener = new GUIWindowListener();
 
 		
 		EventQueue.invokeLater(new Runnable(){
@@ -47,6 +52,10 @@ public class GUI extends View{
 				controlBoard = new ControlBoard(playerID);
 				controlBoard.addWindowListener(controlBoardListener);
 				controlBoard.setVisible(true);
+				
+				leaderBoard = new LeaderBoard(playerID);
+				leaderBoard.addWindowListener(leaderBoardListener);
+				leaderBoard.setVisible(true);
 			}
 			
 		});
@@ -72,6 +81,7 @@ public class GUI extends View{
 		gameBoard.update(g);
 		playerBoard.update(g);
 		controlBoard.update(g);
+		leaderBoard.update(g);
 	}
 	
 	public void addController(GUIController controller){
@@ -99,15 +109,20 @@ public class GUI extends View{
 	public ControlBoard getControlBoard() {
 		return controlBoard;
 	}
+	
+	
+
+	public LeaderBoard getLeaderBoard() {
+		return leaderBoard;
+	}
 
 	@Override
 	public void showError(String error) {
-		// TODO Auto-generated method stub
-		
+		leaderBoard.updateTextArea(error);
 	}
 	
 	public boolean isReady(){
-		return gameBoardListener.isReady() && playerBoardListener.isReady() && controlBoardListener.isReady();
+		return gameBoardListener.isReady() && playerBoardListener.isReady() && controlBoardListener.isReady() && leaderBoardListener.isReady();
 	}
 
 }

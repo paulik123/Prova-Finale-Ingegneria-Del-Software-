@@ -20,6 +20,7 @@ import it.polimi.ingsw.ps45.model.effects.NoTerritoryMilitaryPointsRequirementsE
 import it.polimi.ingsw.ps45.model.effects.NoTowerCoinsPenaltyEffect;
 import it.polimi.ingsw.ps45.model.effects.ProductionEffect;
 import it.polimi.ingsw.ps45.model.effects.SistoEffect;
+import it.polimi.ingsw.ps45.model.effects.SmallestPawnValueEffect;
 import it.polimi.ingsw.ps45.model.effects.TakeAnyCardEffect;
 import it.polimi.ingsw.ps45.model.effects.TakeConsumablesTwoTimesEffect;
 import it.polimi.ingsw.ps45.model.effects.ThreeCoinsCardDiscountEffect;
@@ -39,22 +40,22 @@ public class SerializeLeaderCards {
 		cs.setFaithPoints(0);
 		cs.setVictoryPoints(0);
 		
-		int tCost = 0;
+		int tCost = 5;
 		int cCost = 0;
 		int bCost = 0;
-		int vCost = 5;
+		int vCost = 0;
 		int anyCost = 0;
 		
-		String name = "Francesco Sforza";
+		String name = "Federico da Montefeltro";
 		
 		
-		//ProductionEffect immediateEffect = new LorenzoDeMediciEffect();
-		HarvestEffect perRoundEffect = new HarvestEffect(1);
+		SmallestPawnValueEffect immediateEffect = new SmallestPawnValueEffect();
+		//HarvestEffect perRoundEffect = new HarvestEffect(1);
 		
 		LeaderCard lc = new LeaderCard(name, cs, tCost, cCost, bCost, vCost, anyCost);
 		
-		//lc.addImmediateEffect(immediateEffect);
-		lc.addPerRoundEffect(perRoundEffect);
+		lc.addImmediateEffect(immediateEffect);
+		//lc.addPerRoundEffect(perRoundEffect);
 		
 		Writer writer;
 		try {

@@ -12,6 +12,7 @@ public class PermanentEffects {
 	private boolean canPlacePawnOnOccupiedAreas;
 	private boolean valueFivePawn;
 	private boolean noThreeCoinsTowerPenalty;
+	private boolean smallestPawnHasSixValue;
 	
 	//ENDGAME
 	private boolean noCharacterVictoryPoints;
@@ -157,6 +158,16 @@ public class PermanentEffects {
 	public void setNoThreeCoinsTowerPenalty(boolean noThreeCoinsTowerPenalty) {
 		this.noThreeCoinsTowerPenalty = noThreeCoinsTowerPenalty;
 	}
+
+	public boolean isSmallestPawnHasSixValue() {
+		return smallestPawnHasSixValue;
+	}
+
+	public void setSmallestPawnHasSixValue(boolean smallestPawnHasSixValue) {
+		this.smallestPawnHasSixValue = smallestPawnHasSixValue;
+	}
+	
+	
 	
 	
 	

@@ -213,6 +213,17 @@ public class ResourceSet {
 		return activatedLeaderCardList;
 	}
 	
+	public void setSmallestToPawnSix(){
+		if(!permanentEffects.isSmallestPawnHasSixValue()) return;
+		int black = pawnSet.get(PawnType.BLACK).getValue();
+		int white = pawnSet.get(PawnType.WHITE).getValue();
+		int orange = pawnSet.get(PawnType.ORANGE).getValue();
+		
+		if(black <= white && black <= orange)pawnSet.set(PawnType.BLACK, 6, true);
+		else if (white <= black && white <= orange) pawnSet.set(PawnType.WHITE, 6, true);
+		else pawnSet.set(PawnType.ORANGE, 6, true);
+	}
+	
 	
 	
 	

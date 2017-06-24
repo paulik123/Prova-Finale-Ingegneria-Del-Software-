@@ -434,7 +434,6 @@ public class GameBoard extends JFrame {
 		JLabel newLabel = new JLabel("");
 		newLabel.setBounds(x, y, excomMarkerWidth, excomMarkerHeight);
 		newLabel.setOpaque(true);
-		newLabel.setBackground(Color.GREEN);
 		
 
 		frontPanel.add(newLabel);

@@ -276,6 +276,10 @@ public class Game {
 		setSinglePawn(r.nextInt(6)+1, PawnType.WHITE);
 		setSinglePawn(r.nextInt(6)+1, PawnType.ORANGE);
 		setNeutralPawn();
+		
+		for(Player p:players){
+			p.getResourceSet().setSmallestToPawnSix();
+		}
 	}
 	
 	public void setSinglePawn(int value, PawnType pt){

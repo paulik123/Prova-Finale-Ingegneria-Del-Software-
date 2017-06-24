@@ -428,6 +428,10 @@ public class ActionBuilder {
 			notifyError("Action not allowed - leader card with that index does not exist");
 			throw new Exception("Action not allowed - leader card with that index does not exist");
 		}
+		if(!p.getResourceSet().getLeaderCardList().get(index).canActivate(p)){
+			notifyError("You don't meet the requirements to activate the leader card");
+			throw new Exception("You don't meet the requirements to activate the leader card");
+		}
 		new ActivateLeaderCardAction(p, index).run();
 	}
 	
@@ -436,6 +440,7 @@ public class ActionBuilder {
 			notifyError("Action not allowed - leader card with that index does not exist or has been used this round");
 			throw new Exception("Action not allowed - leader card with that index does not exist or has been used this round");
 		}
+
 		new UseLeaderCardAction(p, index).run();
 	}
 	
