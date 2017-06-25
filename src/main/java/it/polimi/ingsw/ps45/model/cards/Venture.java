@@ -51,5 +51,11 @@ public class Venture extends Card {
 	public void addEndGameEffect(Effect e){
 		endGameEffects.add(e);
 	}
+
+	public ArrayList<Effect> getEndGameEffects() {
+		return endGameEffects;
+	}
+	
+	
 	
 }

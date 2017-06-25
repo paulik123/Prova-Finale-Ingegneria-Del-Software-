@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import it.polimi.ingsw.ps45.model.game.ErrorResponse;
 import it.polimi.ingsw.ps45.model.game.GameUpdateResponse;
+import it.polimi.ingsw.ps45.model.game.ResultsResponse;
 import it.polimi.ingsw.ps45.model.game.ServerResponseVisitor;
 import it.polimi.ingsw.ps45.view.View;
 
@@ -23,6 +24,12 @@ public class ClientServerResponseVisitor implements ServerResponseVisitor{
 	@Override
 	public void visit(ErrorResponse errorResponse) {
 		view.showError(errorResponse.getData());
+		
+	}
+
+	@Override
+	public void visit(ResultsResponse resultsResponse) {
+		view.showResults(resultsResponse.getData());
 		
 	}
 

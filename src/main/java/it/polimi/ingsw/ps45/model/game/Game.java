@@ -128,6 +128,12 @@ public class Game {
 	}
 	
 	public void nextEra() throws Exception{
+		// Check if it's the last era so the game will end.
+		if(currentEra == 3){
+			calculateWinner();
+			return;
+		} 
+		
 		for(Player p:players){
 			if(p.hasAnsweredVatican()){
 				p.setAnsweredVatican(false);
@@ -350,6 +356,65 @@ public class Game {
 	public HashMap<PawnType, Integer> getDices(){
 		return dices;
 	}
+	
+	private void calculateWinner(){
+		StringBuilder sb = new StringBuilder();
+		
+		 endGameMilitaryVictoryPoints();
+		
+		for(Player p:players){
+			sb.append(p.getPlayerID() + ": " + endGamePlayerVictoryPoints(p) + " victory points.");
+		}
+		
+		ResultsNotifier n = new ResultsNotifier(observers, sb.toString());
+		n.start();
+	}
+	
+	private void endGameMilitaryVictoryPoints(){
+		int first = 0;
+		int second = 0;
+		
+		for(Player p:players){
+			int points = p.getResourceSet().getResources().getMilitaryPoins();
+			if(points > first){
+				second = first;
+				first = points;
+			}else if(points > second){
+				second = points;
+			}
+		}
+		for(Player p:players){
+			int points = p.getResourceSet().getResources().getMilitaryPoins();
+			if(points == first){
+				ConsumableSet cs = new ConsumableSet();
+				cs.setVictoryPoints(5);
+				p.getResourceSet().collect(cs);
+			}else if(points == second){
+				ConsumableSet cs = new ConsumableSet();
+				cs.setVictoryPoints(2);
+				p.getResourceSet().collect(cs);
+			}
+		}
+	}
+	
+	private int endGamePlayerVictoryPoints(Player p){
+		VictoryPointsConverter vpc = new VictoryPointsConverter(p);
+		
+		
+		vpc.characterVictoryPoints();
+		vpc.applyVentureVictoryPoints();
+		vpc.territoryVictoryPoints();
+		vpc.vaticanVictoryPoints();
+		vpc.resourceVictoryPoints();
+		vpc.aFifthVictoryPointsPenalty();
+		vpc.militaryPointsPenalty();
+		vpc.resourcePointsPenalty();
+		vpc.buildingPointsPenalty();
+		
+		return p.getResourceSet().getResources().getVictoryPoints();
+	}
+	
+
 	
 	
 	

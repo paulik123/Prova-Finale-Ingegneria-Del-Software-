@@ -182,4 +182,12 @@ public class CLI extends View{
 		
 	}
 
+
+
+	@Override
+	public void showResults(String results) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

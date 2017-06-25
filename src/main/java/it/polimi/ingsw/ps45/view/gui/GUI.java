@@ -125,4 +125,10 @@ public class GUI extends View{
 		return gameBoardListener.isReady() && playerBoardListener.isReady() && controlBoardListener.isReady() && leaderBoardListener.isReady();
 	}
 
+	@Override
+	public void showResults(String results) {
+		leaderBoard.updateTextArea(results);
+		
+	}
+
 }
