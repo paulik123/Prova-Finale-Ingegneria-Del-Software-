@@ -28,7 +28,7 @@ public class ActionBuilder {
 	private ActionBuilderState state;
 	private Board board;
 	private Player p;
-	Observer errorObserver;
+	private Observer errorObserver;
 	
 	
 	public ActionBuilder(Player p, Board board, Observer errorObserver){
@@ -603,6 +603,10 @@ public class ActionBuilder {
 
 		ErrorNotifier n = new ErrorNotifier(errorObserver, sb.toString());
 		n.start();
+	}
+	
+	public void changeObserver(Observer o){
+		this.errorObserver = o;
 	}
 	
 	

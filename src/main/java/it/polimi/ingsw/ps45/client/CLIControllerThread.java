@@ -10,6 +10,7 @@ import com.google.gson.GsonBuilder;
 import it.polimi.ingsw.ps45.controller.command.AddPlayerCommand;
 import it.polimi.ingsw.ps45.controller.command.Command;
 import it.polimi.ingsw.ps45.controller.command.CommandHolder;
+import it.polimi.ingsw.ps45.controller.command.ReconnectCommand;
 import it.polimi.ingsw.ps45.gson.GsonWithInterface;
 import it.polimi.ingsw.ps45.gson.PropertyBasedInterfaceMarshal;
 import it.polimi.ingsw.ps45.model.effects.Effect;
@@ -62,6 +63,19 @@ public class CLIControllerThread extends Thread implements ClientController{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void sendReconnectCommand() {
+		try {
+			CommandHolder ch = new CommandHolder(new ReconnectCommand(), playerID);
+			String json = gson.toJson(ch);
+			send(json);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 }

@@ -54,7 +54,6 @@ public class GUIWindowListener implements WindowListener{
 	public void windowOpened(WindowEvent e) {
 		// TODO Auto-generated method stub
 		ready = true;
-		System.out.println("Window ready");
 	}
 
 }

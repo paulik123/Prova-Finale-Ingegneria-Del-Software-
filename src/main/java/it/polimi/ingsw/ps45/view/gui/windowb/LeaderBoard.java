@@ -92,7 +92,7 @@ public class LeaderBoard extends JFrame implements ActionListener{
 		
 		
 		setResizable(false);
-		setTitle("Lorenzo il Magnifico - ControlBoard");
+		setTitle("Lorenzo il Magnifico - LeaderBoard");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, width, height + 25);
 		contentPane = new JPanel();

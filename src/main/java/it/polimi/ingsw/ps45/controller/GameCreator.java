@@ -31,6 +31,11 @@ public class GameCreator {
 		}
 	}
 	
+	public void reconnect(String ID, Observer o) throws Exception{
+		if(!playerExists(ID)) throw new Exception("Player with that name does not exist");
+		getGameFromPlayerID(ID).reconnect(ID, o);
+	}
+	
 	private boolean playerExists(String ID){
 		for(String s:playersInGames.keySet()){
 			if(s.equals(ID)) return true;

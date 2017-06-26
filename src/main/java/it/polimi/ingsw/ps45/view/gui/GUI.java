@@ -69,25 +69,29 @@ public class GUI extends View{
 		
 		while(!isReady()){
 			try {
-				System.out.println("Window not ready.. waiting");
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-
 		
-		gameBoard.update(g);
-		playerBoard.update(g);
-		controlBoard.update(g);
-		leaderBoard.update(g);
+		EventQueue.invokeLater(new Runnable(){
+
+			@Override
+			public void run() {
+				gameBoard.update(g);
+				playerBoard.update(g);
+				controlBoard.update(g);
+				leaderBoard.update(g);
+			}
+			
+		});
 	}
 	
 	public void addController(GUIController controller){
 		while(!isReady()){
 			try {
-				System.out.println("Window not ready.. waiting");
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block

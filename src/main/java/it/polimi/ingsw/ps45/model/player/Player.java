@@ -47,6 +47,10 @@ public class Player {
 		return actionBuilder;
 	}
 	
+	public void updateBoard(Board b){
+		actionBuilder.setBoard(b);
+	}
+	
 	private void initializeVaticanPenalties(){
 		vaticanPenalties = new HashMap<Era, Boolean>();
 		vaticanPenalties.put(Era.I, false);
@@ -62,6 +66,10 @@ public class Player {
 	
 	public String getPlayerID() {
 		return playerID;
+	}
+	
+	public void changeObserver(Observer o){
+		actionBuilder.changeObserver(o);
 	}
 
 

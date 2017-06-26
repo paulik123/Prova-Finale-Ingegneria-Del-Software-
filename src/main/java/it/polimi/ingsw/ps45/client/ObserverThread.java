@@ -36,11 +36,7 @@ public class ObserverThread extends Thread{
             while((fromServer = br.readLine()) != null) {
             	
             	ServerResponseWrapper respWrapper = gson.fromJson(fromServer, ServerResponseWrapper.class);
-				respWrapper.getResponse().accept(serverResponseVisitor);
-
-            	
-            	
-            	
+				respWrapper.getResponse().accept(serverResponseVisitor);	
             }
         } catch (IOException e) {
             e.printStackTrace();

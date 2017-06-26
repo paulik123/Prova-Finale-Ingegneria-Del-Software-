@@ -34,7 +34,7 @@ public class Game {
 	
 	private transient Era[] eras = {Era.I, Era.II, Era.III};
 	private ArrayList<Player> players;
-	private transient ArrayList<Observer> observers;
+	private transient HashMap<String, Observer> observers;
 	private Board board;
 	private Vatican vatican;
 	private transient Player[] turns; 
@@ -53,7 +53,7 @@ public class Game {
 		roundNumber = 0;
 		currentEra = 0;
 		players = new ArrayList<Player>();
-		observers = new ArrayList<Observer>();
+		observers = new HashMap<String, Observer>();
 		dices = new HashMap<PawnType, Integer>();
 
 		vatican = new Vatican();
@@ -71,7 +71,10 @@ public class Game {
 	
 	public void start() throws Exception{
 		if(gameStarted) throw new Exception("Game already started");
+		
 		board = new Board(players.size());
+		updatePlayerBoards();
+		
 		turns = new Player[turnsPerRound * numberOfPlayers];
 		colorTurns = new String[numberOfPlayers];
 		calculateTurnsStart();
@@ -164,6 +167,15 @@ public class Game {
 		}
 	}
 	
+	public void reconnect(String playerID, Observer o) throws Exception{
+		observers.put(playerID, o);
+		Player player = getPlayerByID(playerID);
+		player.changeObserver(o);
+		
+		System.out.println("SERVER: reconnected player: "+ playerID);
+		notifyObservers();
+	}
+	
 	private void calculateTurns(){
 		
 			Player[] temp = new Player[numberOfPlayers];
@@ -215,7 +227,7 @@ public class Game {
 			
 			Player p = new Player(playerID, bonusTile, ColorFromInt.getColor(numberOfPlayers), board, cs, cardDealer.getFourLeaders(), observer);
 			players.add(p);
-			registerObserver(observer);
+			registerObserver(playerID, observer);
 			numberOfPlayers++;
 			
 			System.out.println("SERVER: added player: "+ playerID);
@@ -252,8 +264,8 @@ public class Game {
 		return numberOfPlayers;
 	}
 	
-	public void registerObserver(Observer o){
-		observers.add(o);
+	public void registerObserver(String playerID, Observer o){
+		observers.put(playerID, o);
 	}
 	
 	
@@ -273,7 +285,7 @@ public class Game {
 			e.printStackTrace();
 		}
 		
-		GameUpdateNotifier n = new GameUpdateNotifier(observers, game);
+		GameUpdateNotifier n = new GameUpdateNotifier(observersList(), game);
 		n.start();
 	}
 	
@@ -367,7 +379,7 @@ public class Game {
 			sb.append(p.getPlayerID() + ": " + endGamePlayerVictoryPoints(p) + " victory points.");
 		}
 		
-		ResultsNotifier n = new ResultsNotifier(observers, sb.toString());
+		ResultsNotifier n = new ResultsNotifier(observersList(), sb.toString());
 		n.start();
 	}
 	
@@ -413,6 +425,21 @@ public class Game {
 		vpc.buildingPointsPenalty();
 		
 		return p.getResourceSet().getResources().getVictoryPoints();
+	}
+	
+	public ArrayList<Observer>  observersList(){
+		ArrayList<Observer> list = new ArrayList<Observer>();
+		
+		for(String key:observers.keySet()){
+			list.add(observers.get(key));
+		}
+		return list;
+	}
+	
+	private void updatePlayerBoards(){
+		for(Player p: players){
+			p.updateBoard(board);
+		}
 	}
 	
 

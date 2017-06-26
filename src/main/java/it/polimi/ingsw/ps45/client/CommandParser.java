@@ -2,7 +2,6 @@ package it.polimi.ingsw.ps45.client;
 
 import it.polimi.ingsw.ps45.controller.command.AcceptVaticanCommand;
 import it.polimi.ingsw.ps45.controller.command.ActivateLeaderCardCommand;
-import it.polimi.ingsw.ps45.controller.command.AddPlayerCommand;
 import it.polimi.ingsw.ps45.controller.command.AddServantsToHarvestCommand;
 import it.polimi.ingsw.ps45.controller.command.AddServantsToProductionCommand;
 import it.polimi.ingsw.ps45.controller.command.Command;
@@ -60,8 +59,6 @@ public class CommandParser {
 			return parseNoPawnBuilding(s);
 		case "nopawnventure":
 			return parseNoPawnVenture(s);
-		case "joingame":
-			return parseJoinGame(s);
 		case "acceptvatican":
 			return parseAcceptVatican(s);
 		case "refusevatican":
@@ -147,10 +144,6 @@ public class CommandParser {
 		return new NoPawnVentureCommand(s[1], Integer.valueOf(s[2]), s[3]);
 	}
 	
-	public AddPlayerCommand parseJoinGame(String[] s) throws Exception{
-		if(s.length != 2) throw new Exception("Bad command");
-		return new AddPlayerCommand(s[1]);
-	}
 	
 	public AcceptVaticanCommand parseAcceptVatican(String[] s) throws Exception{
 		if(s.length != 1) throw new Exception("Bad command");
