@@ -9,12 +9,12 @@ public class ProductionAreas implements HasDictionary {
 	NoCardArea big;
 	HashMap<String, NoCardArea> productionAreaDictionary;
 	
-	public ProductionAreas(){
+	public ProductionAreas(int players){
 		productionAreaDictionary = new HashMap<String, NoCardArea>();
 		small = Board.loadFromFile("serialized//areas//ProductionSmallArea.json");
 		big = Board.loadFromFile("serialized//areas//ProductionBigArea.json");
 		productionAreaDictionary.put("small", small);
-		productionAreaDictionary.put("big", big);
+		if(players >= 3)productionAreaDictionary.put("big", big);
 	}
 	
 	public boolean isOccupiedByPlayer(Player p) {

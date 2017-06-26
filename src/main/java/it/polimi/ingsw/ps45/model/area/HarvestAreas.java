@@ -9,13 +9,13 @@ public class HarvestAreas implements HasDictionary {
 	private NoCardArea big;
 	private HashMap<String, NoCardArea> harvestAreaDictionary;
 	
-	public HarvestAreas(){
+	public HarvestAreas(int players){
 		harvestAreaDictionary = new HashMap<String, NoCardArea>(); 
 		small = Board.loadFromFile("serialized//areas//HarvestSmallArea.json");
 		big = Board.loadFromFile("serialized//areas//HarvestBigArea.json");
 		
 		harvestAreaDictionary.put("small", small);
-		harvestAreaDictionary.put("big", big);
+		if(players >= 3)harvestAreaDictionary.put("big", big);
 	}
 	
 	public boolean isOccupiedByPlayer(Player p) {

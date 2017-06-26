@@ -55,7 +55,7 @@ public class Game {
 		players = new ArrayList<Player>();
 		observers = new ArrayList<Observer>();
 		dices = new HashMap<PawnType, Integer>();
-		board = new Board();
+
 		vatican = new Vatican();
 		
 		
@@ -71,6 +71,7 @@ public class Game {
 	
 	public void start() throws Exception{
 		if(gameStarted) throw new Exception("Game already started");
+		board = new Board(players.size());
 		turns = new Player[turnsPerRound * numberOfPlayers];
 		colorTurns = new String[numberOfPlayers];
 		calculateTurnsStart();
@@ -99,7 +100,7 @@ public class Game {
 	public void newRound() throws Exception{
 		if(roundNumber % 2 == 1){
 			roundNumber++;
-			board = new Board();
+			board = new Board(players.size());
 			updateActionBuildersBoard();
 			cardDealer.updateBoard(board, eras[currentEra]);
 			setPawns();
@@ -148,7 +149,7 @@ public class Game {
 		
 		currentEra++;
 		roundNumber = 1;
-		board = new Board();
+		board = new Board(players.size());
 		updateActionBuildersBoard();
 		cardDealer.updateBoard(board, eras[currentEra]);
 		setPawns();

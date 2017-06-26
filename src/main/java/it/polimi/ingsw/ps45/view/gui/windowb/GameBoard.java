@@ -107,6 +107,12 @@ public class GameBoard extends JFrame {
 	private JLabel productionBig3;
 	private JLabel productionBig4;
 	
+	private JLabel productionBigCover;
+	private JLabel harvestBigCover;
+	
+	private JLabel militaryCoinsCover;
+	private JLabel councilPrivilegeCover;
+	
 	private JLabel harvestSmall;
 	private JLabel harvestBig1;
 	private JLabel harvestBig2;
@@ -117,6 +123,7 @@ public class GameBoard extends JFrame {
 	private JLabel servantsMarket;
 	private JLabel militaryCoinsMarket;
 	private JLabel councilPrivilegeMarket;
+	
 	
 	private JLabel councilPalace1;
 	private JLabel councilPalace2;
@@ -136,6 +143,8 @@ public class GameBoard extends JFrame {
 	
 	private static final String imagePath = "images/gameboard.jpeg";
 	
+	private boolean updatedCovers;
+	
 	private static final int width = 525;
 	private static final int height = 720;
 	private static final int cardWidth = 50;
@@ -153,8 +162,14 @@ public class GameBoard extends JFrame {
 	
 	private static final int prodHarvestSmallX = 62;
 	private static final int prodHarvestBigX = 110;
-	private static final int productionY = 578;
-	private static final int harvestY = 633;
+	private static final int productionY = 585;
+	private static final int harvestY = 640;
+	
+	private static final int prodHarvestBigCoverX = 95;
+	private static final int productionCoverY = 561;
+	private static final int harvestCoverY = 616;
+	private static final int coverBigWidth = 112;
+	private static final int coverBigHeight = 47;
 	
 	
 	private static final int coinsMarketX = 286;
@@ -165,6 +180,11 @@ public class GameBoard extends JFrame {
 	private static final int militaryCoinsMarketY = 580;
 	private static final int councilPrivilegeMarketX = 400;
 	private static final int councilPrivilegeMarketY = 612;
+	private static final int militaryCoinsMarketCoverX = 360;
+	private static final int militaryCoinsMarketCoverY = 570;
+	private static final int councilPrivilegeMarketCoverX = 390;
+	private static final int councilPrivilegeMarketCoverY = 597;
+	private static final int marketCoverSize = 40;
 	
 	
 	private static final int diceBlackX = 280;
@@ -276,11 +296,12 @@ public class GameBoard extends JFrame {
 		productionBig3 = initializePawnLabel(prodHarvestBigX + pawnAreaSize*2, productionY);
 		productionBig4 = initializePawnLabel(prodHarvestBigX + pawnAreaSize*3, productionY);
 		
+		
 		harvestSmall = initializePawnLabel(prodHarvestSmallX, harvestY);
 		harvestBig1 = initializePawnLabel(prodHarvestBigX, harvestY);
 		harvestBig2 = initializePawnLabel(prodHarvestBigX + pawnAreaSize, harvestY);
 		harvestBig3 = initializePawnLabel(prodHarvestBigX + pawnAreaSize*2, harvestY);
-		harvestBig4 = initializePawnLabel(prodHarvestBigX + + pawnAreaSize*3, harvestY);
+		harvestBig4 = initializePawnLabel(prodHarvestBigX + pawnAreaSize*3, harvestY);
 		
 		coinsMarket = initializePawnLabel(coinsMarketX, coinsMarketY);
 		servantsMarket = initializePawnLabel(servantsMarketX, servantsMarketY);
@@ -505,6 +526,7 @@ public class GameBoard extends JFrame {
 		setPawnLabelIcon(productionBig3, g.getBoard().getProductionAreas().getBig().getOccupants(),2);
 		setPawnLabelIcon(productionBig4, g.getBoard().getProductionAreas().getBig().getOccupants(),3);
 		
+		
 		setPawnLabelIcon(harvestSmall, g.getBoard().getHarvestAreas().getSmall().getOccupants(), 0);
 		setPawnLabelIcon(harvestBig1, g.getBoard().getHarvestAreas().getBig().getOccupants(), 0);
 		setPawnLabelIcon(harvestBig2, g.getBoard().getHarvestAreas().getBig().getOccupants(), 1);
@@ -598,6 +620,51 @@ public class GameBoard extends JFrame {
 		}
 	}
 	
+	private void updateCovers(){
+		int players = g.getNumberOfPlayers();
+		
+		if(players < 3){
+			productionBigCover = new JLabel("");
+			productionBigCover.setBounds(prodHarvestBigCoverX, productionCoverY, coverBigWidth, coverBigHeight);
+			frontPanel.add(productionBigCover);
+			ImageIcon imageIcon = new ImageIcon("images\\production-big-cover.png"); // load the image to a imageIcon
+			Image image = imageIcon.getImage(); // transform it 
+			Image newimg = image.getScaledInstance(coverBigWidth, coverBigHeight,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+			imageIcon = new ImageIcon(newimg);
+			productionBigCover.setIcon(imageIcon);
+			
+			harvestBigCover = new JLabel("");
+			harvestBigCover.setBounds(prodHarvestBigCoverX, harvestCoverY, coverBigWidth, coverBigHeight);
+			frontPanel.add(harvestBigCover);
+			imageIcon = new ImageIcon("images\\harvest-big-cover.png"); // load the image to a imageIcon
+			image = imageIcon.getImage(); // transform it 
+			newimg = image.getScaledInstance(coverBigWidth, coverBigHeight,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+			imageIcon = new ImageIcon(newimg);
+			harvestBigCover.setIcon(imageIcon);
+		}
+		if(players < 4){
+			militaryCoinsCover = new JLabel("");
+			militaryCoinsCover.setBounds(militaryCoinsMarketCoverX, militaryCoinsMarketCoverY, marketCoverSize, marketCoverSize);
+			frontPanel.add(militaryCoinsCover);
+			ImageIcon imageIcon = new ImageIcon("images\\market-cover1.png"); // load the image to a imageIcon
+			Image image = imageIcon.getImage(); // transform it 
+			Image newimg = image.getScaledInstance(marketCoverSize, marketCoverSize,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+			imageIcon = new ImageIcon(newimg);
+			militaryCoinsCover.setIcon(imageIcon);
+			
+			councilPrivilegeCover = new JLabel("");
+			councilPrivilegeCover.setBounds(councilPrivilegeMarketCoverX, councilPrivilegeMarketCoverY, marketCoverSize, marketCoverSize);
+			frontPanel.add(councilPrivilegeCover);
+			imageIcon = new ImageIcon("images\\market-cover2.png"); // load the image to a imageIcon
+			image = imageIcon.getImage(); // transform it 
+			newimg = image.getScaledInstance(marketCoverSize, marketCoverSize,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+			imageIcon = new ImageIcon(newimg);
+			councilPrivilegeCover.setIcon(imageIcon);
+		}
+
+		updatedCovers = true;
+	}
+	
 	public void update(Game g){
 		this.g = g;
 		updateDiceLabels();
@@ -605,6 +672,7 @@ public class GameBoard extends JFrame {
 		updatePawnLabels();
 		updateCardLabels();
 		updateExcomLabels();
+		if(!updatedCovers) updateCovers();
 	}
 	
 

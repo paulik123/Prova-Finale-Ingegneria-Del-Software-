@@ -18,6 +18,8 @@ import it.polimi.ingsw.ps45.model.effects.Effect;
 
 public class Board implements HasDictionary {
 	
+	private int players;
+	
 	HashMap<String, NoCardArea> noCardAreaDictionary;
 	ProductionAreas productionAreas;
 	
@@ -35,12 +37,13 @@ public class Board implements HasDictionary {
 	BuildingTower buildingTower;
 	VentureTower ventureTower;
 	
-	public Board(){
+	public Board(int players){
+		this.players = players;
 		noCardAreaDictionary = new HashMap<String, NoCardArea>();
 		
-		productionAreas = new ProductionAreas();
+		productionAreas = new ProductionAreas(players);
 		
-		harvestAreas = new HarvestAreas();
+		harvestAreas = new HarvestAreas(players);
 		
 		coinsMarketArea = loadFromFile("serialized//areas//CoinsMarketArea.json");
 		servantsMarketArea = loadFromFile("serialized//areas//ServantsMarketArea.json");
@@ -51,8 +54,8 @@ public class Board implements HasDictionary {
 		
 		noCardAreaDictionary.put("coinsmarketarea", coinsMarketArea);
 		noCardAreaDictionary.put("servantsmarketarea", servantsMarketArea);
-		noCardAreaDictionary.put("militarymndcoinarea", militaryAndCoinArea);
-		noCardAreaDictionary.put("councilprivilegemarketarea", councilPrivilegeMarketArea);
+		if(players >= 4)noCardAreaDictionary.put("militarymndcoinarea", militaryAndCoinArea);
+		if(players >= 4)noCardAreaDictionary.put("councilprivilegemarketarea", councilPrivilegeMarketArea);
 		noCardAreaDictionary.put("councilpalacearea", councilPalaceArea);
 		
 		
