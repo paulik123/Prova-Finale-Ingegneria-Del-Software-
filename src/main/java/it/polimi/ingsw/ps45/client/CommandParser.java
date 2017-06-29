@@ -17,7 +17,6 @@ import it.polimi.ingsw.ps45.controller.command.NoPawnVentureCommand;
 import it.polimi.ingsw.ps45.controller.command.PlacePawnBuildingCommand;
 import it.polimi.ingsw.ps45.controller.command.PlacePawnCharacterCommand;
 import it.polimi.ingsw.ps45.controller.command.PlacePawnHarvestCommand;
-import it.polimi.ingsw.ps45.controller.command.PlacePawnMarketCommand;
 import it.polimi.ingsw.ps45.controller.command.PlacePawnNoCardCommand;
 import it.polimi.ingsw.ps45.controller.command.PlacePawnProductionCommand;
 import it.polimi.ingsw.ps45.controller.command.PlacePawnTerritoryCommand;
@@ -37,8 +36,6 @@ public class CommandParser {
 			return parseEndTurn(s);
 		case "placepawnnocard":
 			return parsePlacePawnNoCard(s);
-		case "placepawnmarket":
-			return parsePlacePawnMarket(s);
 		case "placepawnharvest":
 			return parsePlacePawnHarvest(s);
 		case "placepawnproduction":
@@ -89,10 +86,6 @@ public class CommandParser {
 		return new PlacePawnNoCardCommand(s[1], s[2], Integer.valueOf(s[3]));
 	}
 	
-	public PlacePawnMarketCommand parsePlacePawnMarket(String[] s) throws Exception{
-		if(s.length != 4) throw new Exception("Bad command");
-		return new PlacePawnMarketCommand(s[1], s[2], Integer.valueOf(s[3]));
-	}
 	
 	public PlacePawnHarvestCommand parsePlacePawnHarvest(String[] s) throws Exception{
 		if(s.length != 4) throw new Exception("Bad command");

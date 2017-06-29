@@ -20,7 +20,7 @@ public class Board implements HasDictionary {
 	
 	private int players;
 	
-	HashMap<String, NoCardArea> noCardAreaDictionary;
+	HashMap<String, NoCardArea> dictionary;
 	ProductionAreas productionAreas;
 	
 	HarvestAreas harvestAreas;
@@ -39,7 +39,8 @@ public class Board implements HasDictionary {
 	
 	public Board(int players){
 		this.players = players;
-		noCardAreaDictionary = new HashMap<String, NoCardArea>();
+		dictionary = new HashMap<String, NoCardArea>();
+		
 		
 		productionAreas = new ProductionAreas(players);
 		
@@ -52,11 +53,11 @@ public class Board implements HasDictionary {
 		
 		councilPalaceArea = loadFromFile("serialized//areas//CouncilPalaceArea.json");
 		
-		noCardAreaDictionary.put("coinsmarketarea", coinsMarketArea);
-		noCardAreaDictionary.put("servantsmarketarea", servantsMarketArea);
-		if(players >= 4)noCardAreaDictionary.put("militarymndcoinarea", militaryAndCoinArea);
-		if(players >= 4)noCardAreaDictionary.put("councilprivilegemarketarea", councilPrivilegeMarketArea);
-		noCardAreaDictionary.put("councilpalacearea", councilPalaceArea);
+		dictionary.put("coinsmarketarea", coinsMarketArea);
+		dictionary.put("servantsmarketarea", servantsMarketArea);
+		if(players >= 4)dictionary.put("militarymndcoinarea", militaryAndCoinArea);
+		if(players >= 4)dictionary.put("councilprivilegemarketarea", councilPrivilegeMarketArea);
+		dictionary.put("councilpalacearea", councilPalaceArea);
 		
 		
 		territoryTower = new TerritoryTower();
@@ -132,18 +133,18 @@ public class Board implements HasDictionary {
 	}
 
 	public NoCardArea getAreaFromString(String s) throws Exception {
-		if(!noCardAreaDictionary.containsKey(s.toLowerCase())) throw new Exception("No such key");
-		return noCardAreaDictionary.get(s.toLowerCase());
+		if(!dictionary.containsKey(s.toLowerCase())) throw new Exception("No such key");
+		return dictionary.get(s.toLowerCase());
 	}
 
 	public HashMap<String, NoCardArea> getDictionary() {
-		return noCardAreaDictionary;
+		return dictionary;
 	}
 
 	@Override
 	public Area getAreaFromDictionary(String s) throws Exception {
-		if(!noCardAreaDictionary.containsKey(s.toLowerCase())) throw new Exception("No such key");
-		return noCardAreaDictionary.get(s.toLowerCase());
+		if(!dictionary.containsKey(s.toLowerCase())) throw new Exception("No such key");
+		return dictionary.get(s.toLowerCase());
 	}
 
 	

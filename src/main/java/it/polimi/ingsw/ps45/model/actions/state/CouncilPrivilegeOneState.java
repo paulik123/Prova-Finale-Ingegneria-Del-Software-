@@ -112,7 +112,7 @@ public class CouncilPrivilegeOneState implements ActionBuilderState{
 	@Override
 	public String[] commands() {
 		// TODO Auto-generated method stub
-		return null;
+		return commands;
 	}
 	
 }

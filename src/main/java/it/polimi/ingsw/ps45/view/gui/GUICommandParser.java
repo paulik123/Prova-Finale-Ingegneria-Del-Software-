@@ -21,7 +21,6 @@ import it.polimi.ingsw.ps45.controller.command.NoPawnVentureCommand;
 import it.polimi.ingsw.ps45.controller.command.PlacePawnBuildingCommand;
 import it.polimi.ingsw.ps45.controller.command.PlacePawnCharacterCommand;
 import it.polimi.ingsw.ps45.controller.command.PlacePawnHarvestCommand;
-import it.polimi.ingsw.ps45.controller.command.PlacePawnMarketCommand;
 import it.polimi.ingsw.ps45.controller.command.PlacePawnNoCardCommand;
 import it.polimi.ingsw.ps45.controller.command.PlacePawnProductionCommand;
 import it.polimi.ingsw.ps45.controller.command.PlacePawnTerritoryCommand;
@@ -55,8 +54,6 @@ public class GUICommandParser {
 			return parseEndTurn();
 		case "placepawnnocard":
 			return parsePlacePawnNoCard();
-		case "placepawnmarket":
-			return parsePlacePawnMarket();
 		case "placepawnharvest":
 			return parsePlacePawnHarvest();
 		case "placepawnproduction":
@@ -107,9 +104,6 @@ public class GUICommandParser {
 		return new PlacePawnNoCardCommand((String)area.getSelectedItem(), (String)pawn.getSelectedItem(), Integer.valueOf((String)servants.getSelectedItem()));
 	}
 	
-	public PlacePawnMarketCommand parsePlacePawnMarket() throws Exception{
-		return new PlacePawnMarketCommand((String)area.getSelectedItem(), (String)pawn.getSelectedItem(), Integer.valueOf((String)servants.getSelectedItem()));
-	}
 	
 	public PlacePawnHarvestCommand parsePlacePawnHarvest() throws Exception{
 		return new PlacePawnHarvestCommand((String)area.getSelectedItem(), (String)pawn.getSelectedItem(), Integer.valueOf((String)servants.getSelectedItem()));

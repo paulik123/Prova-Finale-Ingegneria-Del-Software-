@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps45.model.game;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -7,13 +9,13 @@ import java.io.PrintWriter;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Observable;
 import java.util.Random;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
-import it.polimi.ingsw.ps45.controller.command.Command;
 import it.polimi.ingsw.ps45.gson.GsonWithInterface;
 import it.polimi.ingsw.ps45.model.actions.state.PawnActionState;
 import it.polimi.ingsw.ps45.model.actions.state.VaticanChoiceState;
@@ -26,9 +28,9 @@ import it.polimi.ingsw.ps45.model.player.PawnType;
 import it.polimi.ingsw.ps45.model.player.Player;
 import it.polimi.ingsw.ps45.model.vatican.Vatican;
 
-public class Game {
+public class Game implements Observer{
 	private static final int turnsPerRound = 4;
-	private static final int MAX_NUM_OF_PLAYERS = 2;
+	private static final int MAX_NUM_OF_PLAYERS = 4;
 	
 	private int numberOfPlayers;
 	
@@ -78,7 +80,9 @@ public class Game {
 		turns = new Player[turnsPerRound * numberOfPlayers];
 		colorTurns = new String[numberOfPlayers];
 		calculateTurnsStart();
-		currentRound = new Round(turns);
+		
+		currentRound = new Round(turns, this);
+		
 		roundNumber++;
 		gameStarted = true;
 		cardDealer.updateBoard(board, eras[currentEra]);
@@ -108,7 +112,7 @@ public class Game {
 			cardDealer.updateBoard(board, eras[currentEra]);
 			setPawns();
 			calculateTurns();
-			currentRound = new Round(turns);
+			currentRound = new Round(turns, this);
 			currentRound.getCurrentPlayer().getActionBuilder().setState(new PawnActionState());
 		}
 		else{
@@ -157,7 +161,7 @@ public class Game {
 		cardDealer.updateBoard(board, eras[currentEra]);
 		setPawns();
 		calculateTurns();
-		currentRound = new Round(turns);
+		currentRound = new Round(turns, this);
 		currentRound.getCurrentPlayer().getActionBuilder().setState(new PawnActionState());
 	}
 	
@@ -441,14 +445,12 @@ public class Game {
 			p.updateBoard(board);
 		}
 	}
-	
 
-	
-	
-	
-	
-	
-	
+	@Override
+	public synchronized void notify(String json) {
+		notifyObservers();
+	}
+
 	
 
 	

@@ -119,25 +119,6 @@ public class ActionBuilder {
 		}
 	}
 	
-	public void placePawnMarket(NoCardArea area, PawnType pt, int servantsAdded) throws Exception{
-		if(!state.placePawnAction()){
-			notifyError("Action not allowed - state is false");
-			throw new Exception("Action not allowed - state is false");
-		}
-		
-		Pawn pawn = p.getResourceSet().getPawn(pt);
-		int pawnValue = calculatePawnValue(pt, servantsAdded);
-		ConsumableSet servantsSet = servantsToConsumableSet(servantsAdded);
-		
-		if(canPlacePawnMarketRun(pawn, pawnValue, area, servantsSet)){
-			makePlayerPay(servantsSet, pawn);
-			setState(new NoActionState());
-			new PlacePawnNoCardAction(p, area, pt, pawnValue).run();
-		}else{
-			notifyError("Action not allowed - pawn/consumables unavailable");
-			throw new Exception("Action not allowed - pawn/consumables unavailable");
-		}
-	}
 	
 	public void placePawnTerritory(TerritoryCardArea area, PawnType pt, int servantsAdded) throws Exception{
 		if(!state.placePawnAction()){
@@ -513,13 +494,16 @@ public class ActionBuilder {
 	}
 	
 	private boolean canPlacePawnNoCardRun(Pawn pawn, int pawnValue, NoCardArea area, ConsumableSet cost){
-		return hasGeneralRequirementsWithPawn(pawn, pawnValue, area, cost);
+		
+		if(!p.getResourceSet().getPermanentEffects().isNoPawnOnMarketPenalty()){
+			return hasGeneralRequirementsWithPawn(pawn, pawnValue, area, cost);
+		}else{
+			return hasGeneralRequirementsWithPawn(pawn, pawnValue, area, cost) &&
+					area.equals(board.getCouncilPalaceArea());
+		}
+		
 	}
 	
-	private boolean canPlacePawnMarketRun(Pawn pawn, int pawnValue, NoCardArea area, ConsumableSet cost){
-		return hasGeneralRequirementsWithPawn(pawn, pawnValue, area, cost) &&
-			   !p.getResourceSet().getPermanentEffects().isNoPawnOnMarketPenalty();
-	}
 	
 	private boolean canPlacePawnProductionRun(Pawn pawn, int pawnValue, NoCardArea area, ConsumableSet cost){
 		return !board.getProductionAreas().isOccupiedByPlayer(p) &&
