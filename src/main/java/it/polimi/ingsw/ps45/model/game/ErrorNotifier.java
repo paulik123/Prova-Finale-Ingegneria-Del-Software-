@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps45.model.game;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import com.google.gson.Gson;
@@ -32,7 +33,12 @@ public class ErrorNotifier extends Thread implements Notifier{
     	
     	String json = gson.toJson(response);
 		for(Observer o: observers){
-			o.notify(json);
+			try {
+				o.notify(json);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 }

@@ -12,6 +12,7 @@ public class GameCreator {
 	private ArrayList<Game> games;
 	private Game pendingGame;
 	private HashMap<String, Game> playersInGames;
+	private HashMap<Observer, Game> observersInGames;
 	private Timer timer;
 	private GameCreatorTimerTask timerTask;
 	private static final long waitTime = 120000;
@@ -21,6 +22,7 @@ public class GameCreator {
 	public GameCreator(){
 		games = new ArrayList<Game>();
 		playersInGames = new HashMap<String, Game>();
+		observersInGames = new HashMap<Observer, Game>();
 		pendingGame = new Game();
 		
 		timer = new Timer();
@@ -30,8 +32,17 @@ public class GameCreator {
 	
 	public void addPlayer(String ID, String bonusTile, Observer o) throws Exception{
 		if(playerExists(ID)) throw new Exception("Player already exists");
+		
+		if(pendingGame.hasStarted()){
+			games.add(pendingGame);
+			pendingGame = new Game();
+			timerTask.cancel();
+			timer.purge();
+		}
+		
 		pendingGame.addPlayer(ID, bonusTile, o);
 		playersInGames.put(ID, pendingGame);
+		observersInGames.put(o, pendingGame);
 		
 		if(pendingGame.getNumberOfPlayers() >= 2 && !pendingGame.hasStarted()){
 			timerTask.cancel();
@@ -41,18 +52,15 @@ public class GameCreator {
 		}
 		
 		
-		if(pendingGame.hasStarted()){
-			games.add(pendingGame);
-			pendingGame = new Game();
-			timerTask.cancel();
-			timer.purge();
-		}
+
 	}
 	
 	public void reconnect(String ID, Observer o) throws Exception{
 		if(!playerExists(ID)) throw new Exception("Player with that name does not exist");
 		getGameFromPlayerID(ID).reconnect(ID, o);
+		observersInGames.put(o, pendingGame);
 	}
+	
 	
 	private boolean playerExists(String ID){
 		for(String s:playersInGames.keySet()){

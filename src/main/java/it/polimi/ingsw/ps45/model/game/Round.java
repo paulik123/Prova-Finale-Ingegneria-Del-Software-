@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps45.model.game;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -44,6 +45,8 @@ public class Round{
 		if(index < turnOrder.length-1){
 			index++;
 			turnOrder[index].getActionBuilder().setState(new PawnActionState());
+			//Skip the turn if the player is diconnected
+			if(turnOrder[index].isDisconnected()) nextTurn();
 		}
 		else{
 			hasEnded = true;
@@ -62,13 +65,16 @@ public class Round{
 	
 	public synchronized void notifyObservers(){
 		for(Observer o: observers){
-				o.notify("");
+				try {
+					o.notify("");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 		}
 	}
 	
 	private class TurnTimerTask extends TimerTask{
 		
-
 		@Override
 		public void run() {
 			System.out.println(getCurrentPlayer().getPlayerID()+"'s time expired. Proceeding to next turn.");

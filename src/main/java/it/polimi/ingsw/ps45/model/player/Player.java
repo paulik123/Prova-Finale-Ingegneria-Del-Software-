@@ -27,6 +27,7 @@ public class Player {
 	
 	private String status;
 	private String[] availableCommands;
+	private boolean disconnected;
 	
 	
 	public Player(String playerID, String bonusTile, String color, Board board, ConsumableSet initialResources, ArrayList<LeaderCard> leaderCards, Observer errorObserver){
@@ -118,6 +119,21 @@ public class Player {
 	public String[] getAvailableCommands(){
 		return availableCommands;
 	}
+
+
+
+
+	public boolean isDisconnected() {
+		return disconnected;
+	}
+
+
+
+
+	public void setDisconnected(boolean disconnected) {
+		this.disconnected = disconnected;
+	}
+	
 	
 	
 

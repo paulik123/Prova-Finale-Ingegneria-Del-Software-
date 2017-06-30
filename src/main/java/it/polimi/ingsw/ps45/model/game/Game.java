@@ -36,7 +36,7 @@ public class Game implements Observer{
 	
 	private transient Era[] eras = {Era.I, Era.II, Era.III};
 	private ArrayList<Player> players;
-	private transient HashMap<String, Observer> observers;
+	private transient HashMap<Observer, String> observers;
 	private Board board;
 	private Vatican vatican;
 	private transient Player[] turns; 
@@ -55,7 +55,7 @@ public class Game implements Observer{
 		roundNumber = 0;
 		currentEra = 0;
 		players = new ArrayList<Player>();
-		observers = new HashMap<String, Observer>();
+		observers = new HashMap<Observer, String>();
 		dices = new HashMap<PawnType, Integer>();
 
 		vatican = new Vatican();
@@ -97,6 +97,8 @@ public class Game implements Observer{
 	
 	public void nextTurn(String playerID) throws Exception{
 		if(!playerID.equals(currentRound.getCurrentPlayer().getPlayerID())) throw new Exception("It's not your turn to end");
+		
+		
 		currentRound.nextTurn();
 		if(currentRound.roundEnded()){
 			newRound();
@@ -172,9 +174,10 @@ public class Game implements Observer{
 	}
 	
 	public void reconnect(String playerID, Observer o) throws Exception{
-		observers.put(playerID, o);
+		observers.put(o, playerID);
 		Player player = getPlayerByID(playerID);
 		player.changeObserver(o);
+		player.setDisconnected(false);
 		
 		System.out.println("SERVER: reconnected player: "+ playerID);
 		notifyObservers();
@@ -269,7 +272,7 @@ public class Game implements Observer{
 	}
 	
 	public void registerObserver(String playerID, Observer o){
-		observers.put(playerID, o);
+		observers.put(o, playerID);
 	}
 	
 	
@@ -289,7 +292,7 @@ public class Game implements Observer{
 			e.printStackTrace();
 		}
 		
-		GameUpdateNotifier n = new GameUpdateNotifier(observersList(), game);
+		GameUpdateNotifier n = new GameUpdateNotifier(observersList(), game, this);
 		n.start();
 	}
 	
@@ -434,8 +437,8 @@ public class Game implements Observer{
 	public ArrayList<Observer>  observersList(){
 		ArrayList<Observer> list = new ArrayList<Observer>();
 		
-		for(String key:observers.keySet()){
-			list.add(observers.get(key));
+		for(Observer o:observers.keySet()){
+			list.add(o);
 		}
 		return list;
 	}
@@ -450,8 +453,16 @@ public class Game implements Observer{
 	public synchronized void notify(String json) {
 		notifyObservers();
 	}
-
 	
+	public void removeObserver(Observer o){
+		try {
+			getPlayerByID(observers.get(o)).setDisconnected(true);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		observers.remove(o);
+	}
 
 	
 }

@@ -17,9 +17,8 @@ public class SocketObserver implements Observer{
 	}
 
 	@Override
-	public void notify(String json) {
-        try {
-        	
+	public void notify(String json) throws IOException {
+
         	StringBuilder sb = new StringBuilder();
         	sb.append(json);
         	sb.append("\n");
@@ -27,10 +26,7 @@ public class SocketObserver implements Observer{
         	
 			os.write(sb.toString());
 			os.flush();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 	}
 	
 	
