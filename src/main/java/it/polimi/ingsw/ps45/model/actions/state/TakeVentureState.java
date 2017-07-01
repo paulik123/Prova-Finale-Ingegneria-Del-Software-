@@ -3,6 +3,10 @@ package it.polimi.ingsw.ps45.model.actions.state;
 import it.polimi.ingsw.ps45.model.player.ConsumableSet;
 import it.polimi.ingsw.ps45.model.vatican.ExcommunicationCard;
 
+/**
+ * ActionBuilderState implementation that allows the player to make a TakeVentureAction
+ * @see the actual interface for documentation of each method
+ */
 public  class TakeVentureState implements ActionBuilderState{
 	
 	private int value;
@@ -19,7 +23,7 @@ public  class TakeVentureState implements ActionBuilderState{
 		// TODO Auto-generated method stub
 		return value;
 	}
-	
+
 	@Override
 	public ConsumableSet discount() {
 		// TODO Auto-generated method stub

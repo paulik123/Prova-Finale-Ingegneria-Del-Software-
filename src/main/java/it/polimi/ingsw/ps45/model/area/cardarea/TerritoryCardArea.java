@@ -7,10 +7,21 @@ import it.polimi.ingsw.ps45.model.cards.Territory;
 import it.polimi.ingsw.ps45.model.effects.Effect;
 import it.polimi.ingsw.ps45.model.player.Player;
 
+
+/**
+ * An area that contains territory cards.
+ */
 public class TerritoryCardArea extends Area implements Serializable{
 	private Territory t;
-	Effect effect;
+	private Effect effect;
 	
+	/**
+ 	 * Constructor
+ 	 * @param cost the (pawn)cost of the area. 
+ 	 * @param maxOccupants maximum number of the occupants that the area can hold.
+ 	 * @param effect The effect that the area will have.
+ 	 * @param name the name of the area.
+	 */
 	public TerritoryCardArea(int cost, Effect effect, String name){
 		super();
 		super.setName(name);
@@ -19,14 +30,26 @@ public class TerritoryCardArea extends Area implements Serializable{
 		this.maxOccupants = 1;
 	}
 
+	/**
+	 * @return The territory card of the area.
+	 */
 	public Territory getTerritory() {
 		return t;
 	}
 
+	/**
+	 * Sets the territory of the area.
+	 * @param t The territory to be added to the area.
+	 */
 	public void setTerritory(Territory t) {
 		this.t = t;
 	}
 
+	/**
+	 * Applies the effects to player parameter
+	 * @param p The effect that will be applied.
+	 * @param value of the effect that will be applied.
+	 */
 	@Override
 	public void immediateEffect(Player p, int value) {
 		effect.runEffect(p, value);	

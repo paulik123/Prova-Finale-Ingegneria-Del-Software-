@@ -3,17 +3,20 @@ package it.polimi.ingsw.ps45.model.actions.state;
 import it.polimi.ingsw.ps45.model.player.ConsumableSet;
 import it.polimi.ingsw.ps45.model.vatican.ExcommunicationCard;
 
+/**
+ * ActionBuilderState implementation that allows the player to make a PawnAction
+ * @see the actual interface for documentation of each method
+ */
 public class PawnActionState implements ActionBuilderState {
 	
 	private String[] commands = {"placepawnnocard", "placepawnharvest", "placepawnproduction", "placepawnterritory", "placepawncharacter", "placepawnbuilding", "placepawnventure", "activateleader", "useleader", "endturn"};
 	
-
 	@Override
 	public int actionValue() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
+
 	@Override
 	public ConsumableSet discount() {
 		// TODO Auto-generated method stub
@@ -37,7 +40,6 @@ public class PawnActionState implements ActionBuilderState {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
 
 	@Override
 	public boolean takeTerritoryAction() {

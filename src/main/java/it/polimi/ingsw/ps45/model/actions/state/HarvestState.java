@@ -3,16 +3,20 @@ package it.polimi.ingsw.ps45.model.actions.state;
 import it.polimi.ingsw.ps45.model.player.ConsumableSet;
 import it.polimi.ingsw.ps45.model.vatican.ExcommunicationCard;
 
+/**
+ * ActionBuilderState implementation that allows the player to make a HarvestAction
+ * @see the actual interface for documentation of each method
+ */
 public class HarvestState implements ActionBuilderState{
 	
 	private String[] commands = {"harvest", "endturn"};
 	
 	private int value;
-	
+
 	public HarvestState(int value){
 		this.value = value;
 	}
-	
+
 	@Override
 	public ConsumableSet discount() {
 		// TODO Auto-generated method stub

@@ -3,6 +3,10 @@ package it.polimi.ingsw.ps45.model.actions.state;
 import it.polimi.ingsw.ps45.model.player.ConsumableSet;
 import it.polimi.ingsw.ps45.model.vatican.ExcommunicationCard;
 
+/**
+ * ActionBuilderState implementation that allows the player to make a TakeBuldingAction
+ * @see the actual interface for documentation of each method
+ */
 public class TakeBuildingState implements ActionBuilderState{
 	
 	private String[] commands = {"nopawnbuilding", "activateleader", "useleader", "endturn"};
@@ -15,23 +19,27 @@ public class TakeBuildingState implements ActionBuilderState{
 		this.discount = discount;
 	}
 
+
 	@Override
 	public int actionValue() {
 		// TODO Auto-generated method stub
 		return value;
 	}
 	
+
 	@Override
 	public ConsumableSet discount() {
 		// TODO Auto-generated method stub
 		return discount;
 	}
 
+
 	@Override
 	public boolean placePawnAction() {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
 
 	@Override
 	public boolean productionAction() {
@@ -44,7 +52,7 @@ public class TakeBuildingState implements ActionBuilderState{
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	
 	@Override
 	public boolean takeTerritoryAction() {
 		// TODO Auto-generated method stub

@@ -5,13 +5,24 @@ import it.polimi.ingsw.ps45.model.player.ConsumableSet;
 import it.polimi.ingsw.ps45.model.player.Player;
 import it.polimi.ingsw.ps45.model.vatican.VaticanVictoryPointsConverter;
 
+/**
+ * The actual actions that is executed by the player to accept vatican at the end of each era.
+ */
 public class AcceptVaticanOffer implements Action{
 
 	Player p;
 	
+	/**
+ 	 * Constructor
+	 * @param  p the object of the player that executes the action.
+	 */
 	AcceptVaticanOffer(Player p){
 		this.p = p;
 	}
+	
+	/**
+ 	 * The method that runs the action.
+	 */
 	@Override
 	public void run() {
 		VaticanVictoryPointsConverter cnv = new VaticanVictoryPointsConverter();

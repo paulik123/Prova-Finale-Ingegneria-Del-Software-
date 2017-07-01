@@ -6,17 +6,29 @@ import it.polimi.ingsw.ps45.model.cards.Building;
 import it.polimi.ingsw.ps45.model.player.PersonalBonusTile;
 import it.polimi.ingsw.ps45.model.player.Player;
 
+/**
+ * The actual action that is executed by the player when he wants to do a ProductionAction.
+ */
 public class ProductionAction implements Action{
 	private Player p;
 	private ProductionMode[] pm;
 	private int level;
 	
+	/**
+ 	 * Constructor
+	 * @param p the player which executes the action.
+	 * @param  pm An array with the modes of each building card in the players building list.
+	 * @param level the level of the production.
+	 */
 	protected ProductionAction(Player p, ProductionMode[] pm, int level){
 		this.p = p;
 		this.pm = pm;
 		this.level = level;
 	}
 
+	/**
+ 	 * The method that runs the action.
+	 */
 	@Override
 	public void run() {
 		ArrayList<Building> buildings = p.getResourceSet().getBuildingList();

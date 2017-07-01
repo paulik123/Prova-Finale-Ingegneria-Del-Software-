@@ -16,10 +16,21 @@ import it.polimi.ingsw.ps45.model.area.HasDictionary;
 import it.polimi.ingsw.ps45.model.effects.Effect;
 import it.polimi.ingsw.ps45.model.player.Player;
 
+/**
+ * Class that holds and manages all BuildingCardAreas of the game.
+ */
 public class BuildingTower implements Tower, HasDictionary{
 	
-	HashMap<String, BuildingCardArea> dictionary;
+	private HashMap<String, BuildingCardArea> dictionary;
+	private BuildingCardArea b0;
+	private BuildingCardArea b1;
+	private BuildingCardArea b2;
+	private BuildingCardArea b3;
 	
+	/**
+ 	 * Constructor
+ 	 * Reads all the areas from file.
+	 */
 	public BuildingTower(){
 		dictionary = new HashMap<String, BuildingCardArea>();
 		b0 = loadFromFile("serialized//areas//cardareas//BuildingCardAreaGroundFloor.json");
@@ -33,11 +44,10 @@ public class BuildingTower implements Tower, HasDictionary{
 		dictionary.put("b3", b3);
 	}
 	
-	private BuildingCardArea b0;
-	private BuildingCardArea b1;
-	private BuildingCardArea b2;
-	private BuildingCardArea b3;
-	
+
+	/**
+	 * @return true if any of the areas in the tower is occupied.
+	 */
 	@Override
 	public boolean isOccupied() {
 		int occupants = b0.getOccupants().size() + b1.getOccupants().size() + b2.getOccupants().size() + b3.getOccupants().size(); 
@@ -45,6 +55,10 @@ public class BuildingTower implements Tower, HasDictionary{
 		return false;
 	}
 
+	/**
+	 * @param p the player that the area will be checked if is occupied by.
+	 * @return true if any of the areas in the tower is occupied by the player in the parameters.
+	 */
 	@Override
 	public boolean isOccupiedByPlayer(Player p) {
 		return 	    b0.isOccupiedByPlayerWithColoredPawn(p) || 
@@ -53,6 +67,10 @@ public class BuildingTower implements Tower, HasDictionary{
 					b3.isOccupiedByPlayerWithColoredPawn(p);
 	}
 	
+	/**
+	 * Loads a BuildingCardAreas from file.
+	 * @param path the path of the serialized json area file.
+	 */
 	public BuildingCardArea loadFromFile(String path){
 		Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Effect.class,
@@ -73,23 +91,38 @@ public class BuildingTower implements Tower, HasDictionary{
 		}
 	 return c;
 	}
-
+	
+	/**
+	 * @return the BuildingCardArea on the ground floor of the tower.
+	 */
 	public BuildingCardArea getGroundFloor() {
 		return b0;
 	}
 
+	/**
+	 * @return the BuildingCardArea on the first floor of the tower.
+	 */
 	public BuildingCardArea getFirstFloor() {
 		return b1;
 	}
 
+	/**
+	 * @return the BuildingCardArea on the second floor of the tower.
+	 */
 	public BuildingCardArea getSecondFloor() {
 		return b2;
 	}
 
+	/**
+	 * @return the BuildingCardArea on the third floor of the tower.
+	 */
 	public BuildingCardArea getThirdFloor() {
 		return b3;
 	}
 	
+	/**
+	 * @return an ArrayList containing all the ares in the tower.
+	 */
 	public ArrayList<BuildingCardArea> getAreas(){
 		ArrayList<BuildingCardArea> list = new ArrayList<BuildingCardArea>();
 		list.add(b0);
@@ -99,23 +132,22 @@ public class BuildingTower implements Tower, HasDictionary{
 		return list;
 	}
 	
+	/**
+	 * @throws Exception if the an area with the given name doesn't exist
+	 * @param s name of the area. Also key in the dictionary.
+	 * @return A BuildingCardArea that corresponds with the parameter string s.
+	 */
 	public BuildingCardArea getAreaFromString(String s) throws Exception {
 		if(!dictionary.containsKey(s.toLowerCase())) throw new Exception("No such key");
 		return dictionary.get(s.toLowerCase());
 	}
 
+	/**
+	 * @return The a HashMap which stores the name of an area as key and it's instantiated object as value.
+	 */
 	public HashMap<String, BuildingCardArea> getDictionary() {
 		return dictionary;
 	}
-
-	@Override
-	public Area getAreaFromDictionary(String s) throws Exception {
-		if(!dictionary.containsKey(s.toLowerCase())) throw new Exception("No such key");
-		return dictionary.get(s.toLowerCase());
-	}
-	
-	
-	
 	
 }
 

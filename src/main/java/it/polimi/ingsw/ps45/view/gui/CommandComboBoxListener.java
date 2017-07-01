@@ -42,7 +42,7 @@ public class CommandComboBoxListener implements ActionListener{
 		ArrayList<String> available = new ArrayList<String>();
 		for(String key: hs.getDictionary().keySet()){
 			try {
-				if(hs.getAreaFromDictionary(key).isAvailable()) available.add(key);
+				if(hs.getAreaFromString(key).isAvailable()) available.add(key);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

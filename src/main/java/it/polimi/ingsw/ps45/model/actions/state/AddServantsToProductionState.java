@@ -3,6 +3,10 @@ package it.polimi.ingsw.ps45.model.actions.state;
 import it.polimi.ingsw.ps45.model.player.ConsumableSet;
 import it.polimi.ingsw.ps45.model.vatican.ExcommunicationCard;
 
+/**
+ * ActionBuilderState implementation that allows the player to make a AddServantsToProductionAction
+ * @see the actual interface for documentation of each method
+ */
 public class AddServantsToProductionState implements ActionBuilderState{
 
 	int value;
@@ -11,12 +15,13 @@ public class AddServantsToProductionState implements ActionBuilderState{
 	public AddServantsToProductionState(int value){
 		this.value = value;
 	}
-	
+
 	@Override
 	public int actionValue() {
 		// TODO Auto-generated method stub
 		return value;
 	}
+
 
 	@Override
 	public ConsumableSet discount() {
@@ -42,6 +47,7 @@ public class AddServantsToProductionState implements ActionBuilderState{
 		return false;
 	}
 
+
 	@Override
 	public boolean harvestAction() {
 		// TODO Auto-generated method stub
@@ -60,11 +66,13 @@ public class AddServantsToProductionState implements ActionBuilderState{
 		return true;
 	}
 
+
 	@Override
 	public boolean takeTerritoryAction() {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
 
 	@Override
 	public boolean takeCharacterAction() {

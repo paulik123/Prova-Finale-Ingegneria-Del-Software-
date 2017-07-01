@@ -17,11 +17,22 @@ import it.polimi.ingsw.ps45.model.area.HasDictionary;
 import it.polimi.ingsw.ps45.model.effects.Effect;
 import it.polimi.ingsw.ps45.model.player.Player;
 
+
+/**
+ * Class that holds and manages all VentureCardAreas of the game.
+ */
 public class VentureTower implements Tower, HasDictionary{
 	
-	HashMap<String, VentureCardArea> dictionary;
+	private HashMap<String, VentureCardArea> dictionary;
+	private VentureCardArea v0;
+	private VentureCardArea v1;
+	private VentureCardArea v2;
+	private VentureCardArea v3;
 	
-	
+	/**
+ 	 * Constructor
+ 	 * Reads all the areas from file.
+	 */
 	public VentureTower(){
 		dictionary = new HashMap<String, VentureCardArea>();
 		
@@ -38,11 +49,10 @@ public class VentureTower implements Tower, HasDictionary{
 		dictionary.put("v3", v3);
 	}
 	
-	private VentureCardArea v0;
-	private VentureCardArea v1;
-	private VentureCardArea v2;
-	private VentureCardArea v3;
-	
+
+	/**
+	 * @return true if any of the areas in the tower is occupied.
+	 */
 	@Override
 	public boolean isOccupied() {
 		int occupants = v0.getOccupants().size() + v1.getOccupants().size() + v2.getOccupants().size() + v3.getOccupants().size(); 
@@ -50,6 +60,10 @@ public class VentureTower implements Tower, HasDictionary{
 		return false;
 	}
 
+	/**
+	 * @param p the player that the area will be checked if is occupied by.
+	 * @return true if any of the areas in the tower is occupied by the player in the parameters.
+	 */
 	@Override
 	public boolean isOccupiedByPlayer(Player p) {
 		return 	    v0.isOccupiedByPlayerWithColoredPawn(p) || 
@@ -58,6 +72,10 @@ public class VentureTower implements Tower, HasDictionary{
 					v3.isOccupiedByPlayerWithColoredPawn(p);
 	}
 	
+	/**
+	 * Loads a VentureCardAreas from file.
+	 * @param path the path of the serialized json area file.
+	 */
 	public VentureCardArea loadFromFile(String path){
 		Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Effect.class,
@@ -79,22 +97,37 @@ public class VentureTower implements Tower, HasDictionary{
 	 return c;
 	}
 
+	/**
+	 * @return the VentureCardArea on the ground floor of the tower.
+	 */
 	public VentureCardArea getGroundFloor() {
 		return v0;
 	}
 
+	/**
+	 * @return the VentureCardArea on the first floor of the tower.
+	 */
 	public VentureCardArea getFirstFloor() {
 		return v1;
 	}
 
+	/**
+	 * @return the VentureCardArea on the second floor of the tower.
+	 */
 	public VentureCardArea getSecondFloor() {
 		return v2;
 	}
 
+	/**
+	 * @return the VentureCardArea on the third floor of the tower.
+	 */
 	public VentureCardArea getThirdFloor() {
 		return v3;
 	}
 	
+	/**
+	 * @return an ArrayList containing all the ares in the tower.
+	 */
 	public ArrayList<VentureCardArea> getAreas(){
 		ArrayList<VentureCardArea> list = new ArrayList<VentureCardArea>();
 		list.add(v0);
@@ -104,23 +137,21 @@ public class VentureTower implements Tower, HasDictionary{
 		return list;
 	}
 	
+	/**
+	 * @throws Exception if the an area with the given name doesn't exist
+	 * @param s name of the area. Also key in the dictionary.
+	 * @return A VentureCardArea that corresponds with the parameter string s.
+	 */
 	public VentureCardArea getAreaFromString(String s) throws Exception {
 		if(!dictionary.containsKey(s.toLowerCase())) throw new Exception("No such key");
 		return dictionary.get(s.toLowerCase());
 	}
 
+	/**
+	 * @return The a HashMap which stores the name of an area as key and it's instantiated object as value.
+	 */
 	public HashMap<String, VentureCardArea> getDictionary() {
 		return dictionary;
 	}
-
-	@Override
-	public Area getAreaFromDictionary(String s) throws Exception {
-		if(!dictionary.containsKey(s.toLowerCase())) throw new Exception("No such key");
-		return dictionary.get(s.toLowerCase());
-	}
-	
-	
-	
-	
 
 }

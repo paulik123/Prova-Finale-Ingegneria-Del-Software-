@@ -16,27 +16,36 @@ import it.polimi.ingsw.ps45.model.area.cardarea.TerritoryTower;
 import it.polimi.ingsw.ps45.model.area.cardarea.VentureTower;
 import it.polimi.ingsw.ps45.model.effects.Effect;
 
+/**
+ * Class that holds and manages all area objects of the game.
+ */
 public class Board implements HasDictionary {
 	
 	private int players;
 	
-	HashMap<String, NoCardArea> dictionary;
-	ProductionAreas productionAreas;
+	private HashMap<String, NoCardArea> dictionary;
+	private ProductionAreas productionAreas;
 	
-	HarvestAreas harvestAreas;
+	private HarvestAreas harvestAreas;
 	
-	NoCardArea coinsMarketArea;
-	NoCardArea servantsMarketArea;
-	NoCardArea militaryAndCoinArea;
-	NoCardArea councilPrivilegeMarketArea;
+	private NoCardArea coinsMarketArea;
+	private NoCardArea servantsMarketArea;
+	private NoCardArea militaryAndCoinArea;
+	private NoCardArea councilPrivilegeMarketArea;
 	
-	NoCardArea councilPalaceArea;
+	private NoCardArea councilPalaceArea;
 	
-	TerritoryTower territoryTower;
-	CharacterTower characterTower;
-	BuildingTower buildingTower;
-	VentureTower ventureTower;
+	private TerritoryTower territoryTower;
+	private CharacterTower characterTower;
+	private BuildingTower buildingTower;
+	private VentureTower ventureTower;
 	
+	
+	/**
+ 	 * Constructor
+ 	 * Reads all the areas from file.
+ 	 * @ param players the number of players (because if players < 4 some areas don't need to be instantiated)
+	 */
 	public Board(int players){
 		this.players = players;
 		dictionary = new HashMap<String, NoCardArea>();
@@ -66,51 +75,87 @@ public class Board implements HasDictionary {
 		ventureTower = new VentureTower();	
 	}
 
+	/**
+	 * @return An object containing all production areas.
+	 */
 	public ProductionAreas getProductionAreas() {
 		return productionAreas;
 	}
 
+	/**
+	 * @return An object containing all harvest areas.
+	 */
 	public HarvestAreas getHarvestAreas() {
 		return harvestAreas;
 	}
 
+	/**
+	 * @return the CoinsMarketArea.
+	 */
 	public NoCardArea getCoinsMarketArea() {
 		return coinsMarketArea;
 	}
 
+	/**
+	 * @return the servantsMarketArea.
+	 */
 	public NoCardArea getServantsMarketArea() {
 		return servantsMarketArea;
 	}
 
+	/**
+	 * @return the militaryMarketArea.
+	 */
 	public NoCardArea getMilitaryAndCoinArea() {
 		return militaryAndCoinArea;
 	}
 
+	/**
+	 * @return the councilPrivilegeMarketArea.
+	 */
 	public NoCardArea getCouncilPrivilegeMarketArea() {
 		return councilPrivilegeMarketArea;
 	}
 
+	/**
+	 * @return the CouncilPalaceArea.
+	 */
 	public NoCardArea getCouncilPalaceArea() {
 		return councilPalaceArea;
 	}
 
+	/**
+	 * @return the "Tower" that holds all territories.
+	 */
 	public TerritoryTower getTerritoryTower() {
 		return territoryTower;
 	}
 
+	/**
+	 * @return the "Tower" that holds all characters.
+	 */
 	public CharacterTower getCharacterTower() {
 		return characterTower;
 	}
 
+	/**
+	 * @return the "Tower" that holds all buildings.
+	 */
 	public BuildingTower getBuildingTower() {
 		return buildingTower;
 	}
 
+	/**
+	 * @return the "Tower" that holds all ventures.
+	 */
 	public VentureTower getVentureTower() {
 		return ventureTower;
 	}
 	
-	
+	/**
+	 * Loads a NoCardArea from file.
+	 * @param path the path of the serialized json area file.
+	 */
 	public static NoCardArea loadFromFile(String path){
 		Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Effect.class,
@@ -132,20 +177,23 @@ public class Board implements HasDictionary {
 	 return c;
 	}
 
+	/**
+	 * @throws Exception if the an area with the given name doesn't exist
+	 * @param s name of the area. Also key in the dictionary.
+	 * @return A NoCardArea that correspons with the parameter string s.
+	 */
 	public NoCardArea getAreaFromString(String s) throws Exception {
 		if(!dictionary.containsKey(s.toLowerCase())) throw new Exception("No such key");
 		return dictionary.get(s.toLowerCase());
 	}
 
+	/**
+	 * @return The a HashMap which stores the name of an area as key and it's instantiated object as value.
+	 */
 	public HashMap<String, NoCardArea> getDictionary() {
 		return dictionary;
 	}
 
-	@Override
-	public Area getAreaFromDictionary(String s) throws Exception {
-		if(!dictionary.containsKey(s.toLowerCase())) throw new Exception("No such key");
-		return dictionary.get(s.toLowerCase());
-	}
 
 	
 	
