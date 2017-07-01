@@ -10,7 +10,7 @@ import it.polimi.ingsw.ps45.view.View;
 
 public class ClientServerResponseVisitor implements ServerResponseVisitor{
 	
-	View view;
+	private View view;
 	
 	public ClientServerResponseVisitor(View view){
 		this.view = view;

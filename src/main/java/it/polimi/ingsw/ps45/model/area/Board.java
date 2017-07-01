@@ -44,7 +44,7 @@ public class Board implements HasDictionary {
 	/**
  	 * Constructor
  	 * Reads all the areas from file.
- 	 * @ param players the number of players (because if players < 4 some areas don't need to be instantiated)
+ 	 * @param players the number of players (because if players < 4 some areas don't need to be instantiated)
 	 */
 	public Board(int players){
 		this.players = players;

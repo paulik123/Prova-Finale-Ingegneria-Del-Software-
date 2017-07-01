@@ -16,8 +16,8 @@ import it.polimi.ingsw.ps45.controller.GameCreator;
 public class Server {
 	private static int PORTNUMBER = 12345;
 	
-	ServerSocket server;
-	GameCreator gameCreator;
+	private ServerSocket server;
+	private GameCreator gameCreator;
 	
 	
 	/**

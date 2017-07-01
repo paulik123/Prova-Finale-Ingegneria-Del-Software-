@@ -15,7 +15,7 @@ public class HarvestAreas implements HasDictionary {
 	/**
  	 * Constructor
  	 * Reads all the harvest areas from file.
- 	 * @ param players the number of players (because if players < 4 some areas don't need to be instantiated)
+ 	 * @param players the number of players (because if players < 4 some areas don't need to be instantiated)
 	 */
 	public HarvestAreas(int players){
 		harvestAreaDictionary = new HashMap<String, NoCardArea>(); 

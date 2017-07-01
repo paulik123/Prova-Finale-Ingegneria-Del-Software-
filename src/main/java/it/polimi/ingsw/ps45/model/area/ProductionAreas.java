@@ -15,7 +15,7 @@ public class ProductionAreas implements HasDictionary {
 	/**
  	 * Constructor
  	 * Reads all the production areas from file.
- 	 * @ param players the number of players (because if players < 4 some areas don't need to be instantiated)
+ 	 * @param players the number of players (because if players < 4 some areas don't need to be instantiated)
 	 */
 	public ProductionAreas(int players){
 		productionAreaDictionary = new HashMap<String, NoCardArea>();

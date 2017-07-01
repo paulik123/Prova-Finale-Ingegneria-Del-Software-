@@ -21,6 +21,10 @@ import it.polimi.ingsw.ps45.model.area.cardarea.TerritoryCardArea;
 import it.polimi.ingsw.ps45.model.area.cardarea.VentureCardArea;
 import it.polimi.ingsw.ps45.model.effects.Effect;
 
+
+/**
+ * Class that reads all the cards from file using GSON then "deals" them as requested by the game.
+ */
 public class CardDealer {
 	
 	private static final String territoryPath = "serialized//cards//territories//";
@@ -37,6 +41,14 @@ public class CardDealer {
 	private HashMap<Era, ArrayList<Venture>> ventureList;
 	private ArrayList<LeaderCard> leaderList;
 	
+	
+	/**
+ 	 * Constructor
+ 	 * Reads all the cards from file
+ 	 * @throws JsonSyntaxException if the serialized json card is not well formatted.
+ 	 * @throws JsonIOException if Gson can't read the serialized files.
+ 	 * @throws FileNotFoundException if the constructor doesn't find a serialized card.
+	 */
 	public CardDealer() throws JsonSyntaxException, JsonIOException, FileNotFoundException{
 		
 		territoryList = new HashMap<Era, ArrayList<Territory>>();
@@ -54,12 +66,22 @@ public class CardDealer {
 
 	}
 	
+	/**
+	 * 
+	 * Updates a board with fresh, unused cards.
+	 * @param b The board to be updated.
+	 * @param  e Era from which the cards should belong to.
+	 */
 	public void updateBoard(Board b, Era e){
 		updateTerritoryTower(b,e);
 		updateCharacterTower(b,e);
 		updateBuildingTower(b,e);
 		updateVentureTower(b,e);
 	}
+	
+	/**
+	 * @return a list with four Leader Cards needed when adding a new player(every player has to have 4 leader cards). The cards are chosen at random.
+	 */
 	public  ArrayList<LeaderCard> getFourLeaders(){
 		Random r = new Random();
 		ArrayList<LeaderCard> list = new ArrayList<LeaderCard>();
@@ -72,6 +94,13 @@ public class CardDealer {
 		return list;
 	}
 	
+	/**
+	 * 
+	 * Updates a BuildingTower with fresh, unused cards.
+	 * The cards are chosen at random.
+	 * @param b The board which contains the building tower that will be updated.
+	 * @param e Era from which the cards should belong to.
+	 */
 	private void updateBuildingTower(Board b, Era e){
 		Random r = new Random();
 		for(BuildingCardArea bca: b.getBuildingTower().getAreas()){
@@ -82,6 +111,13 @@ public class CardDealer {
 		}
 	}
 	
+	/**
+	 * 
+	 * Updates a CharacterTower with fresh, unused cards.
+	 * The cards are chosen at random.
+	 * @param b The board which contains the character tower that will be updated.
+	 * @param e Era from which the cards should belong to.
+	 */
 	private void updateCharacterTower(Board b, Era e){
 		Random r = new Random();
 		for(CharacterCardArea bca: b.getCharacterTower().getAreas()){
@@ -92,6 +128,13 @@ public class CardDealer {
 		}
 	}
 	
+	/**
+	 * 
+	 * Updates a TerritoryTower with fresh, unused cards.
+	 * The cards are chosen at random.
+	 * @param b The board which contains the territory tower that will be updated.
+	 * @param e Era from which the cards should belong to.
+	 */
 	private void updateTerritoryTower(Board b, Era e){
 		Random r = new Random();
 		for(TerritoryCardArea bca: b.getTerritoryTower().getAreas()){
@@ -102,6 +145,13 @@ public class CardDealer {
 		}
 	}
 	
+	/**
+	 * 
+	 * Updates a VentureTower with fresh, unused cards.
+	 * The cards are chosen at random.
+	 * @param b The board which contains the venture tower that will be updated.
+	 * @param e Era from which the cards should belong to.
+	 */
 	private void updateVentureTower(Board b, Era e){
 		Random r = new Random();
 		for(VentureCardArea bca: b.getVentureTower().getAreas()){
@@ -112,6 +162,14 @@ public class CardDealer {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param e Era from which the cards should belong to.
+	 * @return a list with all territories of a given era.
+	 * @throws JsonSyntaxException if the serialized json card is not well formatted.
+ 	 * @throws JsonIOException if Gson can't read the serialized files.
+ 	 * @throws FileNotFoundException if the constructor doesn't find a serialized card.
+	 */
 	public ArrayList<Territory> getTerritoryFromEra(Era e) throws JsonSyntaxException, JsonIOException, FileNotFoundException{
 		 Gson gson = new GsonBuilder()
 	                .registerTypeAdapter(Effect.class,
@@ -129,6 +187,14 @@ public class CardDealer {
 		 return temp;
 	}
 	
+	/**
+	 * 
+	 * @param e Era from which the cards should belong to.
+	 * @return a list with all characters of a given era.
+	 * @throws JsonSyntaxException if the serialized json card is not well formatted.
+ 	 * @throws JsonIOException if Gson can't read the serialized files.
+ 	 * @throws FileNotFoundException if the constructor doesn't find a serialized card.
+	 */
 	public ArrayList<Character> getCharacterFromEra(Era e) throws JsonSyntaxException, JsonIOException, FileNotFoundException{
 		 Gson gson = new GsonBuilder()
 	                .registerTypeAdapter(Effect.class,
@@ -146,6 +212,14 @@ public class CardDealer {
 		 return temp;
 	}
 	
+	/**
+	 * 
+	 * @param e Era from which the cards should belong to.
+	 * @return a list with all buildings of a given era.
+	 * @throws JsonSyntaxException if the serialized json card is not well formatted.
+ 	 * @throws JsonIOException if Gson can't read the serialized files.
+ 	 * @throws FileNotFoundException if the constructor doesn't find a serialized card.
+	 */
 	public ArrayList<Building> getBuildingFromEra(Era e) throws JsonSyntaxException, JsonIOException, FileNotFoundException{
 		 Gson gson = new GsonBuilder()
 	                .registerTypeAdapter(Effect.class,
@@ -163,6 +237,14 @@ public class CardDealer {
 		 return temp;
 	}
 	
+	/**
+	 * 
+	 * @param e Era from which the cards should belong to.
+	 * @return a list with all ventures of a given era.
+	 * @throws JsonSyntaxException if the serialized json card is not well formatted.
+ 	 * @throws JsonIOException if Gson can't read the serialized files.
+ 	 * @throws FileNotFoundException if the constructor doesn't find a serialized card.
+	 */
 	public ArrayList<Venture> getVentureFromEra(Era e) throws JsonSyntaxException, JsonIOException, FileNotFoundException{
 		 Gson gson = new GsonBuilder()
 	                .registerTypeAdapter(Effect.class,
@@ -180,6 +262,14 @@ public class CardDealer {
 		 return temp;
 	}
 	
+	/**
+	 * 
+	 * @param e Era from which the cards should belong to.
+	 * @return a list with all leader cards of a given era.
+	 * @throws JsonSyntaxException if the serialized json card is not well formatted.
+ 	 * @throws JsonIOException if Gson can't read the serialized files.
+ 	 * @throws FileNotFoundException if the constructor doesn't find a serialized card.
+	 */
 	public ArrayList<LeaderCard> getLeaders() throws JsonSyntaxException, JsonIOException, FileNotFoundException{
 		 Gson gson = GsonWithInterface.getGson();
 		 
