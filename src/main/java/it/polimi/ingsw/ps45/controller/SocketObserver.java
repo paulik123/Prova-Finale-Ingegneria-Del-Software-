@@ -9,6 +9,10 @@ import it.polimi.ingsw.ps45.gson.GsonWithInterface;
 import it.polimi.ingsw.ps45.model.game.Observer;
 import it.polimi.ingsw.ps45.model.game.ServerResponseWrapper;
 
+/**
+ * Implementation of the Observer interface that uses socket, so the clients can be notified.
+ */
+
 public class SocketObserver implements Observer{
 	private OutputStreamWriter os;
 	

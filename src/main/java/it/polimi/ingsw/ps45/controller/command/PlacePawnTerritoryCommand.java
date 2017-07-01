@@ -6,19 +6,34 @@ import it.polimi.ingsw.ps45.model.area.cardarea.TerritoryCardArea;
 import it.polimi.ingsw.ps45.model.game.Game;
 import it.polimi.ingsw.ps45.model.player.PawnType;
 
+
+/**
+ * Command that allows the player to acquire a territory while also placing a pawn.
+ */
 public class PlacePawnTerritoryCommand implements Command{
 
 	private String territoryCardArea;
 	private String pawnType;
 	private int servantsAdded;
 	
+	
+	/**
+ 	 * 
+ 	 * @param  connection the players Connection used to get a reference to the gameCreator.
+ 	 * @param  pt the "color" of the pawn that the player wants to use.
+ 	 * @param  playerID the id of the player that "executes the command".
+	 */
 	public PlacePawnTerritoryCommand(String area, String pt, int servants){
 		this.territoryCardArea = area;
 		this.pawnType = pt;
 		this.servantsAdded = servants;
 	}
 	
-	
+	/**
+ 	 * 
+ 	 * @param  connection the players Connection used to get a reference to the gameCreator
+ 	 * @param  playerID the id of the player that "executes the command"
+	 */
 	@Override
 	public void run(Connection connection, String playerID) {
 		Game g;

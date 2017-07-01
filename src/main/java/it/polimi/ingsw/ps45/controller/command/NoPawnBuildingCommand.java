@@ -5,17 +5,30 @@ import it.polimi.ingsw.ps45.model.actions.ActionBuilder;
 import it.polimi.ingsw.ps45.model.area.cardarea.BuildingCardArea;
 import it.polimi.ingsw.ps45.model.game.Game;
 
+
+/**
+ * Command that allows the player to acquire a building without placing a pawn.
+ */
 public class NoPawnBuildingCommand implements Command{
 
 	private String buildingCardArea;
 	private int servantsAdded;
 	
+	/**
+ 	 * Constructor
+	 * @param  area the area in which the player wants to take the card from.
+	 * @param  servants the number of servants that the player wants to add.
+	 */
 	public NoPawnBuildingCommand(String area, int servants){
 		this.buildingCardArea = area;
 		this.servantsAdded = servants;
 	}
 	
-	
+	/**
+ 	 * 
+ 	 * @param  connection the players Connection used to get a reference to the gameCreator
+ 	 * @param  playerID the id of the player that "executes the command"
+	 */
 	@Override
 	public void run(Connection connection, String playerID) {
 		Game g;

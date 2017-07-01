@@ -5,14 +5,25 @@ import it.polimi.ingsw.ps45.model.actions.ActionBuilder;
 import it.polimi.ingsw.ps45.model.actions.ProductionMode;
 import it.polimi.ingsw.ps45.model.game.Game;
 
+/**
+ * Command that allows the player execute a production and choosing the modes of each building.
+ */
 public class ProductionCommand implements Command{
 	
-	String productionMode;
+	private String productionMode;
 	
+	/**
+ 	 * @param  productionModeArray the modes of each building card.
+	 */
 	public ProductionCommand(String productionModeArray){
 		this.productionMode = productionModeArray;
 	}
 
+	/**
+ 	 * 
+ 	 * @param  connection the players Connection used to get a reference to the gameCreator
+ 	 * @param  playerID the id of the player that "executes the command"
+	 */
 	@Override
 	public void run(Connection connection, String playerID) {
 		Game g;

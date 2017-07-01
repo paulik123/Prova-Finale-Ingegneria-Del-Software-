@@ -5,14 +5,28 @@ import it.polimi.ingsw.ps45.model.actions.ActionBuilder;
 import it.polimi.ingsw.ps45.model.actions.CouncilPrivilege.CouncilPrivilege;
 import it.polimi.ingsw.ps45.model.game.Game;
 
+
+/**
+ * Command that makes the exchange between one CouncilPrivilege and resources.
+ */
 public class ExchangeCouncilPrivilegeOneCommand implements Command{
 	
-	String cp1;
+	private String cp1;
 	
+	
+	/**
+ 	 * Constructor
+	 * @param  cp1 the type of council privilege that the player wants to exchange as a string.
+	 */
 	public ExchangeCouncilPrivilegeOneCommand(String cp1){
 		this.cp1 = cp1;
 	}
 
+	/**
+ 	 * 
+ 	 * @param  connection the players Connection used to get a reference to the gameCreator
+ 	 * @param  playerID the id of the player that "executes the command"
+	 */
 	@Override
 	public void run(Connection connection, String playerID) {
 		Game g;

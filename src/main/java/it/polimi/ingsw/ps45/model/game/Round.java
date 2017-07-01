@@ -1,12 +1,20 @@
 package it.polimi.ingsw.ps45.model.game;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonSyntaxException;
+
+import it.polimi.ingsw.ps45.gson.GsonWithInterface;
 import it.polimi.ingsw.ps45.model.actions.state.NoActionState;
 import it.polimi.ingsw.ps45.model.actions.state.PawnActionState;
+import it.polimi.ingsw.ps45.model.cards.Territory;
 import it.polimi.ingsw.ps45.model.player.Player;
 
 public class Round{
@@ -15,7 +23,7 @@ public class Round{
 	private boolean hasEnded;
 	private transient Timer timer;
 	private transient TurnTimerTask timerTask;
-	private static final long turnTime = 60000;
+	private  long turnTime;
 	private transient ArrayList<Observer> observers;
 	
 	public Round(Player[] turnOrder, Observer o){
@@ -27,6 +35,8 @@ public class Round{
 		
 		observers = new ArrayList<Observer>();
 		observers.add(o);
+		
+		turnTime = new TurnTime().getTime();
 		
 		// Setting up timer
 		timerTask = new TurnTimerTask();

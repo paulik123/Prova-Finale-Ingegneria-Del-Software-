@@ -7,6 +7,10 @@ import it.polimi.ingsw.ps45.model.cards.VentureMode;
 import it.polimi.ingsw.ps45.model.game.Game;
 import it.polimi.ingsw.ps45.model.player.PawnType;
 
+
+/**
+ * Command that allows the player to acquire a venture while also placing a pawn.
+ */
 public class PlacePawnVentureCommand implements Command{
 
 	private String ventureCardArea;
@@ -14,6 +18,13 @@ public class PlacePawnVentureCommand implements Command{
 	private int servantsAdded;
 	private String ventureMode;
 	
+	
+	/**
+ 	 * 
+ 	 * @param  connection the players Connection used to get a reference to the gameCreator.
+ 	 * @param  pt the "color" of the pawn that the player wants to use.
+ 	 * @param  playerID the id of the player that "executes the command".
+	 */
 	public PlacePawnVentureCommand(String area, String pt, int servants, String ventureMode){
 		this.ventureCardArea = area;
 		this.pawnType = pt;
@@ -21,7 +32,11 @@ public class PlacePawnVentureCommand implements Command{
 		this.ventureMode = ventureMode;
 	}
 	
-	
+	/**
+ 	 * 
+ 	 * @param  connection the players Connection used to get a reference to the gameCreator
+ 	 * @param  playerID the id of the player that "executes the command"
+	 */
 	@Override
 	public void run(Connection connection, String playerID) {
 		Game g;

@@ -8,28 +8,44 @@ import java.util.TimerTask;
 import it.polimi.ingsw.ps45.model.game.Game;
 import it.polimi.ingsw.ps45.model.game.Observer;
 
+
+/**
+ * The object that manages existing games and creates new ones when it's needed.
+ * Has a timer that starts the pending games if two players already joined it but no other new player joined in a predefined time.
+ */
 public class GameCreator {
 	private ArrayList<Game> games;
 	private Game pendingGame;
 	private HashMap<String, Game> playersInGames;
-	private HashMap<Observer, Game> observersInGames;
 	private Timer timer;
 	private GameCreatorTimerTask timerTask;
-	private static final long waitTime = 120000;
+	private long waitTime;
 	
 
-	
+	/**
+ 	 * Constructor
+ 	 * Reads the game start time delay from file.
+ 	 * Initializes the list of games and a pendingGame that is waiting to start.
+	 */
 	public GameCreator(){
 		games = new ArrayList<Game>();
 		playersInGames = new HashMap<String, Game>();
-		observersInGames = new HashMap<Observer, Game>();
 		pendingGame = new Game();
+		
+		waitTime = new GameStartTime().getTime();
 		
 		timer = new Timer();
 		timerTask = new GameCreatorTimerTask();
 
 	}
 	
+	/**
+	 * 
+	 * @throws Exception  If a player with that ID already exists on the server.
+	 * @param  ID  a identification string. must be unique on the server.
+	 * @param  bonusTile the index the bonusTile serialized file.
+	 * @param  o An observer so that the game knows where to send gameUpdates and errors to.
+	 */
 	public void addPlayer(String ID, String bonusTile, Observer o) throws Exception{
 		if(playerExists(ID)) throw new Exception("Player already exists");
 		
@@ -42,7 +58,6 @@ public class GameCreator {
 		
 		pendingGame.addPlayer(ID, bonusTile, o);
 		playersInGames.put(ID, pendingGame);
-		observersInGames.put(o, pendingGame);
 		
 		if(pendingGame.getNumberOfPlayers() >= 2 && !pendingGame.hasStarted()){
 			timerTask.cancel();
@@ -50,18 +65,24 @@ public class GameCreator {
 			timerTask = new GameCreatorTimerTask();
 			timer.schedule(timerTask, waitTime);
 		}
-		
-		
-
 	}
 	
+	/**
+	 * 
+	 * @throws Exception  If a player with that ID doesn't exists on the server.
+	 * @param  ID  a identification string. The ID must already exist on the server so gameCreator knows to which the player should be reconnected to.
+	 * @param  o An observer so that the game knows where to send gameUpdates and errors to.
+	 */
 	public void reconnect(String ID, Observer o) throws Exception{
 		if(!playerExists(ID)) throw new Exception("Player with that name does not exist");
 		getGameFromPlayerID(ID).reconnect(ID, o);
-		observersInGames.put(o, pendingGame);
 	}
 	
-	
+	/**
+	 * 
+	 * @param  ID  a identification string of the player.
+	 * @return true if a player with the ID in params exists on the server.
+	 */
 	private boolean playerExists(String ID){
 		for(String s:playersInGames.keySet()){
 			if(s.equals(ID)) return true;
@@ -69,14 +90,21 @@ public class GameCreator {
 		return false;
 	}
 	
+	/**
+	 * @throws Exception  If a player with that ID doesn't exists on the server.
+	 * @param  ID  a identification string of the player.
+	 * @return the game in which a player with that ID exists.
+	 */
 	public Game getGameFromPlayerID(String ID) throws Exception{
 		if(!playerExists(ID)) throw new Exception("Player does not exist");
 		return playersInGames.get(ID);
 	}
 	
+	/**
+	 * A class which defines a task runs when the timer expires.
+	 * The current pending game is started and a new pending games is created.
+	 */
 	private class GameCreatorTimerTask extends TimerTask{
-
-
 		@Override
 		public void run() {
 			try {
