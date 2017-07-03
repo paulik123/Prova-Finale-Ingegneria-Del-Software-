@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps45.model.game;
 
+import it.polimi.ingsw.ps45.client.ServerResponseVisitor;
+
 /**
  * Response that contains the final results of the game as a String. Used for the Visitor design pattern. 
  */

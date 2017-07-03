@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps45.model.game;
 
+import it.polimi.ingsw.ps45.client.ServerResponseVisitor;
 
 /**
  * Response that contains the message of an error. Used for the Visitor design pattern. 

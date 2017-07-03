@@ -2,8 +2,15 @@ package it.polimi.ingsw.ps45.client;
 
 import java.awt.EventQueue;
 
+
+/**
+ * Contains the main method of the client. Does nothing but make the user choose between the CLI client or the GUI client.
+ */
 public class Client {
 	
+	/**
+	 * Main method of the client.
+	 */
 	public static void main(String[] args){
 		if(args.length == 0){
 			System.out.println("You have to enter the view mode as first argument.");

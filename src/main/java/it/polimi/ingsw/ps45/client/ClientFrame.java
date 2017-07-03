@@ -34,14 +34,16 @@ import it.polimi.ingsw.ps45.view.gui.windowb.GameBoard;
 import it.polimi.ingsw.ps45.view.gui.windowb.LeaderBoard;
 import it.polimi.ingsw.ps45.view.gui.windowb.PlayerBoard;
 
+/**
+ * Client that runs the GUI view.
+ */
 
 public class ClientFrame extends JFrame{
 
     private Socket socket;
     private ObserverThread observerThread;
-    
-
-
+    private GUI gui;
+    private GUIController controller;
     
 	private JPanel contentPane;
 	private JTextField nameTextField;
@@ -52,16 +54,21 @@ public class ClientFrame extends JFrame{
 	private JButton btnConnect;
 	private JButton btnReconnect;
     
-    
-
-
     private static final int PORTNUMBER = 12345;
     private static int width = 768;
     private static int height = 432;
+    
+	/**
+ 	 * Constructor
+	 */
     public ClientFrame(){
     	initializeComponents();
     }
     
+	/**
+ 	 * Constructor
+ 	 * Initializes the welcome screen in which the player enters the ip of the server, his name, and other details.
+	 */
     public void initializeComponents(){
     	setTitle("Lorenzo Il Magnifico");
 		setResizable(false);
@@ -181,6 +188,10 @@ public class ClientFrame extends JFrame{
 		pack();
     }
     
+	/**
+	 * Called when the user clicks the connect button in the welcome screen.
+	 * It tries to connect to the server and then it send a AddPlayerCommand to the server.
+	 */
     private void connectButtonPressed(){
     	Runnable r = new Runnable(){
 
@@ -189,8 +200,8 @@ public class ClientFrame extends JFrame{
 		    	try{
 		        	String playerID = nameTextField.getText();
 		    		socket = new Socket(ipTextField.getText(), PORTNUMBER);
-		    		GUI gui = new GUI(playerID);
-		    		GUIController controller = new GUIController(gui, new OutputStreamWriter(socket.getOutputStream()), playerID);
+		    		gui = new GUI(playerID);
+		    		controller = new GUIController(gui, new OutputStreamWriter(socket.getOutputStream()), playerID);
 		    		observerThread = new ObserverThread(new BufferedReader(new InputStreamReader(socket.getInputStream())), gui);
 		    		observerThread.start();
 		    		controller.sendJoinCommand((String) bonusTileComboBox.getSelectedItem());
@@ -203,6 +214,11 @@ public class ClientFrame extends JFrame{
 		new Thread(r).start();
     }
     
+    
+	/**
+	 * Called when the user clicks the reconnect button in the welcome screen.
+	 * It tries to reconnect to the server and then it send a ReconnectCommand to the server.
+	 */
     private void reconnectButtonPressed(){
     	Runnable r = new Runnable(){
 
@@ -212,8 +228,8 @@ public class ClientFrame extends JFrame{
 		    	
 		    	try{
 					socket = new Socket(ipTextField.getText(), PORTNUMBER);
-					GUI gui = new GUI(playerID);
-					GUIController controller = new GUIController(gui, new OutputStreamWriter(socket.getOutputStream()), playerID);
+					gui = new GUI(playerID);
+					controller = new GUIController(gui, new OutputStreamWriter(socket.getOutputStream()), playerID);
 					observerThread = new ObserverThread(new BufferedReader(new InputStreamReader(socket.getInputStream())), gui);
 					observerThread.start();
 					controller.sendReconnectCommand();

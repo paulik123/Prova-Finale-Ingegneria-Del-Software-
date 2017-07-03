@@ -1,4 +1,7 @@
 package it.polimi.ingsw.ps45.model.game;
+
+import it.polimi.ingsw.ps45.client.ServerResponseVisitor;
+
 /**
  * Interface of a server response message. Used in visitor pattern.
  */

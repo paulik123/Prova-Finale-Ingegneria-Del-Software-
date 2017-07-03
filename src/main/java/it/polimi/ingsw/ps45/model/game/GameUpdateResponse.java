@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps45.model.game;
 
+import it.polimi.ingsw.ps45.client.ServerResponseVisitor;
+
 /**
  * Response that contains the serialized object of the current state of the game. Used for the Visitor design pattern. 
  */

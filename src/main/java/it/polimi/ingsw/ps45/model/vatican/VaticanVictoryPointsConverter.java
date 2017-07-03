@@ -1,11 +1,16 @@
 package it.polimi.ingsw.ps45.model.vatican;
 
 import java.util.HashMap;
-
+/**
+ * Converter class which faith points to victory points for when the player accepts vatican or end-game calculation.
+ */
 public class VaticanVictoryPointsConverter {
 	private HashMap<Integer, Integer> rates;
 	
-	
+	/**
+ 	 * Constructor
+ 	 * Adds all the conversion rates in a map.
+	 */
 	public VaticanVictoryPointsConverter(){
 		rates = new HashMap<Integer, Integer>();
 		rates.put(0, 0);
@@ -26,6 +31,10 @@ public class VaticanVictoryPointsConverter {
 		rates.put(15, 30);
 	}
 	
+	/**
+	 * @param faithPoints the number of faithPoints to make the conversion from.
+	 * @return the number of victory the number of given faithPoints corresponds to.
+	 */
 	public int getVictoryPoints(int faithPoints){
 		if(faithPoints < 0) return 0;
 		if(rates.containsKey(faithPoints)){

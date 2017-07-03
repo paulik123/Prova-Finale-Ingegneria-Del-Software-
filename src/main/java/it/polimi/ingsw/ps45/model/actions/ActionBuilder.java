@@ -37,7 +37,7 @@ public class ActionBuilder {
 	
 	/**
  	 * Constructor
-	 * @param  p the player-owner of the actionbuilder.
+	 * @param  p the player-owner of the action builder.
 	 * @param  board the board of the game because some actions depend on the state of the board.
 	 * @param  errorObserver an observer of the player which gets notified when the player commits an error.
 	 */
@@ -57,7 +57,7 @@ public class ActionBuilder {
 	}
 
 	/**
-	 * @param state      the state to which the actionbuilder will be set
+	 * @param state      the state to which the action builder will be set
 	 */
 	public void setState(ActionBuilderState state) {
 		this.state = state;
@@ -78,7 +78,7 @@ public class ActionBuilder {
 	}
 	
 	/**
- 	 * Verifies all the requirements and if everything is allright the action is executed
+ 	 * Verifies all the requirements and if everything is all right the action is executed
  	 * Also calculates the cost of the action and makes the player "pay".
  	 * @throws Exception If one of the requirements are not met.
  	 * 		   It also notifies the player's error observer with the error.
@@ -107,7 +107,7 @@ public class ActionBuilder {
 	}
 	
 	/**
- 	 * Verifies all the requirements and if everything is allright the action is executed
+ 	 * Verifies all the requirements and if everything is all right the action is executed
  	 * Also calculates the cost of the action and makes the player "pay".
  	 * @throws Exception If one of the requirements are not met.
  	 * 		   It also notifies the player's error observer with the error.
@@ -136,7 +136,7 @@ public class ActionBuilder {
 	}
 
 	/**
- 	 * Verifies all the requirements and if everything is allright the action is executed
+ 	 * Verifies all the requirements and if everything is all right the action is executed
  	 * Also calculates the cost of the action and makes the player "pay".
  	 * @throws Exception If one of the requirements are not met.
  	 * 		   It also notifies the player's error observer with the error.
@@ -165,7 +165,7 @@ public class ActionBuilder {
 	}
 	
 	/**
- 	 * Verifies all the requirements and if everything is allright the action is executed
+ 	 * Verifies all the requirements and if everything is all right the action is executed
  	 * Also calculates the cost of the action and makes the player "pay".
  	 * @throws Exception If one of the requirements are not met.
  	 * 		   It also notifies the player's error observer with the error.
@@ -298,7 +298,7 @@ public class ActionBuilder {
 	}
 	
 	/**
- 	 * Verifies all the requirements and if everything is allright the harvest is executed
+ 	 * Verifies all the requirements and if everything is all right the harvest is executed
  	 * @throws Exception If one of the requirements are not met.
  	 * 		   It also notifies the player's error observer with the error.
 	 */
@@ -312,7 +312,7 @@ public class ActionBuilder {
 	}
 	
 	/**
- 	 * Verifies all the requirements and if everything is allright the action is executed
+ 	 * Verifies all the requirements and if everything is all right the action is executed
  	 * @throws Exception If one of the requirements are not met.
  	 * 		   It Also notifies the player's error observer with the error.
 	 * @param  pm An array with the modes of each building card in the players building list.
@@ -348,7 +348,7 @@ public class ActionBuilder {
 	}
 	
 	/**
- 	 * Verifies all the requirements and if everything is allright the action is executed
+ 	 * Verifies all the requirements and if everything is all right the action is executed
  	 * Also calculates the cost of the action and makes the player "pay".
  	 * @throws Exception If one of the requirements are not met.
  	 * 		   It also notifies the player's error observer with the error.
@@ -369,7 +369,7 @@ public class ActionBuilder {
 	}
 	
 	/**
- 	 * Verifies all the requirements and if everything is allright the action is executed
+ 	 * Verifies all the requirements and if everything is all right the action is executed
  	 * Also calculates the cost of the action and makes the player "pay".
  	 * @throws Exception If one of the requirements are not met.
  	 * 		   It also notifies the player's error observer with the error.
@@ -397,7 +397,6 @@ public class ActionBuilder {
 	}
 	
 	/**
- 	 * Verifies all the requirements and if everything is allright the action is executed
  	 * Also calculates the cost of the action and makes the player "pay".
  	 * @throws Exception If one of the requirements are not met.
  	 * 		   It also notifies the player's error observer with the error.
@@ -455,7 +454,7 @@ public class ActionBuilder {
 	}
 	
 	/**
- 	 * Verifies all the requirements and if everything is allright the action is executed
+ 	 * Verifies all the requirements and if everything is all right the action is executed
  	 * Also calculates the cost of the action and makes the player "pay".
  	 * @throws Exception If one of the requirements are not met.
  	 * 		   It also notifies the player's error observer with the error.
@@ -489,7 +488,7 @@ public class ActionBuilder {
 	}
 	
 	/**
- 	 * Verifies all the requirements and if everything is allright the action is executed
+ 	 * Verifies all the requirements and if everything is all right the action is executed
  	 * @throws Exception If one of the requirements are not met.
  	 * 		   It also notifies the player's error observer with the error.
 	 * @param  cp1 the type of council privilege that the player wants to exchange.
@@ -505,7 +504,7 @@ public class ActionBuilder {
 	}
 	
 	/**
- 	 * Verifies all the requirements and if everything is allright the action is executed
+ 	 * Verifies all the requirements and if everything is all right the action is executed
  	 * @throws Exception If one of the requirements are not met.
  	 * 		   It also notifies the player's error observer with the error.
 	 * @param  cp1 the type of council privilege that the player wants to exchange.
@@ -525,7 +524,7 @@ public class ActionBuilder {
 	}
 	
 	/**
- 	 * Verifies all the requirements and if everything is allright the action is executed
+ 	 * Verifies all the requirements and if everything is all right the action is executed
  	 * @throws Exception If one of the requirements are not met.
  	 * 		   It also notifies the player's error observer with the error.
 	 * @param  cp1 the type of council privilege that the player wants to exchange.

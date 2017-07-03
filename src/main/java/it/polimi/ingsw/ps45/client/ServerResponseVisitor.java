@@ -1,5 +1,8 @@
-package it.polimi.ingsw.ps45.model.game;
+package it.polimi.ingsw.ps45.client;
 
+import it.polimi.ingsw.ps45.model.game.ErrorResponse;
+import it.polimi.ingsw.ps45.model.game.GameUpdateResponse;
+import it.polimi.ingsw.ps45.model.game.ResultsResponse;
 
 /**
  * Interface of a server response visitor. Used in visitor pattern.

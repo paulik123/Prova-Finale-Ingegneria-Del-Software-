@@ -15,9 +15,17 @@ import it.polimi.ingsw.ps45.gson.PropertyBasedInterfaceMarshal;
 import it.polimi.ingsw.ps45.model.cards.Era;
 import it.polimi.ingsw.ps45.model.effects.Effect;
 
+/**
+ * Vatican reads from file and manages all excommunication cards.
+ */
+
 public class Vatican {
 	private HashMap<Era, ExcommunicationCard> map;
 	
+	/**
+ 	 * Constructor
+	 * Reads a random Excommunication card for each era.
+	 */
 	public Vatican(){
 		File dirI = new File("serialized//cards//excom//I");
 		File[] filesI = dirI.listFiles();
@@ -36,7 +44,10 @@ public class Vatican {
 		map.put(Era.III, fromFile(filesIII[r.nextInt(filesIII.length)].getPath()));
 	}
 	
-	
+	/**
+	 * @param path the path of the file in which the excom card is serialized.
+	 * @return a deserialized excom card.
+	 */
 	public ExcommunicationCard fromFile(String path){
 		 Gson gson = new GsonBuilder()
 	                .registerTypeAdapter(Effect.class,
@@ -59,6 +70,10 @@ public class Vatican {
 	    
 	}
 	
+	/**
+	 * @param e the era which the excommunication card should belong to.
+	 * @return an excommunication card that belong to the given era.
+	 */
 	public ExcommunicationCard getCard(Era e){
 		return map.get(e);
 	}

@@ -31,7 +31,7 @@ public class SerializeExcommunicationCard {
     	
         
         
-        ExcommunicationCard c = new ExcommunicationCard(Era.III, effect);
+        ExcommunicationCard c = new ExcommunicationCard(Era.III, effect, "name");
 
         Writer writer = new FileWriter("C://outout//excomjson//ResourceVictoryPointsPenalty.json");
 

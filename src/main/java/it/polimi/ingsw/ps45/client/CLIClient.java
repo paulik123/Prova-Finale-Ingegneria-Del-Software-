@@ -10,6 +10,10 @@ import java.util.Scanner;
 
 import it.polimi.ingsw.ps45.view.CLI;
 
+
+/**
+ * Client that runs the CLI view.
+ */
 public class CLIClient extends Thread{
 	
     private Socket socket;
@@ -21,10 +25,19 @@ public class CLIClient extends Thread{
     
     private static final int PORTNUMBER = 12345;
     
+	/**
+ 	 * Constructor
+	 * Creates a new scanner so it can read input from user.
+	 */
     public CLIClient(){
     	scanner = new Scanner(System.in);
     }
     
+	/**
+ 	 * Constructor
+	 * The client runs in a new Thread.
+	 * It gets the necessary data from user then tries to connect to the server.
+	 */
     public void run(){
     	getData();
     	
@@ -35,6 +48,11 @@ public class CLIClient extends Thread{
 		}
     }
     
+	/**
+	 * Tries to connect/reconnect to the server depending what the user wants.
+	 * @throws UnknownHostException thrown to indicate that the IP address of a host could not be determined.
+	 * @throws IOException if the client fails to create and connect the socket with the server.
+	 */
     private void connectOrReconnect() throws UnknownHostException, IOException{
     	String command = "";
     	do{
@@ -50,6 +68,11 @@ public class CLIClient extends Thread{
     	
     }
     
+	/**
+	 * Reconnects with the server.
+	 * @throws UnknownHostException thrown to indicate that the IP address of a host could not be determined.
+	 * @throws IOException if the client fails to create and connect the socket with the server.
+	 */
     private void reconnect() throws UnknownHostException, IOException{
 		socket = new Socket(ip, PORTNUMBER);
         CLI cli = new CLI(scanner, playerID);
@@ -59,6 +82,11 @@ public class CLIClient extends Thread{
         controllerThread.start();
         controllerThread.sendReconnectCommand();
     }
+	/**
+	 * Connects with the server. Also asks the user what bonus tile he wants to use.
+	 * @throws UnknownHostException thrown to indicate that the IP address of a host could not be determined.
+	 * @throws IOException if the client fails to create and connect the socket with the server.
+	 */
     private void connect() throws UnknownHostException, IOException{
     	bonusTile = "";
     	do{
@@ -78,6 +106,9 @@ public class CLIClient extends Thread{
         controllerThread.sendJoinCommand((String) bonusTile);
     }
     
+	/**
+	 * Gets the necessary data from the user to connect to the server.
+	 */
     private void getData(){
     	System.out.println("Lorenzo il Magnifico - CLI");
     	System.out.println("Enter the server IP address:");

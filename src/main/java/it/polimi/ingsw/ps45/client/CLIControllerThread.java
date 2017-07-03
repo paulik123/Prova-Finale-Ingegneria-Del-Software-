@@ -15,6 +15,9 @@ import it.polimi.ingsw.ps45.gson.GsonWithInterface;
 import it.polimi.ingsw.ps45.gson.PropertyBasedInterfaceMarshal;
 import it.polimi.ingsw.ps45.model.effects.Effect;
 
+/**
+ * Thread that listens to keyboard input and send commands to the server from the user.
+ */
 public class CLIControllerThread extends Thread implements ClientController{
 	private OutputStreamWriter os;
 	private Scanner scanner;
@@ -22,6 +25,12 @@ public class CLIControllerThread extends Thread implements ClientController{
 	private CommandParser cp;
 	private Gson gson;
 	
+	/**
+ 	 * Constructor
+	 * @param os OutputStreamWriter the stream the socket will write the serialized commands to.
+	 * @param scanner the scanner the controller will take input from.
+	 * @param playerID the players identification string so the server knows from who the command came from.
+	 */
 	public CLIControllerThread(OutputStreamWriter os, Scanner scanner, String playerID){
 		this.os = os;
 		this.scanner = scanner;
@@ -30,6 +39,10 @@ public class CLIControllerThread extends Thread implements ClientController{
 		gson = GsonWithInterface.getGson();
 	}
 	
+	/**
+	 * Contains a loop that continuously listens for input from the user.
+	 * scanner.nextLine() is blocking.
+	 */
 	public void run(){
         while(true){
         	String c = scanner.nextLine();
@@ -47,12 +60,19 @@ public class CLIControllerThread extends Thread implements ClientController{
         }
     }
 
-	
+	/**
+	 * Writes the serialized JSON Command to the OutputStream then flushes it to be sure the message has been sent. 
+	 * @param message the message that will be written by the OutputStreamWriter
+	 */
     public void send(String message) throws IOException {
         os.write(message+"\n");
         os.flush();
     }
     
+	/**
+	 * Writes a AddPlayerCommand to the server without waiting for the user's input.
+	 * @param the bonusTile that the player chose.
+	 */
 	public void sendJoinCommand(String bonusTile){
 
 		try {
@@ -65,7 +85,10 @@ public class CLIControllerThread extends Thread implements ClientController{
 		}
 	}
 
-	@Override
+	
+	/**
+	 * Writes a ReconnectCommand to the server without waiting for the user's input.
+	 */
 	public void sendReconnectCommand() {
 		try {
 			CommandHolder ch = new CommandHolder(new ReconnectCommand(), playerID);
