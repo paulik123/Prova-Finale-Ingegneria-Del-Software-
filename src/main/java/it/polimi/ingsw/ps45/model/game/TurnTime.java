@@ -9,11 +9,18 @@ import com.google.gson.JsonSyntaxException;
 
 import it.polimi.ingsw.ps45.gson.GsonWithInterface;
 
+/**
+ * Class that represents the time a player has to make his turn. The turn will end when this time expires. It reads the time from file.
+ */
 public class TurnTime {
 	
 	private long time;
 	private int seconds;
 	
+	/**
+ 	 * Constructor
+ 	 * Reads the time from a serialized JSON file.
+	 */
 	public TurnTime(){
 		
 		Gson gson = GsonWithInterface.getGson();
@@ -26,6 +33,9 @@ public class TurnTime {
 		time = 1000 * (long)seconds;
 	}
 	
+	/**
+	 * @return the time in milliseconds as a long.
+	 */
 	public long getTime(){
 		return time;
 	}
