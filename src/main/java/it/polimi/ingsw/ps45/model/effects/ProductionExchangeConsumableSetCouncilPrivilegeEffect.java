@@ -9,7 +9,7 @@ import it.polimi.ingsw.ps45.model.player.Player;
 /**
  * An odd effect that makes the player exchange consumables for a council privilege.
  */
-public class ProductionExchangeConsumableSetCouncilPrivilegeEffect implements Effect, Serializable {
+public class ProductionExchangeConsumableSetCouncilPrivilegeEffect implements Effect{
 	
 	private ConsumableSet before;
 	

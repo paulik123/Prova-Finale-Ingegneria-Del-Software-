@@ -7,7 +7,7 @@ import it.polimi.ingsw.ps45.model.player.Player;
 /**
  * An effect that increases or decreases the player's action value when taking ventures.
  */
-public class TakeVentureActionModifierEffect implements Effect, Serializable{
+public class TakeVentureActionModifierEffect implements Effect{
 
 	private int effectValue;
 	

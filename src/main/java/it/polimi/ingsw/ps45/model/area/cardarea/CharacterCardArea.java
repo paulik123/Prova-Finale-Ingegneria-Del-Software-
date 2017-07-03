@@ -10,7 +10,7 @@ import it.polimi.ingsw.ps45.model.player.Player;
 /**
  * An area that contains character cards.
  */
-public class CharacterCardArea extends Area implements Serializable{
+public class CharacterCardArea extends Area{
 	private Effect effect;
 	private Character c;
 	

@@ -7,7 +7,7 @@ import it.polimi.ingsw.ps45.model.player.Player;
 /**
  * An effect that makes the player spend 2 servants instead of one when wanting to add value to an action.
  */
-public class ServantAddingPenaltyEffect implements Effect, Serializable{
+public class ServantAddingPenaltyEffect implements Effect{
 
 	
 	/**

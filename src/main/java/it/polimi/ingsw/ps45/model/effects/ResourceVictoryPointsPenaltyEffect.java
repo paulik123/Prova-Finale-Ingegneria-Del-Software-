@@ -7,7 +7,7 @@ import it.polimi.ingsw.ps45.model.player.Player;
 /**
  * An effect that sets that reduces player's end game victory points based on how many consumables points he has.
  */
-public class ResourceVictoryPointsPenaltyEffect implements Effect, Serializable{
+public class ResourceVictoryPointsPenaltyEffect implements Effect{
 
 	/**
 	 * The method that runs the effect.

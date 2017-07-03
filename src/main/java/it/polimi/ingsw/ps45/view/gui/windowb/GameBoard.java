@@ -48,6 +48,11 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.SwingConstants;
 
+/**
+ * The frame of the GUI that show the game's big board. It's covering the big production and harvest areas if there are only two players.
+ * Also covers two of the market areas if there are only 3 players.
+ * It uses absolute positioning because some the elements were very hard to arrange properly using other LayoutManagers.
+ */
 public class GameBoard extends JFrame {
 	
 	private Game g;
@@ -231,7 +236,8 @@ public class GameBoard extends JFrame {
 
 
 	/**
-	 * Create the frame.
+ 	 * Constructor
+ 	 * Initializes the background and the front content panel on which all the elements are later added.
 	 */
 	public GameBoard() {
 		
@@ -241,7 +247,6 @@ public class GameBoard extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, width, height);
 		contentPane = new JPanel();
-		//contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
@@ -255,9 +260,13 @@ public class GameBoard extends JFrame {
 		initializeVentures();
 		initializeExcom();
 		initializePawnAreaLabels();
+		initializeDiceLabels();
 		
 	}
 	
+	/**
+	 * Creates a layered pane in which it adds a new background panel. It also adds an image with the board read from file.
+	 */
 	public void setBackground(){
 		
 		layeredPane = new JLayeredPane();
@@ -271,13 +280,16 @@ public class GameBoard extends JFrame {
 
 		
 		background.add(backgroundLabel, BorderLayout.CENTER);
-		ImageIcon imageIcon = new ImageIcon("images\\gameboard.jpeg"); // load the image to a imageIcon
+		ImageIcon imageIcon = new ImageIcon(imagePath); // load the image to a imageIcon
 		Image image = imageIcon.getImage(); // transform it 
 		Image newimg = image.getScaledInstance(width, height,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 		imageIcon = new ImageIcon(newimg);  // transform it back
 		backgroundLabel.setIcon(imageIcon);
 	}
 	
+	/**
+	 * Initializes the front panel on which all the elements are added. 
+	 */
 	public void setFrontPanel(){
 		frontPanel = new JPanel();
 		frontPanel.setOpaque(false);
@@ -288,180 +300,189 @@ public class GameBoard extends JFrame {
 
 	}
 	
+	/**
+	 * Initializes the labels that represent areas in which pawns can stay in.
+	 */
 	public void initializePawnAreaLabels(){
 		
-		productionSmall = initializePawnLabel(prodHarvestSmallX, productionY);
-		productionBig1 = initializePawnLabel(prodHarvestBigX, productionY);
-		productionBig2 = initializePawnLabel(prodHarvestBigX + pawnAreaSize, productionY);
-		productionBig3 = initializePawnLabel(prodHarvestBigX + pawnAreaSize*2, productionY);
-		productionBig4 = initializePawnLabel(prodHarvestBigX + pawnAreaSize*3, productionY);
+		productionSmall = initializeLabel(prodHarvestSmallX, productionY, pawnAreaSize, pawnAreaSize);
+		productionBig1 = initializeLabel(prodHarvestBigX, productionY, pawnAreaSize, pawnAreaSize);
+		productionBig2 = initializeLabel(prodHarvestBigX + pawnAreaSize, productionY, pawnAreaSize, pawnAreaSize);
+		productionBig3 = initializeLabel(prodHarvestBigX + pawnAreaSize*2, productionY, pawnAreaSize, pawnAreaSize);
+		productionBig4 = initializeLabel(prodHarvestBigX + pawnAreaSize*3, productionY, pawnAreaSize, pawnAreaSize);
 		
 		
-		harvestSmall = initializePawnLabel(prodHarvestSmallX, harvestY);
-		harvestBig1 = initializePawnLabel(prodHarvestBigX, harvestY);
-		harvestBig2 = initializePawnLabel(prodHarvestBigX + pawnAreaSize, harvestY);
-		harvestBig3 = initializePawnLabel(prodHarvestBigX + pawnAreaSize*2, harvestY);
-		harvestBig4 = initializePawnLabel(prodHarvestBigX + pawnAreaSize*3, harvestY);
+		harvestSmall = initializeLabel(prodHarvestSmallX, harvestY, pawnAreaSize, pawnAreaSize);
+		harvestBig1 = initializeLabel(prodHarvestBigX, harvestY, pawnAreaSize, pawnAreaSize);
+		harvestBig2 = initializeLabel(prodHarvestBigX + pawnAreaSize, harvestY, pawnAreaSize, pawnAreaSize);
+		harvestBig3 = initializeLabel(prodHarvestBigX + pawnAreaSize*2, harvestY, pawnAreaSize, pawnAreaSize);
+		harvestBig4 = initializeLabel(prodHarvestBigX + pawnAreaSize*3, harvestY, pawnAreaSize, pawnAreaSize);
 		
-		coinsMarket = initializePawnLabel(coinsMarketX, coinsMarketY);
-		servantsMarket = initializePawnLabel(servantsMarketX, servantsMarketY);
-		militaryCoinsMarket = initializePawnLabel(militaryCoinsMarketX, militaryCoinsMarketY);
-		councilPrivilegeMarket = initializePawnLabel(councilPrivilegeMarketX, councilPrivilegeMarketY);
+		coinsMarket = initializeLabel(coinsMarketX, coinsMarketY, pawnAreaSize, pawnAreaSize);
+		servantsMarket = initializeLabel(servantsMarketX, servantsMarketY, pawnAreaSize, pawnAreaSize);
+		militaryCoinsMarket = initializeLabel(militaryCoinsMarketX, militaryCoinsMarketY, pawnAreaSize, pawnAreaSize);
+		councilPrivilegeMarket = initializeLabel(councilPrivilegeMarketX, councilPrivilegeMarketY, pawnAreaSize, pawnAreaSize);
 		
-		councilPalace1 = initializePawnLabel(councilPalaceX, councilPalaceY);
-		councilPalace2 = initializePawnLabel(councilPalaceX + pawnAreaSize, councilPalaceY);
-		councilPalace3 = initializePawnLabel(councilPalaceX + pawnAreaSize*2, councilPalaceY);
-		councilPalace4 = initializePawnLabel(councilPalaceX + pawnAreaSize*3, councilPalaceY);
+		councilPalace1 = initializeLabel(councilPalaceX, councilPalaceY, pawnAreaSize, pawnAreaSize);
+		councilPalace2 = initializeLabel(councilPalaceX + pawnAreaSize, councilPalaceY, pawnAreaSize, pawnAreaSize);
+		councilPalace3 = initializeLabel(councilPalaceX + pawnAreaSize*2, councilPalaceY, pawnAreaSize, pawnAreaSize);
+		councilPalace4 = initializeLabel(councilPalaceX + pawnAreaSize*3, councilPalaceY, pawnAreaSize, pawnAreaSize);
 		
-		diceBlack = initializePawnLabel(diceBlackX, diceY);
+		
+	}
+	
+	/**
+	 * Initializes the labels which show the value of the dices.
+	 */
+	private void initializeDiceLabels(){
+		diceBlack = initializeLabel(diceBlackX, diceY, pawnAreaSize, pawnAreaSize);
 		diceBlack.setFont(new Font("Arial", Font.PLAIN, 25));
 		diceBlack.setForeground(Color.RED);
-		diceWhite = initializePawnLabel(diceWhiteX, diceY);
+		diceWhite = initializeLabel(diceWhiteX, diceY, pawnAreaSize, pawnAreaSize);
 		diceWhite.setFont(new Font("Arial", Font.PLAIN, 25));
 		diceWhite.setForeground(Color.RED);
-		diceOrange = initializePawnLabel(diceOrangeX, diceY);
+		diceOrange = initializeLabel(diceOrangeX, diceY, pawnAreaSize, pawnAreaSize);
 		diceOrange.setFont(new Font("Arial", Font.PLAIN, 25));
 		diceOrange.setForeground(Color.RED);
-		
 	}
 	
+	/**
+	 * Initializes the labels which show the turn order of the players.
+	 */
 	private void initializeTurnMarkers(){
 		turnMarkers = new ArrayList<JLabel>();
-		turnMarkers.add(initializePawnLabel(turnMarkerX, turnMarker1Y));
-		turnMarkers.add(initializePawnLabel(turnMarkerX, turnMarker2Y));
-		turnMarkers.add(initializePawnLabel(turnMarkerX, turnMarker3Y));
-		turnMarkers.add(initializePawnLabel(turnMarkerX, turnMarker4Y));
+		turnMarkers.add(initializeLabel(turnMarkerX, turnMarker1Y, pawnAreaSize, pawnAreaSize));
+		turnMarkers.add(initializeLabel(turnMarkerX, turnMarker2Y, pawnAreaSize, pawnAreaSize));
+		turnMarkers.add(initializeLabel(turnMarkerX, turnMarker3Y, pawnAreaSize, pawnAreaSize));
+		turnMarkers.add(initializeLabel(turnMarkerX, turnMarker4Y, pawnAreaSize, pawnAreaSize));
 	}
 	
 	
 	
+	/**
+	 * Initializes the labels which show territories on the board.
+	 */
 	private void initializeTerritories(){
 		int territoryXWithGap = territoryX + cardPawnHorizontalGap;
 		
 		
 		
-		territory_third = initializeCardLabel(territoryX, thirdFloorY);
-		territory_third_pawn = initializePawnLabel(territoryXWithGap, thirdFloorY + cardPawnVerticalGap);
+		territory_third = initializeLabel(territoryX, thirdFloorY, cardWidth, cardHeight);
+		territory_third_pawn = initializeLabel(territoryXWithGap, thirdFloorY + cardPawnVerticalGap, pawnAreaSize, pawnAreaSize);
 		
-		territory_second = initializeCardLabel(territoryX, secondFloorY);
-		territory_second_pawn = initializePawnLabel(territoryXWithGap, secondFloorY + cardPawnVerticalGap);
+		territory_second = initializeLabel(territoryX, secondFloorY, cardWidth, cardHeight);
+		territory_second_pawn = initializeLabel(territoryXWithGap, secondFloorY + cardPawnVerticalGap, pawnAreaSize, pawnAreaSize);
 
-		territory_first = initializeCardLabel(territoryX, firstFloorY);
-		territory_first_pawn = initializePawnLabel(territoryXWithGap, firstFloorY + cardPawnVerticalGap);
+		territory_first = initializeLabel(territoryX, firstFloorY, cardWidth, cardHeight);
+		territory_first_pawn = initializeLabel(territoryXWithGap, firstFloorY + cardPawnVerticalGap, pawnAreaSize, pawnAreaSize);
 
-		territory_ground = initializeCardLabel(territoryX, groundFloorY);
-		territory_ground_pawn = initializePawnLabel(territoryXWithGap, groundFloorY + cardPawnVerticalGap);
+		territory_ground = initializeLabel(territoryX, groundFloorY, cardWidth, cardHeight);
+		territory_ground_pawn = initializeLabel(territoryXWithGap, groundFloorY + cardPawnVerticalGap, pawnAreaSize, pawnAreaSize);
 	}
 	
+	/**
+	 * Initializes the labels which show characters on the board.
+	 */
 	public void initializeCharacters(){
 		int characterXWithGap = characterX + cardPawnHorizontalGap;
 		
-		character_third = initializeCardLabel(characterX, thirdFloorY);
-		character_third_pawn = initializePawnLabel(characterXWithGap, thirdFloorY + cardPawnVerticalGap);
+		character_third = initializeLabel(characterX, thirdFloorY, cardWidth, cardHeight);
+		character_third_pawn = initializeLabel(characterXWithGap, thirdFloorY + cardPawnVerticalGap, pawnAreaSize, pawnAreaSize);
 		
-		character_second = initializeCardLabel(characterX, secondFloorY);
-		character_second_pawn = initializePawnLabel(characterXWithGap, secondFloorY + cardPawnVerticalGap);
+		character_second = initializeLabel(characterX, secondFloorY, cardWidth, cardHeight);
+		character_second_pawn = initializeLabel(characterXWithGap, secondFloorY + cardPawnVerticalGap, pawnAreaSize, pawnAreaSize);
 		
-		character_first = initializeCardLabel(characterX, firstFloorY);
-		character_first_pawn = initializePawnLabel(characterXWithGap, firstFloorY + cardPawnVerticalGap);
+		character_first = initializeLabel(characterX, firstFloorY, cardWidth, cardHeight);
+		character_first_pawn = initializeLabel(characterXWithGap, firstFloorY + cardPawnVerticalGap, pawnAreaSize, pawnAreaSize);
 		
-		character_ground = initializeCardLabel(characterX, groundFloorY);
-		character_ground_pawn = initializePawnLabel(characterXWithGap, groundFloorY + cardPawnVerticalGap);
+		character_ground = initializeLabel(characterX, groundFloorY, cardWidth, cardHeight);
+		character_ground_pawn = initializeLabel(characterXWithGap, groundFloorY + cardPawnVerticalGap, pawnAreaSize, pawnAreaSize);
 	}
 	
+	/**
+	 * Initializes the labels which show buildings on the board.
+	 */
 	public void initializeBuildings(){
 		int buildingXWithGap = buildingX + cardPawnHorizontalGap;
 		
-		building_third = initializeCardLabel(buildingX, thirdFloorY);
-		building_third_pawn = initializePawnLabel(buildingXWithGap, thirdFloorY + cardPawnVerticalGap);
+		building_third = initializeLabel(buildingX, thirdFloorY, cardWidth, cardHeight);
+		building_third_pawn = initializeLabel(buildingXWithGap, thirdFloorY + cardPawnVerticalGap, pawnAreaSize, pawnAreaSize);
 		
-		building_second = initializeCardLabel(buildingX, secondFloorY);
-		building_second_pawn = initializePawnLabel(buildingXWithGap, secondFloorY + cardPawnVerticalGap);
+		building_second = initializeLabel(buildingX, secondFloorY, cardWidth, cardHeight);
+		building_second_pawn = initializeLabel(buildingXWithGap, secondFloorY + cardPawnVerticalGap, pawnAreaSize, pawnAreaSize);
 		
-		building_first = initializeCardLabel(buildingX, firstFloorY);
-		building_first_pawn = initializePawnLabel(buildingXWithGap, firstFloorY + cardPawnVerticalGap);
+		building_first = initializeLabel(buildingX, firstFloorY, cardWidth, cardHeight);
+		building_first_pawn = initializeLabel(buildingXWithGap, firstFloorY + cardPawnVerticalGap, pawnAreaSize, pawnAreaSize);
 		
-		building_ground = initializeCardLabel(buildingX, groundFloorY);
-		building_ground_pawn = initializePawnLabel(buildingXWithGap, groundFloorY + cardPawnVerticalGap);
+		building_ground = initializeLabel(buildingX, groundFloorY, cardWidth, cardHeight);
+		building_ground_pawn = initializeLabel(buildingXWithGap, groundFloorY + cardPawnVerticalGap, pawnAreaSize, pawnAreaSize);
 	}
 	
+	/**
+	 * Initializes the labels which show ventures on the board.
+	 */
 	public void initializeVentures(){
 		int ventureXWithGap = ventureX + cardPawnHorizontalGap;
 		
-		venture_third = initializeCardLabel(ventureX, thirdFloorY);
-		venture_third_pawn = initializePawnLabel(ventureXWithGap, thirdFloorY + cardPawnVerticalGap);
+		venture_third = initializeLabel(ventureX, thirdFloorY, cardWidth, cardHeight);
+		venture_third_pawn = initializeLabel(ventureXWithGap, thirdFloorY + cardPawnVerticalGap, pawnAreaSize, pawnAreaSize);
 		
-		venture_second = initializeCardLabel(ventureX, secondFloorY);
-		venture_second_pawn = initializePawnLabel(ventureXWithGap, secondFloorY + cardPawnVerticalGap);
+		venture_second = initializeLabel(ventureX, secondFloorY, cardWidth, cardHeight);
+		venture_second_pawn = initializeLabel(ventureXWithGap, secondFloorY + cardPawnVerticalGap, pawnAreaSize, pawnAreaSize);
 		
-		venture_first = initializeCardLabel(ventureX, firstFloorY);
-		venture_first_pawn = initializePawnLabel(ventureXWithGap, firstFloorY + cardPawnVerticalGap);
+		venture_first = initializeLabel(ventureX, firstFloorY, cardWidth, cardHeight);
+		venture_first_pawn = initializeLabel(ventureXWithGap, firstFloorY + cardPawnVerticalGap, pawnAreaSize, pawnAreaSize);
 		
-		venture_ground = initializeCardLabel(ventureX, groundFloorY);
-		venture_ground_pawn = initializePawnLabel(ventureXWithGap, groundFloorY + cardPawnVerticalGap);
+		venture_ground = initializeLabel(ventureX, groundFloorY, cardWidth, cardHeight);
+		venture_ground_pawn = initializeLabel(ventureXWithGap, groundFloorY + cardPawnVerticalGap, pawnAreaSize, pawnAreaSize);
 	}
 	
+	/**
+	 * Initializes the labels which show the excommunication cards on the board.
+	 */
 	public void initializeExcom(){
-		excomI = initializeExcomLabel(excomIX, excomIY );
+		excomI = initializeLabel(excomIX, excomIY, excomWidth, excomHeight);
 		excomIMarkers = new ArrayList<JLabel>();
-		excomIMarkers.add(initializeExcomMarkerLabel(excomIX + excomMarkerXGap1, excomIY + excomMarkerYGap1));
-		excomIMarkers.add(initializeExcomMarkerLabel(excomIX + excomMarkerXGap2, excomIY + excomMarkerYGap1));
-		excomIMarkers.add(initializeExcomMarkerLabel(excomIX + excomMarkerXGap1, excomIY + excomMarkerYGap2));
-		excomIMarkers.add(initializeExcomMarkerLabel(excomIX + excomMarkerXGap2, excomIY + excomMarkerYGap2));
+		excomIMarkers.add(initializeLabel(excomIX + excomMarkerXGap1, excomIY + excomMarkerYGap1, excomWidth, excomHeight));
+		excomIMarkers.add(initializeLabel(excomIX + excomMarkerXGap2, excomIY + excomMarkerYGap1, excomWidth, excomHeight));
+		excomIMarkers.add(initializeLabel(excomIX + excomMarkerXGap1, excomIY + excomMarkerYGap2, excomWidth, excomHeight));
+		excomIMarkers.add(initializeLabel(excomIX + excomMarkerXGap2, excomIY + excomMarkerYGap2, excomWidth, excomHeight));
 		
-		excomII = initializeExcomLabel(excomIIX, excomIIY);
+		excomII = initializeLabel(excomIIX, excomIIY, excomWidth, excomHeight);
 		excomIIMarkers = new ArrayList<JLabel>();
-		excomIIMarkers.add(initializeExcomMarkerLabel(excomIIX + excomMarkerXGap1, excomIIY + excomMarkerYGap1));
-		excomIIMarkers.add(initializeExcomMarkerLabel(excomIIX + excomMarkerXGap2, excomIIY + excomMarkerYGap1));
-		excomIIMarkers.add(initializeExcomMarkerLabel(excomIIX + excomMarkerXGap1, excomIIY + excomMarkerYGap2));
-		excomIIMarkers.add(initializeExcomMarkerLabel(excomIIX + excomMarkerXGap2, excomIIY + excomMarkerYGap2));
+		excomIIMarkers.add(initializeLabel(excomIIX + excomMarkerXGap1, excomIIY + excomMarkerYGap1, excomWidth, excomHeight));
+		excomIIMarkers.add(initializeLabel(excomIIX + excomMarkerXGap2, excomIIY + excomMarkerYGap1, excomWidth, excomHeight));
+		excomIIMarkers.add(initializeLabel(excomIIX + excomMarkerXGap1, excomIIY + excomMarkerYGap2, excomWidth, excomHeight));
+		excomIIMarkers.add(initializeLabel(excomIIX + excomMarkerXGap2, excomIIY + excomMarkerYGap2, excomWidth, excomHeight));
 		
-		excomIII = initializeExcomLabel(excomIIIX, excomIIIY);
+		excomIII = initializeLabel(excomIIIX, excomIIIY, excomWidth, excomHeight);
 		excomIIIMarkers = new ArrayList<JLabel>();
-		excomIIIMarkers.add(initializeExcomMarkerLabel(excomIIIX + excomMarkerXGap1, excomIIIY + excomMarkerTHIRDYGap + excomMarkerYGap1));
-		excomIIIMarkers.add(initializeExcomMarkerLabel(excomIIIX + excomMarkerXGap2, excomIIIY + excomMarkerTHIRDYGap + excomMarkerYGap1));
-		excomIIIMarkers.add(initializeExcomMarkerLabel(excomIIIX + excomMarkerXGap1, excomIIIY + excomMarkerTHIRDYGap + excomMarkerYGap2));
-		excomIIIMarkers.add(initializeExcomMarkerLabel(excomIIIX + excomMarkerXGap2, excomIIIY + excomMarkerTHIRDYGap + excomMarkerYGap2));
+		excomIIIMarkers.add(initializeLabel(excomIIIX + excomMarkerXGap1, excomIIIY + excomMarkerTHIRDYGap + excomMarkerYGap1, excomWidth, excomHeight));
+		excomIIIMarkers.add(initializeLabel(excomIIIX + excomMarkerXGap2, excomIIIY + excomMarkerTHIRDYGap + excomMarkerYGap1, excomWidth, excomHeight));
+		excomIIIMarkers.add(initializeLabel(excomIIIX + excomMarkerXGap1, excomIIIY + excomMarkerTHIRDYGap + excomMarkerYGap2, excomWidth, excomHeight));
+		excomIIIMarkers.add(initializeLabel(excomIIIX + excomMarkerXGap2, excomIIIY + excomMarkerTHIRDYGap + excomMarkerYGap2, excomWidth, excomHeight));
 	}
 	
-	public JLabel initializeCardLabel(int x, int y){
+	/**
+	 * Creates a new label then adds it to the front panel.
+	 * @param x the x position of the label.
+	 * @param y the y position of the label.
+	 * @param width the width of the label.
+	 * @param height the height of the label.
+	 * @return the newly created label.
+	 */
+	public JLabel initializeLabel(int x, int y,int width,int height){
 		JLabel newLabel = new JLabel("");
-		newLabel.setBounds(x, y, cardWidth, cardHeight);
+		newLabel.setBounds(x, y, width, height);
 		frontPanel.add(newLabel);
 		
 		return newLabel;
 	}
 	
-	public JLabel initializePawnLabel(int x, int y){
-		JLabel newLabel = new JLabel("");
-		newLabel.setBounds(x, y, pawnAreaSize, pawnAreaSize);
-		//newLabel.setBackground(new Color(255,0,0,255));
-		frontPanel.add(newLabel);
-		//newLabel.setOpaque(true);
-
-		return newLabel;
-	}
-	
-	public JLabel initializeExcomLabel(int x, int y){
-		JLabel newLabel = new JLabel("");
-		newLabel.setBounds(x, y, excomWidth, excomHeight);
-
-		frontPanel.add(newLabel);
-		
-		return newLabel;
-	}
-	
-	public JLabel initializeExcomMarkerLabel(int x, int y){
-		JLabel newLabel = new JLabel("");
-		newLabel.setBounds(x, y, excomMarkerWidth, excomMarkerHeight);
-		newLabel.setOpaque(true);
-		
-
-		frontPanel.add(newLabel);
-		
-		return newLabel;
-	}
-	
+	/**
+	 * Updates the Icons of the Excom Labels with the icons corresponding with the Excom cards in the game model.
+	 * Also updates the Excom markers to show which players suffered vatican penalties.
+	 */
 	public void updateExcomLabels(){
 		setExcomLabelIcon(excomI,g.getVatican().getCard(Era.I).getName());
 		setExcomLabelIcon(excomII,g.getVatican().getCard(Era.II).getName());
@@ -478,6 +499,11 @@ public class GameBoard extends JFrame {
 		}
 	}
 	
+	/**
+	 * Sets the label of an Excom card label with the corresponding icon read from file.
+	 * @param excomLabel the label that will be updated.
+	 * @param name the name of the Excom card so it can get it's icon from file.
+	 */
 	public void setExcomLabelIcon(JLabel excomLabel, String name){
 		ImageIcon imageIcon = new ImageIcon("images\\excom\\" + name + ".png"); // load the image to a imageIcon
 		Image image = imageIcon.getImage(); // transform it 
@@ -486,9 +512,12 @@ public class GameBoard extends JFrame {
 		excomLabel.setIcon(imageIcon);
 	}
 	
+	/**
+	 * Sets the label of an Excom card label with the corresponding icon read from file.
+	 * @param excom marker label the label that will be updated.
+	 * @param color the color  of the Excom marker so it can get it's icon from file.
+	 */
 	public void setExcomMarkerLabelIcon(JLabel excomLabel, String color){
-		
-		
 		ImageIcon imageIcon = new ImageIcon("images\\pawns\\" + color + ".png"); // load the image to a imageIcon
 		Image image = imageIcon.getImage(); // transform it 
 		Image newimg = image.getScaledInstance(excomMarkerWidth, excomMarkerHeight,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
@@ -496,6 +525,9 @@ public class GameBoard extends JFrame {
 		excomLabel.setIcon(imageIcon);
 	}
 	
+	/**
+	 * Updates the Icons of the Card Labels with the images corresponding to the cards on the game's board.
+	 */
 	public void updateCardLabels(){
 		setCardLabelIcon(territory_third, g.getBoard().getTerritoryTower().getThirdFloor().getTerritory());
 		setCardLabelIcon(territory_second, g.getBoard().getTerritoryTower().getSecondFloor().getTerritory());
@@ -518,6 +550,9 @@ public class GameBoard extends JFrame {
 		setCardLabelIcon(venture_ground, g.getBoard().getVentureTower().getGroundFloor().getVenture());
 	}
 	
+	/**
+	 * Updates the Icons of the Pawn Labels with the images corresponding to the Pawns occupying the areas on the game's board.
+	 */
 	public void updatePawnLabels(){
 		
 		setPawnLabelIcon(productionSmall, g.getBoard().getProductionAreas().getSmall().getOccupants(), 0);
@@ -566,7 +601,9 @@ public class GameBoard extends JFrame {
 	}
 	
 
-	
+	/**
+	 * Updates the text of the dice labels with the new values taken from the game.
+	 */
 	public void updateDiceLabels(){
 		HashMap<PawnType, Integer> dices = g.getDices();
 		diceBlack.setText(dices.get(PawnType.BLACK).toString());
@@ -574,12 +611,20 @@ public class GameBoard extends JFrame {
 		diceOrange.setText(dices.get(PawnType.ORANGE).toString());
 	}
 	
+	/**
+	 * Updates the turn markers with the new turn data taken from the game.
+	 */
 	public void updateTurnMarkers(){
 		for(int i=0;i<g.getNumberOfPlayers();i++){
 			setTurnMarkerLabelIcon(turnMarkers.get(i), g.getColorTurns()[i]);
 		}
 	}
 	
+	/**
+	 * Sets the icon of turn marker label with a new image corresponding to the given color.
+	 * @param l the label whose icon will be updated.
+	 * @param color the color of the turn marker.
+	 */
 	public void setTurnMarkerLabelIcon(JLabel l, String color){
 		ImageIcon imageIcon = new ImageIcon("images\\pawns\\" + color + ".png"); // load the image to a imageIcon
 		Image image = imageIcon.getImage(); // transform it 
@@ -589,6 +634,11 @@ public class GameBoard extends JFrame {
 		l.setIcon(imageIcon);
 	}
 	
+	/**
+	 * Sets the icon of a card label with the corresponding icon read from file.
+	 * @param l the label whose icon will be updated.
+	 * @param card the card whose icon will be read from file.
+	 */
 	public void setCardLabelIcon(JLabel l, Card card){
 		if(card != null){
 			ImageIcon imageIcon = new ImageIcon("images\\cards\\" + card.getName() + ".png"); // load the image to a imageIcon
@@ -602,6 +652,12 @@ public class GameBoard extends JFrame {
 		}
 	}
 	
+	/**
+	 * Sets the icon of a pawn label with the corresponding icon read from file.
+	 * @param l the label whose icon will be updated.
+	 * @param list a list with the occupants of an area.
+	 * @param index the index in the list of the occupant whose icon will be added.
+	 */
 	public void setPawnLabelIcon(JLabel l, ArrayList<PlayerPawnPair> list, int index){
 		
 		if(index <= list.size()-1){
@@ -620,6 +676,10 @@ public class GameBoard extends JFrame {
 		}
 	}
 	
+	/**
+	 * It covers the big production and harvest areas if there are only two players.
+	 * Also covers two of the market areas if there are only 3 players.
+	 */
 	private void updateCovers(){
 		int players = g.getNumberOfPlayers();
 		
@@ -665,6 +725,11 @@ public class GameBoard extends JFrame {
 		updatedCovers = true;
 	}
 	
+	/**
+	 * Sets a new game state that the frame will read from then updates all the elements of the frame.
+	 * It only updates the covers the first time the frame updates.
+	 * @param g the new game.
+	 */
 	public void update(Game g){
 		this.g = g;
 		updateDiceLabels();

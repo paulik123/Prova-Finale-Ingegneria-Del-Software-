@@ -10,9 +10,8 @@ import it.polimi.ingsw.ps45.model.player.Player;
  * Abstract card that defines all the basic functions of a card.
  */
 
-public abstract class Card implements Serializable {
+public abstract class Card{
 
-	private static final long serialVersionUID = -7839605187878687863L;
 	private Era era;
 	private ArrayList<Effect> effects;
 	private String name;

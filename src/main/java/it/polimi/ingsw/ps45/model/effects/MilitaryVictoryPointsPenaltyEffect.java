@@ -7,7 +7,7 @@ import it.polimi.ingsw.ps45.model.player.Player;
 /**
  * An effect that sets that reduces player's end game victory points based on how many military points he has.
  */
-public class MilitaryVictoryPointsPenaltyEffect implements Effect, Serializable{
+public class MilitaryVictoryPointsPenaltyEffect implements Effect{
 
 	
 	/**

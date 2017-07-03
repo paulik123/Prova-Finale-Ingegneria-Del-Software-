@@ -8,7 +8,7 @@ import it.polimi.ingsw.ps45.model.player.Player;
 /**
  * An effect that sets the player's action builder state to HarvestState so he can make a harvest.
  */
-public class HarvestEffect implements Effect, Serializable{
+public class HarvestEffect implements Effect{
 
 	private int penalty;
 	

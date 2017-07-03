@@ -8,7 +8,7 @@ import it.polimi.ingsw.ps45.model.player.Player;
 /**
  * An effect that makes characters cost less when the player tries to acquire them.
  */
-public class TakeCharacterResourceDiscountEffect implements Effect, Serializable{
+public class TakeCharacterResourceDiscountEffect implements Effect{
 
 	private ConsumableSet discount;
 	

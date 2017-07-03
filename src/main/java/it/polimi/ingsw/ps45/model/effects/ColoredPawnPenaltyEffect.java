@@ -8,7 +8,7 @@ import it.polimi.ingsw.ps45.model.player.Player;
 /**
  * An effect that increases or decreases the value of a player's colored pawns. It can be used as a penalty or as a bonus. 
  */
-public class ColoredPawnPenaltyEffect implements Effect, Serializable{
+public class ColoredPawnPenaltyEffect implements Effect{
 
 	private int penalty;
 	

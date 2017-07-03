@@ -8,7 +8,7 @@ import it.polimi.ingsw.ps45.model.player.Player;
 /**
  * An effect that sets the player's action builder state to ProductionState so he can make a production.
  */
-public class ProductionEffect implements Effect, Serializable{
+public class ProductionEffect implements Effect{
 	private int penalty;
 	
 	

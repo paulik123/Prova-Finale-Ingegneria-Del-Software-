@@ -10,7 +10,7 @@ import it.polimi.ingsw.ps45.model.player.Player;
 /**
  * An area that contains building cards.
  */
-public class BuildingCardArea extends Area implements Serializable{
+public class BuildingCardArea extends Area{
 	private Building b;
 	private Effect effect;
 	

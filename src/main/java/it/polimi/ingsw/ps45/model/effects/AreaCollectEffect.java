@@ -9,7 +9,7 @@ import it.polimi.ingsw.ps45.model.player.Player;
 /**
  * An effect that makes a the player collect a consumable set.It differs from Collect effect because of the SantaRita effect. 
  */
-public class AreaCollectEffect implements Effect, Serializable{
+public class AreaCollectEffect implements Effect{
 	private ConsumableSet cs;
 	
 	/**

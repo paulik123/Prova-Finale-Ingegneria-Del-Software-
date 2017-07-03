@@ -7,7 +7,7 @@ import it.polimi.ingsw.ps45.model.player.Player;
 /**
  * An effect that increases or decreases the player's action value when taking buildings.
  */
-public class TakeBuildingActionModifierEffect implements Effect, Serializable{
+public class TakeBuildingActionModifierEffect implements Effect{
 
 	private int effectValue;
 	

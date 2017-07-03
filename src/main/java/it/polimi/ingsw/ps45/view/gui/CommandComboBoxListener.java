@@ -9,13 +9,20 @@ import javax.swing.JComboBox;
 
 import it.polimi.ingsw.ps45.model.area.HasDictionary;
 import it.polimi.ingsw.ps45.model.game.Game;
-import it.polimi.ingsw.ps45.model.player.Pawn;
 import it.polimi.ingsw.ps45.model.player.PawnType;
 import it.polimi.ingsw.ps45.model.player.Player;
+
+/**
+ * Class that listens to the GUI's combo boxes and buttons and updates their contents as necessary to make the game easier for the user. 
+ */
+
+
+
 @SuppressWarnings("rawtypes")
 public class CommandComboBoxListener implements ActionListener{
 	
 
+	
 	private JComboBox areas;
 	private JComboBox pawns;
 	private JComboBox servants;
@@ -25,6 +32,14 @@ public class CommandComboBoxListener implements ActionListener{
 	private String[] none = {"---"};
 
 	
+	/**
+ 	 * Constructor
+ 	 * @param g the game the view is currently "viewing".
+ 	 * @param p the ID of the player controlling the view.
+ 	 * @param areas a JComboBox in which the possible areas are displayed.
+ 	 * @param pawns a JComboBox in which the possible pawns are displayed.
+ 	 * @param servants a JComboBox in which the possible servants that can be added are displayed.
+	 */
 	public CommandComboBoxListener(Game g, Player p,  JComboBox areas, JComboBox pawns, JComboBox servants){
 		this.areas = areas;
 		this.pawns = pawns;
@@ -33,11 +48,21 @@ public class CommandComboBoxListener implements ActionListener{
 		this.p = p;
 	}
 	
+	/**
+ 	 * Updates this with a new game object/player.
+ 	 * @param g the game the view is currently "viewing".
+ 	 * @param p the ID of the player controlling the view.
+	 */
 	public void update(Game g, Player p){
 		this.g = g;
 		this.p = p;
 	}
 	
+	/**
+ 	 * Gets all areas from an object that implements HasDictionary as strings.
+ 	 * @param hs the object which implements HasDictionary.
+ 	 * @return an array of string that represent the areas in the object.
+	 */
 	private String[] getAvailableAreas(HasDictionary hs){
 		ArrayList<String> available = new ArrayList<String>();
 		for(String key: hs.getDictionary().keySet()){
@@ -52,6 +77,9 @@ public class CommandComboBoxListener implements ActionListener{
 		return available.toArray(new String[available.size()]);
 	}
 	
+	/**
+ 	 * @return a list containing all the player's pawns that are currently available.
+	 */
 	public String[] getAvailablePawns(){
 		ArrayList<String> available = new ArrayList<String>();
 		for(PawnType pt: p.getResourceSet().getPawnSet().getPawnMap().keySet()){
@@ -60,6 +88,9 @@ public class CommandComboBoxListener implements ActionListener{
 		return available.toArray(new String[available.size()]);
 	}
 	
+	/**
+ 	 * @return a list containing all possible numbers of servants the player could add to an action.
+	 */
 	public String[] getAvailableServants(){
 		ArrayList<String> available = new ArrayList<String>();
 		int servants = p.getResourceSet().getResources().getServants();
@@ -69,6 +100,9 @@ public class CommandComboBoxListener implements ActionListener{
 		return available.toArray(new String[available.size()]);
 	}
 	
+	/**
+ 	 * @return a list containing the indexes of the leader cards the player currently owns.
+	 */
 	public String[] getAvailableLeaderCards(){
 		ArrayList<String> available = new ArrayList<String>();
 		int size = p.getResourceSet().getLeaderCardList().size();
@@ -78,6 +112,9 @@ public class CommandComboBoxListener implements ActionListener{
 		return available.toArray(new String[available.size()]);
 	}
 	
+	/**
+ 	 * @return a list containing the indexes of the activated leader cards the player currently owns.
+	 */
 	public String[] getAvailableActivatedLeaderCards(){
 		ArrayList<String> available = new ArrayList<String>();
 		int size = p.getResourceSet().getActivatedLeaderCardList().size();
@@ -87,6 +124,10 @@ public class CommandComboBoxListener implements ActionListener{
 		return available.toArray(new String[available.size()]);
 	}
 
+	/**
+	 * Updates all the JComboBoxes with relevant information depending on which action the user selected.
+ 	 * @param e The action event which "fired" this method.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JComboBox cb = (JComboBox)e.getSource();
@@ -212,6 +253,11 @@ public class CommandComboBoxListener implements ActionListener{
 		}
 		
 	}
+	/**
+	 * Changes the model of a JComboBox with a new one containing the string in the argument s.
+ 	 * @param box the box whose model will be changed.
+ 	 * @param s the new options of that box.
+	 */
 	@SuppressWarnings("unchecked")
 	public void changeModel(JComboBox box, String[] s){
 		DefaultComboBoxModel model = new DefaultComboBoxModel(s);

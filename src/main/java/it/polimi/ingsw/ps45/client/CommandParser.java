@@ -35,6 +35,8 @@ public class CommandParser {
 	/**
 	 * Just a big switch which contains cases for all the commands.
 	 * Also split the input string.
+	 * @throws Exception if the user input is wrong or badly formatted.
+	 * @return the parsed Command.
 	 */
 	public Command parse(String input) throws Exception{
 		String[] s = input.toLowerCase().split("-");

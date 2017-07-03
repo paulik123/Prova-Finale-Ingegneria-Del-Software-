@@ -11,7 +11,7 @@ import it.polimi.ingsw.ps45.model.player.Player;
 /**
  * An area that contains territory cards.
  */
-public class TerritoryCardArea extends Area implements Serializable{
+public class TerritoryCardArea extends Area{
 	private Territory t;
 	private Effect effect;
 	

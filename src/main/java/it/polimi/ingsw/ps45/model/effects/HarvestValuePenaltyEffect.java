@@ -7,7 +7,7 @@ import it.polimi.ingsw.ps45.model.player.Player;
 /**
  * An effect that sets a penalty in the value of the harvests the player will make.
  */
-public class HarvestValuePenaltyEffect implements Effect, Serializable{
+public class HarvestValuePenaltyEffect implements Effect{
 
 	private int penalty;
 	

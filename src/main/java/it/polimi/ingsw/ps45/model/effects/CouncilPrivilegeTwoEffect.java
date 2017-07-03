@@ -8,7 +8,7 @@ import it.polimi.ingsw.ps45.model.player.Player;
 /**
  * An effect that makes the player exchange two different Council Privileges.
  */
-public class CouncilPrivilegeTwoEffect implements Effect, Serializable{
+public class CouncilPrivilegeTwoEffect implements Effect{
 
 	/**
 	 * The method that runs the effect.

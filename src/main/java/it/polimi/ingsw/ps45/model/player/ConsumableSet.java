@@ -4,7 +4,7 @@ import java.io.Serializable;
 /**
  * Set of consumables that a player can collect or pay with.
  */
-public class ConsumableSet implements Serializable{
+public class ConsumableSet{
 	
 	private int wood;
 	private int stone;

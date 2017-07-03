@@ -10,7 +10,7 @@ import it.polimi.ingsw.ps45.model.player.Player;
  * Excommunicaton Card. It's effects are applied to the player if he doesn't have enought faith points at the end of an era
  * or he refuses vatican.
  */ 
-public class ExcommunicationCard implements Serializable{
+public class ExcommunicationCard{
 	private Era era;
 	private Effect effect;
 	private String name;

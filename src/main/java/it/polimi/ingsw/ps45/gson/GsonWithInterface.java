@@ -9,6 +9,9 @@ import it.polimi.ingsw.ps45.model.effects.Effect;
 import it.polimi.ingsw.ps45.model.game.ServerResponse;
 import it.polimi.ingsw.ps45.model.player.PersonalBonusTile;
 
+/**
+ * A simple class with a static method that return a Gson object with the required type adapters already registered.
+ */
 public class GsonWithInterface {
 	public static Gson getGson(){
 		Gson gson = new GsonBuilder()

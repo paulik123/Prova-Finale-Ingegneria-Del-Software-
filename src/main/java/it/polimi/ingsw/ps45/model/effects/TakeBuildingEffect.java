@@ -9,7 +9,7 @@ import it.polimi.ingsw.ps45.model.player.Player;
 /**
  * An effect that sets the player's action builder state to TakeBuildingState so he can make a take building action.
  */
-public class TakeBuildingEffect implements Effect, Serializable{
+public class TakeBuildingEffect implements Effect{
 
 
 	private int val;

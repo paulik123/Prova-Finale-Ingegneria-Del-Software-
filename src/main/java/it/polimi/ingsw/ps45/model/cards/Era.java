@@ -5,6 +5,6 @@ import java.io.Serializable;
 /**
  * Enum that lists the eras of the game.
  */
-public enum Era  implements Serializable{
+public enum Era{
 	I, II, III;
 }

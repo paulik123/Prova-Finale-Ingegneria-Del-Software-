@@ -7,7 +7,7 @@ import it.polimi.ingsw.ps45.model.player.Player;
 /**
  * An effect that increases or decreases the player's action value when taking characters.
  */
-public class TakeCharacterActionModifierEffect implements Effect, Serializable{
+public class TakeCharacterActionModifierEffect implements Effect{
 
 	private int effectValue;
 	

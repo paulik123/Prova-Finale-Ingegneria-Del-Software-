@@ -9,7 +9,7 @@ import it.polimi.ingsw.ps45.model.player.Player;
 /**
  * An effect that sets the player's action builder state to TakeCharacterState so he can make a take territory action.
  */
-public class TakeTerritoryEffect implements Effect, Serializable{
+public class TakeTerritoryEffect implements Effect{
 
 
 	private int val;

@@ -9,7 +9,7 @@ import it.polimi.ingsw.ps45.model.player.Player;
 /**
  * An effect that makes a the player collect a consumable set.It also checks for the SantaRita effect. 
  */
-public class CollectEffect implements Effect, Serializable{
+public class CollectEffect implements Effect{
 	private ConsumableSet cs;
 	
 	/**

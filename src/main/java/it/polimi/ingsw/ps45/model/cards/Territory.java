@@ -10,7 +10,6 @@ import it.polimi.ingsw.ps45.model.player.Player;
  */
 public class Territory extends Card {
 	
-	private static final long serialVersionUID = 9088028847025402303L;
 	private int harvestLevel;
 	private ArrayList<Effect> harvestEffects;
 	

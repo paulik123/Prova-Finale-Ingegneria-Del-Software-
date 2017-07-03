@@ -9,7 +9,7 @@ import it.polimi.ingsw.ps45.model.player.Player;
 /**
  * An effect that makes a player collect a consumableset reward and also exchange a councilprivilege.
  */
-public class CouncilPrivilegeOneAndCollectEffect implements Effect, Serializable{
+public class CouncilPrivilegeOneAndCollectEffect implements Effect{
 	private ConsumableSet cs;
 	
 	/**

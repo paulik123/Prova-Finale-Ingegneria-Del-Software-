@@ -36,6 +36,10 @@ import it.polimi.ingsw.ps45.model.player.Player;
 import it.polimi.ingsw.ps45.view.gui.CommandComboBoxListener;
 import it.polimi.ingsw.ps45.view.gui.GUICommandParser;
 
+/**
+ * The frame of the GUI that show the players's leader cards. It's also the frame that displays messages from the server.
+ * It uses absolute positioning because some the elements were very hard to arrange properly using other LayoutManagers.
+ */
 public class LeaderBoard extends JFrame implements ActionListener{
 	
 	private Game g;
@@ -46,15 +50,12 @@ public class LeaderBoard extends JFrame implements ActionListener{
 	private JLayeredPane layeredPane;
 	private JPanel frontPanel;
 	
-	private CommandComboBoxListener commandListener;
-	private GUICommandParser commandParser;
-	
-	
 
 	private JTextArea textArea;
 	
+	private JComboBox playerList;
 	
-	JComboBox playerList;
+	private static final String backgroundImagePath = "images\\punchboard.png";
 	
 	
 	private ArrayList<JLabel> leaderCards;
@@ -87,7 +88,10 @@ public class LeaderBoard extends JFrame implements ActionListener{
 	
 	
 	
-	
+	/**
+ 	 * Constructor
+ 	 * Initializes the background and the front content panel on which all the elements are later added.
+	 */
 	public LeaderBoard(String playerID){
 		
 		
@@ -114,6 +118,9 @@ public class LeaderBoard extends JFrame implements ActionListener{
 		initializeTextArea();
 	}
 	
+	/**
+ 	 * Initializes the text area that displays the messages from the server.
+	 */
 	private void initializeTextArea() {
         textArea = new JTextArea();
         textArea.setBounds((width - textAreaWidth)/2, textAreaY, textAreaWidth, textAreaHeight);
@@ -121,10 +128,18 @@ public class LeaderBoard extends JFrame implements ActionListener{
         frontPanel.add(textArea);
 	}
 	
+	/**
+ 	 * Updates the text area with new text.
+ 	 * @param s the new text to be displayed.
+	 */
 	public void updateTextArea(String s){
 		textArea.setText(s);
 	}
 
+	/**
+	 * Updates the Icons of the Card Labels with the images corresponding to the current player's leader cards.
+	 * It creates new labels and deletes the old ones.
+	 */
 	public void updateCards(){
 		//Removing old labels
 		for(JLabel l: leaderCards){
@@ -146,6 +161,9 @@ public class LeaderBoard extends JFrame implements ActionListener{
 		frontPanel.repaint();
 	}
 	
+	/**
+	 * Updates the Icons of the Card Labels with the images corresponding to the current selected player's leader cards.
+	 */
 	public void updateLeaderCards(){
 		int gap = 0;
 		
@@ -155,6 +173,9 @@ public class LeaderBoard extends JFrame implements ActionListener{
 		}
 	}
 	
+	/**
+	 * Updates the Icons of the Card Labels with the images corresponding to the current selected player's activated leader cards.
+	 */
 	public void updateActivatedLeaderCards(){
 		int gap = 0;
 		
@@ -164,6 +185,9 @@ public class LeaderBoard extends JFrame implements ActionListener{
 		}
 	}
 	
+	/**
+	 * Creates a layered pane in which it adds a new background panel. It also adds an image with the board read from file.
+	 */
 	public void setBackground(){
 		
 		layeredPane = new JLayeredPane();
@@ -177,7 +201,7 @@ public class LeaderBoard extends JFrame implements ActionListener{
 
 		
 		background.add(backgroundLabel, BorderLayout.CENTER);
-		ImageIcon imageIcon = new ImageIcon("images\\punchboard.png"); // load the image to a imageIcon
+		ImageIcon imageIcon = new ImageIcon(backgroundImagePath); // load the image to a imageIcon
 		Image image = imageIcon.getImage(); // transform it 
 		Image newimg = image.getScaledInstance(width, height,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 		imageIcon = new ImageIcon(newimg);  // transform it back
@@ -185,6 +209,9 @@ public class LeaderBoard extends JFrame implements ActionListener{
 		
 	}
 	
+	/**
+	 * Initializes the front panel on which all the elements are added. 
+	 */
 	public void setFrontPanel(){
 		frontPanel = new JPanel();
 		frontPanel.setOpaque(false);
@@ -196,6 +223,13 @@ public class LeaderBoard extends JFrame implements ActionListener{
 	}
 	
 	
+	/**
+	 * Creates a new label then adds it to the front panel.
+	 * Also adds it to the front panel.
+	 * @param x the x position of the label.
+	 * @param y the y position of the label.
+	 * @param card the leader card the new label's icon will contain.
+	 */
 	public JLabel initializeCardLabel(int x, int y, LeaderCard card){
 		
 		JLabel newLabel = new JLabel("");
@@ -215,6 +249,9 @@ public class LeaderBoard extends JFrame implements ActionListener{
 		return newLabel;
 	}
 	
+	/**
+	 * Initializes the ComboBox with which the user can change the current player of the board(to see other player's leader cards).
+	 */
 	public void initializePlayerComboBox(){
 
 		playerList = new JComboBox();
@@ -223,6 +260,9 @@ public class LeaderBoard extends JFrame implements ActionListener{
         frontPanel.add(playerList);
 	}
 	
+	/**
+	 * Updates the model of the ComboBox with the players that are currently in the game.
+	 */
 	public void updatePlayerComboBox(){
 		ArrayList<String> players = new ArrayList<String>();
 		for(Player p: g.getPlayers()){
@@ -234,7 +274,10 @@ public class LeaderBoard extends JFrame implements ActionListener{
 		playerList.setSelectedItem(playerID);
 	}
 	
-	
+	/**
+	 * This method is called when the user change's the boards current player.
+	 * The player is changed with the newly selected one then the leader cards on the board are updated.
+	 */
 	//Only updates cards, has nothing to do with command boxes
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -250,10 +293,11 @@ public class LeaderBoard extends JFrame implements ActionListener{
 			updateCards();
 	}
 	
-	public Command getCommand() throws Exception{
-		return commandParser.parse();
-	}
 	
+	/**
+	 * Sets a new game state that the frame will read from then updates all the elements of the frame.
+	 * @param g the new game.
+	 */
 	public void update(Game g){
 		
 		this.g = g;

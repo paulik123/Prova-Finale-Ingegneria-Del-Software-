@@ -9,7 +9,7 @@ import it.polimi.ingsw.ps45.model.player.Player;
 /**
  * An effect that sets the player's action builder state to TakeCharacterState so he can make a take character action.
  */
-public class TakeCharacterEffect implements Effect, Serializable{
+public class TakeCharacterEffect implements Effect{
 
 
 	private int val;

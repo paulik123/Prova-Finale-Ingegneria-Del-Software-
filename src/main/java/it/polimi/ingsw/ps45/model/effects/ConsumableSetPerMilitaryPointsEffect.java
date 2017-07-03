@@ -8,7 +8,7 @@ import it.polimi.ingsw.ps45.model.player.Player;
 /**
  * An effect that gives a player some ConsumableSet reward based on how many buildings he has. The player "collects" the reward "militaryPoints/2" times.
  */
-public class ConsumableSetPerMilitaryPointsEffect implements Effect, Serializable {
+public class ConsumableSetPerMilitaryPointsEffect implements Effect{
 
 	private ConsumableSet cs;
 	

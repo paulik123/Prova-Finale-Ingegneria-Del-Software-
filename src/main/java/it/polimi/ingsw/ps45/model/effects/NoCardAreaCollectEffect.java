@@ -7,7 +7,7 @@ import it.polimi.ingsw.ps45.model.player.Player;
 /**
  * An effect that makes the player's unable to collect consumables from NoCardAreas. 
  */
-public class NoCardAreaCollectEffect implements Effect, Serializable{
+public class NoCardAreaCollectEffect implements Effect{
 
 	/**
 	 * The method that runs the effect.

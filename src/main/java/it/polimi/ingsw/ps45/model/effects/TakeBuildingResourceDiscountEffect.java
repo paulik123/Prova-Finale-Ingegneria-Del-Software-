@@ -8,7 +8,7 @@ import it.polimi.ingsw.ps45.model.player.Player;
 /**
  * An effect that makes buildins cost less when the player tries to acquire them.
  */
-public class TakeBuildingResourceDiscountEffect implements Effect, Serializable{
+public class TakeBuildingResourceDiscountEffect implements Effect{
 
 	private ConsumableSet discount;
 	

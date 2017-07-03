@@ -8,7 +8,7 @@ import it.polimi.ingsw.ps45.model.player.Player;
 /**
  * An effect that gives a player some ConsumableSet reward based on how many ventures he has. For example if he has 3 ventures he "collects" the reward 3 times.
  */
-public class ConsumableSetPerVentureEffect implements Effect, Serializable {
+public class ConsumableSetPerVentureEffect implements Effect{
 
 	private ConsumableSet cs;
 	

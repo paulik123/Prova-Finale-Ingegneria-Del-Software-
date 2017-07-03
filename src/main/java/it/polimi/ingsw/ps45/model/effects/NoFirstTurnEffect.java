@@ -7,7 +7,7 @@ import it.polimi.ingsw.ps45.model.player.Player;
 /**
  * An effect that makes the player skip his first turn of the round.
  */
-public class NoFirstTurnEffect implements Effect, Serializable{
+public class NoFirstTurnEffect implements Effect{
 
 	/**
 	 * The method that runs the effect.

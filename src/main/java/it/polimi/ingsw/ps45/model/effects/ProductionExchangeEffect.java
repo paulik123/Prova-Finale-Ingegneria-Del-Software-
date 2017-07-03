@@ -8,7 +8,7 @@ import it.polimi.ingsw.ps45.model.player.Player;
 /**
  * An odd effect that makes the player exchange consumables with other consumables
  */
-public class ProductionExchangeEffect implements Effect, Serializable {
+public class ProductionExchangeEffect implements Effect{
 	
 	private ConsumableSet before;
 	private ConsumableSet after;

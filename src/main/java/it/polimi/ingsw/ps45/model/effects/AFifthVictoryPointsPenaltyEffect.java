@@ -7,7 +7,7 @@ import it.polimi.ingsw.ps45.model.player.Player;
 /**
  * An effect that makes a the player lose a fifth of his victory points at the end of the game if it is activated. 
  */
-public class AFifthVictoryPointsPenaltyEffect implements Effect, Serializable{
+public class AFifthVictoryPointsPenaltyEffect implements Effect{
 
 	
 	/**

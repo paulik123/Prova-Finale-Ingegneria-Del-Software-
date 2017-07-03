@@ -1,6 +1,5 @@
 package it.polimi.ingsw.ps45.view;
 
-import java.util.Scanner;
 
 import com.google.gson.Gson;
 
@@ -24,18 +23,27 @@ import it.polimi.ingsw.ps45.model.game.Game;
 import it.polimi.ingsw.ps45.model.player.PawnType;
 import it.polimi.ingsw.ps45.model.player.Player;
 
+
+/**
+ * CLI View. Prints out the state of the game in the terminal.
+ */
 public class CLI extends View{
 	
-	Scanner scanner;
 	private String playerID;
 	
-	public CLI(Scanner scanner, String playerID){
-		this.scanner = scanner;
+	/**
+ 	 * Constructor
+ 	 * @param playerID the ID of the player who "owns" the view.
+	 */
+	public CLI(String playerID){
 		this.playerID = playerID;
 	}
 
 
-
+	/**
+	 * Updates the view with the new game data.
+ 	 * @param gameJSON The new object of the game serialized as a JSON string.
+	 */
 	@Override
 	public void updateView(String gameJSON) {
 		Gson gson = GsonWithInterface.getGson();
@@ -64,6 +72,10 @@ public class CLI extends View{
 		
 	}
 	
+	/**
+	 * Prints out strings representing all the territories a player owns.
+ 	 * @param p the player whose territories will be printed.
+	 */
 	private void printTerritories(Player p){
 		StringBuilder sb = new StringBuilder();
 		sb.append("Territories: ");
@@ -73,6 +85,10 @@ public class CLI extends View{
 		System.out.println(sb.toString());
 	}
 	
+	/**
+	 * Prints out strings representing all the pawns a player owns.
+ 	 * @param p the player whose pawns will be printed.
+	 */
 	private void printPawns(Player p){
 		StringBuilder sb = new StringBuilder();
 		sb.append("PAWNS: \n");
@@ -83,6 +99,11 @@ public class CLI extends View{
 		if(p.getResourceSet().getPawn(PawnType.NEUTRAL).isAvailable())sb.append("Neutral: " + p.getResourceSet().getPawn(PawnType.NEUTRAL).getValue()+ "  ||  ");
 		System.out.println(sb.toString());
 	}
+	
+	/**
+	 * Prints out strings representing all the characters a player owns.
+ 	 * @param p the player whose characters will be printed.
+	 */
 	private void printCharacters(Player p){
 		StringBuilder sb = new StringBuilder();
 		sb.append("Characters: ");
@@ -91,6 +112,11 @@ public class CLI extends View{
 		}
 		System.out.println(sb.toString());
 	}	
+	
+	/**
+	 * Prints out strings representing all the buildings a player owns.
+ 	 * @param p the player whose buildings will be printed.
+	 */
 	private void printBuildings(Player p){
 		StringBuilder sb = new StringBuilder();
 		sb.append("Buildings: ");
@@ -99,6 +125,11 @@ public class CLI extends View{
 		}
 		System.out.println(sb.toString());
 	}	
+	
+	/**
+	 * Prints out strings representing all the ventures a player owns.
+ 	 * @param p the player whose ventures will be printed.
+	 */
 	private void printVentures(Player p){
 		StringBuilder sb = new StringBuilder();
 		sb.append("Ventures: ");
@@ -108,6 +139,11 @@ public class CLI extends View{
 		System.out.println(sb.toString());
 	}	
 	
+	
+	/**
+	 * Prints out strings representing the current state of the game's board.
+ 	 * @param b the board whose state will be printed.
+	 */
 	private void printBoard(Board b){
 		printArea(b.getCoinsMarketArea());
 		printArea(b.getServantsMarketArea());
@@ -129,6 +165,10 @@ public class CLI extends View{
 		printVentureTower(b.getVentureTower());
 	}
 	
+	/**
+	 * Prints out the name of an area and it's occupants.
+ 	 * @param a the area whose occupants will be printed.
+	 */
 	private void printArea(Area a){
 		System.out.println(a.getName() + ": ");
 		for(PlayerPawnPair ppp: a.getOccupants()){
@@ -136,6 +176,10 @@ public class CLI extends View{
 		}
 	}
 	
+	/**
+	 * Prints out strings representing the territory tower and it's occupants.
+ 	 * @param t the tower whose state will be printed.
+	 */
 	private void printTerritoryTower(TerritoryTower t){
 		System.out.println("");
 		for(TerritoryCardArea a: t.getAreas()){
@@ -146,6 +190,11 @@ public class CLI extends View{
 		}
 		System.out.println("---");
 	}
+	
+	/**
+	 * Prints out strings representing the character tower and it's occupants.
+ 	 * @param t the tower whose state will be printed.
+	 */
 	private void printCharacterTower(CharacterTower t){
 		for(CharacterCardArea a: t.getAreas()){
 			if(a.getCharacter() != null)System.out.println(a.getName() + " | Character: " + a.getCharacter().getName());
@@ -155,6 +204,11 @@ public class CLI extends View{
 		}
 		System.out.println("---");
 	}
+	
+	/**
+	 * Prints out strings representing the building tower and it's occupants.
+ 	 * @param t the tower whose state will be printed.
+	 */
 	private void printBuildingTower(BuildingTower t){
 		for(BuildingCardArea a: t.getAreas()){
 			if(a.getBuilding() != null)System.out.println(a.getName() + " | Building: " + a.getBuilding().getName());
@@ -164,6 +218,11 @@ public class CLI extends View{
 		}
 		System.out.println("---");
 	}
+	
+	/**
+	 * Prints out strings representing the venture tower and it's occupants.
+ 	 * @param t the tower whose state will be printed.
+	 */
 	private void printVentureTower(VentureTower t){
 		for(VentureCardArea a: t.getAreas()){
 			if(a.getVenture() != null) System.out.println(a.getName() + " | Venture: " + a.getVenture().getName());
@@ -176,6 +235,10 @@ public class CLI extends View{
 
 
 
+	/**
+	 * Prints out an error message received from the server.
+ 	 * @param error the error message that will be printed.
+	 */
 	@Override
 	public void showError(String error) {
 		System.out.println(error);
@@ -184,10 +247,14 @@ public class CLI extends View{
 
 
 
+	/**
+	 * Prints out the end game results received from the server.
+ 	 * @param error the error message that will be printed.
+	 */
 	@Override
 	public void showResults(String results) {
-		// TODO Auto-generated method stub
-		
+		System.out.println("\n\n\n\n\n End Game Results: \n");
+		System.out.println(results);	
 	}
 
 }

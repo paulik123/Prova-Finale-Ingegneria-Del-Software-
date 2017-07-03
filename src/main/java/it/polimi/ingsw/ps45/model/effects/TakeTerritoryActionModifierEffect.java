@@ -7,7 +7,7 @@ import it.polimi.ingsw.ps45.model.player.Player;
 /**
  * An effect that increases or decreases the player's action value when taking territories.
  */
-public class TakeTerritoryActionModifierEffect implements Effect, Serializable{
+public class TakeTerritoryActionModifierEffect implements Effect{
 
 	private int effectValue;
 	

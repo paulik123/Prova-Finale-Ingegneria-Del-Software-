@@ -14,6 +14,9 @@ import it.polimi.ingsw.ps45.view.gui.windowb.GameBoard;
 import it.polimi.ingsw.ps45.view.gui.windowb.LeaderBoard;
 import it.polimi.ingsw.ps45.view.gui.windowb.PlayerBoard;
 
+/**
+ * Main class of the GUI view. It is currently composed of 4 frames because a lot of screen space is needed to show all the information of the game.
+ */
 public class GUI extends View{
 	
 	private GameBoard gameBoard;
@@ -29,6 +32,12 @@ public class GUI extends View{
 	private GUIWindowListener controlBoardListener;
 	private GUIWindowListener leaderBoardListener;
 	
+	
+	/**
+ 	 * Constructor
+ 	 * Initializes the required frames.
+ 	 * @param playerID the ID of the player controlling the view.
+	 */
 	public GUI(String playerID){
 		
 		gameBoardListener = new GUIWindowListener();
@@ -62,6 +71,11 @@ public class GUI extends View{
 
 	}
 
+	/**
+	 * Update the view when the game state changes.
+	 * It waits for all the frames to be initialized and ready.
+	 * @param gameJSON the game serialized as a JSON string.
+	 */
 	@Override
 	public void updateView(String gameJSON) {
 		Gson gson = GsonWithInterface.getGson();
@@ -89,6 +103,10 @@ public class GUI extends View{
 		});
 	}
 	
+	/**
+	 * Adds a controller to the view so that the user can send commands to the server.
+	 * @param controller the controller that will send commands to the server.
+	 */
 	public void addController(GUIController controller){
 		while(!isReady()){
 			try {
@@ -102,33 +120,56 @@ public class GUI extends View{
 		controlBoard.getSendCommandButton().addActionListener(controller);
 	}
 
+	/**
+	 * @return the frame showing the game board.
+	 */
 	public GameBoard getGameBoard() {
 		return gameBoard;
 	}
 
+	/**
+	 * @return the frame showing the player board.
+	 */
 	public PlayerBoard getPlayerBoard() {
 		return playerBoard;
 	}
 
+	/**
+	 * @return the frame showing the control board.
+	 */
 	public ControlBoard getControlBoard() {
 		return controlBoard;
 	}
 	
 	
 
+	/**
+	 * @return the frame showing the leader board.
+	 */
 	public LeaderBoard getLeaderBoard() {
 		return leaderBoard;
 	}
 
+	/**
+	 * Shows an error message from the server in the leader board.
+	 * @param error the error message.
+	 */
 	@Override
 	public void showError(String error) {
 		leaderBoard.updateTextArea(error);
 	}
 	
+	/**
+	 * @return true if all the frames are initialized and ready.
+	 */
 	public boolean isReady(){
 		return gameBoardListener.isReady() && playerBoardListener.isReady() && controlBoardListener.isReady() && leaderBoardListener.isReady();
 	}
 
+	/**
+	 * Show the end game results received from the server in the leader board.
+	 * @param results a string containing the results.
+	 */
 	@Override
 	public void showResults(String results) {
 		leaderBoard.updateTextArea(results);

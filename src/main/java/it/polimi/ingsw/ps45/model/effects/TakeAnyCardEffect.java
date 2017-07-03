@@ -9,7 +9,7 @@ import it.polimi.ingsw.ps45.model.player.Player;
 /**
  * An effect that sets the player's action builder state to TakeCardState so he can make a take any card action.
  */
-public class TakeAnyCardEffect implements Effect, Serializable{
+public class TakeAnyCardEffect implements Effect{
 
 
 	private int val;

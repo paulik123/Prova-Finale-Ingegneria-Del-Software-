@@ -8,7 +8,7 @@ import it.polimi.ingsw.ps45.model.player.Player;
 /**
  * An effect that sets the player's action builder state to AddServantsToProductionState so he can make a harvest and also add servants to it's value.
  */
-public class ProductionWithValueEffect implements Effect, Serializable{
+public class ProductionWithValueEffect implements Effect{
 
 	private int val;
 	

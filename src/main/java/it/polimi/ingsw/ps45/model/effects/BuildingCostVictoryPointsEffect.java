@@ -7,7 +7,7 @@ import it.polimi.ingsw.ps45.model.player.Player;
 /**
  * An effect that makes reduces the player's end game victory points depending on how much his buildings cost(wood/stone). Used in an excom card. 
  */
-public class BuildingCostVictoryPointsEffect implements Effect, Serializable{
+public class BuildingCostVictoryPointsEffect implements Effect{
 
 	/**
 	 * The method that runs the effect.

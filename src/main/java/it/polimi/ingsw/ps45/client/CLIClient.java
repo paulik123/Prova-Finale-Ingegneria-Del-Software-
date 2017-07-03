@@ -75,7 +75,7 @@ public class CLIClient extends Thread{
 	 */
     private void reconnect() throws UnknownHostException, IOException{
 		socket = new Socket(ip, PORTNUMBER);
-        CLI cli = new CLI(scanner, playerID);
+        CLI cli = new CLI(playerID);
         CLIControllerThread controllerThread = new CLIControllerThread(new OutputStreamWriter(socket.getOutputStream()), scanner, playerID);
         observerThread = new ObserverThread(new BufferedReader(new InputStreamReader(socket.getInputStream())), cli);
         observerThread.start();
@@ -98,7 +98,7 @@ public class CLIClient extends Thread{
     	}while(!(bonusTile.equals("1") || bonusTile.equals("2") || bonusTile.equals("3") || bonusTile.equals("4") || bonusTile.equals("5")));
     	
 		socket = new Socket(ip, PORTNUMBER);
-        CLI cli = new CLI(scanner, playerID);
+        CLI cli = new CLI(playerID);
         CLIControllerThread controllerThread = new CLIControllerThread(new OutputStreamWriter(socket.getOutputStream()), scanner, playerID);
         observerThread = new ObserverThread(new BufferedReader(new InputStreamReader(socket.getInputStream())), cli);
         observerThread.start();

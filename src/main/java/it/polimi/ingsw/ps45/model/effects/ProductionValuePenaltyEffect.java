@@ -7,7 +7,7 @@ import it.polimi.ingsw.ps45.model.player.Player;
 /**
  * An effect that sets a penalty in the value of the productions the player will make.
  */
-public class ProductionValuePenaltyEffect implements Effect, Serializable{
+public class ProductionValuePenaltyEffect implements Effect{
 
 	private int penalty;
 	

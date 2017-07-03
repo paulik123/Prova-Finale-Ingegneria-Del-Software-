@@ -6,7 +6,7 @@ import it.polimi.ingsw.ps45.model.player.Player;
 /**
  * An empty effect.
  */
-public class NoEffect implements Effect, Serializable{
+public class NoEffect implements Effect{
 
 	/**
 	 * The method that runs the effect.

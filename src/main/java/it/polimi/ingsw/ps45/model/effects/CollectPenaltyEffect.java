@@ -8,7 +8,7 @@ import it.polimi.ingsw.ps45.model.player.Player;
 /**
  * An effect that adds a penalty whenever the player collects consumables. For example: get -1 wood.
  */
-public class CollectPenaltyEffect implements Effect, Serializable{
+public class CollectPenaltyEffect implements Effect{
 
 	private ConsumableSet penalty;
 	

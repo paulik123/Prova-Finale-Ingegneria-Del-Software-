@@ -35,6 +35,10 @@ import it.polimi.ingsw.ps45.model.player.Player;
 import it.polimi.ingsw.ps45.view.gui.CommandComboBoxListener;
 import it.polimi.ingsw.ps45.view.gui.GUICommandParser;
 
+/**
+ * The frame of the GUI that show the players's characters and venture cards. It's also the frame from which the user can send commands to the server.
+ * It uses absolute positioning because some the elements were very hard to arrange properly using other LayoutManagers.
+ */
 public class ControlBoard extends JFrame implements ActionListener{
 	
 	private Game g;
@@ -48,6 +52,8 @@ public class ControlBoard extends JFrame implements ActionListener{
 	private CommandComboBoxListener commandListener;
 	private GUICommandParser commandParser;
 	
+	private static final String backgroundImagePath = "images\\punchboard.png";
+	
 	
 	private JComboBox commandList;
 	private JComboBox areaList;
@@ -58,13 +64,12 @@ public class ControlBoard extends JFrame implements ActionListener{
 	private JTextArea textArea;
 	
 	
-	JComboBox playerList;
+	private JComboBox playerList;
 	
 	
 	private ArrayList<JLabel> characters;
 	private ArrayList<JLabel> ventures;
 	
-	private String[] commands = {"endturn", "placepawnnocard","placepawnmarket", "placepawnharvest","placepawnproduction","placepawnterritory","placepawncharacter", "placepawnbuilding","placepawnventure", "nopawnterritory","nopawncharacter", "nopawnbuilding","nopawnventure","acceptvatican","refusevatican", "addservantsharvest","addservantsproduction", "cp1","cp2","cp3", "harvest","production"};
 	private String[] none = {"---"};
 	
 	private static final int width = 720;
@@ -99,7 +104,10 @@ public class ControlBoard extends JFrame implements ActionListener{
 	
 	
 	
-	
+	/**
+ 	 * Constructor
+ 	 * Initializes the background and the front content panel on which all the elements are later added.
+	 */
 	public ControlBoard(String playerID){
 		
 		
@@ -108,7 +116,6 @@ public class ControlBoard extends JFrame implements ActionListener{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, width, height + 25);
 		contentPane = new JPanel();
-		//contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
@@ -126,11 +133,11 @@ public class ControlBoard extends JFrame implements ActionListener{
 		initializeCommandComboBoxes();
 		
 		commandParser = new GUICommandParser(commandList, areaList, pawnList, servants, modes);
-		
-		
-
 	}
-	
+	/**
+	 * Updates the Icons of the Card Labels with the images corresponding to the current player's character and venture cards.
+	 * It creates new labels and deletes the old ones.
+	 */
 	public void updateCards(){
 		//Removing old labels
 		for(JLabel l: characters){
@@ -152,6 +159,9 @@ public class ControlBoard extends JFrame implements ActionListener{
 		frontPanel.repaint();
 	}
 	
+	/**
+	 * Updates the Icons of the Card Labels with the images corresponding to the current selected player's character cards.
+	 */
 	public void updateCharacters(){
 		int gap = 0;
 		
@@ -161,6 +171,9 @@ public class ControlBoard extends JFrame implements ActionListener{
 		}
 	}
 	
+	/**
+	 * Updates the Icons of the Card Labels with the images corresponding to the current selected player's venture cards.
+	 */
 	public void updateVentures(){
 		int gap = 0;
 		
@@ -170,6 +183,10 @@ public class ControlBoard extends JFrame implements ActionListener{
 		}
 	}
 	
+	
+	/**
+	 * Creates a layered pane in which it adds a new background panel. It also adds an image with the board read from file.
+	 */
 	public void setBackground(){
 		
 		layeredPane = new JLayeredPane();
@@ -183,7 +200,7 @@ public class ControlBoard extends JFrame implements ActionListener{
 
 		
 		background.add(backgroundLabel, BorderLayout.CENTER);
-		ImageIcon imageIcon = new ImageIcon("images\\punchboard.png"); // load the image to a imageIcon
+		ImageIcon imageIcon = new ImageIcon(backgroundImagePath); // load the image to a imageIcon
 		Image image = imageIcon.getImage(); // transform it 
 		Image newimg = image.getScaledInstance(width, height,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 		imageIcon = new ImageIcon(newimg);  // transform it back
@@ -191,6 +208,9 @@ public class ControlBoard extends JFrame implements ActionListener{
 		
 	}
 	
+	/**
+	 * Initializes the front panel on which all the elements are added. 
+	 */
 	public void setFrontPanel(){
 		frontPanel = new JPanel();
 		frontPanel.setOpaque(false);
@@ -202,6 +222,13 @@ public class ControlBoard extends JFrame implements ActionListener{
 	}
 	
 	
+	/**
+	 * Creates a new label then adds it to the front panel.
+	 * Also adds it to the front panel.
+	 * @param x the x position of the label.
+	 * @param y the y position of the label.
+	 * @param card the card the new label's icon will contain.
+	 */
 	public JLabel initializeCardLabel(int x, int y, Card card){
 		
 		JLabel newLabel = new JLabel("");
@@ -221,6 +248,9 @@ public class ControlBoard extends JFrame implements ActionListener{
 		return newLabel;
 	}
 	
+	/**
+	 * Initializes the ComboBox with which the user can change the current player of the board(to see other player's cards).
+	 */
 	public void initializePlayerComboBox(){
 
 		playerList = new JComboBox();
@@ -229,6 +259,9 @@ public class ControlBoard extends JFrame implements ActionListener{
         frontPanel.add(playerList);
 	}
 	
+	/**
+	 * Updates the model of the ComboBox with the players that are currently in the game.
+	 */
 	public void updatePlayerComboBox(){
 		ArrayList<String> players = new ArrayList<String>();
 		for(Player p: g.getPlayers()){
@@ -240,6 +273,11 @@ public class ControlBoard extends JFrame implements ActionListener{
 		playerList.setSelectedItem(playerID);
 	}
 	
+	/**
+	 * Updates the command ComboBox with the command the user is currently able to make.
+	 * It deletes the old listener and creates a new one.
+	 * Also Updates the top Text Area with useful info about the game(Current era, current round, etc...)
+	 */
 	public void updateCommandComboBoxes(){
 		try {
 			System.out.println((g.getPlayerByID(playerID).getAvailableCommands().length));
@@ -256,7 +294,6 @@ public class ControlBoard extends JFrame implements ActionListener{
 			commandListener.actionPerformed(new ActionEvent(commandList, ActionEvent.ACTION_PERFORMED, null));
 			commandListener.actionPerformed(new ActionEvent(commandList, ActionEvent.ACTION_PERFORMED, null));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -265,19 +302,19 @@ public class ControlBoard extends JFrame implements ActionListener{
 	}
 	
 
+	/**
+	 * Initializes the ComboBoxes with which the user can set the parameters of a command.
+	 */
 	public void initializeCommandComboBoxes(){
 		commandList = new JComboBox();
-		//commandList.setSelectedIndex(0);
 		commandList.setBounds(commandBoxX, commandBoxY, boxWidht * 2, boxHeight);
 		frontPanel.add(commandList);
 		
 		areaList = new JComboBox(none);
-		//areaList.setSelectedIndex(0);
 		areaList.setBounds(areaBoxX, commandBoxY, boxWidht, boxHeight);
 		frontPanel.add(areaList);
 		
 		pawnList = new JComboBox(none);
-		//pawnList.setSelectedIndex(0);
 		pawnList.setBounds(pawnBoxX, commandBoxY, boxWidht, boxHeight);
 		frontPanel.add(pawnList);
 		
@@ -300,7 +337,10 @@ public class ControlBoard extends JFrame implements ActionListener{
 		
 	}
 	
-	
+	/**
+	 * This method is called when the user change's the boards current player.
+	 * The player is changed with the newly selected one then the cards on the board are updated.
+	 */
 	//Only updates cards, has nothing to do with command boxes
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -316,10 +356,17 @@ public class ControlBoard extends JFrame implements ActionListener{
 			updateCards();
 	}
 	
+	/**
+	 * @return a command parsed from the input the user selected in the command boxes.
+	 */
 	public Command getCommand() throws Exception{
 		return commandParser.parse();
 	}
 	
+	/**
+	 * Sets a new game state that the frame will read from then updates all the elements of the frame.
+	 * @param g the new game.
+	 */
 	public void update(Game g){
 		
 		this.g = g;
@@ -328,6 +375,9 @@ public class ControlBoard extends JFrame implements ActionListener{
 		updateCards();
 	}
 
+	/**
+	 * @return a command parsed from the input the user selected in the command boxes.
+	 */
 	public JButton getSendCommandButton() {
 		return sendCommandButton;
 	}

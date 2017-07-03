@@ -15,34 +15,48 @@ import it.polimi.ingsw.ps45.controller.command.AddPlayerCommand;
 import it.polimi.ingsw.ps45.controller.command.Command;
 import it.polimi.ingsw.ps45.controller.command.CommandHolder;
 import it.polimi.ingsw.ps45.controller.command.ReconnectCommand;
+import it.polimi.ingsw.ps45.gson.GsonWithInterface;
 import it.polimi.ingsw.ps45.gson.PropertyBasedInterfaceMarshal;
 import it.polimi.ingsw.ps45.model.effects.Effect;
 
+
+/**
+ * Controller that listen to buttons in the view and sends commands to the server at the request of the user.
+ */
 public class GUIController implements ActionListener, ClientController{
 	private OutputStreamWriter os;
 	private String playerID;
 	private Gson gson;
 	private GUI gui;
 	
+	/**
+ 	 * Constructor
+	 * @param os OutputStreamWriter the stream the socket will write the serialized commands to.
+	 * @param gui the gui that the controller will get the commands from.
+	 * @param playerID the players identification string so the server knows from who the command came from.
+	 */
 	public GUIController(GUI gui, OutputStreamWriter os, String playerID){
 		this.os = os;
 		this.playerID = playerID;
 		this.gui = gui;
 		
-		gson = new GsonBuilder()
-                .registerTypeAdapter(Effect.class,
-                        new PropertyBasedInterfaceMarshal())
-                .registerTypeAdapter(Command.class,
-                        new PropertyBasedInterfaceMarshal()).create();
+		gson = GsonWithInterface.getGson();
 	}
 	
 
-	
+	/**
+	 * Writes the serialized JSON Command to the OutputStream then flushes it to be sure the message has been sent. 
+	 * @param message the message that will be written by the OutputStreamWriter
+	 */
     public void send(String message) throws IOException {
         os.write(message+"\n");
         os.flush();
     }
 
+	/**
+	 * Parses the command from the GUI elements, serializes it, then sends it to the server. 
+	 * @param e the ActionEvent that activated this method.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		try {
@@ -57,6 +71,10 @@ public class GUIController implements ActionListener, ClientController{
 		
 	}
 	
+	/**
+	 * Writes a AddPlayerCommand to the server without waiting for the user's input.
+	 * @param the bonusTile that the player chose.
+	 */
 	public void sendJoinCommand(String bonusTile){
 
 		try {
@@ -71,7 +89,9 @@ public class GUIController implements ActionListener, ClientController{
 
 
 
-
+	/**
+	 * Writes a ReconnectCommand to the server without waiting for the user's input.
+	 */
 	@Override
 	public void sendReconnectCommand() {
 		try {

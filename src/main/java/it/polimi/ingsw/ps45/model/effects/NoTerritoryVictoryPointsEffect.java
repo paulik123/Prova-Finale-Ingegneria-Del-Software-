@@ -7,7 +7,7 @@ import it.polimi.ingsw.ps45.model.player.Player;
 /**
  * An effect that makes the player not receive  any victory points for the territories he acquired during the game.
  */
-public class NoTerritoryVictoryPointsEffect implements Effect, Serializable{
+public class NoTerritoryVictoryPointsEffect implements Effect{
 
 	/**
 	 * The method that runs the effect.

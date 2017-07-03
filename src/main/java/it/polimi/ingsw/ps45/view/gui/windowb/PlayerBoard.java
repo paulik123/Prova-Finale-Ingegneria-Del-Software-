@@ -29,6 +29,10 @@ import it.polimi.ingsw.ps45.model.cards.Territory;
 import it.polimi.ingsw.ps45.model.game.Game;
 import it.polimi.ingsw.ps45.model.player.Player;
 
+/**
+ * The frame of the GUI that show the players's own board containing territories, buildings, resources and the personal bonus tile. 
+ * It uses absolute positioning because some the elements were very hard to arrange properly using other LayoutManagers.
+ */
 public class PlayerBoard extends JFrame implements ActionListener{
 	
 	private Game g;
@@ -54,8 +58,7 @@ public class PlayerBoard extends JFrame implements ActionListener{
 	
 	private String playerID;
 	
-	private boolean updatedBackground;
-	
+	private static final String backgroundImagePath = "images\\playerboard_1.png";
 	
 	private static final int width = 720;
 	private static final int height = 454;
@@ -89,16 +92,16 @@ public class PlayerBoard extends JFrame implements ActionListener{
 	private static final int playerBoxWidht = 100;
 	private static final int playerBoxHeight = 20;
 	
-	
+	/**
+ 	 * Constructor
+ 	 * Initializes the background and the front content panel on which all the elements are later added.
+	 */
 	public PlayerBoard(String playerID){
-		
-		
 		setResizable(false);
 		setTitle("Lorenzo il Magnifico - PlayerBoard");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, width, height + 25);
 		contentPane = new JPanel();
-		//contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
@@ -116,6 +119,10 @@ public class PlayerBoard extends JFrame implements ActionListener{
 		
 	}
 	
+	/**
+	 * Updates the Icons of the Card Labels with the images corresponding to the current player's territories and building cards.
+	 * It creates new labels and deletes the old ones.
+	 */
 	public void updateCards(){
 		//Removing old labels
 		for(JLabel l: buildings){
@@ -137,6 +144,9 @@ public class PlayerBoard extends JFrame implements ActionListener{
 		frontPanel.repaint();
 	}
 	
+	/**
+	 * Updates the Icons of the Card Labels with the images corresponding to the current selected player's building cards.
+	 */
 	public void updateBuildings(){
 		int gap = 0;
 		
@@ -148,6 +158,9 @@ public class PlayerBoard extends JFrame implements ActionListener{
 
 	}
 	
+	/**
+	 * Updates the Icons of the Card Labels with the images corresponding to the current selected player's territories cards.
+	 */
 	public void updateTerritories(){
 		int gap = 0;
 		
@@ -157,6 +170,9 @@ public class PlayerBoard extends JFrame implements ActionListener{
 		}
 	}
 	
+	/**
+	 * Creates a layered pane in which it adds a new background panel. It also adds an image with the board read from file.
+	 */
 	public void setBackground(){
 		
 		layeredPane = new JLayeredPane();
@@ -172,7 +188,7 @@ public class PlayerBoard extends JFrame implements ActionListener{
 
 		
 		background.add(backgroundLabel, BorderLayout.CENTER);
-		ImageIcon imageIcon = new ImageIcon("images\\playerboard_1.png"); // load the image to a imageIcon
+		ImageIcon imageIcon = new ImageIcon(backgroundImagePath); // load the image to a imageIcon
 		Image image = imageIcon.getImage(); // transform it 
 		Image newimg = image.getScaledInstance(width, height,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 		imageIcon = new ImageIcon(newimg);  // transform it back
@@ -180,6 +196,9 @@ public class PlayerBoard extends JFrame implements ActionListener{
 		
 	}
 	
+	/**
+	 * Initializes the front panel on which all the elements are added. 
+	 */
 	public void setFrontPanel(){
 		frontPanel = new JPanel();
 		frontPanel.setOpaque(false);
@@ -190,6 +209,9 @@ public class PlayerBoard extends JFrame implements ActionListener{
 
 	}
 	
+	/**
+	 * Initializes Labels that show how many resources the player has. 
+	 */
 	public void initializeResourceLabels(){
 		coinsLabel = initializeLabel(coinsX, coinsY, Color.RED);
 		stoneLabel = initializeLabel(stoneX, stoneY, Color.RED);		
@@ -200,15 +222,20 @@ public class PlayerBoard extends JFrame implements ActionListener{
 		victoryLabel = initializeLabel(victoryX, victoryY, Color.RED);
 	}
 	
+	/**
+	 * Updates the background image depending on the currently selected player's personal bonus tile. 
+	 */
 	private void updateBackground(){
 		ImageIcon imageIcon = new ImageIcon("images\\playerboard_" + p.getResourceSet().getBonusTile().getId() + ".png"); // load the image to a imageIcon
 		Image image = imageIcon.getImage(); // transform it 
 		Image newimg = image.getScaledInstance(width, height,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 		imageIcon = new ImageIcon(newimg);  // transform it back
 		backgroundLabel.setIcon(imageIcon);
-		updatedBackground = true;
 	}
 	
+	/**
+	 * Updates the resource labels depending on the currently selected player's resources. 
+	 */
 	public void updateResourceLabels(){
 		coinsLabel.setText(String.valueOf(p.getResourceSet().getResources().getCoins()));
 		stoneLabel.setText(String.valueOf(p.getResourceSet().getResources().getStone()));
@@ -220,6 +247,13 @@ public class PlayerBoard extends JFrame implements ActionListener{
 		
 	}
 	
+	/**
+	 * Creates a new label then adds it to the front panel.
+	 * Also adds it to the front panel.
+	 * @param x the x position of the label.
+	 * @param y the y position of the label.
+	 * @param card the card the new label's icon will contain.
+	 */
 	public JLabel initializeCardLabel(int x, int y, Card card){
 		
 		JLabel newLabel = new JLabel("");
@@ -238,16 +272,22 @@ public class PlayerBoard extends JFrame implements ActionListener{
 		return newLabel;
 	}
 	
-	
+	/**
+	 * Initializes the ComboBox with which the user can change the current player of the board(to see other player's cards).
+	 */
 	public void initializePlayerComboBox(){
-
-		
 		playerList = new JComboBox();
         playerList.addActionListener(this);
         playerList.setBounds(playerBoxX, playerBoxY, playerBoxWidht, playerBoxHeight);
         frontPanel.add(playerList);
 	}
 	
+	/**
+	 * Creates a new label then adds it to the front panel.
+	 * @param x the x position of the label.
+	 * @param y the y position of the label.
+	 * @param c the color of the foreground of the label(color of the text).
+	 */
 	public JLabel initializeLabel(int x, int y, Color c){
 		JLabel newLabel = new JLabel("");
 		newLabel.setBounds(x, y, areaSize, areaSize);
@@ -259,6 +299,9 @@ public class PlayerBoard extends JFrame implements ActionListener{
 		return newLabel;
 	}
 	
+	/**
+	 * Updates the model of the ComboBox with the players that are currently in the game.
+	 */
 	public void updatePlayerComboBox(){
 		ArrayList<String> players = new ArrayList<String>();
 		for(Player p: g.getPlayers()){
@@ -270,6 +313,10 @@ public class PlayerBoard extends JFrame implements ActionListener{
 		playerList.setSelectedItem(playerID);
 	}
 	
+	/**
+	 * Sets a new game state that the frame will read from then updates all the elements of the frame.
+	 * @param g the new game.
+	 */
 	public void update(Game g){
 		this.g = g;
 		
@@ -278,6 +325,10 @@ public class PlayerBoard extends JFrame implements ActionListener{
 		updateResourceLabels();
 	}
 
+	/**
+	 * This method is called when the user change's the boards current player.
+	 * The player is changed with the newly selected one then the cards and other labels on the board are updated.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 

@@ -7,7 +7,7 @@ import it.polimi.ingsw.ps45.model.player.Player;
 /**
  * An effect that makes the player unable to place pawns on market areas. 
  */
-public class CantPlacePawnOnMarkeyEffect implements Effect, Serializable{
+public class CantPlacePawnOnMarkeyEffect implements Effect{
 
 	/**
 	 * The method that runs the effect.
