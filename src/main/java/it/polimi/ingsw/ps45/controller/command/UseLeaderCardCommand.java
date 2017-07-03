@@ -10,7 +10,7 @@ import it.polimi.ingsw.ps45.model.game.Game;
  */
 public class UseLeaderCardCommand  implements Command{
 	
-	int index;
+	private int index;
 	
 	/**
  	 * @param  index the index of the leader card in the players activated leader card list.

@@ -5,13 +5,16 @@ import java.io.Serializable;
 import it.polimi.ingsw.ps45.model.actions.state.CouncilPrivilegeOneState;
 import it.polimi.ingsw.ps45.model.player.Player;
 
-public class CouncilPrivilegeOneEffect implements Effect, Serializable{
-
+/**
+ * An effect that makes the player exchange a Council Privilege.
+ */
+public class CouncilPrivilegeOneEffect implements Effect, Serializable{	
 	/**
+	 * The method that runs the effect.
 	 * 
+	 *@param p the player that runs the effect.
+	 *@param value the value of the effect. It is needed only when nesting actions(an action makes you do another action with a certain value).
 	 */
-	private static final long serialVersionUID = -3542006696048721849L;
-
 	@Override
 	public void runEffect(Player p, int value) {
 		p.getActionBuilder().setState(new CouncilPrivilegeOneState());

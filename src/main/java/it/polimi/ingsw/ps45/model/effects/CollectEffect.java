@@ -6,12 +6,26 @@ import it.polimi.ingsw.ps45.model.actions.state.NoActionState;
 import it.polimi.ingsw.ps45.model.player.ConsumableSet;
 import it.polimi.ingsw.ps45.model.player.Player;
 
+/**
+ * An effect that makes a the player collect a consumable set.It also checks for the SantaRita effect. 
+ */
 public class CollectEffect implements Effect, Serializable{
-	ConsumableSet cs;
+	private ConsumableSet cs;
 	
+	/**
+ 	 * Constructor
+ 	 * @param cs The ConsumableSet that the player will collect.
+	 */
 	public CollectEffect(ConsumableSet cs){
 		this.cs = cs;
 	}
+	
+	/**
+	 * The method that runs the effect.
+	 * 
+	 *@param p the player that runs the effect.
+	 *@param value the value of the effect. It is needed only when nesting actions(an action makes you do another action with a certain value).
+	 */
 	@Override
 	public void runEffect(Player p, int value) {
 		

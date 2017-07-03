@@ -10,13 +10,13 @@ import it.polimi.ingsw.ps45.model.vatican.VaticanVictoryPointsConverter;
  */
 public class AcceptVaticanOffer implements Action{
 
-	Player p;
+	private Player p;
 	
 	/**
  	 * Constructor
 	 * @param  p the object of the player that executes the action.
 	 */
-	AcceptVaticanOffer(Player p){
+	public AcceptVaticanOffer(Player p){
 		this.p = p;
 	}
 	
