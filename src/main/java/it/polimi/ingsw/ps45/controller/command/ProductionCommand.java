@@ -1,5 +1,8 @@
 package it.polimi.ingsw.ps45.controller.command;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import it.polimi.ingsw.ps45.controller.Connection;
 import it.polimi.ingsw.ps45.model.actions.ActionBuilder;
 import it.polimi.ingsw.ps45.model.actions.ProductionMode;
@@ -9,7 +12,7 @@ import it.polimi.ingsw.ps45.model.game.Game;
  * Command that allows the player execute a production and choosing the modes of each building.
  */
 public class ProductionCommand implements Command{
-	
+	private static final Logger LOGGER = Logger.getLogger( ProductionCommand.class.getName());
 	private String productionMode;
 	
 	/**
@@ -38,7 +41,7 @@ public class ProductionCommand implements Command{
 			ab.production(pm);
 			g.notifyObservers();
 		}catch(Exception e){
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "context", e);
 		}
 		
 	}

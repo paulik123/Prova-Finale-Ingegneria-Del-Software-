@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import it.polimi.ingsw.ps45.model.effects.Effect;
 import it.polimi.ingsw.ps45.model.player.ConsumableSet;
-import it.polimi.ingsw.ps45.model.player.Player;
 
 /**
  * Venture Card - has two consumable costs and to consumable requirements because the requirements and the costs can differ and a list of end-game effects.

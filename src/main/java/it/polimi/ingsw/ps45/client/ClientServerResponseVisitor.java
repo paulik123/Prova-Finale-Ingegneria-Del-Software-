@@ -1,7 +1,5 @@
 package it.polimi.ingsw.ps45.client;
 
-import java.awt.EventQueue;
-
 import it.polimi.ingsw.ps45.model.game.ErrorResponse;
 import it.polimi.ingsw.ps45.model.game.GameUpdateResponse;
 import it.polimi.ingsw.ps45.model.game.ResultsResponse;

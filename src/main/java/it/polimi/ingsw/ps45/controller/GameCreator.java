@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import it.polimi.ingsw.ps45.exceptions.PlayerExistanceException;
 import it.polimi.ingsw.ps45.model.game.Game;
 import it.polimi.ingsw.ps45.model.game.Observer;
 
@@ -14,6 +17,8 @@ import it.polimi.ingsw.ps45.model.game.Observer;
  * Has a timer that starts the pending games if two players already joined it but no other new player joined in a predefined time.
  */
 public class GameCreator {
+	
+	private static final Logger LOGGER = Logger.getLogger( GameCreator.class.getName() );
 	private ArrayList<Game> games;
 	private Game pendingGame;
 	private HashMap<String, Game> playersInGames;
@@ -41,13 +46,14 @@ public class GameCreator {
 	
 	/**
 	 * 
-	 * @throws Exception  If a player with that ID already exists on the server.
 	 * @param  ID  a identification string. must be unique on the server.
 	 * @param  bonusTile the index the bonusTile serialized file.
 	 * @param  o An observer so that the game knows where to send gameUpdates and errors to.
+	 * @throws PlayerExistanceException If a player with that ID doesn't exists on the server.
+	 * @throws Exception
 	 */
-	public void addPlayer(String ID, String bonusTile, Observer o) throws Exception{
-		if(playerExists(ID)) throw new Exception("Player already exists");
+	public void addPlayer(String ID, String bonusTile, Observer o) throws PlayerExistanceException, Exception{
+		if(playerExists(ID)) throw new PlayerExistanceException();
 		
 		if(pendingGame.hasStarted()){
 			games.add(pendingGame);
@@ -69,13 +75,12 @@ public class GameCreator {
 	
 	/**
 	 * 
-	 * @throws Exception  If a player with that ID doesn't exists on the server.
+	 * @throws PlayerExistanceException  If a player with that ID doesn't exists on the server.
 	 * @param  ID  a identification string. The ID must already exist on the server so gameCreator knows to which the player should be reconnected to.
 	 * @param  o An observer so that the game knows where to send gameUpdates and errors to.
 	 */
-	public void reconnect(String ID, Observer o) throws Exception{
-		if(!playerExists(ID)) throw new Exception("Player with that name does not exist");
-		getGameFromPlayerID(ID).reconnect(ID, o);
+	public void reconnect(String ID, Observer o) throws PlayerExistanceException{
+			getGameFromPlayerID(ID).reconnect(ID, o);
 	}
 	
 	/**
@@ -91,12 +96,12 @@ public class GameCreator {
 	}
 	
 	/**
-	 * @throws Exception  If a player with that ID doesn't exists on the server.
+	 * @throws PlayerExistanceException  If a player with that ID doesn't exists on the server.
 	 * @param  ID  a identification string of the player.
 	 * @return the game in which a player with that ID exists.
 	 */
-	public Game getGameFromPlayerID(String ID) throws Exception{
-		if(!playerExists(ID)) throw new Exception("Player does not exist");
+	public Game getGameFromPlayerID(String ID) throws PlayerExistanceException{
+		if(!playerExists(ID)) throw new PlayerExistanceException();
 		return playersInGames.get(ID);
 	}
 	
@@ -112,7 +117,7 @@ public class GameCreator {
 				games.add(pendingGame);
 				pendingGame = new Game();
 			} catch (Exception e) {
-				e.printStackTrace();
+				LOGGER.log(Level.SEVERE, "context", e);
 			}
 			
 		}

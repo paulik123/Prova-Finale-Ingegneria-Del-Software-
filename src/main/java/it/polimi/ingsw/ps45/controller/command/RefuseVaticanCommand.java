@@ -1,5 +1,8 @@
 package it.polimi.ingsw.ps45.controller.command;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import it.polimi.ingsw.ps45.controller.Connection;
 import it.polimi.ingsw.ps45.model.actions.ActionBuilder;
 import it.polimi.ingsw.ps45.model.game.Game;
@@ -9,7 +12,7 @@ import it.polimi.ingsw.ps45.model.game.Game;
  * Command that allows the player to refuse vatican at the end of each era.
  */
 public class RefuseVaticanCommand implements Command{
-
+	private static final Logger LOGGER = Logger.getLogger( RefuseVaticanCommand.class.getName());
 	
 	/**
  	 * @param  connection the players Connection used to get a reference to the gameCreator
@@ -26,7 +29,7 @@ public class RefuseVaticanCommand implements Command{
 			ab.refuseVatican();
 			g.notifyObservers();
 		}catch(Exception e){
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "context", e);
 		}
 		
 	}

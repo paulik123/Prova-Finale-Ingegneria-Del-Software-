@@ -52,6 +52,11 @@ public abstract class CouncilPrivilege {
 	 * @return      true if the type of the CouncilPrivilege in the params is the same.
 	 */
 	public boolean equals(CouncilPrivilege cp){
-		return this.getType().equals(cp.getType());
+		if(cp != null){
+			return this.getType().equals(cp.getType());
+		}else{
+			return false;
+		}
+		
 	}
 }

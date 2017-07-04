@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -11,7 +13,6 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
 import it.polimi.ingsw.ps45.gson.PropertyBasedInterfaceMarshal;
-import it.polimi.ingsw.ps45.model.area.Area;
 import it.polimi.ingsw.ps45.model.area.HasDictionary;
 import it.polimi.ingsw.ps45.model.effects.Effect;
 import it.polimi.ingsw.ps45.model.player.Player;
@@ -20,7 +21,7 @@ import it.polimi.ingsw.ps45.model.player.Player;
  * Class that holds and manages all TerritoryCardAreas of the game.
  */
 public class TerritoryTower implements Tower, HasDictionary{
-	
+	private static final Logger LOGGER = Logger.getLogger( TerritoryTower.class.getName());
 	private HashMap<String, TerritoryCardArea> dictionary;
 	private TerritoryCardArea t0;
 	private TerritoryCardArea t1;
@@ -83,13 +84,13 @@ public class TerritoryTower implements Tower, HasDictionary{
 			c = gson.fromJson(new FileReader(path), TerritoryCardArea.class);
 		} catch (JsonSyntaxException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "context", e);
 		} catch (JsonIOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "context", e);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "context", e);
 		}
 	 return c;
 	}

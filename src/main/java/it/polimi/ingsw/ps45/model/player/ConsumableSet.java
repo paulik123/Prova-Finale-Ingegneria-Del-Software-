@@ -1,6 +1,5 @@
 package it.polimi.ingsw.ps45.model.player;
 
-import java.io.Serializable;
 /**
  * Set of consumables that a player can collect or pay with.
  */

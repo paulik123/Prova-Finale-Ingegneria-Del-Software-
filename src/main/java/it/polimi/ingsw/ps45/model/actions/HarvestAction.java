@@ -2,7 +2,6 @@ package it.polimi.ingsw.ps45.model.actions;
 
 import java.util.ArrayList;
 
-import it.polimi.ingsw.ps45.model.actions.state.NoActionState;
 import it.polimi.ingsw.ps45.model.cards.Territory;
 import it.polimi.ingsw.ps45.model.player.PersonalBonusTile;
 import it.polimi.ingsw.ps45.model.player.Player;

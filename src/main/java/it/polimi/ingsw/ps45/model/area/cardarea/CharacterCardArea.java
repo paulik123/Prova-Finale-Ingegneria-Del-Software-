@@ -1,7 +1,5 @@
 package it.polimi.ingsw.ps45.model.area.cardarea;
 
-import java.io.Serializable;
-
 import it.polimi.ingsw.ps45.model.area.Area;
 import it.polimi.ingsw.ps45.model.cards.Character;
 import it.polimi.ingsw.ps45.model.effects.Effect;

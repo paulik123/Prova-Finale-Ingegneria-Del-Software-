@@ -1,6 +1,5 @@
 package it.polimi.ingsw.ps45.model.actions;
 
-import it.polimi.ingsw.ps45.model.actions.state.NoActionState;
 import it.polimi.ingsw.ps45.model.area.cardarea.BuildingCardArea;
 import it.polimi.ingsw.ps45.model.cards.Building;
 import it.polimi.ingsw.ps45.model.player.Player;

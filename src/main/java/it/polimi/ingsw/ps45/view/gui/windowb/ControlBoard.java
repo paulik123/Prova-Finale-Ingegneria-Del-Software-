@@ -4,9 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -19,16 +19,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonIOException;
-import com.google.gson.JsonSyntaxException;
-
 import it.polimi.ingsw.ps45.controller.command.Command;
-import it.polimi.ingsw.ps45.gson.GsonWithInterface;
-import it.polimi.ingsw.ps45.model.cards.Building;
-import it.polimi.ingsw.ps45.model.cards.Character;
 import it.polimi.ingsw.ps45.model.cards.Card;
-import it.polimi.ingsw.ps45.model.cards.Territory;
+import it.polimi.ingsw.ps45.model.cards.Character;
 import it.polimi.ingsw.ps45.model.cards.Venture;
 import it.polimi.ingsw.ps45.model.game.Game;
 import it.polimi.ingsw.ps45.model.player.Player;
@@ -40,17 +33,18 @@ import it.polimi.ingsw.ps45.view.gui.GUICommandParser;
  * It uses absolute positioning because some the elements were very hard to arrange properly using other LayoutManagers.
  */
 public class ControlBoard extends JFrame implements ActionListener{
+	private static final Logger LOGGER = Logger.getLogger( ControlBoard.class.getName());
 	
-	private Game g;
-	private Player p;
+	private transient Game g;
+	private transient Player p;
 	private String playerID;
 
 	private JPanel contentPane;
 	private JLayeredPane layeredPane;
 	private JPanel frontPanel;
 	
-	private CommandComboBoxListener commandListener;
-	private GUICommandParser commandParser;
+	private transient CommandComboBoxListener  commandListener;
+	private transient GUICommandParser commandParser;
 	
 	private static final String backgroundImagePath = "images\\punchboard.png";
 	
@@ -294,7 +288,7 @@ public class ControlBoard extends JFrame implements ActionListener{
 			commandListener.actionPerformed(new ActionEvent(commandList, ActionEvent.ACTION_PERFORMED, null));
 			commandListener.actionPerformed(new ActionEvent(commandList, ActionEvent.ACTION_PERFORMED, null));
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "context", e);
 		}
 		
 		textArea.setText("Current ERA: " + g.getEras()[g.getCurrentEra()] + "  || Current ROUND: " + g.getRoundNumber() + "  || CURRENT PLAYER: " + g.getCurrentRound().getCurrentPlayer().getPlayerID());

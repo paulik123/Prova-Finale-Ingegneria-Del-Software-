@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -20,6 +22,7 @@ import it.polimi.ingsw.ps45.model.effects.Effect;
 
 public class Connection extends Thread {
 
+	private static final Logger LOGGER = Logger.getLogger( Connection.class.getName() );
     private Socket s;
     private BufferedReader br;
     private OutputStreamWriter os;
@@ -60,7 +63,7 @@ public class Connection extends Thread {
                 
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "context", e);
         }
     }
     

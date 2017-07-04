@@ -1,18 +1,20 @@
 package it.polimi.ingsw.ps45.controller.command;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import it.polimi.ingsw.ps45.controller.Connection;
 import it.polimi.ingsw.ps45.model.actions.ActionBuilder;
-import it.polimi.ingsw.ps45.model.area.NoCardArea;
 import it.polimi.ingsw.ps45.model.game.Game;
-import it.polimi.ingsw.ps45.model.player.PawnType;
 
 
 /**
  * Command that allows the player to activate a leader card.
  */
 public class ActivateLeaderCardCommand  implements Command{
+	private static final Logger LOGGER = Logger.getLogger( ActivateLeaderCardCommand.class.getName());
 	
-	int index;
+	private int index;
 	
 	/**
  	 * Constructor
@@ -37,7 +39,7 @@ public class ActivateLeaderCardCommand  implements Command{
 			ab.activateLeaderCard(index);
 			g.notifyObservers();
 		}catch(Exception e){
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "context", e);
 		}
 		
 	}

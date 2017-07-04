@@ -25,6 +25,7 @@ public class Client {
 				@Override
 				public void run() {
 					ClientFrame c = new ClientFrame();
+					c.setVisible(true);
 				}
 				
 			});

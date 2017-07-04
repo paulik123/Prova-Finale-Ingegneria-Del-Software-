@@ -1,5 +1,8 @@
 package it.polimi.ingsw.ps45.controller.command;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import it.polimi.ingsw.ps45.controller.Connection;
 import it.polimi.ingsw.ps45.model.actions.ActionBuilder;
 import it.polimi.ingsw.ps45.model.area.cardarea.TerritoryCardArea;
@@ -9,7 +12,7 @@ import it.polimi.ingsw.ps45.model.game.Game;
  * Command that allows the player to acquire a territory without placing a pawn.
  */
 public class NoPawnTerritoryCommand implements Command{
-
+	private static final Logger LOGGER = Logger.getLogger( NoPawnTerritoryCommand.class.getName());
 	private String territoryCardArea;
 	private int servantsAdded;
 	
@@ -41,7 +44,7 @@ public class NoPawnTerritoryCommand implements Command{
 			ab.NoPawnTerritory(tca, servantsAdded);
 			g.notifyObservers();
 		}catch(Exception e){
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "context", e);
 		}
 	}
 

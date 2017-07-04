@@ -1,5 +1,8 @@
 package it.polimi.ingsw.ps45.controller.command;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import it.polimi.ingsw.ps45.controller.Connection;
 import it.polimi.ingsw.ps45.model.actions.ActionBuilder;
 import it.polimi.ingsw.ps45.model.area.cardarea.VentureCardArea;
@@ -10,7 +13,7 @@ import it.polimi.ingsw.ps45.model.game.Game;
  * Command that allows the player to acquire a venture without placing a pawn.
  */
 public class NoPawnVentureCommand implements Command{
-
+	private static final Logger LOGGER = Logger.getLogger( NoPawnVentureCommand.class.getName());
 	private String ventureCardArea;
 	private int servantsAdded;
 	private String ventureMode;
@@ -46,7 +49,7 @@ public class NoPawnVentureCommand implements Command{
 			ab.NoPawnVenture(tca, servantsAdded, vm);
 			g.notifyObservers();
 		}catch(Exception e){
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "context", e);
 		}
 	}
 

@@ -26,7 +26,7 @@ public class NeutralPawnDefaultValue implements Effect{
 	@Override
 	public void runEffect(Player p, int value) {
 		int oldValue = p.getResourceSet().getPawnSet().getDefaultNeutralValue();
-		p.getResourceSet().getPawnSet().setDefaultNeutralValue(oldValue + value);
+		p.getResourceSet().getPawnSet().setDefaultNeutralValue(oldValue + this.value);
 	}
 
 }

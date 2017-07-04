@@ -6,8 +6,6 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
@@ -18,11 +16,6 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonIOException;
-import com.google.gson.JsonSyntaxException;
-
-import it.polimi.ingsw.ps45.gson.GsonWithInterface;
 import it.polimi.ingsw.ps45.model.cards.Building;
 import it.polimi.ingsw.ps45.model.cards.Card;
 import it.polimi.ingsw.ps45.model.cards.Territory;
@@ -35,8 +28,8 @@ import it.polimi.ingsw.ps45.model.player.Player;
  */
 public class PlayerBoard extends JFrame implements ActionListener{
 	
-	private Game g;
-	private Player p;
+	private transient Game g;
+	private transient Player p;
 
 	private JPanel contentPane;
 	private JLayeredPane layeredPane;

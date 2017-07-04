@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -20,6 +22,7 @@ import it.polimi.ingsw.ps45.model.effects.Effect;
  */
 
 public class Vatican {
+	private static final Logger LOGGER = Logger.getLogger( Vatican.class.getName());
 	private HashMap<Era, ExcommunicationCard> map;
 	
 	/**
@@ -58,13 +61,13 @@ public class Vatican {
 			c = gson.fromJson(new FileReader(path), ExcommunicationCard.class);
 		} catch (JsonSyntaxException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "context", e);
 		} catch (JsonIOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "context", e);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "context", e);
 		}
 		 return c;
 	    

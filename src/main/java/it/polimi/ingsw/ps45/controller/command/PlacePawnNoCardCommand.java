@@ -1,5 +1,8 @@
 package it.polimi.ingsw.ps45.controller.command;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import it.polimi.ingsw.ps45.controller.Connection;
 import it.polimi.ingsw.ps45.model.actions.ActionBuilder;
 import it.polimi.ingsw.ps45.model.area.NoCardArea;
@@ -10,7 +13,7 @@ import it.polimi.ingsw.ps45.model.player.PawnType;
  * Command that allows the player to place a pawn in a NoCard action area.
  */
 public class PlacePawnNoCardCommand implements Command{
-
+	private static final Logger LOGGER = Logger.getLogger( PlacePawnNoCardCommand.class.getName());
 	private String noCardArea;
 	private String pawnType;
 	private int servantsAdded;
@@ -47,7 +50,7 @@ public class PlacePawnNoCardCommand implements Command{
 			ab.placePawnNoCard(nca, pt, servantsAdded);
 			g.notifyObservers();
 		}catch(Exception e){
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "context", e);
 		}
 	}
 

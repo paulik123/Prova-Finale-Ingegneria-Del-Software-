@@ -1,5 +1,8 @@
 package it.polimi.ingsw.ps45.controller.command;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import it.polimi.ingsw.ps45.controller.Connection;
 import it.polimi.ingsw.ps45.model.actions.ActionBuilder;
 import it.polimi.ingsw.ps45.model.game.Game;
@@ -9,7 +12,7 @@ import it.polimi.ingsw.ps45.model.game.Game;
  * Command that allows the player to use the once-per-turn effect of a leader card.
  */
 public class UseLeaderCardCommand  implements Command{
-	
+	private static final Logger LOGGER = Logger.getLogger( UseLeaderCardCommand.class.getName());
 	private int index;
 	
 	/**
@@ -33,7 +36,7 @@ public class UseLeaderCardCommand  implements Command{
 			ab.useLeaderCard(index);
 			g.notifyObservers();
 		}catch(Exception e){
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "context", e);
 		}
 		
 	}

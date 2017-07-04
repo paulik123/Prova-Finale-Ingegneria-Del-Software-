@@ -1,20 +1,14 @@
 package it.polimi.ingsw.ps45.model.game;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonIOException;
-import com.google.gson.JsonSyntaxException;
-
-import it.polimi.ingsw.ps45.gson.GsonWithInterface;
 import it.polimi.ingsw.ps45.model.actions.state.NoActionState;
 import it.polimi.ingsw.ps45.model.actions.state.PawnActionState;
-import it.polimi.ingsw.ps45.model.cards.Territory;
 import it.polimi.ingsw.ps45.model.player.Player;
 
 
@@ -22,6 +16,8 @@ import it.polimi.ingsw.ps45.model.player.Player;
  * Class that contains all the logic regarding rounds/turns.
  */
 public class Round{
+	
+	private static final Logger LOGGER = Logger.getLogger( Round.class.getName());
 	private Player[] turnOrder;
 	int index;
 	private boolean hasEnded;
@@ -102,7 +98,7 @@ public class Round{
 				try {
 					o.notify("");
 				} catch (IOException e) {
-					e.printStackTrace();
+					LOGGER.log(Level.SEVERE, "context", e);
 				}
 		}
 	}

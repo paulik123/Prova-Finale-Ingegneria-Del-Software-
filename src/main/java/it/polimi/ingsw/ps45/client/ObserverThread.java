@@ -1,20 +1,14 @@
 package it.polimi.ingsw.ps45.client;
 
-import java.awt.EventQueue;
 import java.io.BufferedReader;
 import java.io.IOException;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
-import it.polimi.ingsw.ps45.controller.command.Command;
-import it.polimi.ingsw.ps45.controller.command.CommandHolder;
 import it.polimi.ingsw.ps45.gson.GsonWithInterface;
-import it.polimi.ingsw.ps45.gson.PropertyBasedInterfaceMarshal;
-import it.polimi.ingsw.ps45.model.effects.Effect;
 import it.polimi.ingsw.ps45.model.game.ServerResponseWrapper;
-
 import it.polimi.ingsw.ps45.view.View;
 
 
@@ -22,6 +16,8 @@ import it.polimi.ingsw.ps45.view.View;
  * Thread that continuously listens to the socket's input stream.
  */
 public class ObserverThread extends Thread{
+	
+	private static final Logger LOGGER = Logger.getLogger( ObserverThread.class.getName() );
 	private BufferedReader br;
 	private ClientServerResponseVisitor serverResponseVisitor;
 	private Gson gson;
@@ -55,7 +51,7 @@ public class ObserverThread extends Thread{
 				respWrapper.getResponse().accept(serverResponseVisitor);	
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "context", e);
         }
     }
 

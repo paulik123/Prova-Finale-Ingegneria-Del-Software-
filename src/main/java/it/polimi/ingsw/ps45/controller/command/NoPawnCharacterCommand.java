@@ -1,5 +1,8 @@
 package it.polimi.ingsw.ps45.controller.command;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import it.polimi.ingsw.ps45.controller.Connection;
 import it.polimi.ingsw.ps45.model.actions.ActionBuilder;
 import it.polimi.ingsw.ps45.model.area.cardarea.CharacterCardArea;
@@ -9,7 +12,7 @@ import it.polimi.ingsw.ps45.model.game.Game;
  * Command that allows the player to acquire a character without placing a pawn.
  */
 public class NoPawnCharacterCommand implements Command{
-
+	private static final Logger LOGGER = Logger.getLogger( NoPawnCharacterCommand.class.getName());
 	private String characterCardArea;
 	private int servantsAdded;
 	
@@ -41,7 +44,7 @@ public class NoPawnCharacterCommand implements Command{
 			ab.NoPawnCharacter(tca, servantsAdded);
 			g.notifyObservers();
 		}catch(Exception e){
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "context", e);
 		}
 	}
 

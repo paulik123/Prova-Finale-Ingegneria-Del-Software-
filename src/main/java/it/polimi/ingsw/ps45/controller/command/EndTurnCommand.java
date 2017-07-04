@@ -1,5 +1,8 @@
 package it.polimi.ingsw.ps45.controller.command;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import it.polimi.ingsw.ps45.controller.Connection;
 import it.polimi.ingsw.ps45.model.game.Game;
 
@@ -10,7 +13,7 @@ import it.polimi.ingsw.ps45.model.game.Game;
 public class EndTurnCommand implements Command{
 
 
-	
+	private static final Logger LOGGER = Logger.getLogger( EndTurnCommand.class.getName());
 	/**
  	 * 
  	 * @param  connection the players Connection used to get a reference to the gameCreator
@@ -24,7 +27,7 @@ public class EndTurnCommand implements Command{
 			g.notifyObservers();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "context", e);
 		}
 	}
 

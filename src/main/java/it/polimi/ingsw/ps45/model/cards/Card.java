@@ -1,6 +1,5 @@
 package it.polimi.ingsw.ps45.model.cards;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import it.polimi.ingsw.ps45.model.effects.Effect;

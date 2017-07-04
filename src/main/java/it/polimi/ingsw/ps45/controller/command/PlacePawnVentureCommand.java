@@ -1,5 +1,8 @@
 package it.polimi.ingsw.ps45.controller.command;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import it.polimi.ingsw.ps45.controller.Connection;
 import it.polimi.ingsw.ps45.model.actions.ActionBuilder;
 import it.polimi.ingsw.ps45.model.area.cardarea.VentureCardArea;
@@ -12,7 +15,7 @@ import it.polimi.ingsw.ps45.model.player.PawnType;
  * Command that allows the player to acquire a venture while also placing a pawn.
  */
 public class PlacePawnVentureCommand implements Command{
-
+	private static final Logger LOGGER = Logger.getLogger( PlacePawnVentureCommand.class.getName());
 	private String ventureCardArea;
 	private String pawnType;
 	private int servantsAdded;
@@ -54,7 +57,7 @@ public class PlacePawnVentureCommand implements Command{
 			ab.placePawnVenture(tca, pt, servantsAdded, vm);
 			g.notifyObservers();
 		}catch(Exception e){
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "context", e);
 		}
 	}
 

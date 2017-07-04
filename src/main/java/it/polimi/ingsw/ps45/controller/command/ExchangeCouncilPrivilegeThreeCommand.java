@@ -1,5 +1,8 @@
 package it.polimi.ingsw.ps45.controller.command;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import it.polimi.ingsw.ps45.controller.Connection;
 import it.polimi.ingsw.ps45.model.actions.ActionBuilder;
 import it.polimi.ingsw.ps45.model.actions.CouncilPrivilege.CouncilPrivilege;
@@ -10,7 +13,7 @@ import it.polimi.ingsw.ps45.model.game.Game;
  * Command that makes the exchange between three different CouncilPrivilege and resources.
  */
 public class ExchangeCouncilPrivilegeThreeCommand implements Command{
-	
+	private static final Logger LOGGER = Logger.getLogger( ExchangeCouncilPrivilegeThreeCommand.class.getName());
 	private String cp1;
 	private String cp2;
 	private String cp3;
@@ -50,7 +53,7 @@ public class ExchangeCouncilPrivilegeThreeCommand implements Command{
 			ab.exchangeCouncilPrivilegeThree(privilege1, privilege2, privilege3);
 			g.notifyObservers();
 		}catch(Exception e){
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "context", e);
 		}
 	}
 

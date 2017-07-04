@@ -1,18 +1,18 @@
 package it.polimi.ingsw.ps45.client;
 
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
-import java.net.UnknownHostException;
-import java.util.Scanner;
 
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -21,18 +21,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import java.awt.*;
 
-
-
-import it.polimi.ingsw.ps45.view.CLI;
-import it.polimi.ingsw.ps45.view.View;
 import it.polimi.ingsw.ps45.view.gui.GUI;
 import it.polimi.ingsw.ps45.view.gui.GUIController;
-import it.polimi.ingsw.ps45.view.gui.windowb.ControlBoard;
-import it.polimi.ingsw.ps45.view.gui.windowb.GameBoard;
-import it.polimi.ingsw.ps45.view.gui.windowb.LeaderBoard;
-import it.polimi.ingsw.ps45.view.gui.windowb.PlayerBoard;
 
 /**
  * Client that runs the GUI view.
@@ -40,10 +31,10 @@ import it.polimi.ingsw.ps45.view.gui.windowb.PlayerBoard;
 
 public class ClientFrame extends JFrame{
 
-    private Socket socket;
-    private ObserverThread observerThread;
-    private GUI gui;
-    private GUIController controller;
+    private transient Socket socket;
+    private transient ObserverThread observerThread;
+    private transient GUI gui;
+    private transient GUIController controller;
     
 	private JPanel contentPane;
 	private JTextField nameTextField;
@@ -55,8 +46,8 @@ public class ClientFrame extends JFrame{
 	private JButton btnReconnect;
     
     private static final int PORTNUMBER = 12345;
-    private static int width = 768;
-    private static int height = 432;
+    private static int width = 450;
+    private static int height = 300;
     
 	/**
  	 * Constructor
@@ -73,7 +64,7 @@ public class ClientFrame extends JFrame{
     	setTitle("Lorenzo Il Magnifico");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, width, height);
 		setVisible(true);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

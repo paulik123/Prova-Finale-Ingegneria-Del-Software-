@@ -1,5 +1,8 @@
 package it.polimi.ingsw.ps45.controller.command;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import it.polimi.ingsw.ps45.controller.Connection;
 import it.polimi.ingsw.ps45.controller.SocketObserver;
 
@@ -7,7 +10,7 @@ import it.polimi.ingsw.ps45.controller.SocketObserver;
  * Command that tells the gameCreator to add the player with playerID to the server.
  */
 public class AddPlayerCommand implements Command{
-
+	private static final Logger LOGGER = Logger.getLogger( AddPlayerCommand.class.getName());
 	private String bonusTile;
 	
 	
@@ -31,7 +34,7 @@ public class AddPlayerCommand implements Command{
 			connection.getGameCreator().addPlayer(playerID, bonusTile, new SocketObserver(connection.getOutputStreamWriter()));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "context", e);
 		}
 	}
 

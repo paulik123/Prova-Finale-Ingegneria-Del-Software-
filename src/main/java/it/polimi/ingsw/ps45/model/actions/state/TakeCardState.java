@@ -7,7 +7,7 @@ import it.polimi.ingsw.ps45.model.vatican.ExcommunicationCard;
  * ActionBuilderState implementation that allows the player to make a TakeAnyCardAction
  * @see the actual interface for documentation of each method
  */
-public class TakeCardState implements ActionBuilderState{
+public class TakeCardState extends ConcreteActionBuilderState{
 	
 	private String[] commands = {"nopawnterritory", "nopawncharacter", "nopawnbuilding", "nopawnventure", "activateleader", "useleader", "endturn"};
 	
@@ -29,24 +29,6 @@ public class TakeCardState implements ActionBuilderState{
 	public ConsumableSet discount() {
 		// TODO Auto-generated method stub
 		return discount;
-	}
-
-	@Override
-	public boolean placePawnAction() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean productionAction() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean harvestAction() {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 	@Override
@@ -73,47 +55,6 @@ public class TakeCardState implements ActionBuilderState{
 		return true;
 	}
 
-	@Override
-	public boolean coucilPrivilegeActionOne() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean coucilPrivilegeActionTwo() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean coucilPrivilegeActionThree() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public ExcommunicationCard getExcommunicationCard() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean vaticanChoice() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean addServantsToHarvestAction() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean addServantsToProductionAction() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 	
 	@Override
 	public String message() {

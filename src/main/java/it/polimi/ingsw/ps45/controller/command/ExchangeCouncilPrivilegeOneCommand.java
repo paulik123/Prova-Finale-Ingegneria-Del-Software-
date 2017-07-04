@@ -1,5 +1,8 @@
 package it.polimi.ingsw.ps45.controller.command;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import it.polimi.ingsw.ps45.controller.Connection;
 import it.polimi.ingsw.ps45.model.actions.ActionBuilder;
 import it.polimi.ingsw.ps45.model.actions.CouncilPrivilege.CouncilPrivilege;
@@ -12,7 +15,7 @@ import it.polimi.ingsw.ps45.model.game.Game;
 public class ExchangeCouncilPrivilegeOneCommand implements Command{
 	
 	private String cp1;
-	
+	private static final Logger LOGGER = Logger.getLogger( ExchangeCouncilPrivilegeOneCommand.class.getName());
 	
 	/**
  	 * Constructor
@@ -41,7 +44,7 @@ public class ExchangeCouncilPrivilegeOneCommand implements Command{
 			ab.exchangeCouncilPrivilegeOne(privilege1);
 			g.notifyObservers();
 		}catch(Exception e){
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "context", e);
 		}
 	}
 

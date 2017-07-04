@@ -1,52 +1,24 @@
 package it.polimi.ingsw.ps45.view.gui.windowb;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.Color;
 import java.awt.Font;
-import java.awt.Graphics2D;
-
-import javax.imageio.ImageIO;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonIOException;
-import com.google.gson.JsonSyntaxException;
-
-import it.polimi.ingsw.ps45.gson.GsonWithInterface;
-import it.polimi.ingsw.ps45.model.area.PlayerPawnPair;
-import it.polimi.ingsw.ps45.model.cards.Card;
-import it.polimi.ingsw.ps45.model.cards.Era;
-import it.polimi.ingsw.ps45.model.cards.Territory;
-import it.polimi.ingsw.ps45.model.game.Game;
-import it.polimi.ingsw.ps45.model.player.PawnType;
-import it.polimi.ingsw.ps45.model.player.Player;
-
-import java.awt.GridLayout;
 import java.awt.Image;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.swing.JLabel;
 import javax.swing.ImageIcon;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Color;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
-import java.awt.Dimension;
-import java.awt.Insets;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.Shape;
-import java.awt.geom.Ellipse2D;
-import java.awt.image.BufferedImage;
+import javax.swing.JPanel;
 
-import javax.swing.SwingConstants;
+import it.polimi.ingsw.ps45.model.area.PlayerPawnPair;
+import it.polimi.ingsw.ps45.model.cards.Card;
+import it.polimi.ingsw.ps45.model.cards.Era;
+import it.polimi.ingsw.ps45.model.game.Game;
+import it.polimi.ingsw.ps45.model.player.PawnType;
+import it.polimi.ingsw.ps45.model.player.Player;
 
 /**
  * The frame of the GUI that show the game's big board. It's covering the big production and harvest areas if there are only two players.
@@ -55,7 +27,7 @@ import javax.swing.SwingConstants;
  */
 public class GameBoard extends JFrame {
 	
-	private Game g;
+	private transient Game g;
 
 	private JPanel contentPane;
 	private JLayeredPane layeredPane;

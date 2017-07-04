@@ -3,6 +3,8 @@ package it.polimi.ingsw.ps45.server;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import it.polimi.ingsw.ps45.controller.Connection;
 import it.polimi.ingsw.ps45.controller.GameCreator;
@@ -14,6 +16,7 @@ import it.polimi.ingsw.ps45.controller.GameCreator;
  */
 
 public class Server {
+	private static final Logger LOGGER = Logger.getLogger( Server.class.getName());
 	private static int PORTNUMBER = 12345;
 	
 	private ServerSocket server;
@@ -28,7 +31,7 @@ public class Server {
 		try {
 			server = new ServerSocket(PORTNUMBER);
 		} catch (IOException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "context", e);
 		}
 		
 		this.gameCreator = gameCreator;
@@ -42,15 +45,16 @@ public class Server {
 	 */
     public void run(){
     	System.out.println("Server running");
-        while(true){
-            Socket socket;
-            try {
-                socket = server.accept();
-                new Connection(socket, gameCreator).start();
-            } catch (IOException e) {
-                e.printStackTrace();
+
+            while(true){
+                Socket socket;
+                try {
+                    socket = server.accept();
+                    new Connection(socket, gameCreator).start();
+                } catch (IOException e) {
+                    LOGGER.log(Level.SEVERE, "context", e);
+                }
             }
-        }
     }
     
 	/**

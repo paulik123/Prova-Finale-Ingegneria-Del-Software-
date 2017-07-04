@@ -1,5 +1,8 @@
 package it.polimi.ingsw.ps45.controller.command;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import it.polimi.ingsw.ps45.controller.Connection;
 import it.polimi.ingsw.ps45.model.actions.ActionBuilder;
 import it.polimi.ingsw.ps45.model.area.cardarea.BuildingCardArea;
@@ -10,7 +13,7 @@ import it.polimi.ingsw.ps45.model.game.Game;
  * Command that allows the player to acquire a building without placing a pawn.
  */
 public class NoPawnBuildingCommand implements Command{
-
+	private static final Logger LOGGER = Logger.getLogger( NoPawnBuildingCommand.class.getName());
 	private String buildingCardArea;
 	private int servantsAdded;
 	
@@ -42,7 +45,7 @@ public class NoPawnBuildingCommand implements Command{
 			ab.NoPawnBuilding(tca, servantsAdded);
 			g.notifyObservers();
 		}catch(Exception e){
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "context", e);
 		}
 	}
 

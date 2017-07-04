@@ -4,37 +4,20 @@ import java.awt.BorderLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonIOException;
-import com.google.gson.JsonSyntaxException;
-
-import it.polimi.ingsw.ps45.controller.command.Command;
-import it.polimi.ingsw.ps45.gson.GsonWithInterface;
-import it.polimi.ingsw.ps45.model.cards.Building;
-import it.polimi.ingsw.ps45.model.cards.Character;
 import it.polimi.ingsw.ps45.model.cards.LeaderCard;
-import it.polimi.ingsw.ps45.model.cards.Card;
-import it.polimi.ingsw.ps45.model.cards.Territory;
-import it.polimi.ingsw.ps45.model.cards.Venture;
 import it.polimi.ingsw.ps45.model.game.Game;
 import it.polimi.ingsw.ps45.model.player.Player;
-import it.polimi.ingsw.ps45.view.gui.CommandComboBoxListener;
-import it.polimi.ingsw.ps45.view.gui.GUICommandParser;
 
 /**
  * The frame of the GUI that show the players's leader cards. It's also the frame that displays messages from the server.
@@ -42,8 +25,8 @@ import it.polimi.ingsw.ps45.view.gui.GUICommandParser;
  */
 public class LeaderBoard extends JFrame implements ActionListener{
 	
-	private Game g;
-	private Player p;
+	private transient Game g;
+	private transient Player p;
 	private String playerID;
 
 	private JPanel contentPane;

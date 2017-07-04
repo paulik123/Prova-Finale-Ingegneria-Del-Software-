@@ -3,6 +3,8 @@ package it.polimi.ingsw.ps45.model.area;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -21,8 +23,7 @@ import it.polimi.ingsw.ps45.model.effects.Effect;
  */
 public class Board implements HasDictionary {
 	
-	private int players;
-	
+	private static final Logger LOGGER = Logger.getLogger( Board.class.getName());
 	private HashMap<String, NoCardArea> dictionary;
 	private ProductionAreas productionAreas;
 	
@@ -47,7 +48,6 @@ public class Board implements HasDictionary {
  	 * @param players the number of players (because if players < 4 some areas don't need to be instantiated)
 	 */
 	public Board(int players){
-		this.players = players;
 		dictionary = new HashMap<String, NoCardArea>();
 		
 		
@@ -166,13 +166,13 @@ public class Board implements HasDictionary {
 		c = gson.fromJson(new FileReader(path), NoCardArea.class);
 	} catch (JsonSyntaxException e) {
 		// TODO Auto-generated catch block
-		e.printStackTrace();
+		LOGGER.log(Level.SEVERE, "context", e);
 	} catch (JsonIOException e) {
 		// TODO Auto-generated catch block
-		e.printStackTrace();
+		LOGGER.log(Level.SEVERE, "context", e);
 	} catch (FileNotFoundException e) {
 		// TODO Auto-generated catch block
-		e.printStackTrace();
+		LOGGER.log(Level.SEVERE, "context", e);
 	}
 	 return c;
 	}

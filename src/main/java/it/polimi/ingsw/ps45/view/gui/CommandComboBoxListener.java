@@ -3,6 +3,8 @@ package it.polimi.ingsw.ps45.view.gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -21,7 +23,7 @@ import it.polimi.ingsw.ps45.model.player.Player;
 @SuppressWarnings("rawtypes")
 public class CommandComboBoxListener implements ActionListener{
 	
-
+	private static final Logger LOGGER = Logger.getLogger( CommandComboBoxListener.class.getName());
 	
 	private JComboBox areas;
 	private JComboBox pawns;
@@ -70,7 +72,7 @@ public class CommandComboBoxListener implements ActionListener{
 				if(hs.getAreaFromString(key).isAvailable()) available.add(key);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				LOGGER.log(Level.SEVERE, "context", e);
 			}
 		}
 

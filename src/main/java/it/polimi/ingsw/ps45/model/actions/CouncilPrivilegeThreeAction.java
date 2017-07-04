@@ -1,7 +1,6 @@
 package it.polimi.ingsw.ps45.model.actions;
 
 import it.polimi.ingsw.ps45.model.actions.CouncilPrivilege.CouncilPrivilege;
-import it.polimi.ingsw.ps45.model.actions.state.NoActionState;
 import it.polimi.ingsw.ps45.model.player.Player;
 /**
  * The actual action that is executed by the player when he wants to exchange three councilPrivileges.

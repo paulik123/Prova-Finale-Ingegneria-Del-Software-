@@ -1,5 +1,8 @@
 package it.polimi.ingsw.ps45.controller.command;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import it.polimi.ingsw.ps45.controller.Connection;
 import it.polimi.ingsw.ps45.model.actions.ActionBuilder;
 import it.polimi.ingsw.ps45.model.game.Game;
@@ -9,7 +12,7 @@ import it.polimi.ingsw.ps45.model.game.Game;
  * Command that increases the number of servants of a production actions that is waiting to be started.
  */
 public class AddServantsToProductionCommand implements Command{
-	
+	private static final Logger LOGGER = Logger.getLogger( AddServantsToProductionCommand.class.getName());
 	private int servants;
 	
 	/**
@@ -36,7 +39,7 @@ public class AddServantsToProductionCommand implements Command{
 			ab.addServantsToProduction(servants);
 			g.notifyObservers();
 		}catch(Exception e){
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "context", e);
 		}
 		
 	}

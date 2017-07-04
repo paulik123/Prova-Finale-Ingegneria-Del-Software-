@@ -5,7 +5,6 @@ import javax.swing.JTextField;
 
 import it.polimi.ingsw.ps45.controller.command.AcceptVaticanCommand;
 import it.polimi.ingsw.ps45.controller.command.ActivateLeaderCardCommand;
-import it.polimi.ingsw.ps45.controller.command.AddPlayerCommand;
 import it.polimi.ingsw.ps45.controller.command.AddServantsToHarvestCommand;
 import it.polimi.ingsw.ps45.controller.command.AddServantsToProductionCommand;
 import it.polimi.ingsw.ps45.controller.command.Command;

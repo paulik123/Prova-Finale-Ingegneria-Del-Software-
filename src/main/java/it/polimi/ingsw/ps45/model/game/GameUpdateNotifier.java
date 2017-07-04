@@ -2,7 +2,6 @@ package it.polimi.ingsw.ps45.model.game;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import com.google.gson.Gson;
 

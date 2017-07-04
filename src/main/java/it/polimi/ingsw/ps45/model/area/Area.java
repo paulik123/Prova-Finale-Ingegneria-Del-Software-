@@ -1,6 +1,5 @@
 package it.polimi.ingsw.ps45.model.area;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import it.polimi.ingsw.ps45.model.player.PawnType;
@@ -10,7 +9,7 @@ import it.polimi.ingsw.ps45.model.player.Player;
 /**
  * Abstract class that all area instances inherit from.
  */
-public abstract class Area implements Serializable{
+public abstract class Area{
 	private String name;
 	private int cost;
 	private ArrayList<PlayerPawnPair> occupiedBy;

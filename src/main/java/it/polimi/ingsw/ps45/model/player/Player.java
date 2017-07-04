@@ -19,10 +19,10 @@ public class Player {
 	private  ResourceSet resourceSet;
 	private transient ActionBuilder actionBuilder;
 	
-	public static int defaultWood = 2;
-	public static int defaultStone = 2;
-	public static int defaultServants = 3;
-	public static int defaultCoins = 5;
+	public static final int defaultWood = 2;
+	public static final int defaultStone = 2;
+	public static final int defaultServants = 3;
+	public static final int defaultCoins = 5;
 	
 	private boolean answeredVatican;
 	

@@ -1,21 +1,20 @@
 package it.polimi.ingsw.ps45.model.game;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Observable;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
+import it.polimi.ingsw.ps45.exceptions.PlayerExistanceException;
 import it.polimi.ingsw.ps45.gson.GsonWithInterface;
 import it.polimi.ingsw.ps45.model.actions.state.PawnActionState;
 import it.polimi.ingsw.ps45.model.actions.state.VaticanChoiceState;
@@ -32,8 +31,11 @@ import it.polimi.ingsw.ps45.model.vatican.Vatican;
  * Game contains all the data the model of the game needs. It has observers and notifies them it's state has changed.
  */
 public class Game implements Observer{
+	
+	private static final Logger LOGGER = Logger.getLogger( Game.class.getName());
+	
 	private static final int turnsPerRound = 4;
-	private static final int MAX_NUM_OF_PLAYERS = 4;
+	private static final int MAX_NUM_OF_PLAYERS = 2;
 	
 	private int numberOfPlayers;
 	
@@ -74,7 +76,7 @@ public class Game implements Observer{
 			cardDealer = new CardDealer();
 		} catch (JsonSyntaxException | JsonIOException | FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "context", e);
 		}
 		
 		status = "Game not started";
@@ -215,7 +217,7 @@ public class Game implements Observer{
 	 * Changes the player's old observer with the new observer.
 	 * @throws Exception if the player with the given playerID is not found.
 	 */
-	public void reconnect(String playerID, Observer o) throws Exception{
+	public void reconnect(String playerID, Observer o) throws PlayerExistanceException{
 		observers.put(o, playerID);
 		Player player = getPlayerByID(playerID);
 		player.changeObserver(o);
@@ -331,14 +333,14 @@ public class Game implements Observer{
 	 * @return the player that has an ID equal to the given ID.
 	 * @throws Exception if no player with the given ID exists.
 	 */
-	public Player getPlayerByID(String ID) throws Exception{
+	public Player getPlayerByID(String ID) throws PlayerExistanceException{
 		for(Player p: players){
 			if(p.getPlayerID().equals(ID)){
 				return p;
 			}
 		}
 		
-		throw new Exception("No such player");
+		throw new PlayerExistanceException();
 	}
 
 	/**
@@ -373,7 +375,7 @@ public class Game implements Observer{
 			writer.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE,"context", e);
 		}
 		
 		GameUpdateNotifier n = new GameUpdateNotifier(observersList(), game, this);
@@ -609,7 +611,7 @@ public class Game implements Observer{
 			getPlayerByID(observers.get(o)).setDisconnected(true);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "context", e);
 		}
 		observers.remove(o);
 	}

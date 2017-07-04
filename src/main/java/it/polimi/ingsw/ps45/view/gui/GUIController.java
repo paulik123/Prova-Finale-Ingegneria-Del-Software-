@@ -4,26 +4,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import it.polimi.ingsw.ps45.client.ClientController;
-import it.polimi.ingsw.ps45.client.CommandParser;
 import it.polimi.ingsw.ps45.controller.command.AddPlayerCommand;
-import it.polimi.ingsw.ps45.controller.command.Command;
 import it.polimi.ingsw.ps45.controller.command.CommandHolder;
 import it.polimi.ingsw.ps45.controller.command.ReconnectCommand;
 import it.polimi.ingsw.ps45.gson.GsonWithInterface;
-import it.polimi.ingsw.ps45.gson.PropertyBasedInterfaceMarshal;
-import it.polimi.ingsw.ps45.model.effects.Effect;
 
 
 /**
  * Controller that listen to buttons in the view and sends commands to the server at the request of the user.
  */
 public class GUIController implements ActionListener, ClientController{
+	private static final Logger LOGGER = Logger.getLogger( GUIController.class.getName());
 	private OutputStreamWriter os;
 	private String playerID;
 	private Gson gson;
@@ -83,7 +80,7 @@ public class GUIController implements ActionListener, ClientController{
 			send(json);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "context", e);
 		}
 	}
 
@@ -100,7 +97,7 @@ public class GUIController implements ActionListener, ClientController{
 			send(json);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "context", e);
 		}
 		
 	}

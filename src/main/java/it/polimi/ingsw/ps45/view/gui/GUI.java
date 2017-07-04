@@ -1,8 +1,6 @@
 package it.polimi.ingsw.ps45.view.gui;
 
 import java.awt.EventQueue;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 
 import com.google.gson.Gson;
 
@@ -26,44 +24,28 @@ public class GUI extends View{
 	private ControlBoard controlBoard;
 	
 	private LeaderBoard leaderBoard;
-	
-	private GUIWindowListener gameBoardListener;
-	private GUIWindowListener playerBoardListener;
-	private GUIWindowListener controlBoardListener;
-	private GUIWindowListener leaderBoardListener;
-	
-	
+
 	/**
  	 * Constructor
  	 * Initializes the required frames.
  	 * @param playerID the ID of the player controlling the view.
 	 */
 	public GUI(String playerID){
-		
-		gameBoardListener = new GUIWindowListener();
-		playerBoardListener = new GUIWindowListener();
-		controlBoardListener = new GUIWindowListener();
-		leaderBoardListener = new GUIWindowListener();
 
-		
 		EventQueue.invokeLater(new Runnable(){
 
 			@Override
 			public void run() {
 				gameBoard = new GameBoard();
-				gameBoard.addWindowListener(gameBoardListener);
 				gameBoard.setVisible(true);
 				
 				playerBoard = new PlayerBoard(playerID);
-				playerBoard.addWindowListener(playerBoardListener);
 				playerBoard.setVisible(true);
 				
 				controlBoard = new ControlBoard(playerID);
-				controlBoard.addWindowListener(controlBoardListener);
 				controlBoard.setVisible(true);
 				
 				leaderBoard = new LeaderBoard(playerID);
-				leaderBoard.addWindowListener(leaderBoardListener);
 				leaderBoard.setVisible(true);
 			}
 			
@@ -81,14 +63,6 @@ public class GUI extends View{
 		Gson gson = GsonWithInterface.getGson();
 		Game g = gson.fromJson(gameJSON, Game.class);
 		
-		while(!isReady()){
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
 		
 		EventQueue.invokeLater(new Runnable(){
 
@@ -108,16 +82,15 @@ public class GUI extends View{
 	 * @param controller the controller that will send commands to the server.
 	 */
 	public void addController(GUIController controller){
-		while(!isReady()){
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
 		
-		controlBoard.getSendCommandButton().addActionListener(controller);
+		EventQueue.invokeLater(new Runnable(){
+			@Override
+			public void run() {
+				controlBoard.getSendCommandButton().addActionListener(controller);
+			}
+			
+		});
+		
 	}
 
 	/**
@@ -159,12 +132,6 @@ public class GUI extends View{
 		leaderBoard.updateTextArea(error);
 	}
 	
-	/**
-	 * @return true if all the frames are initialized and ready.
-	 */
-	public boolean isReady(){
-		return gameBoardListener.isReady() && playerBoardListener.isReady() && controlBoardListener.isReady() && leaderBoardListener.isReady();
-	}
 
 	/**
 	 * Show the end game results received from the server in the leader board.
