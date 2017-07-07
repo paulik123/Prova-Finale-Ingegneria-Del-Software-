@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
+import it.polimi.ingsw.ps45.exceptions.AreaNotAvailableException;
 import it.polimi.ingsw.ps45.model.area.PlayerPawnPair;
 import it.polimi.ingsw.ps45.model.cards.Card;
 import it.polimi.ingsw.ps45.model.cards.Era;
@@ -542,8 +543,14 @@ public class GameBoard extends JFrame {
 		
 		setPawnLabelIcon(coinsMarket, g.getBoard().getCoinsMarketArea().getOccupants(),0);
 		setPawnLabelIcon(servantsMarket, g.getBoard().getServantsMarketArea().getOccupants(),0);
-		setPawnLabelIcon(militaryCoinsMarket, g.getBoard().getMilitaryAndCoinArea().getOccupants(),0);
-		setPawnLabelIcon(councilPrivilegeMarket, g.getBoard().getCouncilPrivilegeMarketArea().getOccupants(),0);
+		try {
+			if(g.getNumberOfPlayers() >= 4){
+				setPawnLabelIcon(councilPrivilegeMarket, g.getBoard().getCouncilPrivilegeMarketArea().getOccupants(),0);
+				setPawnLabelIcon(militaryCoinsMarket, g.getBoard().getMilitaryAndCoinArea().getOccupants(),0);
+			}
+		} catch (AreaNotAvailableException e) {
+			System.out.println("Some areas are not available - not updatating it");
+		}
 		
 		setPawnLabelIcon(councilPalace1, g.getBoard().getCouncilPalaceArea().getOccupants(), 0);
 		setPawnLabelIcon(councilPalace2, g.getBoard().getCouncilPalaceArea().getOccupants(), 1);

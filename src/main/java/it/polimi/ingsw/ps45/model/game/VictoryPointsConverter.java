@@ -5,6 +5,7 @@ import it.polimi.ingsw.ps45.model.cards.Venture;
 import it.polimi.ingsw.ps45.model.effects.Effect;
 import it.polimi.ingsw.ps45.model.player.ConsumableSet;
 import it.polimi.ingsw.ps45.model.player.Player;
+import it.polimi.ingsw.ps45.model.vatican.Vatican;
 import it.polimi.ingsw.ps45.model.vatican.VaticanVictoryPointsConverter;
 
 /**
@@ -104,7 +105,7 @@ public class VictoryPointsConverter {
  	 * Awards the player with victory points depending on how many faith points he has.
 	 */
 	public void vaticanVictoryPoints(){
-		VaticanVictoryPointsConverter vpc = new VaticanVictoryPointsConverter();
+		VaticanVictoryPointsConverter vpc = Vatican.converter;
 		int victoryPoints = vpc.getVictoryPoints(p.getResourceSet().getResources().getFaithPoints());
 		
 		ConsumableSet cs = new ConsumableSet();

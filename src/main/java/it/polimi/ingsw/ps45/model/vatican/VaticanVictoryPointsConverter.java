@@ -11,7 +11,7 @@ public class VaticanVictoryPointsConverter {
  	 * Constructor
  	 * Adds all the conversion rates in a map.
 	 */
-	public VaticanVictoryPointsConverter(){
+	VaticanVictoryPointsConverter(){
 		rates = new HashMap<Integer, Integer>();
 		rates.put(0, 0);
 		rates.put(1, 1);

@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps45.view;
 
 import com.google.gson.Gson;
 
+import it.polimi.ingsw.ps45.exceptions.AreaNotAvailableException;
 import it.polimi.ingsw.ps45.gson.GsonWithInterface;
 import it.polimi.ingsw.ps45.model.area.Area;
 import it.polimi.ingsw.ps45.model.area.Board;
@@ -147,8 +148,14 @@ public class CLI extends View{
 	private void printBoard(Board b){
 		printArea(b.getCoinsMarketArea());
 		printArea(b.getServantsMarketArea());
-		printArea(b.getMilitaryAndCoinArea());
-		printArea(b.getCouncilPrivilegeMarketArea());
+		try {
+			if(b.getPlayers() >= 4){
+				printArea(b.getMilitaryAndCoinArea());
+				printArea(b.getCouncilPrivilegeMarketArea());
+			}
+		} catch (AreaNotAvailableException e) {
+			showError("Some areas are not available - not updatating it");
+		}
 		
 		printArea(b.getCouncilPalaceArea());
 		

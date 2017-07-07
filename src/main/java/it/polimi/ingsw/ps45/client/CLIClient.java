@@ -14,10 +14,8 @@ import it.polimi.ingsw.ps45.view.CLI;
 /**
  * Client that runs the CLI view.
  */
-public class CLIClient extends Thread{
+public class CLIClient extends Client{
 	
-    private Socket socket;
-    private ObserverThread observerThread;
     private Scanner scanner;
     private String ip;
     private String playerID;
@@ -31,14 +29,6 @@ public class CLIClient extends Thread{
 	 */
     public CLIClient(){
     	scanner = new Scanner(System.in);
-    }
-    
-	/**
- 	 * Constructor
-	 * The client runs in a new Thread.
-	 * It gets the necessary data from user then tries to connect to the server.
-	 */
-    public void run(){
     	getData();
     	
     	try {
@@ -47,6 +37,7 @@ public class CLIClient extends Thread{
 			System.out.println("Cannot connect to the server. The entered ip may be wrong or the server isn't online.");
 		}
     }
+    
     
 	/**
 	 * Tries to connect/reconnect to the server depending what the user wants.
@@ -76,9 +67,14 @@ public class CLIClient extends Thread{
     private void reconnect() throws UnknownHostException, IOException{
 		socket = new Socket(ip, PORTNUMBER);
         CLI cli = new CLI(playerID);
+        view = cli;
+        
         CLIControllerThread controllerThread = new CLIControllerThread(new OutputStreamWriter(socket.getOutputStream()), scanner, playerID);
+        controller = controllerThread;
+        
         observerThread = new ObserverThread(new BufferedReader(new InputStreamReader(socket.getInputStream())), cli);
         observerThread.start();
+        
         controllerThread.start();
         controllerThread.sendReconnectCommand();
     }
@@ -99,9 +95,13 @@ public class CLIClient extends Thread{
     	
 		socket = new Socket(ip, PORTNUMBER);
         CLI cli = new CLI(playerID);
+        view = cli;
         CLIControllerThread controllerThread = new CLIControllerThread(new OutputStreamWriter(socket.getOutputStream()), scanner, playerID);
+        controller = controllerThread;
+        
         observerThread = new ObserverThread(new BufferedReader(new InputStreamReader(socket.getInputStream())), cli);
         observerThread.start();
+        
         controllerThread.start();
         controllerThread.sendJoinCommand((String) bonusTile);
     }

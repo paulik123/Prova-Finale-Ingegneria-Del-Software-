@@ -11,6 +11,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
+import it.polimi.ingsw.ps45.exceptions.AreaNotAvailableException;
 import it.polimi.ingsw.ps45.gson.PropertyBasedInterfaceMarshal;
 import it.polimi.ingsw.ps45.model.area.cardarea.BuildingTower;
 import it.polimi.ingsw.ps45.model.area.cardarea.CharacterTower;
@@ -29,10 +30,9 @@ public class Board implements HasDictionary {
 	
 	private HarvestAreas harvestAreas;
 	
-	private NoCardArea coinsMarketArea;
-	private NoCardArea servantsMarketArea;
-	private NoCardArea militaryAndCoinArea;
-	private NoCardArea councilPrivilegeMarketArea;
+	private int players;
+	
+
 	
 	private NoCardArea councilPalaceArea;
 	
@@ -48,6 +48,7 @@ public class Board implements HasDictionary {
  	 * @param players the number of players (because if players < 4 some areas don't need to be instantiated)
 	 */
 	public Board(int players){
+		this.players = players;
 		dictionary = new HashMap<String, NoCardArea>();
 		
 		
@@ -55,10 +56,10 @@ public class Board implements HasDictionary {
 		
 		harvestAreas = new HarvestAreas(players);
 		
-		coinsMarketArea = loadFromFile("serialized//areas//CoinsMarketArea.json");
-		servantsMarketArea = loadFromFile("serialized//areas//ServantsMarketArea.json");
-		militaryAndCoinArea = loadFromFile("serialized//areas//MilitaryAndCoinsMarketArea.json");
-		councilPrivilegeMarketArea = loadFromFile("serialized//areas//CouncilPrivilegeMarketArea.json");
+		NoCardArea coinsMarketArea = loadFromFile("serialized//areas//CoinsMarketArea.json");
+		NoCardArea servantsMarketArea = loadFromFile("serialized//areas//ServantsMarketArea.json");
+		NoCardArea militaryAndCoinArea = loadFromFile("serialized//areas//MilitaryAndCoinsMarketArea.json");
+		NoCardArea councilPrivilegeMarketArea = loadFromFile("serialized//areas//CouncilPrivilegeMarketArea.json");
 		
 		councilPalaceArea = loadFromFile("serialized//areas//CouncilPalaceArea.json");
 		
@@ -93,28 +94,32 @@ public class Board implements HasDictionary {
 	 * @return the CoinsMarketArea.
 	 */
 	public NoCardArea getCoinsMarketArea() {
-		return coinsMarketArea;
+		return dictionary.get("coinsmarketarea");
 	}
 
 	/**
 	 * @return the servantsMarketArea.
 	 */
 	public NoCardArea getServantsMarketArea() {
-		return servantsMarketArea;
+		return dictionary.get("servantsmarketarea");
 	}
 
 	/**
 	 * @return the militaryMarketArea.
+	 * @throws AreaNotAvailableException 
 	 */
-	public NoCardArea getMilitaryAndCoinArea() {
-		return militaryAndCoinArea;
+	public NoCardArea getMilitaryAndCoinArea() throws AreaNotAvailableException {
+		if(players < 4) throw new AreaNotAvailableException();
+		return dictionary.get("militarymndcoinarea");
 	}
 
 	/**
 	 * @return the councilPrivilegeMarketArea.
+	 * @throws AreaNotAvailableException if the area is not available because it was covered.
 	 */
-	public NoCardArea getCouncilPrivilegeMarketArea() {
-		return councilPrivilegeMarketArea;
+	public NoCardArea getCouncilPrivilegeMarketArea() throws AreaNotAvailableException {
+		if(players < 4) throw new AreaNotAvailableException();
+		return dictionary.get("councilprivilegemarketarea");
 	}
 
 	/**
@@ -193,6 +198,12 @@ public class Board implements HasDictionary {
 	public HashMap<String, NoCardArea> getDictionary() {
 		return dictionary;
 	}
+
+	public int getPlayers() {
+		return players;
+	}
+	
+	
 
 
 	

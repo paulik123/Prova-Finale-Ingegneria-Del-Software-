@@ -23,6 +23,7 @@ import it.polimi.ingsw.ps45.model.effects.Effect;
 
 public class Vatican {
 	private static final Logger LOGGER = Logger.getLogger( Vatican.class.getName());
+	public static VaticanVictoryPointsConverter converter = new VaticanVictoryPointsConverter();
 	private HashMap<Era, ExcommunicationCard> map;
 	
 	/**

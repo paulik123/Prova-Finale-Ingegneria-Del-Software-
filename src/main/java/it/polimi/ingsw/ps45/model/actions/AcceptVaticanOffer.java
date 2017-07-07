@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps45.model.actions;
 
 import it.polimi.ingsw.ps45.model.player.ConsumableSet;
 import it.polimi.ingsw.ps45.model.player.Player;
+import it.polimi.ingsw.ps45.model.vatican.Vatican;
 import it.polimi.ingsw.ps45.model.vatican.VaticanVictoryPointsConverter;
 
 /**
@@ -24,7 +25,7 @@ public class AcceptVaticanOffer implements Action{
 	 */
 	@Override
 	public void run() {
-		VaticanVictoryPointsConverter cnv = new VaticanVictoryPointsConverter();
+		VaticanVictoryPointsConverter cnv = Vatican.converter;
 		int victoryPoints = cnv.getVictoryPoints(p.getResourceSet().getResources().getFaithPoints());
 		
 		if(p.getResourceSet().getPermanentEffects().isHasActivatedSisto()) victoryPoints = victoryPoints + 5;

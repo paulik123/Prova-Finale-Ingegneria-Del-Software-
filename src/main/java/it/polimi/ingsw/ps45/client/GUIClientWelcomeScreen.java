@@ -1,6 +1,5 @@
 package it.polimi.ingsw.ps45.client;
 
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -25,17 +24,10 @@ import javax.swing.border.EmptyBorder;
 import it.polimi.ingsw.ps45.view.gui.GUI;
 import it.polimi.ingsw.ps45.view.gui.GUIController;
 
-/**
- * Client that runs the GUI view.
- */
+public class GUIClientWelcomeScreen extends JFrame{
+	private transient GUIClient client;
 
-public class ClientFrame extends JFrame{
-
-    private transient Socket socket;
-    private transient ObserverThread observerThread;
-    private transient GUI gui;
-    private transient GUIController controller;
-    
+	
 	private JPanel contentPane;
 	private JTextField nameTextField;
 	private JTextField ipTextField;
@@ -44,20 +36,20 @@ public class ClientFrame extends JFrame{
 	private JComboBox viewComboBox;
 	private JButton btnConnect;
 	private JButton btnReconnect;
-    
-    private static final int PORTNUMBER = 12345;
+	
     private static int width = 450;
     private static int height = 300;
-    
+
+	
 	/**
  	 * Constructor
 	 */
-    public ClientFrame(){
+    public GUIClientWelcomeScreen(GUIClient client){
     	initializeComponents();
+    	this.client = client;
     }
     
-	/**
- 	 * Constructor
+    /**
  	 * Initializes the welcome screen in which the player enters the ip of the server, his name, and other details.
 	 */
     public void initializeComponents(){
@@ -180,58 +172,39 @@ public class ClientFrame extends JFrame{
     }
     
 	/**
-	 * Called when the user clicks the connect button in the welcome screen.
-	 * It tries to connect to the server and then it send a AddPlayerCommand to the server.
-	 */
-    private void connectButtonPressed(){
-    	Runnable r = new Runnable(){
-
-			@Override
-			public void run() {
-		    	try{
-		        	String playerID = nameTextField.getText();
-		    		socket = new Socket(ipTextField.getText(), PORTNUMBER);
-		    		gui = new GUI(playerID);
-		    		controller = new GUIController(gui, new OutputStreamWriter(socket.getOutputStream()), playerID);
-		    		observerThread = new ObserverThread(new BufferedReader(new InputStreamReader(socket.getInputStream())), gui);
-		    		observerThread.start();
-		    		controller.sendJoinCommand((String) bonusTileComboBox.getSelectedItem());
-		    		gui.addController(controller);
-		    	}catch(Exception e){
-		    		messageTextField.setText("Error: could not connect.");
-		    	}
-			}
-		};
-		new Thread(r).start();
-    }
-    
-    
-	/**
 	 * Called when the user clicks the reconnect button in the welcome screen.
 	 * It tries to reconnect to the server and then it send a ReconnectCommand to the server.
 	 */
     private void reconnectButtonPressed(){
-    	Runnable r = new Runnable(){
-
-			@Override
-			public void run() {
-		    	String playerID = nameTextField.getText();
-		    	
-		    	try{
-					socket = new Socket(ipTextField.getText(), PORTNUMBER);
-					gui = new GUI(playerID);
-					controller = new GUIController(gui, new OutputStreamWriter(socket.getOutputStream()), playerID);
-					observerThread = new ObserverThread(new BufferedReader(new InputStreamReader(socket.getInputStream())), gui);
-					observerThread.start();
-					controller.sendReconnectCommand();
-					gui.addController(controller);
-		    	}catch(Exception e){
-		    		messageTextField.setText("Error: could not reconnect.");
-		    	}
-			}
-		};
-		new Thread(r).start();
+    	client.reconnectButtonPressed();			
     }
-
-
+    
+	/**
+	 * Called when the user clicks the connect button in the welcome screen.
+	 * It tries to connect to the server and then it send a AddPlayerCommand to the server.
+	 */
+    private void connectButtonPressed(){
+    	client.connectButtonPressed();
+    }
+    
+    
+    public String getBonusTile(){
+    	return (String) bonusTileComboBox.getSelectedItem();
+    }
+    public String getNameText(){
+    	return nameTextField.getText();
+    }
+    public String getIpText(){
+    	return ipTextField.getText();
+    }
+    
+    public void setMessage(String message){
+    	messageTextField.setText(message);
+    }
+    
+    
 }
+    
+    
+    
+

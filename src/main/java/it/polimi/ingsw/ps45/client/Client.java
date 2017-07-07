@@ -1,12 +1,22 @@
 package it.polimi.ingsw.ps45.client;
 
 import java.awt.EventQueue;
+import java.net.Socket;
+
+import it.polimi.ingsw.ps45.view.View;
 
 
 /**
  * Contains the main method of the client. Does nothing but make the user choose between the CLI client or the GUI client.
  */
 public class Client {
+	
+	
+	protected transient Socket socket;
+	protected transient ObserverThread observerThread;
+	protected transient ClientController controller;
+	protected transient View view;
+	protected static final int PORTNUMBER = 12345;
 	
 	/**
 	 * Main method of the client.
@@ -24,14 +34,22 @@ public class Client {
 
 				@Override
 				public void run() {
-					ClientFrame c = new ClientFrame();
-					c.setVisible(true);
+					GUIClient c = new GUIClient();
 				}
 				
 			});
 		}else if(view.equals("cli")){
-			CLIClient c = new CLIClient();
-			c.start();
+			
+			Runnable r = new Runnable(){
+
+				@Override
+				public void run() {
+					CLIClient c = new CLIClient();
+				}
+				
+			};
+			new Thread(r).start();
+
 		}else{
 			System.out.println("Wrong arguments. Available views are 'gui' and 'cli'.");
 		}
