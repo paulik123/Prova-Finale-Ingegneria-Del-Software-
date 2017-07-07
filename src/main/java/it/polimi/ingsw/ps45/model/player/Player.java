@@ -204,5 +204,15 @@ public class Player {
 		this.disconnected = disconnected;
 	}
 
+
+	/**
+	 * @return A hashmap showing in which era the player sufferec vatican penalties.
+	 */
+	public HashMap<Era, Boolean> getVaticanPenalties() {
+		return vaticanPenalties;
+	}
+	
+	
+
 	
 }

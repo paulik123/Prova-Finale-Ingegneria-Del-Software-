@@ -18,11 +18,14 @@ import it.polimi.ingsw.ps45.model.area.cardarea.VentureCardArea;
 import it.polimi.ingsw.ps45.model.area.cardarea.VentureTower;
 import it.polimi.ingsw.ps45.model.cards.Building;
 import it.polimi.ingsw.ps45.model.cards.Character;
+import it.polimi.ingsw.ps45.model.cards.Era;
+import it.polimi.ingsw.ps45.model.cards.LeaderCard;
 import it.polimi.ingsw.ps45.model.cards.Territory;
 import it.polimi.ingsw.ps45.model.cards.Venture;
 import it.polimi.ingsw.ps45.model.game.Game;
 import it.polimi.ingsw.ps45.model.player.PawnType;
 import it.polimi.ingsw.ps45.model.player.Player;
+import it.polimi.ingsw.ps45.model.vatican.Vatican;
 
 
 /**
@@ -60,14 +63,19 @@ public class CLI extends View{
 			System.out.println("\n   --- " + p.getPlayerID() + " ---   ");
 			System.out.println("State: " + p.getStatus());
 			System.out.println(p.getResourceSet().getResources());
+			System.out.println("Personal Bonus Tile: " + p.getResourceSet().getBonusTile().getId());
 			printPawns(p);
+			printVaticanPenalties(p);
 			printTerritories(p);
 			printCharacters(p);
 			printBuildings(p);
 			printVentures(p);
+			printLeaderCards(p);
+			printActivatedLeaderCards(p);
 		}
 		
 		System.out.println("\n ---------------- BOARD ----------------");
+		printVatican(g.getVatican());
 		printBoard(g.getBoard());
 		
 		
@@ -115,6 +123,34 @@ public class CLI extends View{
 	}	
 	
 	/**
+	 * Prints out strings representing all the leader cards that the player hasn't activated yet.
+ 	 * @param p the player whose leader cards will be printed.
+	 */
+	private void printLeaderCards(Player p){
+		StringBuilder sb = new StringBuilder();
+		sb.append("Leader Cards: ");
+		for(LeaderCard lc: p.getResourceSet().getLeaderCardList()){
+			sb.append(lc.getName() + " | ");
+		}
+		System.out.println(sb.toString());
+	}
+	
+	/**
+	 * Prints out strings representing all the leader cards that the player has already activated.
+ 	 * @param p the player whose leader cards will be printed.
+	 */
+	private void printActivatedLeaderCards(Player p){
+		StringBuilder sb = new StringBuilder();
+		sb.append("Activated Leader Cards: ");
+		for(LeaderCard lc: p.getResourceSet().getActivatedLeaderCardList()){
+			sb.append(lc.getName() + " | ");
+		}
+		System.out.println(sb.toString());
+	}
+	
+	
+	
+	/**
 	 * Prints out strings representing all the buildings a player owns.
  	 * @param p the player whose buildings will be printed.
 	 */
@@ -146,6 +182,8 @@ public class CLI extends View{
  	 * @param b the board whose state will be printed.
 	 */
 	private void printBoard(Board b){
+		
+		
 		printArea(b.getCoinsMarketArea());
 		printArea(b.getServantsMarketArea());
 		try {
@@ -181,6 +219,13 @@ public class CLI extends View{
 		for(PlayerPawnPair ppp: a.getOccupants()){
 			System.out.println("Player: " + ppp.getPlayer().getPlayerID() + "   Pawn: " + ppp.getType());
 		}
+	}
+	
+	private void printVaticanPenalties(Player p){
+		System.out.println("Vatican Penalties: \n");
+		if(p.getVaticanPenalties().get(Era.I)) System.out.println("Penalty in era I");
+		if(p.getVaticanPenalties().get(Era.II)) System.out.println("Penalty in era II");
+		if(p.getVaticanPenalties().get(Era.III)) System.out.println("Penalty in era III");
 	}
 	
 	/**
@@ -224,6 +269,14 @@ public class CLI extends View{
 			}
 		}
 		System.out.println("---");
+	}
+	
+	private void printVatican(Vatican v){
+		System.out.println("Vatican:");
+		System.out.println("Era I: " + v.getCard(Era.I).getName());
+		System.out.println("Era II: " + v.getCard(Era.II).getName());
+		System.out.println("Era III: " + v.getCard(Era.III).getName());
+		System.out.println("\n");
 	}
 	
 	/**
