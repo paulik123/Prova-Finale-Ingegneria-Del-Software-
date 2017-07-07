@@ -56,10 +56,10 @@ public class Board implements HasDictionary {
 		
 		harvestAreas = new HarvestAreas(players);
 		
-		NoCardArea coinsMarketArea = loadFromFile("./serialized//areas//CoinsMarketArea.json");
-		NoCardArea servantsMarketArea = loadFromFile("./serialized//areas//ServantsMarketArea.json");
-		NoCardArea militaryAndCoinArea = loadFromFile("./serialized//areas//MilitaryAndCoinsMarketArea.json");
-		NoCardArea councilPrivilegeMarketArea = loadFromFile("./serialized//areas//CouncilPrivilegeMarketArea.json");
+		NoCardArea coinsMarketArea = loadFromFile("serialized/areas/CoinsMarketArea.json");
+		NoCardArea servantsMarketArea = loadFromFile("serialized/areas/ServantsMarketArea.json");
+		NoCardArea militaryAndCoinArea = loadFromFile("serialized/areas/MilitaryAndCoinsMarketArea.json");
+		NoCardArea councilPrivilegeMarketArea = loadFromFile("serialized/areas/CouncilPrivilegeMarketArea.json");
 		
 		councilPalaceArea = loadFromFile("serialized//areas//CouncilPalaceArea.json");
 		

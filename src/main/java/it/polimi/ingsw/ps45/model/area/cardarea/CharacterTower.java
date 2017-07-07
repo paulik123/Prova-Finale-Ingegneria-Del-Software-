@@ -36,10 +36,10 @@ public class CharacterTower implements Tower, HasDictionary{
 	public CharacterTower(){
 		dictionary = new HashMap<String, CharacterCardArea>();
 		
-		c0 = loadFromFile("./serialized//areas//cardareas//CharacterCardAreaGroundFloor.json");
-		c1 = loadFromFile("./serialized//areas//cardareas//CharacterCardAreaFirstFloor.json");
-		c2 = loadFromFile("./serialized//areas//cardareas//CharacterCardAreaSecondFloor.json");
-		c3 = loadFromFile("./serialized//areas//cardareas//CharacterCardAreaThirdFloor.json");
+		c0 = loadFromFile("serialized/areas/cardareas/CharacterCardAreaGroundFloor.json");
+		c1 = loadFromFile("serialized/areas/cardareas/CharacterCardAreaFirstFloor.json");
+		c2 = loadFromFile("serialized/areas/cardareas/CharacterCardAreaSecondFloor.json");
+		c3 = loadFromFile("serialized/areas/cardareas/CharacterCardAreaThirdFloor.json");
 		
 		dictionary.put("c0", c0);
 		dictionary.put("c1", c1);

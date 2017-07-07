@@ -51,7 +51,7 @@ public class PlayerBoard extends JFrame implements ActionListener{
 	
 	private String playerID;
 	
-	private static final String backgroundImagePath = "images\\playerboard_1.png";
+	private static final String backgroundImagePath = "images/playerboard_1.png";
 	
 	private static final int width = 720;
 	private static final int height = 454;
@@ -219,7 +219,7 @@ public class PlayerBoard extends JFrame implements ActionListener{
 	 * Updates the background image depending on the currently selected player's personal bonus tile. 
 	 */
 	private void updateBackground(){
-		ImageIcon imageIcon = new ImageIcon("images\\playerboard_" + p.getResourceSet().getBonusTile().getId() + ".png"); // load the image to a imageIcon
+		ImageIcon imageIcon = new ImageIcon("images/playerboard_" + p.getResourceSet().getBonusTile().getId() + ".png"); // load the image to a imageIcon
 		Image image = imageIcon.getImage(); // transform it 
 		Image newimg = image.getScaledInstance(width, height,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 		imageIcon = new ImageIcon(newimg);  // transform it back
@@ -253,7 +253,7 @@ public class PlayerBoard extends JFrame implements ActionListener{
 		newLabel.setBounds(x, y, cardWidth, cardHeight);
 		
 		if(card != null){
-			ImageIcon imageIcon = new ImageIcon("images\\cards\\" + card.getName() + ".png"); // load the image to a imageIcon
+			ImageIcon imageIcon = new ImageIcon("images/cards/" + card.getName() + ".png"); // load the image to a imageIcon
 			Image image = imageIcon.getImage(); // transform it 
 			Image newimg = image.getScaledInstance(cardWidth, cardHeight,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 			imageIcon = new ImageIcon(newimg);

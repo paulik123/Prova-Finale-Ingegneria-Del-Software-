@@ -19,8 +19,8 @@ public class ProductionAreas implements HasDictionary {
 	 */
 	public ProductionAreas(int players){
 		productionAreaDictionary = new HashMap<String, NoCardArea>();
-		small = Board.loadFromFile("./serialized//areas//ProductionSmallArea.json");
-		big = Board.loadFromFile("./serialized//areas//ProductionBigArea.json");
+		small = Board.loadFromFile("serialized/areas/ProductionSmallArea.json");
+		big = Board.loadFromFile("serialized/areas/ProductionBigArea.json");
 		productionAreaDictionary.put("small", small);
 		if(players >= 3)productionAreaDictionary.put("big", big);
 	}

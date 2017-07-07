@@ -34,10 +34,10 @@ public class BuildingTower implements Tower, HasDictionary{
 	 */
 	public BuildingTower(){
 		dictionary = new HashMap<String, BuildingCardArea>();
-		b0 = loadFromFile("./serialized//areas//cardareas//BuildingCardAreaGroundFloor.json");
-		b1 = loadFromFile("./serialized//areas//cardareas//BuildingCardAreaFirstFloor.json");
-		b2 = loadFromFile("./serialized//areas//cardareas//BuildingCardAreaSecondFloor.json");
-		b3 = loadFromFile("./serialized//areas//cardareas//BuildingCardAreaThirdFloor.json");
+		b0 = loadFromFile("serialized/areas/cardareas/BuildingCardAreaGroundFloor.json");
+		b1 = loadFromFile("serialized/areas/cardareas/BuildingCardAreaFirstFloor.json");
+		b2 = loadFromFile("serialized/areas/cardareas/BuildingCardAreaSecondFloor.json");
+		b3 = loadFromFile("serialized/areas/cardareas/BuildingCardAreaThirdFloor.json");
 		
 		dictionary.put("b0", b0);
 		dictionary.put("b1", b1);

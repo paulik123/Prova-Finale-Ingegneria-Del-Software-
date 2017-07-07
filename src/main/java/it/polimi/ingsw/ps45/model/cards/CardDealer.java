@@ -27,11 +27,11 @@ import it.polimi.ingsw.ps45.model.effects.Effect;
  */
 public class CardDealer {
 	
-	private static final String territoryPath = "./serialized//cards//territories//";
-	private static final String characterPath = "./serialized//cards//characters//";
-	private static final String buildingPath = "./serialized//cards//buildings//";
-	private static final String venturePath = "./serialized//cards//ventures//";
-	private static final String leaderPath = "./serialized//cards//leader//";
+	private static final String territoryPath = "serialized/cards/territories/";
+	private static final String characterPath = "serialized/cards/characters/";
+	private static final String buildingPath = "serialized/cards/buildings/";
+	private static final String venturePath = "serialized/cards/ventures/";
+	private static final String leaderPath = "serialized/cards/leader/";
 	
 	
 	

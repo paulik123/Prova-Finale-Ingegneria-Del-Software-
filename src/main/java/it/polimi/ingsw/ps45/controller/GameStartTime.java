@@ -24,7 +24,7 @@ public class GameStartTime {
 		
 		Gson gson = GsonWithInterface.getGson();
 		try {
-			seconds = gson.fromJson(new FileReader("serialized\\time\\gameStartDelayTime.json"), Integer.class);
+			seconds = gson.fromJson(new FileReader("serialized/time/gameStartDelayTime.json"), Integer.class);
 		} catch (JsonSyntaxException | JsonIOException | FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			seconds = 120;

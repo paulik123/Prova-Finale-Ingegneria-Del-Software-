@@ -38,7 +38,7 @@ public class LeaderBoard extends JFrame implements ActionListener{
 	
 	private JComboBox playerList;
 	
-	private static final String backgroundImagePath = "images\\punchboard.png";
+	private static final String backgroundImagePath = "images/punchboard.png";
 	
 	
 	private ArrayList<JLabel> leaderCards;
@@ -219,7 +219,7 @@ public class LeaderBoard extends JFrame implements ActionListener{
 		newLabel.setBounds(x, y, cardWidth, cardHeight);
 		
 		if(card != null){
-			ImageIcon imageIcon = new ImageIcon("images\\leadercards\\" + card.getName() + ".jpg"); // load the image to a imageIcon
+			ImageIcon imageIcon = new ImageIcon("images/leadercards/" + card.getName() + ".jpg"); // load the image to a imageIcon
 			Image image = imageIcon.getImage(); // transform it 
 			Image newimg = image.getScaledInstance(cardWidth, cardHeight,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 			imageIcon = new ImageIcon(newimg);

@@ -46,7 +46,7 @@ public class ControlBoard extends JFrame implements ActionListener{
 	private transient CommandComboBoxListener  commandListener;
 	private transient GUICommandParser commandParser;
 	
-	private static final String backgroundImagePath = "images\\punchboard.png";
+	private static final String backgroundImagePath = "images/punchboard.png";
 	
 	
 	private JComboBox commandList;
@@ -229,7 +229,7 @@ public class ControlBoard extends JFrame implements ActionListener{
 		newLabel.setBounds(x, y, cardWidth, cardHeight);
 		
 		if(card != null){
-			ImageIcon imageIcon = new ImageIcon("images\\cards\\" + card.getName() + ".png"); // load the image to a imageIcon
+			ImageIcon imageIcon = new ImageIcon("images/cards/" + card.getName() + ".png"); // load the image to a imageIcon
 			Image image = imageIcon.getImage(); // transform it 
 			Image newimg = image.getScaledInstance(cardWidth, cardHeight,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 			imageIcon = new ImageIcon(newimg);

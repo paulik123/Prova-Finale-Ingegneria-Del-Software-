@@ -478,7 +478,7 @@ public class GameBoard extends JFrame {
 	 * @param name the name of the Excom card so it can get it's icon from file.
 	 */
 	public void setExcomLabelIcon(JLabel excomLabel, String name){
-		ImageIcon imageIcon = new ImageIcon("images\\excom\\" + name + ".png"); // load the image to a imageIcon
+		ImageIcon imageIcon = new ImageIcon("images/excom/" + name + ".png"); // load the image to a imageIcon
 		Image image = imageIcon.getImage(); // transform it 
 		Image newimg = image.getScaledInstance(excomWidth, excomHeight,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 		imageIcon = new ImageIcon(newimg);
@@ -491,7 +491,7 @@ public class GameBoard extends JFrame {
 	 * @param color the color  of the Excom marker so it can get it's icon from file.
 	 */
 	public void setExcomMarkerLabelIcon(JLabel excomLabel, String color){
-		ImageIcon imageIcon = new ImageIcon("images\\pawns\\" + color + ".png"); // load the image to a imageIcon
+		ImageIcon imageIcon = new ImageIcon("images/pawns/" + color + ".png"); // load the image to a imageIcon
 		Image image = imageIcon.getImage(); // transform it 
 		Image newimg = image.getScaledInstance(excomMarkerWidth, excomMarkerHeight,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 		imageIcon = new ImageIcon(newimg);
@@ -605,7 +605,7 @@ public class GameBoard extends JFrame {
 	 * @param color the color of the turn marker.
 	 */
 	public void setTurnMarkerLabelIcon(JLabel l, String color){
-		ImageIcon imageIcon = new ImageIcon("images\\pawns\\" + color + ".png"); // load the image to a imageIcon
+		ImageIcon imageIcon = new ImageIcon("images/pawns/" + color + ".png"); // load the image to a imageIcon
 		Image image = imageIcon.getImage(); // transform it 
 		Image newimg = image.getScaledInstance(pawnAreaSize, pawnAreaSize,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 		imageIcon = new ImageIcon(newimg);
@@ -620,7 +620,7 @@ public class GameBoard extends JFrame {
 	 */
 	public void setCardLabelIcon(JLabel l, Card card){
 		if(card != null){
-			ImageIcon imageIcon = new ImageIcon("images\\cards\\" + card.getName() + ".png"); // load the image to a imageIcon
+			ImageIcon imageIcon = new ImageIcon("images/cards/" + card.getName() + ".png"); // load the image to a imageIcon
 			Image image = imageIcon.getImage(); // transform it 
 			Image newimg = image.getScaledInstance(cardWidth, cardHeight,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 			imageIcon = new ImageIcon(newimg);
@@ -644,7 +644,7 @@ public class GameBoard extends JFrame {
 			String diceColor = list.get(index).getType().getColor();
 			
 			
-			ImageIcon imageIcon = new ImageIcon("images\\pawns\\" + playerColor+ "-" + diceColor + ".png"); // load the image to a imageIcon
+			ImageIcon imageIcon = new ImageIcon("images/pawns/" + playerColor+ "-" + diceColor + ".png"); // load the image to a imageIcon
 			Image image = imageIcon.getImage(); // transform it 
 			Image newimg = image.getScaledInstance(pawnAreaSize, pawnAreaSize,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 			imageIcon = new ImageIcon(newimg);
@@ -666,7 +666,7 @@ public class GameBoard extends JFrame {
 			productionBigCover = new JLabel("");
 			productionBigCover.setBounds(prodHarvestBigCoverX, productionCoverY, coverBigWidth, coverBigHeight);
 			frontPanel.add(productionBigCover);
-			ImageIcon imageIcon = new ImageIcon("images\\production-big-cover.png"); // load the image to a imageIcon
+			ImageIcon imageIcon = new ImageIcon("images/production-big-cover.png"); // load the image to a imageIcon
 			Image image = imageIcon.getImage(); // transform it 
 			Image newimg = image.getScaledInstance(coverBigWidth, coverBigHeight,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 			imageIcon = new ImageIcon(newimg);
@@ -675,7 +675,7 @@ public class GameBoard extends JFrame {
 			harvestBigCover = new JLabel("");
 			harvestBigCover.setBounds(prodHarvestBigCoverX, harvestCoverY, coverBigWidth, coverBigHeight);
 			frontPanel.add(harvestBigCover);
-			imageIcon = new ImageIcon("images\\harvest-big-cover.png"); // load the image to a imageIcon
+			imageIcon = new ImageIcon("images/harvest-big-cover.png"); // load the image to a imageIcon
 			image = imageIcon.getImage(); // transform it 
 			newimg = image.getScaledInstance(coverBigWidth, coverBigHeight,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 			imageIcon = new ImageIcon(newimg);
@@ -685,7 +685,7 @@ public class GameBoard extends JFrame {
 			militaryCoinsCover = new JLabel("");
 			militaryCoinsCover.setBounds(militaryCoinsMarketCoverX, militaryCoinsMarketCoverY, marketCoverSize, marketCoverSize);
 			frontPanel.add(militaryCoinsCover);
-			ImageIcon imageIcon = new ImageIcon("images\\market-cover1.png"); // load the image to a imageIcon
+			ImageIcon imageIcon = new ImageIcon("images/market-cover1.png"); // load the image to a imageIcon
 			Image image = imageIcon.getImage(); // transform it 
 			Image newimg = image.getScaledInstance(marketCoverSize, marketCoverSize,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 			imageIcon = new ImageIcon(newimg);
@@ -694,7 +694,7 @@ public class GameBoard extends JFrame {
 			councilPrivilegeCover = new JLabel("");
 			councilPrivilegeCover.setBounds(councilPrivilegeMarketCoverX, councilPrivilegeMarketCoverY, marketCoverSize, marketCoverSize);
 			frontPanel.add(councilPrivilegeCover);
-			imageIcon = new ImageIcon("images\\market-cover2.png"); // load the image to a imageIcon
+			imageIcon = new ImageIcon("images/market-cover2.png"); // load the image to a imageIcon
 			image = imageIcon.getImage(); // transform it 
 			newimg = image.getScaledInstance(marketCoverSize, marketCoverSize,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 			imageIcon = new ImageIcon(newimg);
