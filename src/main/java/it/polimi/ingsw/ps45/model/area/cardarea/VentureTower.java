@@ -38,10 +38,10 @@ public class VentureTower implements Tower, HasDictionary{
 		dictionary = new HashMap<String, VentureCardArea>();
 		
 		
-		v0 = loadFromFile("serialized//areas//cardareas//VentureCardAreaGroundFloor.json");
-		v1 = loadFromFile("serialized//areas//cardareas//VentureCardAreaFirstFloor.json");
-		v2 = loadFromFile("serialized//areas//cardareas//VentureCardAreaSecondFloor.json");
-		v3 = loadFromFile("serialized//areas//cardareas//VentureCardAreaThirdFloor.json");
+		v0 = loadFromFile("./serialized//areas//cardareas//VentureCardAreaGroundFloor.json");
+		v1 = loadFromFile("./serialized//areas//cardareas//VentureCardAreaFirstFloor.json");
+		v2 = loadFromFile("./serialized//areas//cardareas//VentureCardAreaSecondFloor.json");
+		v3 = loadFromFile("./serialized//areas//cardareas//VentureCardAreaThirdFloor.json");
 		
 		
 		dictionary.put("v0", v0);

@@ -276,7 +276,7 @@ public class ResourceSet {
 		
 		
 		try {
-			bonusTile = gson.fromJson(new FileReader("serialized\\bonustiles\\" + bt  + ".json"), PersonalBonusTile.class);
+			bonusTile = gson.fromJson(new FileReader("./serialized\\bonustiles\\" + bt  + ".json"), PersonalBonusTile.class);
 		} catch (Exception e) {
 			try {
 				bonusTile = gson.fromJson(new FileReader("serialized\\bonustiles\\0.json"), PersonalBonusTile.class);

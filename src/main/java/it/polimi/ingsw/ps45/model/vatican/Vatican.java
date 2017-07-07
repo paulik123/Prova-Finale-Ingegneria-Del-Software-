@@ -31,13 +31,13 @@ public class Vatican {
 	 * Reads a random Excommunication card for each era.
 	 */
 	public Vatican(){
-		File dirI = new File("serialized//cards//excom//I");
+		File dirI = new File("./serialized//cards//excom//I");
 		File[] filesI = dirI.listFiles();
 		
-		File dirII = new File("serialized//cards//excom//II");
+		File dirII = new File("./serialized//cards//excom//II");
 		File[] filesII = dirII.listFiles();
 		
-		File dirIII = new File("serialized//cards//excom//III");
+		File dirIII = new File("./serialized//cards//excom//III");
 		File[] filesIII = dirIII.listFiles();
 		
 		map = new HashMap<Era, ExcommunicationCard>();

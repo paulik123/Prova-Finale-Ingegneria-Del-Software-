@@ -36,10 +36,10 @@ public class TerritoryTower implements Tower, HasDictionary{
 	public TerritoryTower(){
 		dictionary = new HashMap<String, TerritoryCardArea>();
 		
-		t0 = loadFromFile("serialized//areas//cardareas//TerritoryCardAreaGroundFloor.json");
-		t1 = loadFromFile("serialized//areas//cardareas//TerritoryCardAreaFirstFloor.json");
-		t2 = loadFromFile("serialized//areas//cardareas//TerritoryCardAreaSecondFloor.json");
-		t3 = loadFromFile("serialized//areas//cardareas//TerritoryCardAreaThirdFloor.json");
+		t0 = loadFromFile("./serialized//areas//cardareas//TerritoryCardAreaGroundFloor.json");
+		t1 = loadFromFile("./serialized//areas//cardareas//TerritoryCardAreaFirstFloor.json");
+		t2 = loadFromFile("./serialized//areas//cardareas//TerritoryCardAreaSecondFloor.json");
+		t3 = loadFromFile("./serialized//areas//cardareas//TerritoryCardAreaThirdFloor.json");
 		
 		dictionary.put("t0", t0);
 		dictionary.put("t1", t1);
