@@ -5,6 +5,8 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -24,6 +26,8 @@ import it.polimi.ingsw.ps45.model.player.Player;
  * It uses absolute positioning because some the elements were very hard to arrange properly using other LayoutManagers.
  */
 public class LeaderBoard extends JFrame implements ActionListener{
+	
+	private static final Logger LOGGER = Logger.getLogger( LeaderBoard.class.getName());
 	
 	private transient Game g;
 	private transient Player p;
@@ -270,8 +274,7 @@ public class LeaderBoard extends JFrame implements ActionListener{
 	        try {
 				p = g.getPlayerByID(playerID);
 			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				LOGGER.log(Level.SEVERE, "context", e);
 			}
 			updateCards();
 	}

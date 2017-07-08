@@ -89,7 +89,7 @@ public class CommandParser {
 			return parseActivateLeader(s);
 		case "useleader":
 			return parseUseLeader(s);
-		default: throw new BadCommandException();
+		default: throw new BadCommandException("Bad command");
 		}
 	}
 	
@@ -100,7 +100,7 @@ public class CommandParser {
 	 * @return the parsed command.
 	 */
 	public PlacePawnNoCardCommand parsePlacePawnNoCard(String[] s) throws BadCommandException{
-		if(s.length != 4) throw new BadCommandException();
+		if(s.length != 4) throw new BadCommandException("Bad command");
 		return new PlacePawnNoCardCommand(s[1], s[2], Integer.valueOf(s[3]));
 	}
 	
@@ -111,7 +111,7 @@ public class CommandParser {
 	 * @return the parsed command.
 	 */
 	public PlacePawnHarvestCommand parsePlacePawnHarvest(String[] s) throws BadCommandException{
-		if(s.length != 4) throw new BadCommandException();
+		if(s.length != 4) throw new BadCommandException("Bad command");
 		return new PlacePawnHarvestCommand(s[1], s[2], Integer.valueOf(s[3]));
 	}
 	
@@ -122,7 +122,7 @@ public class CommandParser {
 	 * @return the parsed command.
 	 */
 	public PlacePawnProductionCommand parsePlacePawnProduction(String[] s) throws BadCommandException{
-		if(s.length != 4) throw new BadCommandException();
+		if(s.length != 4) throw new BadCommandException("Bad command");
 		return new PlacePawnProductionCommand(s[1], s[2], Integer.valueOf(s[3]));
 	}
 	
@@ -133,7 +133,7 @@ public class CommandParser {
 	 * @return the parsed command.
 	 */
 	public PlacePawnBuildingCommand parsePlacePawnBuilding(String[] s) throws BadCommandException{
-		if(s.length != 4) throw new BadCommandException();
+		if(s.length != 4) throw new BadCommandException("Bad command");
 		return new PlacePawnBuildingCommand(s[1], s[2], Integer.valueOf(s[3]));
 	}
 	
@@ -144,7 +144,7 @@ public class CommandParser {
 	 * @return the parsed command.
 	 */
 	public PlacePawnCharacterCommand parsePlacePawnCharacter(String[] s) throws BadCommandException{
-		if(s.length != 4) throw new BadCommandException();
+		if(s.length != 4) throw new BadCommandException("Bad command");
 		return new PlacePawnCharacterCommand(s[1], s[2], Integer.valueOf(s[3]));
 	}
 	
@@ -155,7 +155,7 @@ public class CommandParser {
 	 * @return the parsed command.
 	 */
 	public PlacePawnTerritoryCommand parsePlacePawnTerritory(String[] s) throws BadCommandException{
-		if(s.length != 4) throw new BadCommandException();
+		if(s.length != 4) throw new BadCommandException("Bad command");
 		return new PlacePawnTerritoryCommand(s[1], s[2], Integer.valueOf(s[3]));
 	}
 	
@@ -166,7 +166,7 @@ public class CommandParser {
 	 * @return the parsed command.
 	 */
 	public PlacePawnVentureCommand parsePlacePawnVenture(String[] s) throws BadCommandException{
-		if(s.length != 5) throw new BadCommandException();
+		if(s.length != 5) throw new BadCommandException("Bad command");
 		return new PlacePawnVentureCommand(s[1], s[2], Integer.valueOf(s[3]), s[4]);
 	}
 	
@@ -176,7 +176,7 @@ public class CommandParser {
 	 * @return the parsed command.
 	 */
 	public NoPawnTerritoryCommand parseNoPawnTerritory(String[] s) throws BadCommandException{
-		if(s.length != 3) throw new BadCommandException();
+		if(s.length != 3) throw new BadCommandException("Bad command");
 		return new NoPawnTerritoryCommand(s[1], Integer.valueOf(s[2]));
 	}
 	
@@ -186,7 +186,7 @@ public class CommandParser {
 	 * @return the parsed command.
 	 */
 	public NoPawnCharacterCommand parseNoPawnCharacter(String[] s) throws BadCommandException{
-		if(s.length != 3) throw new BadCommandException();
+		if(s.length != 3) throw new BadCommandException("Bad command");
 		return new NoPawnCharacterCommand(s[1], Integer.valueOf(s[2]));
 	}
 	
@@ -196,7 +196,7 @@ public class CommandParser {
 	 * @return the parsed command.
 	 */
 	public NoPawnBuildingCommand parseNoPawnBuilding(String[] s) throws BadCommandException{
-		if(s.length != 3) throw new BadCommandException();
+		if(s.length != 3) throw new BadCommandException("Bad command");
 		return new NoPawnBuildingCommand(s[1], Integer.valueOf(s[2]));
 	}
 	
@@ -206,7 +206,7 @@ public class CommandParser {
 	 * @return the parsed command.
 	 */
 	public NoPawnVentureCommand parseNoPawnVenture(String[] s) throws BadCommandException{
-		if(s.length != 4) throw new BadCommandException();
+		if(s.length != 4) throw new BadCommandException("Bad command");
 		return new NoPawnVentureCommand(s[1], Integer.valueOf(s[2]), s[3]);
 	}
 	
@@ -216,7 +216,7 @@ public class CommandParser {
 	 * @return the parsed command.
 	 */
 	public AcceptVaticanCommand parseAcceptVatican(String[] s) throws BadCommandException{
-		if(s.length != 1) throw new BadCommandException();
+		if(s.length != 1) throw new BadCommandException("Bad command");
 		return new AcceptVaticanCommand();
 	}
 	
@@ -224,7 +224,7 @@ public class CommandParser {
 	 * @return the parsed command.
 	 */
 	public RefuseVaticanCommand parseRefuseVatican(String[] s) throws BadCommandException{
-		if(s.length != 1) throw new BadCommandException();
+		if(s.length != 1) throw new BadCommandException("Bad command");
 		return new RefuseVaticanCommand();
 	}
 	
@@ -233,7 +233,7 @@ public class CommandParser {
 	 * @return the parsed command.
 	 */
 	public AddServantsToHarvestCommand parseAddServantsHarvest(String[] s) throws BadCommandException{
-		if(s.length != 2) throw new BadCommandException();
+		if(s.length != 2) throw new BadCommandException("Bad command");
 		return new AddServantsToHarvestCommand(Integer.valueOf(s[1]));
 	}
 	
@@ -242,7 +242,7 @@ public class CommandParser {
 	 * @return the parsed command.
 	 */
 	public AddServantsToProductionCommand parseAddServantsProduction(String[] s) throws BadCommandException{
-		if(s.length != 2) throw new BadCommandException();
+		if(s.length != 2) throw new BadCommandException("Bad command");
 		return new AddServantsToProductionCommand(Integer.valueOf(s[1]));
 	}
 	
@@ -251,7 +251,7 @@ public class CommandParser {
 	 * @return the parsed command.
 	 */
 	public ExchangeCouncilPrivilegeOneCommand parseCPOne(String[] s) throws BadCommandException{
-		if(s.length != 2) throw new BadCommandException();
+		if(s.length != 2) throw new BadCommandException("Bad command");
 		return new ExchangeCouncilPrivilegeOneCommand(s[1]);
 	}
 	
@@ -261,7 +261,7 @@ public class CommandParser {
 	 * @return the parsed command.
 	 */
 	public ExchangeCouncilPrivilegeTwoCommand parseCPTwo(String[] s) throws BadCommandException{
-		if(s.length != 3) throw new BadCommandException();
+		if(s.length != 3) throw new BadCommandException("Bad command");
 		return new ExchangeCouncilPrivilegeTwoCommand(s[1], s[2]);
 	}
 	
@@ -272,7 +272,7 @@ public class CommandParser {
 	 * @return the parsed command.
 	 */
 	public ExchangeCouncilPrivilegeThreeCommand parseCPThree(String[] s) throws BadCommandException{
-		if(s.length != 4) throw new BadCommandException();
+		if(s.length != 4) throw new BadCommandException("Bad command");
 		return new ExchangeCouncilPrivilegeThreeCommand(s[1], s[2], s[3]);
 	}
 	
@@ -280,7 +280,7 @@ public class CommandParser {
 	 * @return the parsed command.
 	 */
 	public HarvestCommand parseHarvest(String[] s) throws BadCommandException{
-		if(s.length != 1) throw new BadCommandException();
+		if(s.length != 1) throw new BadCommandException("Bad command");
 		return new HarvestCommand();
 	}
 	
@@ -289,7 +289,7 @@ public class CommandParser {
 	 * @return the parsed command.
 	 */
 	public ProductionCommand parseProduction(String[] s) throws BadCommandException{
-		if(s.length != 2) throw new BadCommandException();
+		if(s.length != 2) throw new BadCommandException("Bad command");
 		return new ProductionCommand(s[1]);
 	}
 	
@@ -297,7 +297,7 @@ public class CommandParser {
 	 * @return the parsed command.
 	 */
 	public EndTurnCommand parseEndTurn(String[] s) throws BadCommandException{
-		if(s.length != 1) throw new BadCommandException();
+		if(s.length != 1) throw new BadCommandException("Bad command");
 		return new EndTurnCommand();
 	}
 	

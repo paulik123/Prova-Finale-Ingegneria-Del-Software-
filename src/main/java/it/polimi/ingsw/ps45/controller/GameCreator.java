@@ -7,6 +7,7 @@ import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import it.polimi.ingsw.ps45.exceptions.ActionNotAllowedException;
 import it.polimi.ingsw.ps45.exceptions.PlayerExistanceException;
 import it.polimi.ingsw.ps45.model.game.Game;
 import it.polimi.ingsw.ps45.model.game.Observer;
@@ -52,8 +53,8 @@ public class GameCreator {
 	 * @throws PlayerExistanceException If a player with that ID doesn't exists on the server.
 	 * @throws Exception
 	 */
-	public void addPlayer(String ID, String bonusTile, Observer o) throws PlayerExistanceException, Exception{
-		if(playerExists(ID)) throw new PlayerExistanceException();
+	public void addPlayer(String ID, String bonusTile, Observer o) throws PlayerExistanceException, ActionNotAllowedException{
+		if(playerExists(ID)) throw new PlayerExistanceException("Player already exists");
 		
 		if(pendingGame.hasStarted()){
 			games.add(pendingGame);
@@ -101,7 +102,7 @@ public class GameCreator {
 	 * @return the game in which a player with that ID exists.
 	 */
 	public Game getGameFromPlayerID(String ID) throws PlayerExistanceException{
-		if(!playerExists(ID)) throw new PlayerExistanceException();
+		if(!playerExists(ID)) throw new PlayerExistanceException("Player does not exist");
 		return playersInGames.get(ID);
 	}
 	

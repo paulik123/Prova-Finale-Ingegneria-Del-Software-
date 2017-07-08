@@ -3,6 +3,8 @@ package it.polimi.ingsw.ps45.model.player;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
@@ -14,11 +16,14 @@ import it.polimi.ingsw.ps45.model.cards.Character;
 import it.polimi.ingsw.ps45.model.cards.LeaderCard;
 import it.polimi.ingsw.ps45.model.cards.Territory;
 import it.polimi.ingsw.ps45.model.cards.Venture;
+import it.polimi.ingsw.ps45.model.game.Game;
 
 /**
  * A set that contains all player's cards, bonus tile, consumables, action value modifiers and permanent effects.
  */
 public class ResourceSet {
+	
+	private static final Logger LOGGER = Logger.getLogger( ResourceSet.class.getName());
 	
 	private ConsumableSet resources;
 	
@@ -281,8 +286,7 @@ public class ResourceSet {
 			try {
 				bonusTile = gson.fromJson(new FileReader("serialized/bonustiles/0.json"), PersonalBonusTile.class);
 			} catch (JsonSyntaxException | JsonIOException | FileNotFoundException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				LOGGER.log(Level.SEVERE, "context", e);
 			}
 		}
 	}

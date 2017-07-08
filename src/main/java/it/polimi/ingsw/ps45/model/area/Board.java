@@ -12,6 +12,7 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
 import it.polimi.ingsw.ps45.exceptions.AreaNotAvailableException;
+import it.polimi.ingsw.ps45.exceptions.WrongCommandArgumentException;
 import it.polimi.ingsw.ps45.gson.PropertyBasedInterfaceMarshal;
 import it.polimi.ingsw.ps45.model.area.cardarea.BuildingTower;
 import it.polimi.ingsw.ps45.model.area.cardarea.CharacterTower;
@@ -109,7 +110,7 @@ public class Board implements HasDictionary {
 	 * @throws AreaNotAvailableException 
 	 */
 	public NoCardArea getMilitaryAndCoinArea() throws AreaNotAvailableException {
-		if(players < 4) throw new AreaNotAvailableException();
+		if(players < 4) throw new AreaNotAvailableException("Area is not available");
 		return dictionary.get("militarymndcoinarea");
 	}
 
@@ -118,7 +119,7 @@ public class Board implements HasDictionary {
 	 * @throws AreaNotAvailableException if the area is not available because it was covered.
 	 */
 	public NoCardArea getCouncilPrivilegeMarketArea() throws AreaNotAvailableException {
-		if(players < 4) throw new AreaNotAvailableException();
+		if(players < 4) throw new AreaNotAvailableException("Area is not available");
 		return dictionary.get("councilprivilegemarketarea");
 	}
 
@@ -187,8 +188,8 @@ public class Board implements HasDictionary {
 	 * @param s name of the area. Also key in the dictionary.
 	 * @return A NoCardArea that correspons with the parameter string s.
 	 */
-	public NoCardArea getAreaFromString(String s) throws Exception {
-		if(!dictionary.containsKey(s.toLowerCase())) throw new Exception("No such key");
+	public NoCardArea getAreaFromString(String s) throws WrongCommandArgumentException {
+		if(!dictionary.containsKey(s.toLowerCase())) throw new WrongCommandArgumentException("No such key");
 		return dictionary.get(s.toLowerCase());
 	}
 

@@ -20,6 +20,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import it.polimi.ingsw.ps45.controller.command.Command;
+import it.polimi.ingsw.ps45.exceptions.BadCommandException;
 import it.polimi.ingsw.ps45.model.cards.Card;
 import it.polimi.ingsw.ps45.model.cards.Character;
 import it.polimi.ingsw.ps45.model.cards.Venture;
@@ -344,8 +345,7 @@ public class ControlBoard extends JFrame implements ActionListener{
 	        try {
 				p = g.getPlayerByID(playerID);
 			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				LOGGER.log(Level.SEVERE, "context", e);
 			}
 			updateCards();
 	}
@@ -353,7 +353,7 @@ public class ControlBoard extends JFrame implements ActionListener{
 	/**
 	 * @return a command parsed from the input the user selected in the command boxes.
 	 */
-	public Command getCommand() throws Exception{
+	public Command getCommand() throws BadCommandException{
 		return commandParser.parse();
 	}
 	

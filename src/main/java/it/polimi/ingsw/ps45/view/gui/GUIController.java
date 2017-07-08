@@ -63,7 +63,7 @@ public class GUIController implements ActionListener, ClientController{
 		   send(json);
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			LOGGER.log(Level.SEVERE, "context", e);
 		}
 		
 	}

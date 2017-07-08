@@ -100,13 +100,13 @@ public class ConsumableSet{
 	 * @param c a ConsumableSet representing the discount.
 	 */
 	public void makeDiscount(ConsumableSet c){
-		subtractWithZeroLimit(this.wood, c.wood);
-		subtractWithZeroLimit(this.stone, c.stone);
-		subtractWithZeroLimit(this.servants, c.servants);
-		subtractWithZeroLimit(this.coins, c.coins);
-		subtractWithZeroLimit(this.victoryPoints, c.victoryPoints);
-		subtractWithZeroLimit(this.faithPoints, c.faithPoints);
-		subtractWithZeroLimit(this.militaryPoints, c.militaryPoints);
+		this.wood = subtractWithZeroLimit(this.wood, c.wood);
+		this.stone = subtractWithZeroLimit(this.stone, c.stone);
+		this.servants = subtractWithZeroLimit(this.servants, c.servants);
+		this.coins = subtractWithZeroLimit(this.coins, c.coins);
+		this.victoryPoints = subtractWithZeroLimit(this.victoryPoints, c.victoryPoints);
+		this.faithPoints = subtractWithZeroLimit(this.faithPoints, c.faithPoints);
+		this.militaryPoints = subtractWithZeroLimit(this.militaryPoints, c.militaryPoints);
 	}
 	
 	/**

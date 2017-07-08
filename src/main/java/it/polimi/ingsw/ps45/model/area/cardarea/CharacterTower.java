@@ -12,6 +12,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
+import it.polimi.ingsw.ps45.exceptions.WrongCommandArgumentException;
 import it.polimi.ingsw.ps45.gson.PropertyBasedInterfaceMarshal;
 import it.polimi.ingsw.ps45.model.area.HasDictionary;
 import it.polimi.ingsw.ps45.model.effects.Effect;
@@ -143,8 +144,8 @@ public class CharacterTower implements Tower, HasDictionary{
 	 * @param s name of the area. Also key in the dictionary.
 	 * @return A CharacterCardArea that corresponds with the parameter string s.
 	 */
-	public CharacterCardArea getAreaFromString(String s) throws Exception {
-		if(!dictionary.containsKey(s.toLowerCase())) throw new Exception("No such key");
+	public CharacterCardArea getAreaFromString(String s) throws WrongCommandArgumentException {
+		if(!dictionary.containsKey(s.toLowerCase())) throw new WrongCommandArgumentException("No such key");
 		return dictionary.get(s.toLowerCase());
 	}
 

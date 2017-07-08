@@ -14,7 +14,9 @@ import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
+import it.polimi.ingsw.ps45.exceptions.ActionNotAllowedException;
 import it.polimi.ingsw.ps45.exceptions.PlayerExistanceException;
+import it.polimi.ingsw.ps45.exceptions.ResourceNotFoundException;
 import it.polimi.ingsw.ps45.gson.GsonWithInterface;
 import it.polimi.ingsw.ps45.model.actions.state.PawnActionState;
 import it.polimi.ingsw.ps45.model.actions.state.VaticanChoiceState;
@@ -86,8 +88,8 @@ public class Game implements Observer{
 	 * Starts the game. A new board is created. The turn-orders of the players are calculated and the game is marked as started so no other new players can join it.
 	 * @throws Exception if the game has already started.
 	 */
-	public void start() throws Exception{
-		if(gameStarted) throw new Exception("Game already started");
+	public void start() throws ActionNotAllowedException{
+		if(gameStarted) throw new ActionNotAllowedException("Game already started");
 		
 		board = new Board(players.size());
 		updateActionBuildersBoard();
@@ -116,8 +118,8 @@ public class Game implements Observer{
 	 * @param playerID the ID of the player that says his turn is over.
 	 * @throws Exception the player with the id that called this method is not the current player(it's not his turn to end).
 	 */
-	public void nextTurn(String playerID) throws Exception{
-		if(!playerID.equals(currentRound.getCurrentPlayer().getPlayerID())) throw new Exception("It's not your turn to end");
+	public void nextTurn(String playerID) throws ActionNotAllowedException{
+		if(!playerID.equals(currentRound.getCurrentPlayer().getPlayerID())) throw new ActionNotAllowedException("It's not your turn to end");
 		
 		
 		currentRound.nextTurn();
@@ -131,7 +133,7 @@ public class Game implements Observer{
      * Checks the round that has ended was the second round of the era. If it was, a vatican round is created. If not a simple round is created.
 	 * @throws Exception if the new round is a vatican round and the game can't read the excommunication card of that era from file.
 	 */
-	public void newRound() throws Exception{
+	public void newRound() throws ActionNotAllowedException{
 		if(roundNumber % 2 == 1){
 			roundNumber++;
 			board = new Board(players.size());
@@ -151,7 +153,7 @@ public class Game implements Observer{
      * Checks the round that has ended was the second round of the era. If it was, a vatican round is created. If not a simple round is created.
 	 * @throws Exception if nextEra() can't read the excommunication card of that era from file.
 	 */
-	public void vaticanTurn() throws Exception{
+	public void vaticanTurn() throws ActionNotAllowedException{
 		for(Player p:players){
 			//currentEra+2 is the faith points requirement
 			if(p.getResourceSet().getResources().getFaithPoints() < currentEra+2) {
@@ -170,7 +172,7 @@ public class Game implements Observer{
      * If the era that has just ended is the last one it proceeds to calculate the winner. Else a new era is created.
 	 * @throws Exception if it can't get the current excommunication card from vatican.
 	 */
-	public void nextEra() throws Exception{
+	public void nextEra() throws ActionNotAllowedException{
 		// Check if it's the last era so the game will end.
 		if(currentEra == 3){
 			for(Player p:players){
@@ -286,7 +288,7 @@ public class Game implements Observer{
 	 * @param bonusTile the index of the bonus tile the player wants to use, so the correct bonus tile can be read from file.
 	 * @param observer the observer that gets notified when the game changes it's state.
 	 */
-	public void addPlayer(String playerID, String bonusTile, Observer observer) throws Exception{
+	public void addPlayer(String playerID, String bonusTile, Observer observer)throws ActionNotAllowedException{
 		if(canAddPlayer(playerID)){
 			ConsumableSet cs = new ConsumableSet();
 			cs.setWood(Player.defaultWood);
@@ -311,9 +313,9 @@ public class Game implements Observer{
 	 * @param playerID the ID of the player.
 	 * @return true if the game can add one more player.
 	 */
-	private boolean canAddPlayer(String playerID) throws Exception{
-		if(playerIDExists(playerID)) throw new Exception("PlayerID already exists");
-		if(players.size() >= MAX_NUM_OF_PLAYERS) throw new Exception("Game is full");
+	private boolean canAddPlayer(String playerID) throws ActionNotAllowedException{
+		if(playerIDExists(playerID)) throw new ActionNotAllowedException("PlayerID already exists");
+		if(players.size() >= MAX_NUM_OF_PLAYERS) throw new ActionNotAllowedException("Game is full");
 		return true;
 	}
 	
@@ -340,7 +342,7 @@ public class Game implements Observer{
 			}
 		}
 		
-		throw new PlayerExistanceException();
+		throw new PlayerExistanceException("Player does not exits");
 	}
 
 	/**

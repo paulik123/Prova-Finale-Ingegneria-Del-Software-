@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;

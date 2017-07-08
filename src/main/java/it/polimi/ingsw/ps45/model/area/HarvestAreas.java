@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps45.model.area;
 
 import java.util.HashMap;
 
+import it.polimi.ingsw.ps45.exceptions.WrongCommandArgumentException;
 import it.polimi.ingsw.ps45.model.player.Player;
 
 /**
@@ -54,8 +55,8 @@ public class HarvestAreas implements HasDictionary {
 	 * @param s name of the area. Also key in the dictionary.
 	 * @return A NoCardArea that corresponds with the parameter string s.
 	 */
-	public NoCardArea getAreaFromString(String s) throws Exception {
-		if(!harvestAreaDictionary.containsKey(s.toLowerCase())) throw new Exception("No such key");
+	public NoCardArea getAreaFromString(String s) throws WrongCommandArgumentException {
+		if(!harvestAreaDictionary.containsKey(s.toLowerCase())) throw new WrongCommandArgumentException("No such key");
 		return harvestAreaDictionary.get(s.toLowerCase());
 	}
 

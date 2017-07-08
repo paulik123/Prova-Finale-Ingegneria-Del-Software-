@@ -27,6 +27,7 @@ import it.polimi.ingsw.ps45.controller.command.PlacePawnVentureCommand;
 import it.polimi.ingsw.ps45.controller.command.ProductionCommand;
 import it.polimi.ingsw.ps45.controller.command.RefuseVaticanCommand;
 import it.polimi.ingsw.ps45.controller.command.UseLeaderCardCommand;
+import it.polimi.ingsw.ps45.exceptions.BadCommandException;
 
 /**
  * Adapter class that takes data from the GUI's elements and outputs commands. 
@@ -62,7 +63,7 @@ public class GUICommandParser {
 	 * Reads the command string from the command JComboBox.
 	 * @throws Exception if the user's input is wrong or badly formatted.
 	 */
-	public Command parse() throws Exception{
+	public Command parse() throws BadCommandException{
 		
 		String c = (String)command.getSelectedItem();
 
@@ -113,7 +114,7 @@ public class GUICommandParser {
 			return parseActivateLeader();
 		case "useleader":
 			return parseUseLeader();
-		default: throw new Exception("Bad command");
+		default: throw new BadCommandException("Bad command");
 		}
 	}
 	
@@ -226,7 +227,7 @@ public class GUICommandParser {
 	 * @throws Exception if it can't read input from the GUI elements.
 	 * @return the parsed command.
 	 */
-	public ExchangeCouncilPrivilegeOneCommand parseCPOne() throws Exception{
+	public ExchangeCouncilPrivilegeOneCommand parseCPOne() throws BadCommandException{
 		String[] s = councilPrivilegeParse(1);
 		return new ExchangeCouncilPrivilegeOneCommand(s[0]);
 	}
@@ -235,7 +236,7 @@ public class GUICommandParser {
 	 * @throws Exception if it can't read input from the GUI elements.
 	 * @return the parsed command.
 	 */
-	public ExchangeCouncilPrivilegeTwoCommand parseCPTwo() throws Exception{
+	public ExchangeCouncilPrivilegeTwoCommand parseCPTwo() throws BadCommandException{
 		String[] s = councilPrivilegeParse(2);
 		return new ExchangeCouncilPrivilegeTwoCommand(s[0], s[1]);
 	}
@@ -244,7 +245,7 @@ public class GUICommandParser {
 	 * @return the parsed command.
 	 * @throws Exception if the user didn't enter the council privileges correctly in the modes JTextField.
 	 */
-	public ExchangeCouncilPrivilegeThreeCommand parseCPThree() throws Exception{
+	public ExchangeCouncilPrivilegeThreeCommand parseCPThree() throws BadCommandException{
 		String[] s = councilPrivilegeParse(3);
 		return new ExchangeCouncilPrivilegeThreeCommand(s[0], s[1], s[2]);
 	}
@@ -275,10 +276,10 @@ public class GUICommandParser {
 	 * @throws Exception if the user didn't enter the council privileges correctly in the modes JTextField.
 	 * @return an array containing the council privileges the user has entered.
 	 */
-	public String[] councilPrivilegeParse(int count) throws Exception{
+	public String[] councilPrivilegeParse(int count) throws BadCommandException{
 		String cp = (String) modes.getText();
 		String[] cps = cp.split("-");
-		if(cps.length != count) throw new Exception("Bad councilPrivilege command");
+		if(cps.length != count) throw new BadCommandException("Bad councilPrivilege command");
 		return cps;
 	}
 	

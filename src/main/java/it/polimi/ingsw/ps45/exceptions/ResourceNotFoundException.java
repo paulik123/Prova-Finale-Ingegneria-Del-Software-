@@ -1,12 +1,12 @@
 package it.polimi.ingsw.ps45.exceptions;
 
-public class BadCommandException extends Exception{
+public class ResourceNotFoundException extends Exception{
 
 	/**
  	 * Constructor
 	 * @param  s String explaining the error.
 	 */
-	public BadCommandException(String s){
+	public ResourceNotFoundException(String s){
 		super(s);
 	}
 }

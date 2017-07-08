@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps45.controller.command;
 
+import it.polimi.ingsw.ps45.exceptions.BadCommandException;
+import it.polimi.ingsw.ps45.exceptions.WrongCommandArgumentException;
 import it.polimi.ingsw.ps45.model.actions.ProductionMode;
 import it.polimi.ingsw.ps45.model.actions.CouncilPrivilege.CoinsCouncilPrivilege;
 import it.polimi.ingsw.ps45.model.actions.CouncilPrivilege.CouncilPrivilege;
@@ -33,13 +35,13 @@ public class CommandAdapter {
 	 * @param  mode string with the mode chosen by the player
 	 * @return      the mode as an enum object
 	 */
-	public VentureMode getVentureMode(String mode) throws Exception{
+	public VentureMode getVentureMode(String mode) throws WrongCommandArgumentException{
 		switch(mode.toLowerCase()){
 		case "first":
 			return VentureMode.FIRST;
 		case "second":
 			return VentureMode.SECOND;
-		default: throw new Exception("Wrong Venture Mode");
+		default: throw new WrongCommandArgumentException("Wrong Venture Mode");
 		}
 	}
 	
@@ -85,7 +87,7 @@ public class CommandAdapter {
 	 * @param  pawnType string with the pawn type chosen by the player
 	 * @return      the pawn type as an enum object
 	 */
-	public PawnType getPawnType(String pawnType) throws Exception{
+	public PawnType getPawnType(String pawnType) throws WrongCommandArgumentException{
 		
 		String s = pawnType.toLowerCase();
 		
@@ -98,7 +100,7 @@ public class CommandAdapter {
 			return PawnType.ORANGE;
 		case "neutral":
 			return PawnType.NEUTRAL;
-		default: throw new Exception("Wrong Pawn Type");
+		default: throw new WrongCommandArgumentException("Wrong Pawn Type");
 		}
 	}
 	
@@ -107,7 +109,7 @@ public class CommandAdapter {
 	 * @param  s string with the NoCardArea chosen by the player
 	 * @return      the NoCardArea as an object on the board
 	 */
-	public NoCardArea getNoCardArea(String s) throws Exception{
+	public NoCardArea getNoCardArea(String s) throws WrongCommandArgumentException{
 		return b.getAreaFromString(s);
 	}
 	
@@ -116,7 +118,7 @@ public class CommandAdapter {
 	 * @param  s string with the ProductionArea chosen by the player
 	 * @return      the ProductionArea as an object on the board
 	 */
-	public NoCardArea getProductioArea(String s) throws Exception{
+	public NoCardArea getProductioArea(String s) throws WrongCommandArgumentException{
 		return b.getProductionAreas().getAreaFromString(s);
 	}
 	
@@ -125,7 +127,7 @@ public class CommandAdapter {
 	 * @param  s string with the HarvestArea chosen by the player
 	 * @return      the HarvestArea as an object on the board
 	 */
-	public NoCardArea getHarvestArea(String s) throws Exception{
+	public NoCardArea getHarvestArea(String s) throws WrongCommandArgumentException{
 		return b.getHarvestAreas().getAreaFromString(s);
 	}
 	
@@ -134,7 +136,7 @@ public class CommandAdapter {
 	 * @param  s string with the BuildingCardArea chosen by the player
 	 * @return      the BuildingCardArea as an object on the board
 	 */
-	public BuildingCardArea getBuildingArea(String s) throws Exception{
+	public BuildingCardArea getBuildingArea(String s) throws WrongCommandArgumentException{
 		return b.getBuildingTower().getAreaFromString(s);
 	}
 	
@@ -143,7 +145,7 @@ public class CommandAdapter {
 	 * @param  s string with the CharacterCardArea chosen by the player
 	 * @return      the CharacterCardArea as an object on the board
 	 */
-	public CharacterCardArea getCharacterArea(String s) throws Exception{
+	public CharacterCardArea getCharacterArea(String s) throws WrongCommandArgumentException{
 		return b.getCharacterTower().getAreaFromString(s);
 	}
 	
@@ -152,7 +154,7 @@ public class CommandAdapter {
 	 * @param  s string with the TerritoryCardArea chosen by the player
 	 * @return      the TerritoryCardArea as an object on the board
 	 */
-	public TerritoryCardArea getTerritoryArea(String s) throws Exception{
+	public TerritoryCardArea getTerritoryArea(String s) throws WrongCommandArgumentException{
 		return b.getTerritoryTower().getAreaFromString(s);
 	}
 	
@@ -161,7 +163,7 @@ public class CommandAdapter {
 	 * @param  s string with the VentureCardArea chosen by the player
 	 * @return      the Venture as an object on the board
 	 */
-	public VentureCardArea getVentureArea(String s) throws Exception{
+	public VentureCardArea getVentureArea(String s) throws WrongCommandArgumentException{
 		return b.getVentureTower().getAreaFromString(s);
 	}
 }
