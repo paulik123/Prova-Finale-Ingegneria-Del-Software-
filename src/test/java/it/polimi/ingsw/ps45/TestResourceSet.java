@@ -6,8 +6,11 @@ import static org.junit.Assert.*;
 import org.junit.*;
 
 import it.polimi.ingsw.ps45.model.player.ConsumableSet;
+import junit.framework.TestCase;
+import junit.framework.Test;
+import junit.framework.TestSuite;
 
-public class TestResourceSet {
+public class TestResourceSet extends TestCase{
 	
 	private ConsumableSet cs;
 	private ConsumableSet collectSet;
@@ -26,7 +29,7 @@ public class TestResourceSet {
 	    
 	  }
 	  
-	    @Test
+	    
 	    public void testEmpty() {
 	    	assertEquals(0, cs.getWood());
 	    	assertEquals(0, cs.getCoins());
@@ -37,7 +40,7 @@ public class TestResourceSet {
 	    	assertEquals(0, cs.getVictoryPoints());
 	    }
 	    
-	    @Test
+	    
 	    public void testPay() {
 	    	cs.setWood(15);
 	    	cs.setCoins(15);
@@ -59,7 +62,7 @@ public class TestResourceSet {
 	    }
 	    
 	    
-	    @Test
+	   
 	    public void testDiscount() {
 	    	cs.setWood(15);
 	    	cs.setCoins(15);
@@ -81,7 +84,7 @@ public class TestResourceSet {
 	    }
 	    
 	    
-	    @Test
+	    
 	    public void testAvailable() {
 	    	cs.setWood(15);
 	    	cs.setCoins(15);
@@ -93,7 +96,7 @@ public class TestResourceSet {
 	    	
 	    	assertTrue(!cs.hasConsumablesAvailable(collectSet));
 	    }
-	    @Test
+	    
 	    public void testCollect() {
 
 	    	
@@ -110,7 +113,7 @@ public class TestResourceSet {
 	    
 	    
 	  
-	    @Test
+	    
 	    public void testOne() {
 	    	cs.setWood(1);
 	    	cs.setCoins(1);
@@ -126,6 +129,32 @@ public class TestResourceSet {
 	    	assertEquals(1, cs.getMilitaryPoins());
 	    	assertEquals(1, cs.getServants());
 	    	assertEquals(1, cs.getVictoryPoints());
+	    }
+	    
+	    /**
+	     * Create the test case
+	     *
+	     * @param testName name of the test case
+	     */
+	    public TestResourceSet( String testName )
+	    {
+	        super( testName );
+	    }
+
+	    /**
+	     * @return the suite of tests being tested
+	     */
+	    public static Test suite()
+	    {
+	        return new TestSuite( TestResourceSet.class );
+	    }
+
+	    /**
+	     * Rigourous Test :-)
+	     */
+	    public void testApp()
+	    {
+	        assertTrue( true );
 	    }
 	    
 

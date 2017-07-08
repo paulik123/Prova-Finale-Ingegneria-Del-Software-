@@ -284,7 +284,7 @@ public class ResourceSet {
 			bonusTile = gson.fromJson(new FileReader("serialized/bonustiles/" + bt  + ".json"), PersonalBonusTile.class);
 		} catch (Exception e) {
 			try {
-				bonusTile = gson.fromJson(new FileReader("serialized/bonustiles/0.json"), PersonalBonusTile.class);
+				bonusTile = gson.fromJson(new FileReader("serialized/bonustiles/1.json"), PersonalBonusTile.class);
 			} catch (JsonSyntaxException | JsonIOException | FileNotFoundException e1) {
 				LOGGER.log(Level.SEVERE, "context", e);
 			}
