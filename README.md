@@ -15,8 +15,10 @@ The UML is located at /doc/UML.png in the project folder.
 1. Open a new terminal in the project folder then run the server using
     `java -jar s.jar`
 2. To open the client open another terminal in the same folder then type
+
     `java -jar c.jar gui` //to use GUI    or
     `java -jar c.jar cli` // to use CLI
+    
 3. The game will start after four players joined the game or the game start timer ran out of time(currently set to 180 seconds - you can modify it by modifying the json files in serialized/time/).
 
 
