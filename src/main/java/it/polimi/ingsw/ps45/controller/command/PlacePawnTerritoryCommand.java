@@ -4,8 +4,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import it.polimi.ingsw.ps45.controller.Connection;
+import it.polimi.ingsw.ps45.controller.SocketObserver;
 import it.polimi.ingsw.ps45.model.actions.ActionBuilder;
 import it.polimi.ingsw.ps45.model.area.cardarea.TerritoryCardArea;
+import it.polimi.ingsw.ps45.model.game.ErrorNotifier;
 import it.polimi.ingsw.ps45.model.game.Game;
 import it.polimi.ingsw.ps45.model.player.PawnType;
 
@@ -52,6 +54,8 @@ public class PlacePawnTerritoryCommand implements Command{
 			ab.placePawnTerritory(tca, pt, servantsAdded);
 			g.notifyObservers();
 		}catch(Exception e){
+			ErrorNotifier n = new ErrorNotifier(new SocketObserver(connection.getOutputStreamWriter()), "Bad command arguments");
+			n.start();
 			LOGGER.log(Level.SEVERE, "context", e);
 		}
 	}

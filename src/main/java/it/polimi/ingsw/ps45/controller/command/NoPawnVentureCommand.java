@@ -4,9 +4,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import it.polimi.ingsw.ps45.controller.Connection;
+import it.polimi.ingsw.ps45.controller.SocketObserver;
 import it.polimi.ingsw.ps45.model.actions.ActionBuilder;
 import it.polimi.ingsw.ps45.model.area.cardarea.VentureCardArea;
 import it.polimi.ingsw.ps45.model.cards.VentureMode;
+import it.polimi.ingsw.ps45.model.game.ErrorNotifier;
 import it.polimi.ingsw.ps45.model.game.Game;
 
 /**
@@ -49,6 +51,8 @@ public class NoPawnVentureCommand implements Command{
 			ab.NoPawnVenture(tca, servantsAdded, vm);
 			g.notifyObservers();
 		}catch(Exception e){
+			ErrorNotifier n = new ErrorNotifier(new SocketObserver(connection.getOutputStreamWriter()), "Bad command arguments");
+			n.start();
 			LOGGER.log(Level.SEVERE, "context", e);
 		}
 	}

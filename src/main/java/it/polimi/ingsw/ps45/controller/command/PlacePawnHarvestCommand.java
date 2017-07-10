@@ -4,8 +4,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import it.polimi.ingsw.ps45.controller.Connection;
+import it.polimi.ingsw.ps45.controller.SocketObserver;
 import it.polimi.ingsw.ps45.model.actions.ActionBuilder;
 import it.polimi.ingsw.ps45.model.area.NoCardArea;
+import it.polimi.ingsw.ps45.model.game.ErrorNotifier;
 import it.polimi.ingsw.ps45.model.game.Game;
 import it.polimi.ingsw.ps45.model.player.PawnType;
 
@@ -50,6 +52,8 @@ public class PlacePawnHarvestCommand implements Command{
 			ab.placePawnHarvest(nca, pt, servantsAdded);
 			g.notifyObservers();
 		}catch(Exception e){
+			ErrorNotifier n = new ErrorNotifier(new SocketObserver(connection.getOutputStreamWriter()), "Bad command arguments");
+			n.start();
 			LOGGER.log(Level.SEVERE, "context", e);
 		}
 	}

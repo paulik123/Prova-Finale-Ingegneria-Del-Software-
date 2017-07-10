@@ -15,6 +15,7 @@ import it.polimi.ingsw.ps45.controller.command.Command;
 import it.polimi.ingsw.ps45.controller.command.CommandHolder;
 import it.polimi.ingsw.ps45.gson.PropertyBasedInterfaceMarshal;
 import it.polimi.ingsw.ps45.model.effects.Effect;
+import it.polimi.ingsw.ps45.model.game.ErrorNotifier;
 
 /**
  * Contains all the objects needed to support the communication between the server and client.
