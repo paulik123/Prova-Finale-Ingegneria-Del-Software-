@@ -32,6 +32,7 @@ public class PlacePawnHarvestAction implements Action{
 	 */
 	@Override
 	public void run() {
+		System.out.println(value);
 		HarvestArea.addOccupant(p, pt);
 		HarvestArea.immediateEffect(p, value);
 	}

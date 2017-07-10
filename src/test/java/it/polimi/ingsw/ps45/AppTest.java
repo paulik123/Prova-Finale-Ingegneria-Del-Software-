@@ -1,8 +1,5 @@
 package it.polimi.ingsw.ps45;
 
-import org.junit.Before;
-
-import it.polimi.ingsw.ps45.model.player.ConsumableSet;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;

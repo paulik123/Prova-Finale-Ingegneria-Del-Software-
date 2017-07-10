@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 
 import it.polimi.ingsw.ps45.exceptions.ActionNotAllowedException;
 import it.polimi.ingsw.ps45.exceptions.PlayerExistanceException;
+import it.polimi.ingsw.ps45.model.game.ErrorNotifier;
 import it.polimi.ingsw.ps45.model.game.Game;
 import it.polimi.ingsw.ps45.model.game.Observer;
 
@@ -54,7 +55,11 @@ public class GameCreator {
 	 * @throws Exception
 	 */
 	public void addPlayer(String ID, String bonusTile, Observer o) throws PlayerExistanceException, ActionNotAllowedException{
-		if(playerExists(ID)) throw new PlayerExistanceException("Player already exists");
+		if(playerExists(ID)){
+			ErrorNotifier n = new ErrorNotifier(o, "Player already exists on server, please try to connect again with another username");
+			n.start();
+			throw new PlayerExistanceException("Player already exists");
+		}
 		
 		if(pendingGame.hasStarted()){
 			games.add(pendingGame);

@@ -6,7 +6,6 @@ import java.awt.Font;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -34,6 +33,7 @@ public class GameBoard extends JFrame {
 	private JPanel contentPane;
 	private JLayeredPane layeredPane;
 	private JPanel frontPanel;
+	private JPanel excomMarkerPanel;
 	
 	
 	private JLabel territory_third;
@@ -197,8 +197,8 @@ public class GameBoard extends JFrame {
 	private static final int excomMarkerHeight = 5;
 	private static final int excomMarkerXGap1 = 10;
 	private static final int excomMarkerXGap2 = 20;
-	private static final int excomMarkerYGap1 = 10;
-	private static final int excomMarkerYGap2 = 20;
+	private static final int excomMarkerYGap1 = -17;
+	private static final int excomMarkerYGap2 = -7;
 	private static final int excomMarkerTHIRDYGap = 2;
 	
 	
@@ -227,12 +227,12 @@ public class GameBoard extends JFrame {
 		
 		setBackground();
 		setFrontPanel();
-		initializeTurnMarkers();
 		initializeTerritories();
 		initializeCharacters();
 		initializeBuildings();
 		initializeVentures();
 		initializeExcom();
+		initializeTurnMarkers();
 		initializePawnAreaLabels();
 		initializeDiceLabels();
 		
@@ -271,6 +271,14 @@ public class GameBoard extends JFrame {
 		frontPanel.setBounds(0, 0, width, height);
 		layeredPane.add(frontPanel);
 		frontPanel.setLayout(null);
+		
+		excomMarkerPanel = new JPanel();
+		excomMarkerPanel.setOpaque(false);
+		layeredPane.setLayer(excomMarkerPanel, 2);
+		excomMarkerPanel.setBounds(0, 0, width, height);
+		layeredPane.add(excomMarkerPanel);
+		excomMarkerPanel.setLayout(null);
+		
 
 	}
 	
@@ -417,24 +425,24 @@ public class GameBoard extends JFrame {
 	public void initializeExcom(){
 		excomI = initializeLabel(excomIX, excomIY, excomWidth, excomHeight);
 		excomIMarkers = new ArrayList<JLabel>();
-		excomIMarkers.add(initializeLabel(excomIX + excomMarkerXGap1, excomIY + excomMarkerYGap1, excomWidth, excomHeight));
-		excomIMarkers.add(initializeLabel(excomIX + excomMarkerXGap2, excomIY + excomMarkerYGap1, excomWidth, excomHeight));
-		excomIMarkers.add(initializeLabel(excomIX + excomMarkerXGap1, excomIY + excomMarkerYGap2, excomWidth, excomHeight));
-		excomIMarkers.add(initializeLabel(excomIX + excomMarkerXGap2, excomIY + excomMarkerYGap2, excomWidth, excomHeight));
+		excomIMarkers.add(initializeExcomMarkerLabel(excomIX + excomMarkerXGap1, excomIY + excomMarkerYGap1, excomWidth, excomHeight));
+		excomIMarkers.add(initializeExcomMarkerLabel(excomIX + excomMarkerXGap2, excomIY + excomMarkerYGap1, excomWidth, excomHeight));
+		excomIMarkers.add(initializeExcomMarkerLabel(excomIX + excomMarkerXGap1, excomIY + excomMarkerYGap2, excomWidth, excomHeight));
+		excomIMarkers.add(initializeExcomMarkerLabel(excomIX + excomMarkerXGap2, excomIY + excomMarkerYGap2, excomWidth, excomHeight));
 		
 		excomII = initializeLabel(excomIIX, excomIIY, excomWidth, excomHeight);
 		excomIIMarkers = new ArrayList<JLabel>();
-		excomIIMarkers.add(initializeLabel(excomIIX + excomMarkerXGap1, excomIIY + excomMarkerYGap1, excomWidth, excomHeight));
-		excomIIMarkers.add(initializeLabel(excomIIX + excomMarkerXGap2, excomIIY + excomMarkerYGap1, excomWidth, excomHeight));
-		excomIIMarkers.add(initializeLabel(excomIIX + excomMarkerXGap1, excomIIY + excomMarkerYGap2, excomWidth, excomHeight));
-		excomIIMarkers.add(initializeLabel(excomIIX + excomMarkerXGap2, excomIIY + excomMarkerYGap2, excomWidth, excomHeight));
+		excomIIMarkers.add(initializeExcomMarkerLabel(excomIIX + excomMarkerXGap1, excomIIY + excomMarkerYGap1, excomWidth, excomHeight));
+		excomIIMarkers.add(initializeExcomMarkerLabel(excomIIX + excomMarkerXGap2, excomIIY + excomMarkerYGap1, excomWidth, excomHeight));
+		excomIIMarkers.add(initializeExcomMarkerLabel(excomIIX + excomMarkerXGap1, excomIIY + excomMarkerYGap2, excomWidth, excomHeight));
+		excomIIMarkers.add(initializeExcomMarkerLabel(excomIIX + excomMarkerXGap2, excomIIY + excomMarkerYGap2, excomWidth, excomHeight));
 		
 		excomIII = initializeLabel(excomIIIX, excomIIIY, excomWidth, excomHeight);
 		excomIIIMarkers = new ArrayList<JLabel>();
-		excomIIIMarkers.add(initializeLabel(excomIIIX + excomMarkerXGap1, excomIIIY + excomMarkerTHIRDYGap + excomMarkerYGap1, excomWidth, excomHeight));
-		excomIIIMarkers.add(initializeLabel(excomIIIX + excomMarkerXGap2, excomIIIY + excomMarkerTHIRDYGap + excomMarkerYGap1, excomWidth, excomHeight));
-		excomIIIMarkers.add(initializeLabel(excomIIIX + excomMarkerXGap1, excomIIIY + excomMarkerTHIRDYGap + excomMarkerYGap2, excomWidth, excomHeight));
-		excomIIIMarkers.add(initializeLabel(excomIIIX + excomMarkerXGap2, excomIIIY + excomMarkerTHIRDYGap + excomMarkerYGap2, excomWidth, excomHeight));
+		excomIIIMarkers.add(initializeExcomMarkerLabel(excomIIIX + excomMarkerXGap1, excomIIIY + excomMarkerTHIRDYGap + excomMarkerYGap1, excomWidth, excomHeight));
+		excomIIIMarkers.add(initializeExcomMarkerLabel(excomIIIX + excomMarkerXGap2, excomIIIY + excomMarkerTHIRDYGap + excomMarkerYGap1, excomWidth, excomHeight));
+		excomIIIMarkers.add(initializeExcomMarkerLabel(excomIIIX + excomMarkerXGap1, excomIIIY + excomMarkerTHIRDYGap + excomMarkerYGap2, excomWidth, excomHeight));
+		excomIIIMarkers.add(initializeExcomMarkerLabel(excomIIIX + excomMarkerXGap2, excomIIIY + excomMarkerTHIRDYGap + excomMarkerYGap2, excomWidth, excomHeight));
 	}
 	
 	/**
@@ -453,15 +461,37 @@ public class GameBoard extends JFrame {
 		return newLabel;
 	}
 	
+	
+	/**
+	 * Creates a new excom Marker label then adds it to the excom marker panel.
+	 * @param x the x position of the label.
+	 * @param y the y position of the label.
+	 * @param width the width of the label.
+	 * @param height the height of the label.
+	 * @return the newly created label.
+	 */
+	public JLabel initializeExcomMarkerLabel(int x, int y,int width,int height){
+		JLabel newLabel = new JLabel("");
+		newLabel.setBounds(x, y, width, height);
+		excomMarkerPanel.add(newLabel);
+		
+		return newLabel;
+	}
+	
 	/**
 	 * Updates the Icons of the Excom Labels with the icons corresponding with the Excom cards in the game model.
-	 * Also updates the Excom markers to show which players suffered vatican penalties.
 	 */
 	public void updateExcomLabels(){
 		setExcomLabelIcon(excomI,g.getVatican().getCard(Era.I).getName());
 		setExcomLabelIcon(excomII,g.getVatican().getCard(Era.II).getName());
 		setExcomLabelIcon(excomIII,g.getVatican().getCard(Era.III).getName());
-		
+	}
+	
+	
+	/**
+	 * Updates the Excom markers to show which players suffered vatican penalties.
+	 */
+	public void updateExcomMarkerLabesl(){
 		ArrayList<Player> players = g.getPlayers();
 		
 		for(int i=0; i<players.size();i++){
@@ -712,11 +742,12 @@ public class GameBoard extends JFrame {
 	 */
 	public void update(Game g){
 		this.g = g;
+		updateExcomLabels();
 		updateDiceLabels();
-		updateTurnMarkers();
 		updatePawnLabels();
 		updateCardLabels();
-		updateExcomLabels();
+		updateTurnMarkers();
+		updateExcomMarkerLabesl();
 		if(!updatedCovers) updateCovers();
 	}
 	

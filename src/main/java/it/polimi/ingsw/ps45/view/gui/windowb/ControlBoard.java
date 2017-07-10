@@ -275,7 +275,6 @@ public class ControlBoard extends JFrame implements ActionListener{
 	 */
 	public void updateCommandComboBoxes(){
 		try {
-			System.out.println((g.getPlayerByID(playerID).getAvailableCommands().length));
 			DefaultComboBoxModel model = new DefaultComboBoxModel(g.getPlayerByID(playerID).getAvailableCommands());
 			commandList.setModel(model);
 			

@@ -16,7 +16,6 @@ import com.google.gson.JsonSyntaxException;
 
 import it.polimi.ingsw.ps45.exceptions.ActionNotAllowedException;
 import it.polimi.ingsw.ps45.exceptions.PlayerExistanceException;
-import it.polimi.ingsw.ps45.exceptions.ResourceNotFoundException;
 import it.polimi.ingsw.ps45.gson.GsonWithInterface;
 import it.polimi.ingsw.ps45.model.actions.state.PawnActionState;
 import it.polimi.ingsw.ps45.model.actions.state.VaticanChoiceState;
@@ -136,11 +135,11 @@ public class Game implements Observer{
 	public void newRound() throws ActionNotAllowedException{
 		if(roundNumber % 2 == 1){
 			roundNumber++;
+			calculateTurns();
 			board = new Board(players.size());
 			updateActionBuildersBoard();
 			cardDealer.updateBoard(board, eras[currentEra]);
 			setPawns();
-			calculateTurns();
 			currentRound = new Round(turns, this);
 			currentRound.getCurrentPlayer().getActionBuilder().setState(new PawnActionState());
 		}

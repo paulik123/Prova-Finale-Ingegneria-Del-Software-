@@ -9,7 +9,6 @@ import it.polimi.ingsw.ps45.model.area.cardarea.BuildingTower;
 import it.polimi.ingsw.ps45.model.area.cardarea.CharacterTower;
 import it.polimi.ingsw.ps45.model.area.cardarea.TerritoryTower;
 import it.polimi.ingsw.ps45.model.area.cardarea.VentureTower;
-import it.polimi.ingsw.ps45.model.player.ConsumableSet;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -90,13 +89,5 @@ public class TestBoard extends TestCase{
     public static Test suite()
     {
         return new TestSuite( TestBoard.class );
-    }
-
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
     }
 }

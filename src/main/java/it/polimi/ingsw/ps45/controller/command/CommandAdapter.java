@@ -1,6 +1,5 @@
 package it.polimi.ingsw.ps45.controller.command;
 
-import it.polimi.ingsw.ps45.exceptions.BadCommandException;
 import it.polimi.ingsw.ps45.exceptions.WrongCommandArgumentException;
 import it.polimi.ingsw.ps45.model.actions.ProductionMode;
 import it.polimi.ingsw.ps45.model.actions.CouncilPrivilege.CoinsCouncilPrivilege;

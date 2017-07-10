@@ -32,7 +32,11 @@ public class PlacePawnVentureCommand implements Command{
 		this.ventureCardArea = area;
 		this.pawnType = pt;
 		this.servantsAdded = servants;
-		this.ventureMode = ventureMode;
+		if(!(ventureMode == null || ventureMode.length() == 0)){
+			this.ventureMode = ventureMode;
+		}else{
+			this.ventureMode = "first";
+		}
 	}
 	
 	/**

@@ -45,7 +45,7 @@ public class PlacePawnProductionCommand implements Command{
 			g = connection.getGameCreator().getGameFromPlayerID(playerID);
 			ab = g.getPlayerByID(playerID).getActionBuilder();
 			CommandAdapter ca = new CommandAdapter(g.getBoard());
-			nca = ca.getHarvestArea(productionArea);
+			nca = ca.getProductioArea(productionArea);
 			pt = ca.getPawnType(pawnType);
 			ab.placePawnProduction(nca, pt, servantsAdded);
 			g.notifyObservers();

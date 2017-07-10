@@ -26,6 +26,7 @@ public class HarvestEffect implements Effect{
 	 */
 	@Override
 	public void runEffect(Player p, int value) {
+		System.out.println("HarvestEffect: " + value);
 		p.getActionBuilder().setState(new HarvestState(value - penalty));
 		p.setStatus("Make a harvest.");
 	}

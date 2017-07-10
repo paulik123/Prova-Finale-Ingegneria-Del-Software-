@@ -16,7 +16,6 @@ import it.polimi.ingsw.ps45.model.cards.Character;
 import it.polimi.ingsw.ps45.model.cards.LeaderCard;
 import it.polimi.ingsw.ps45.model.cards.Territory;
 import it.polimi.ingsw.ps45.model.cards.Venture;
-import it.polimi.ingsw.ps45.model.game.Game;
 
 /**
  * A set that contains all player's cards, bonus tile, consumables, action value modifiers and permanent effects.

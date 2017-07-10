@@ -7,10 +7,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.Socket;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -20,9 +16,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-
-import it.polimi.ingsw.ps45.view.gui.GUI;
-import it.polimi.ingsw.ps45.view.gui.GUIController;
 
 public class GUIClientWelcomeScreen extends JFrame{
 	private transient GUIClient client;

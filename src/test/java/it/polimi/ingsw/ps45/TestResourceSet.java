@@ -1,13 +1,11 @@
 package it.polimi.ingsw.ps45;
 
 
-import static org.junit.Assert.*;
-
-import org.junit.*;
+import org.junit.Before;
 
 import it.polimi.ingsw.ps45.model.player.ConsumableSet;
-import junit.framework.TestCase;
 import junit.framework.Test;
+import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 public class TestResourceSet extends TestCase{
@@ -148,14 +146,5 @@ public class TestResourceSet extends TestCase{
 	    {
 	        return new TestSuite( TestResourceSet.class );
 	    }
-
-	    /**
-	     * Rigourous Test :-)
-	     */
-	    public void testApp()
-	    {
-	        assertTrue( true );
-	    }
-	    
 
 }

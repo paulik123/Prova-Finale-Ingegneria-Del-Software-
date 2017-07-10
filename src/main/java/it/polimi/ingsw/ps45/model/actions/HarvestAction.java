@@ -34,6 +34,7 @@ public class HarvestAction implements Action{
 		PersonalBonusTile bt = p.getResourceSet().getBonusTile();
 		if(level >=bt.getHarvestLevel())bt.harvest(p);
 		
+		
 		for(Territory t:territories){
 			if(level >= t.getHarvestLevel()) t.harvest(p);
 		}	

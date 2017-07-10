@@ -8,15 +8,9 @@ import org.junit.Before;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
-import it.polimi.ingsw.ps45.exceptions.AreaNotAvailableException;
 import it.polimi.ingsw.ps45.model.area.Board;
-import it.polimi.ingsw.ps45.model.area.cardarea.BuildingTower;
-import it.polimi.ingsw.ps45.model.area.cardarea.CharacterTower;
-import it.polimi.ingsw.ps45.model.area.cardarea.TerritoryTower;
-import it.polimi.ingsw.ps45.model.area.cardarea.VentureTower;
 import it.polimi.ingsw.ps45.model.cards.CardDealer;
 import it.polimi.ingsw.ps45.model.cards.Era;
-import it.polimi.ingsw.ps45.model.player.ConsumableSet;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -93,13 +87,5 @@ public class TestCardDealer extends TestCase{
     public static Test suite()
     {
         return new TestSuite( TestCardDealer.class );
-    }
-
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
     }
 }

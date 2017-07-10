@@ -19,7 +19,13 @@ public class ProductionCommand implements Command{
  	 * @param  productionModeArray the modes of each building card.
 	 */
 	public ProductionCommand(String productionModeArray){
-		this.productionMode = productionModeArray;
+		if(!(productionModeArray == null || productionModeArray.length() == 0 )){
+			this.productionMode = productionModeArray;
+		}
+		else{
+			this.productionMode = "000000";
+		}
+		
 	}
 
 	/**

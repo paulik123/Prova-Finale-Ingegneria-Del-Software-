@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps45.view.gui;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionListener;
 
 import com.google.gson.Gson;
 
@@ -81,7 +82,7 @@ public class GUI extends View{
 	 * Adds a controller to the view so that the user can send commands to the server.
 	 * @param controller the controller that will send commands to the server.
 	 */
-	public void addController(GUIController controller){
+	public void addListener(ActionListener controller){
 		
 		EventQueue.invokeLater(new Runnable(){
 			@Override
@@ -129,7 +130,14 @@ public class GUI extends View{
 	 */
 	@Override
 	public void showError(String error) {
-		leaderBoard.updateTextArea(error);
+		
+		EventQueue.invokeLater(new Runnable(){
+			@Override
+			public void run() {
+				leaderBoard.updateTextArea(error);
+			}
+			
+		});
 	}
 	
 
