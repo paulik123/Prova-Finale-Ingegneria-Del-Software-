@@ -608,6 +608,20 @@ public class ActionBuilder {
 	}
 	
 	/**
+ 	 * Discards a leader card then gives the player a councilPrivilege
+ 	 * @throws ActionNotAllowedException If the index does not correspond with the list's size.
+ 	 * 		   It also notifies the player's error observer with the error.
+ 	 * @param  index the index of the LeaderCard in the player's LeaderCard list.
+	 */
+	public void discardLeaderCard(int index, CouncilPrivilege cp1) throws ActionNotAllowedException{
+		if(index >= p.getResourceSet().getLeaderCardList().size() || index < 0) {
+			notifyError("Action not allowed - leader card with that index does not exist");
+			throw new ActionNotAllowedException("Action not allowed - leader card with that index does not exist");
+		}
+		new DiscardLeaderCardAction(p, index, cp1).run();
+	}
+	
+	/**
  	 * Verifies all the requirements and if everything is allright the action is executed
  	 * @throws Exception If one of the requirements are not met.
  	 * 		   It also notifies the player's error observer with the error.

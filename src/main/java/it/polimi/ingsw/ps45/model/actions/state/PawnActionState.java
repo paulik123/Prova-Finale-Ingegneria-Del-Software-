@@ -6,7 +6,7 @@ package it.polimi.ingsw.ps45.model.actions.state;
  */
 public class PawnActionState extends ConcreteActionBuilderState{
 	
-	private String[] commands = {"placepawnnocard", "placepawnharvest", "placepawnproduction", "placepawnterritory", "placepawncharacter", "placepawnbuilding", "placepawnventure", "activateleader", "useleader", "endturn"};
+	private String[] commands = {"placepawnnocard", "placepawnharvest", "placepawnproduction", "placepawnterritory", "placepawncharacter", "placepawnbuilding", "placepawnventure", "activateleader", "useleader", "discardleader", "endturn"};
 
 	@Override
 	public boolean placePawnAction() {

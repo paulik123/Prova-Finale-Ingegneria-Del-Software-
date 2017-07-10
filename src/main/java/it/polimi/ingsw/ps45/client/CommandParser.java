@@ -5,6 +5,7 @@ import it.polimi.ingsw.ps45.controller.command.ActivateLeaderCardCommand;
 import it.polimi.ingsw.ps45.controller.command.AddServantsToHarvestCommand;
 import it.polimi.ingsw.ps45.controller.command.AddServantsToProductionCommand;
 import it.polimi.ingsw.ps45.controller.command.Command;
+import it.polimi.ingsw.ps45.controller.command.DiscardLeaderCard;
 import it.polimi.ingsw.ps45.controller.command.EndTurnCommand;
 import it.polimi.ingsw.ps45.controller.command.ExchangeCouncilPrivilegeOneCommand;
 import it.polimi.ingsw.ps45.controller.command.ExchangeCouncilPrivilegeThreeCommand;
@@ -89,6 +90,8 @@ public class CommandParser {
 			return parseActivateLeader(s);
 		case "useleader":
 			return parseUseLeader(s);
+		case "discardleader":
+			return parseDiscardLeader(s);
 		default: throw new BadCommandException("Bad command");
 		}
 	}
@@ -315,6 +318,14 @@ public class CommandParser {
 	 */
 	public  UseLeaderCardCommand parseUseLeader(String[] s){
 		return new UseLeaderCardCommand(Integer.valueOf(s[1]));
+	}
+	
+	/**
+	 * s[1] = the index of the leader card in the player's activated leader card list.
+	 * @return the parsed command.
+	 */
+	public DiscardLeaderCard parseDiscardLeader(String[] s){
+		return new DiscardLeaderCard(Integer.valueOf(s[1]), s[2]);
 	}
 	
 }

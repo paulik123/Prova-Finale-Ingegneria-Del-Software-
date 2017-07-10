@@ -247,6 +247,11 @@ public class CommandComboBoxListener implements ActionListener{
 			changeModel(pawns, none);
 			changeModel(servants, none);
 			break;
+		case "discardleader":
+			changeModel(areas, getAvailableLeaderCards());
+			changeModel(pawns, none);
+			changeModel(servants, none);
+			break;
 		default: 			
 			changeModel(areas, none);
 			changeModel(pawns, none);

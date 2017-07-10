@@ -8,6 +8,7 @@ import it.polimi.ingsw.ps45.controller.command.ActivateLeaderCardCommand;
 import it.polimi.ingsw.ps45.controller.command.AddServantsToHarvestCommand;
 import it.polimi.ingsw.ps45.controller.command.AddServantsToProductionCommand;
 import it.polimi.ingsw.ps45.controller.command.Command;
+import it.polimi.ingsw.ps45.controller.command.DiscardLeaderCard;
 import it.polimi.ingsw.ps45.controller.command.EndTurnCommand;
 import it.polimi.ingsw.ps45.controller.command.ExchangeCouncilPrivilegeOneCommand;
 import it.polimi.ingsw.ps45.controller.command.ExchangeCouncilPrivilegeThreeCommand;
@@ -114,6 +115,8 @@ public class GUICommandParser {
 			return parseActivateLeader();
 		case "useleader":
 			return parseUseLeader();
+		case "discardleader":
+			return parseDiscardLeader();
 		default: throw new BadCommandException("Bad command");
 		}
 	}
@@ -295,5 +298,12 @@ public class GUICommandParser {
 	 */
 	public  UseLeaderCardCommand parseUseLeader(){
 		return new UseLeaderCardCommand(Integer.valueOf((String)area.getSelectedItem()));
+	}
+	
+	/**
+	 * @return the parsed command.
+	 */
+	public DiscardLeaderCard parseDiscardLeader(){
+		return new DiscardLeaderCard(Integer.valueOf((String)area.getSelectedItem()), (String) modes.getText());
 	}
 }

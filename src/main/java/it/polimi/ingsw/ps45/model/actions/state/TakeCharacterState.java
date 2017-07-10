@@ -8,7 +8,7 @@ import it.polimi.ingsw.ps45.model.player.ConsumableSet;
  */
 public class TakeCharacterState extends ConcreteActionBuilderState{
 	
-	private String[] commands = {"nopawncharacter", "activateleader", "useleader", "endturn"};
+	private String[] commands = {"nopawncharacter", "activateleader", "useleader","discardleader", "endturn"};
 	private int value;
 	private ConsumableSet discount;
 	

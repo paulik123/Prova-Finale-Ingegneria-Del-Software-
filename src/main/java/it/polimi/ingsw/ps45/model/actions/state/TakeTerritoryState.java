@@ -10,7 +10,7 @@ public class TakeTerritoryState extends ConcreteActionBuilderState{
 	
 	private int value;
 	private ConsumableSet discount;
-	private String[] commands = {"nopawnterritory", "activateleader", "useleader", "endturn"};
+	private String[] commands = {"nopawnterritory", "activateleader", "useleader","discardleader",  "endturn"};
 	
 	public TakeTerritoryState(int value, ConsumableSet discount){
 		this.value = value;

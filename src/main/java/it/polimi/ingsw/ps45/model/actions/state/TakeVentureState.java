@@ -10,7 +10,7 @@ public  class TakeVentureState extends ConcreteActionBuilderState{
 	
 	private int value;
 	private ConsumableSet discount;
-	private String[] commands = {"nopawnventure", "activateleader", "useleader", "endturn"};
+	private String[] commands = {"nopawnventure", "activateleader", "useleader","discardleader", "endturn"};
 	
 	public TakeVentureState(int value, ConsumableSet discount){
 		this.value = value;

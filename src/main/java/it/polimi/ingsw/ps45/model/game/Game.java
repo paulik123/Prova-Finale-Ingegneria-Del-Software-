@@ -36,7 +36,7 @@ public class Game implements Observer{
 	private static final Logger LOGGER = Logger.getLogger( Game.class.getName());
 	
 	private static final int turnsPerRound = 4;
-	private static final int MAX_NUM_OF_PLAYERS = 2;
+	private static final int MAX_NUM_OF_PLAYERS = 4;
 	
 	private int numberOfPlayers;
 	
