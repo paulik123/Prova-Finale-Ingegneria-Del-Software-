@@ -39,6 +39,10 @@ public class TestActions extends TestCase{
 		g.getPlayerByID("player1").getResourceSet().getResources().setStone(200);
 		g.getPlayerByID("player1").getResourceSet().getResources().setServants(200);
 		g.getPlayerByID("player1").getResourceSet().getResources().setMilitaryPoins(200);
+		
+		g.addPlayer("player3", "3", new SocketObserver(null));
+		g.addPlayer("player4", "2", new SocketObserver(null));
+		
 	  }
 	 
 	 public void testPawnTerritory() throws ActionNotAllowedException, PlayerExistanceException{
@@ -60,6 +64,7 @@ public class TestActions extends TestCase{
 	 }
 	 
 	 public void testPawnVenture() throws ActionNotAllowedException, PlayerExistanceException{
+		 System.out.println(g.hasStarted());
 		 
 		 g.getPlayerByID("player1").getActionBuilder().placePawnVenture(g.getBoard().getVentureTower().getGroundFloor(), PawnType.WHITE, 0, VentureMode.FIRST);
 		 assertEquals(1, g.getPlayerByID("player1").getResourceSet().getVentureList().size());

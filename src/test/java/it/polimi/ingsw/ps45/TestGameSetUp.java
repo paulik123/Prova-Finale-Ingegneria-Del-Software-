@@ -25,6 +25,8 @@ public class TestGameSetUp extends TestCase{
 		
 		g.addPlayer("player1", "2", new SocketObserver(null));
 		g.addPlayer("player2", "3", new SocketObserver(null));
+		g.addPlayer("player3", "3", new SocketObserver(null));
+		g.addPlayer("player4", "2", new SocketObserver(null));
 	  }
 	 
 	 public void testGameStarted(){
